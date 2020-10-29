@@ -1,36 +1,18 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-// import MenuDrawer from "react-native-side-drawer";
-// import HomeScreen from "./screens/HomeScreen";
+import React from "react";
+import { View, Text } from "react-native";
 
-export default function AccountScreen() {
+const AccountScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Account Test!</Text>
-      <StatusBar style="auto" />
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "white",
+      }}>
+      <Text>Account</Text>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
-    zIndex: 0,
-  },
-  body: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F04812",
-  },
-  animatedBox: {
-    flex: 1,
-    backgroundColor: "#38C8EC",
-    padding: 10,
-  },
-});
+export default AccountScreen;
