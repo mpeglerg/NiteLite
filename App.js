@@ -2,13 +2,15 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import MenuDrawer from "react-native-side-drawer";
+import { writeUserData } from './firebase/firebase.util'
+
 
 export default function App() {
   const [open, setOpen] = useState(false);
 
   const toggleOpen = () => {
     setOpen(!open);
-    // console.log("open", open);
+    // writeUserData();
   };
 
   const drawerContent = () => {
