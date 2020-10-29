@@ -1,43 +1,70 @@
+// import React from "react";
+// import { createAppContainer, createSwitchNavigator } from "react-navigation";
+// import { createStackNavigator } from "react-navigation-stack";
+// import { createBottomTabNavigator } from "react-navigation-tabs";
+// import { createDrawerNavigator } from "react-navigation-drawer";
+
+// const App = createSwitchNavigator({
+//   Loading: {
+//     screen: Example,
+//   },
+//   Auth: {
+//     screen: Example,
+//   },
+//   App: {
+//     screen: Example,
+//   },
+// });
+
+// export default createAppContainer(App);
+
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import MenuDrawer from "react-native-side-drawer";
+import HomeScreen from "./screens/HomeScreen";
+import AccountScreen from "./screens/AccountScreen";
+// import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { createStackNavigator } from "react-navigation-stack";
+import Example from "./Example";
 
-export default function App() {
-  const [open, setOpen] = useState(false);
+// const HomeStack = createStackNavigator({
+//   Home: { screen: HomeScreen },
+//   Account: { screen: AccountScreen },
+// });
+const AppDrawer = createDrawerNavigator({
+  Home: Example,
+  Account: Example,
+  // App,
+});
 
-  const toggleOpen = () => {
-    setOpen(!open);
-    // console.log("open", open);
-  };
+const AppModalStack = createStackNavigator(
+  {
+    App: AppDrawer,
+    Promotion1: {
+      screen: Example,
+    },
+  },
+  {
+    mode: "modal",
+    headerMode: "none",
+  }
+);
 
-  const drawerContent = () => {
-    return (
-      <TouchableOpacity onPress={() => toggleOpen} style={styles.animatedBox}>
-        {console.log("drawContent return")}
-        <Text>Close</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  return (
-    <View style={styles.container}>
-      <MenuDrawer
-        open={open}
-        drawerContent={drawerContent()}
-        drawerPercentage={45}
-        animationTime={250}
-        overlay={true}
-        opacity={0.4}>
-        <TouchableOpacity onPress={toggleOpen} style={styles.body}>
-          <Text>Home</Text>
-        </TouchableOpacity>
-      </MenuDrawer>
-      {/* <Text>Open up App.js to start working on your app!</Text> */}
-      {/* <StatusBar style="auto" /> */}
-    </View>
-  );
-}
+const App = createSwitchNavigator({
+  // Login: {
+  //   screen: AccountScreen,
+  // },
+  // Home: {
+  //   screen: AccountScreen,
+  // },
+  App: {
+    screen: AppModalStack,
+  },
+});
+export default createAppContainer(App);
 
 const styles = StyleSheet.create({
   container: {
