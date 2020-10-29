@@ -10,7 +10,7 @@ export default function App() {
 
   const toggleOpen = () => {
     setOpen(!open);
-    // writeUserData();
+    writeUserData();
   };
 
   const drawerContent = () => {
