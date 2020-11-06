@@ -16,7 +16,7 @@ const MapContainer = () => {
   
   return (
      <LoadScript
-       googleMapsApiKey={"AIzaSyDXj6OqzRzxbs2nFT5V6N67Tf3QsPY69nY"}>
+       googleMapsApiKey={"API_KEY_HERE"}>
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={13}
@@ -54,7 +54,7 @@ export default MapContainer;
 //   }
   
 //   export default GoogleApiWrapper({
-//     apiKey: 'AIzaSyDXj6OqzRzxbs2nFT5V6N67Tf3QsPY69nY' // TODO: remove api key from code
+//     apiKey: 'API_KEY_HERE' // TODO: remove api key from code
 //   })(MapContainer);
   
 
@@ -63,8 +63,7 @@ export default MapContainer;
   // export default GoogleApiWrapper(
   //   (props) => ({
   //     // apiKey: props.apiKey
-  //     apiKey: 'AIzaSyDXj6OqzRzxbs2nFT5V6N67Tf3QsPY69nY'
+  //     apiKey: 'API_KEY_HERE'
   //   }
   // ))(MapContainer)
 
-// GOOGLE_MAP_API_KEY = 'AIzaSyDXj6OqzRzxbs2nFT5V6N67Tf3QsPY69nY';
