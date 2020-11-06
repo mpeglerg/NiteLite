@@ -1,6 +1,8 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import MapModal from "../components/MapModal";
+// import GoogleApiWrapper from "../components/Map";
+import MapContainer from "../components/Map";
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -11,6 +13,8 @@ const HomeScreen = ({ navigation }) => {
         justifyContent: "center",
         backgroundColor: "white",
       }}>
+      {/* <GoogleApiWrapper/> */}
+      <MapContainer></MapContainer>
       <MapModal />
     </View>
   );
