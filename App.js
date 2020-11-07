@@ -12,6 +12,7 @@ import {
 } from "react-navigation-redux-helpers";
 import React from "react";
 import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
+import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
   Account: AccountScreen,
@@ -32,6 +33,7 @@ const navigationReducer = createNavigationReducer(AppSwitchNavigator);
 const appReducer = combineReducers({
   nav: navigationReducer,
   safeSpots: safeSpotsReducer,
+  emergencyContacts: emergencyContactsReducer,
 });
 
 const appMiddleware = createReactNavigationReduxMiddleware(

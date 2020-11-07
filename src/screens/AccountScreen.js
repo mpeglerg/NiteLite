@@ -43,7 +43,11 @@ const AccountScreen = (props) => {
       {props.safeSpots.map((safeSpot) => {
         return (
           <SafeSpot
-            props={{ name: safeSpot.name, address: safeSpot.address }}
+            props={{
+              name: safeSpot.name,
+              address: safeSpot.address,
+              handleClick: props.deleteSafeSpot,
+            }}
           />
         );
       })}
@@ -57,4 +61,12 @@ const mapStateToProps = (state) => {
   return state.safeSpots;
 };
 
-export default connect(mapStateToProps)(AccountScreen);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteSafeSpot: (id) => {
+      dispatch({ type: "DELETE_SAFE_SPOT", id: id });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountScreen);

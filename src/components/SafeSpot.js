@@ -1,6 +1,7 @@
 import Icon from "react-native-vector-icons/MaterialIcons";
 import React from "react";
 import { View, Text, Button } from "react-native";
+import { connect } from "react-redux";
 
 const SafeSpot = ({ props }) => {
   return (
@@ -12,7 +13,7 @@ const SafeSpot = ({ props }) => {
       />
       <Text>{props.name}</Text>
       <Button title="edit" />
-      <Button title="X" />
+      <Button title="X" onPress={() => props.handleClick(props.name)} />
       <Text>{props.address}</Text>
       <Button title="edit" />
       <Button title="X" />
@@ -20,4 +21,11 @@ const SafeSpot = ({ props }) => {
   );
 };
 
-export default SafeSpot;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteSafeSpot: (id) => {
+      dispatch({ type: "DELETE_SAFE_SPOT", id: id });
+    },
+  };
+};
+export default connect(mapDispatchToProps)(SafeSpot);
