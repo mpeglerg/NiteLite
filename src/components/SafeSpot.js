@@ -13,6 +13,9 @@ const SafeSpot = ({ props }) => {
       <Text>{props.name}</Text>
       <Button title="edit" />
       <Button title="X" />
+      <Text>{props.address}</Text>
+      <Button title="edit" />
+      <Button title="X" />
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import MapModal from "../../../components/MapModal";
+import MapModal from "../../components/MapModal";
 import MapView from "react-native-maps";
 
 const HomeScreen = () => {

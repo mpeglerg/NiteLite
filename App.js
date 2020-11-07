@@ -1,22 +1,17 @@
-import HomeScreen from "./src/components/screens/HomeScreen";
-import AccountScreen from "./src/components/screens/AccountScreen";
-import {
-  createAppContainer,
-  createSwitchNavigator,
-  StackNavigator,
-} from "react-navigation";
+import HomeScreen from "./src/screens/HomeScreen";
+import AccountScreen from "./src/screens/AccountScreen";
+import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";
 import { Provider, connect } from "react-redux";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import {
-  reduxifyNavigator,
   createReactNavigationReduxMiddleware,
   createNavigationReducer,
   createReduxContainer,
 } from "react-navigation-redux-helpers";
 import React from "react";
-
+import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
   Account: AccountScreen,
@@ -36,6 +31,7 @@ const navigationReducer = createNavigationReducer(AppSwitchNavigator);
 
 const appReducer = combineReducers({
   nav: navigationReducer,
+  safeSpots: safeSpotsReducer,
 });
 
 const appMiddleware = createReactNavigationReduxMiddleware(

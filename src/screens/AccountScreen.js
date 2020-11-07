@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import CheckBox from "../../../components/CheckBox";
-import EmergencyContact from "../EmergencyContact";
-import SafeSpot from "../SafeSpot";
+import { connect } from "react-redux";
+import CheckBox from "../../components/CheckBox";
+import EmergencyContact from "../components/EmergencyContact";
+import SafeSpot from "../components/SafeSpot";
 
-const AccountScreen = () => {
+const AccountScreen = (props) => {
   const [safePlaceInput, setSafePlaceInput] = useState("");
-
   return (
     <ScrollView>
       <Text>Account</Text>
@@ -40,12 +40,21 @@ const AccountScreen = () => {
         }}
         value={safePlaceInput}
       />
-      <SafeSpot props={{ name: "Maya's House" }} />
-      <SafeSpot props={{ name: "Campus" }} />
+      {props.safeSpots.map((safeSpot) => {
+        return (
+          <SafeSpot
+            props={{ name: safeSpot.name, address: safeSpot.address }}
+          />
+        );
+      })}
       <Text>Emergency Contacts</Text>
       <EmergencyContact props={{ name: "Lauren" }}></EmergencyContact>
     </ScrollView>
   );
 };
 
-export default AccountScreen;
+const mapStateToProps = (state) => {
+  return state.safeSpots;
+};
+
+export default connect(mapStateToProps)(AccountScreen);
