@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import MapModal from "../../components/MapModal";
 import MapView from "react-native-maps";
+import BottomSheet from "reanimated-bottom-sheet";
+
+const renderContent = () => (
+  <View
+    style={{
+      backgroundColor: "blue",
+      padding: 16,
+      height: 450,
+    }}>
+    <MapModal></MapModal>
+  </View>
+);
 
 const HomeScreen = () => {
+  const sheetRef = useState(null);
+
   return (
     <View
       style={{
@@ -28,7 +42,12 @@ const HomeScreen = () => {
           showsUserLocation={true}
         />
       </View>
-      <MapModal />
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={[450, 300, 100]}
+        borderRadius={20}
+        renderContent={renderContent}
+      />
     </View>
   );
 };

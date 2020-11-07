@@ -40,7 +40,7 @@ const AccountScreen = (props) => {
         }}
         value={safePlaceInput}
       />
-      {props.safeSpots.map((safeSpot) => {
+      {props.safeSpots.safeSpots.map((safeSpot) => {
         return (
           <SafeSpot
             props={{
@@ -52,19 +52,36 @@ const AccountScreen = (props) => {
         );
       })}
       <Text>Emergency Contacts</Text>
-      <EmergencyContact props={{ name: "Lauren" }}></EmergencyContact>
+      {/* {console.log("props.emergencyContacts", props.emergencyContacts)} */}
+      {props.emergencyContacts.contacts.map((contact) => {
+        return (
+          <EmergencyContact
+            props={{
+              name: contact.name,
+              number: contact.phoneNumber,
+              handleClick: props.deleteEmergencyContact,
+            }}
+          />
+        );
+      })}
     </ScrollView>
   );
 };
 
 const mapStateToProps = (state) => {
-  return state.safeSpots;
+  return {
+    safeSpots: state.safeSpots,
+    emergencyContacts: state.emergencyContacts,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteSafeSpot: (id) => {
       dispatch({ type: "DELETE_SAFE_SPOT", id: id });
+    },
+    deleteEmergencyContact: (contact) => {
+      dispatch({ type: "DELETE_EMERGENCY_CONTACT", id: contact });
     },
   };
 };
