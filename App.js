@@ -1,5 +1,5 @@
-import HomeScreen from "./screens/HomeScreen";
-import AccountScreen from "./screens/AccountScreen";
+import HomeScreen from "./src/components/screens/HomeScreen";
+import AccountScreen from "./src/components/screens/AccountScreen";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";

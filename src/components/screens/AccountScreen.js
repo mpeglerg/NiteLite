@@ -1,8 +1,7 @@
 import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import MapModal from "../components/MapModal";
+import { View, Text } from "react-native";
 
-const HomeScreen = ({ navigation }) => {
+const AccountScreen = () => {
   return (
     <View
       style={{
@@ -11,9 +10,9 @@ const HomeScreen = ({ navigation }) => {
         justifyContent: "center",
         backgroundColor: "white",
       }}>
-      <MapModal />
+      <Text>Account</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default AccountScreen;
