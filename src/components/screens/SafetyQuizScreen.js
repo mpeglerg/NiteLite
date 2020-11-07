@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CheckBox from "../../../components/CheckBox";
 const SafetyQuizScreen = () => {
@@ -21,7 +21,7 @@ const SafetyQuizScreen = () => {
         <CheckBox />
         <Text>Busy Sidewalks</Text>
       </View>
-      <Text>Safe Spots</Text>
+      <Text>Enter the addresses of places you consider "Safe Spots"</Text>
       <TextInput
         style={{
           height: 40,
@@ -36,7 +36,8 @@ const SafetyQuizScreen = () => {
         }}
         value={safePlaceInput}
       />
-      <Text>Emergency Contacts</Text>
+      <Text>Set up Emergency Contacts</Text>
+      <Button title="Complete profile"></Button>
     </View>
   );
 };
