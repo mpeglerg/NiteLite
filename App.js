@@ -1,5 +1,6 @@
 import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
+import { writeUserData } from './firebase/firebase.util'
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";
