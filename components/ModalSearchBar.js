@@ -2,7 +2,7 @@ import React from "react";
 import { TextInput } from "react-native";
 
 const ModalSearchBar = (props) => {
-  const [value, setValue] = React.useState("Search here...");
+  const [value, setValue] = React.useState("");
 
   return (
     <TextInput
@@ -13,9 +13,9 @@ const ModalSearchBar = (props) => {
         borderRadius: 20,
         padding: 15,
       }}
+      placeholder={"Search here..."}
       onChangeText={(text) => {
         setValue(text);
-        console.log("props", props);
         props.performQuery;
       }}
       value={value}
