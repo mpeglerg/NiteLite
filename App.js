@@ -1,64 +1,62 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import MenuDrawer from "react-native-side-drawer";
+import HomeScreen from "./src/screens/HomeScreen";
+import AccountScreen from "./src/screens/AccountScreen";
 import { writeUserData } from './firebase/firebase.util'
+import { createSwitchNavigator } from "react-navigation";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { createStackNavigator } from "react-navigation-stack";
+import { Provider, connect } from "react-redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import {
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
+  createReduxContainer,
+} from "react-navigation-redux-helpers";
+import React from "react";
+import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
+import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
+const AppDrawer = createDrawerNavigator({
+  Home: HomeScreen,
+  Account: AccountScreen,
+});
 
+const AppModalStack = createStackNavigator({
+  NiteLite: AppDrawer,
+});
 
-export default function App() {
-  const [open, setOpen] = useState(false);
-
-  const toggleOpen = () => {
-    setOpen(!open);
-    writeUserData();
-  };
-
-  const drawerContent = () => {
-    return (
-      <TouchableOpacity onPress={() => toggleOpen} style={styles.animatedBox}>
-        {console.log("drawContent return")}
-        <Text>Close</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  return (
-    <View style={styles.container}>
-      <MenuDrawer
-        open={open}
-        drawerContent={drawerContent()}
-        drawerPercentage={45}
-        animationTime={250}
-        overlay={true}
-        opacity={0.4}>
-        <TouchableOpacity onPress={toggleOpen} style={styles.body}>
-          <Text>Home</Text>
-        </TouchableOpacity>
-      </MenuDrawer>
-      {/* <Text>Open up App.js to start working on your app!</Text> */}
-      {/* <StatusBar style="auto" /> */}
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
-    zIndex: 0,
-  },
-  body: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F04812",
-  },
-  animatedBox: {
-    flex: 1,
-    backgroundColor: "#38C8EC",
-    padding: 10,
+const AppSwitchNavigator = createSwitchNavigator({
+  App: {
+    screen: AppModalStack,
   },
 });
+
+const navigationReducer = createNavigationReducer(AppSwitchNavigator);
+
+const appReducer = combineReducers({
+  nav: navigationReducer,
+  safeSpots: safeSpotsReducer,
+  emergencyContacts: emergencyContactsReducer,
+});
+
+const appMiddleware = createReactNavigationReduxMiddleware(
+  (state) => state.nav
+);
+
+const AppContainer = createReduxContainer(AppSwitchNavigator, "root");
+
+const mapStateToProps = (state) => ({
+  state: state.nav,
+});
+
+const AppWithNavigationState = connect(mapStateToProps)(AppContainer);
+
+const store = createStore(appReducer, applyMiddleware(appMiddleware));
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <AppWithNavigationState />
+    </Provider>
+  );
+};
+
+export default App;
