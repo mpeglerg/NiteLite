@@ -4,8 +4,6 @@ import { registerNewUser } from '../../firebase/firebase.util';
 import { TextInput } from "react-native-gesture-handler";
 
 
-
-
 const SignUpScreen = () => {
 
   const [UserName, setUserName] = useState("");
@@ -40,10 +38,10 @@ const SignUpScreen = () => {
           value={UserPhoneNumber}
         />  
 
-      <Button title="Next"
-         onPress={() => registerNewUser(UserName, UserEmail, UserPassword, UserPhoneNumber)}>
-      </Button>
-
+        <Button title="Next" onPress={ () => 
+        {registerNewUser(UserName, UserEmail, UserPassword, UserPhoneNumber);
+        navigation.navigate('Page2', { phoneNumber: UserPhoneNumber })}}>
+        </Button>
     </View>
   );
 };

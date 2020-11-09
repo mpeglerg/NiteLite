@@ -1,8 +1,9 @@
 import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
-import EntryScreen from "./src/screens/EntryScreen"
-import SingUpScreen from "./src/screens/SignUpScreen"
-import { writeUserData } from './firebase/firebase.util'
+import EntryScreen from "./src/screens/EntryScreen";
+import SignUpScreen from "./src/screens/SignUpScreen";
+import SetSafeLocations from "./src/screens/SetSafeLocations";
+import { writeUserData } from './firebase/firebase.util';
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";
@@ -18,11 +19,19 @@ import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
 import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
-  Account: SingUpScreen,
+  Account: AccountScreen
 });
 
 const AppModalStack = createStackNavigator({
-  NiteLite: AppDrawer,
+  // NiteLite: AppDrawer,
+
+  // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
+  NiteLite: EntryScreen,
+  Account: AccountScreen,
+  Page1: SignUpScreen, 
+  Page2: SetSafeLocations //,
+  // Page3: SetEmergencyContacts
+  // add 2 more for other pages
 });
 
 const AppSwitchNavigator = createSwitchNavigator({

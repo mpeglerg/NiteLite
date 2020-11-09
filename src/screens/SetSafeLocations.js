@@ -4,17 +4,16 @@ import { StackNavigator } from 'react-navigation';
 
 // openSignUpScreen = () =>
 // {
-//    this.props.navigation.navigate('Second');
+//    this.props.navigation.navigate('Page2');
 // }
 
-const EntryScreen = ({navigation}) => {
+const EntryScreen = () => {
   const [safePlaceInput, setSafePlaceInput] = useState("");
   return (
     <View>
       <Text>Log In</Text>
-      <Button title="Log In"></Button>
-      <Text>Sign Up</Text> 
-      <Button title="Sign Up" onPress={ () => navigation.navigate('Page1')}></Button>
+      <Button title="Log In"><Text>Safe locations!!</Text></Button>
+      <Button title="Sign Up" onPress = { this.openSignUpScreen }></Button>
     </View>
   );
 };
