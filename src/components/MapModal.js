@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from "react-native";
+import { Modal, StyleSheet, Text, View } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
 
 const MapModal = () => {
@@ -51,13 +45,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     width: "100%",
-    // marginTop: 30,
   },
   modalView: {
     margin: 20,
     backgroundColor: "blue",
     borderRadius: 20,
-    // paddingVertical: 110,
     width: "100%",
     alignItems: "center",
     elevation: 5,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import MapModal from "../../components/MapModal";
+import MapModal from "../components/MapModal";
 import MapView from "react-native-maps";
 import BottomSheet from "reanimated-bottom-sheet";
 

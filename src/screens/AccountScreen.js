@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
-import CheckBox from "../../components/CheckBox";
+import CheckBox from "../components/CheckBox";
 import EmergencyContact from "../components/EmergencyContact";
 import SafeSpot from "../components/SafeSpot";
 
@@ -52,7 +52,6 @@ const AccountScreen = (props) => {
         );
       })}
       <Text>Emergency Contacts</Text>
-      {/* {console.log("props.emergencyContacts", props.emergencyContacts)} */}
       {props.emergencyContacts.contacts.map((contact) => {
         return (
           <EmergencyContact

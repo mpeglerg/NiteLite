@@ -1,6 +1,6 @@
 import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
-import { writeUserData } from './firebase/firebase.util'
+import { writeUserData } from "./firebase/firebase.util";
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";
@@ -14,6 +14,8 @@ import {
 import React from "react";
 import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
 import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
+import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
+
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
   Account: AccountScreen,
