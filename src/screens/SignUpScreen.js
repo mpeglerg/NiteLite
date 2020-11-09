@@ -63,11 +63,6 @@ const styles = StyleSheet.create({
       borderColor: "#ccc",
       borderBottomWidth: 1
     },
-    loginText: {
-      color: '#3740FE',
-      marginTop: 25,
-      textAlign: 'center'
-    },
   });
 
 export default SignUpScreen;

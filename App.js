@@ -2,6 +2,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import EntryScreen from "./src/screens/EntryScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
+import LogInScreen from "./src/screens/LogInScreen";
 import SetSafeLocations from "./src/screens/SetSafeLocations";
 import { writeUserData } from './firebase/firebase.util';
 import { createSwitchNavigator } from "react-navigation";
@@ -26,9 +27,9 @@ const AppModalStack = createStackNavigator({
   // NiteLite: AppDrawer,
 
   // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
-  NiteLite: EntryScreen,
+  NiteLite: LogInScreen,
   Account: AccountScreen,
-  Page1: SignUpScreen, 
+  Page1: SignUpScreen,  // SignUp 
   Page2: SetSafeLocations //,
   // Page3: SetEmergencyContacts
   // add 2 more for other pages
