@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import MapModal from "../components/MapModal";
-import MapContainer from "../components/Map";
+import MapContainer from "../src/components/Map";
 
 const HomeScreen = ({ navigation }) => {
   return (

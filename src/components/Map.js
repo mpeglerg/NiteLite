@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 
+const GOOGLE_MAPS_APIKEY = '';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
 const destination = {latitude: 37.771707, longitude: -122.4053769};
 

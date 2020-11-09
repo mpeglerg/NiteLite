@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import MapModal from "../../components/MapModal";
-import MapView from "react-native-maps";
+import MapModal from "../components/MapModal";
+import MapContainer from "../components/Map";
+// import MapView from "react-native-maps";
 import BottomSheet from "reanimated-bottom-sheet";
 
 const renderContent = () => (
@@ -31,7 +32,8 @@ const HomeScreen = () => {
           height: "75%",
           width: "100%",
         }}>
-        <MapView
+          <MapContainer />
+        {/* <MapView
           style={{ flex: 1 }}
           region={{
             latitude: 42.882004,
@@ -40,7 +42,8 @@ const HomeScreen = () => {
             longitudeDelta: 0.0421,
           }}
           showsUserLocation={true}
-        />
+        /> */}
+
       </View>
       <BottomSheet
         ref={sheetRef}
