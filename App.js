@@ -52,7 +52,6 @@ const mapStateToProps = (state) => ({
 const AppWithNavigationState = connect(mapStateToProps)(AppContainer);
 
 const store = createStore(appReducer, applyMiddleware(appMiddleware));
-store.subscribe(() =>  console.log('State after dispatch: ', store.getState()))
 
 const App = () => {
   return (

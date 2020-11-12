@@ -8,12 +8,9 @@ const initState = {
 };
 
 const emergencyContactsReducer = (state = initState, action) => {
-  console.log("action", action);
   if (action.type == "DELETE_EMERGENCY_CONTACT") {
-    console.log("DELETE_EMERGENCY_CONTACT");
 
     let newEmergencyContacts = state.contacts.map((contact) => {
-      console.log("contact", contact);
       return action.id == contact.name;
     });
     return {
@@ -21,7 +18,6 @@ const emergencyContactsReducer = (state = initState, action) => {
       emergencyContacts: newEmergencyContacts,
     };
   } else {
-    console.log("ELSE");
     return state;
   }
 };
