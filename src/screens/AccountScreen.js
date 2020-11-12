@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  ShadowPropTypesIOS,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import CheckBox from "../components/CheckBox";
@@ -40,13 +46,21 @@ const AccountScreen = (props) => {
         }}
         value={safePlaceInput}
       />
+      {safePlaceInput != "" ? (
+        <Button
+          title="Add safe spot"
+          onPress={() =>
+            props.addSafeSpot({ name: safePlaceInput, address: "1 LMU Drive" })
+          }></Button>
+      ) : null}
       {props.safeSpots.safeSpots.map((safeSpot) => {
         return (
           <SafeSpot
             props={{
               name: safeSpot.name,
               address: safeSpot.address,
-              handleClick: props.deleteSafeSpot,
+              deleteSafeSpot: props.deleteSafeSpot,
+              editSafeSpot: props.editSafeSpot,
             }}
           />
         );
@@ -58,7 +72,8 @@ const AccountScreen = (props) => {
             props={{
               name: contact.name,
               number: contact.phoneNumber,
-              handleClick: props.deleteEmergencyContact,
+              deleteEmergencyContact: props.deleteEmergencyContact,
+              editEmergencyContact: props.editEmergencyContact,
             }}
           />
         );
@@ -81,6 +96,15 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteEmergencyContact: (contact) => {
       dispatch({ type: "DELETE_EMERGENCY_CONTACT", id: contact });
+    },
+    addSafeSpot: (newSafeSpot) => {
+      dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
+    },
+    editSafeSpot: (id) => {
+      dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
+    },
+    editEmergencyContact: (id) => {
+      dispatch({ type: "EDIT_EMERGENCY_CONTACT", payload: id });
     },
   };
 };

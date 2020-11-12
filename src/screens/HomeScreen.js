@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
 import MapModal from "../components/MapModal";
+import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 
