@@ -53,7 +53,8 @@ const AccountScreen = (props) => {
             props={{
               name: safeSpot.name,
               address: safeSpot.address,
-              handleClick: props.deleteSafeSpot,
+              deleteSafeSpot: props.deleteSafeSpot,
+              editSafeSpot: props.editSafeSpot,
             }}
           />
         );
@@ -91,6 +92,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     addSafeSpot: (newSafeSpot) => {
       dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
+    },
+    editSafeSpot: (id) => {
+      dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
     },
   };
 };

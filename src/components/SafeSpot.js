@@ -15,7 +15,7 @@ const SafeSpot = ({ props }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newPhoneNumber, setNewPhoneNumber] = React.useState("");
   const [newContactName, setNewContactName] = React.useState("");
-
+  console.log("props", props);
   return (
     <View style={{ borderWidth: "1px" }}>
       <Icon
@@ -26,7 +26,7 @@ const SafeSpot = ({ props }) => {
       <Text>{props.name}</Text>
       <Text>{props.address}</Text>
       <Button title="edit" onPress={() => setModalVisible(!modalVisible)} />
-      <Button title="X" onPress={() => props.handleClick(props.name)} />
+      <Button title="X" onPress={() => props.deleteSafeSpot(props.name)} />
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -73,6 +73,10 @@ const SafeSpot = ({ props }) => {
                 style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
+                  props.editSafeSpot({
+                    name: "TEST",
+                    address: "1 LMU DRIVE???",
+                  });
                 }}>
                 <Text style={styles.textStyle}>Save changes</Text>
               </TouchableHighlight>
@@ -125,11 +129,19 @@ const styles = StyleSheet.create({
   },
 });
 
+// const mapStateToProps = () => {
+//   return {};
+// };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteSafeSpot: (id) => {
       dispatch({ type: "DELETE_SAFE_SPOT", id: id });
     },
+    editSafeSpot: (id) => {
+      dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
+    },
   };
 };
-export default connect(mapDispatchToProps)(SafeSpot);
+
+export default connect(null, mapDispatchToProps)(SafeSpot);
