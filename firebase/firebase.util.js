@@ -14,32 +14,18 @@ firebase.initializeApp(firebaseConfig);
  // Get a reference to the database service
  export const database = firebase.database();
 
- export function registerNewUser(name, email, password, phoneNumber) {
-  database.ref('users/' + phoneNumber).set({
-    name: name,
-    email: email,
-    password: password,
-    phoneNumber: phoneNumber
-});
-}
-
-export function setUserPreferences(userKey, busySidewalks, openBusinesses, policeStations) {
-  database.ref('users/' + userKey).set({
-    busySidewalks: busySidewalks,
-    openBusinesses: openBusinesses,
-    policeStations: policeStations,
-});
-}
-
-export function safeSpots(userKey, safeLocations) {
-  database.ref('users/' + userKey).set({
-    safeLocations: safeLocations,
-});
-}
-
-export function setEmergencyContact(userKey, name, phoneNumber) {
-  emergencyContact = [name, phoneNumber]
-  database.ref('users/' + userKey).set({
+ export function registerNewUser(object) {
+   //get the number for ref
+   let emergencyContact = [object.get("eName"), object.get("eNumber")];
+  database.ref('users/' + object.get("phoneNumber")).set({
+    name: object.get("name"),
+    email: object.get("email"),
+    password: object.get("password"),
+    phoneNumber: object.get("phoneNumber"),
+    busySidewalks: object.get("busySidewalks"),
+    openBusinesses: object.get("openBusinesses"),
+    policeStations: object.get("policeStations"),
+    safeLocations: object.get("safePlaces"),
     emergencyNumber: emergencyContact,
 });
 }

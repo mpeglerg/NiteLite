@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { setEmergencyContact } from '../../firebase/firebase.util';
+import { registerNewUser } from '../../firebase/firebase.util';
 
 const EmergencyContacts = ({navigation}) => {
+    let object = navigation.getParam('object','missing');
   const [name, setName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
 
   return (
-      
     <View>
         <Text>Enter who you would like to call during an Emergency.</Text>
         <Text>Name</Text>
@@ -42,11 +42,21 @@ const EmergencyContacts = ({navigation}) => {
         value={contactPhone}
       />
       <Button title="Complete Profile" onPress={ () => 
-        {setEmergencyContact(navigation.getParam('phoneNumber','none inputted'), name, contactPhone);
-        navigation.navigate('Page4')}}>
+        {objectifyAndNav(navigation, object, name, contactPhone)}}>
         </Button>
     </View>
   );
 };
 
+function objectifyAndNav(navigation, object, name, contactPhone){
+    // add new items to our object
+    object.set("eName", name);
+    object.set("eNumber", contactPhone);
+
+    // call firebase function to set all of these items in the object
+    registerNewUser(object)
+    // navigate to next page
+    navigation.navigate('Page4');
+  
+  }
 export default EmergencyContacts;

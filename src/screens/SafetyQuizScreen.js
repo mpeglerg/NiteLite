@@ -2,19 +2,14 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CheckBox from "../../components/CheckBox";
-import { setUserPreferences, safeSpots } from '../../firebase/firebase.util';
-// export function setUserPreferences(userKey, busySidewalks, openBusinesses, policeStations) {
 
 
 const SafetyQuizScreen = ({navigation}) => {
-  console.log("navigation", navigation);
-  const phoneNumber = navigation.getParam('phoneNumber','none inputted');
-  console.log("passed in phone number!!", phoneNumber);
+  let object = navigation.getParam('object','missing');
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState("");
   const [policeStations, setPoliceStations] = useState("");
   const [busySidewalks, setBusySidewalks] = useState("");
-  // let openBusinesses, policeStations, busySidewalks;
 
   return (
     <View>
@@ -56,12 +51,24 @@ const SafetyQuizScreen = ({navigation}) => {
         value={safePlaceInput}
       />
       <Button title="Set up Emergency Contacts" onPress={ () => 
-        {setUserPreferences(navigation.getParam('phoneNumber','none inputted'), busySidewalks, openBusinesses, policeStations);
-        safeSpots(navigation.getParam('phoneNumber','none inputted'), safePlaceInput);
-        navigation.navigate('Page3', { phoneNumber: phoneNumber })}}>
+        {objectifyAndNav(navigation, object, busySidewalks, openBusinesses, policeStations, safePlaceInput);}}>
         </Button>
     </View>
   );
 };
+
+function objectifyAndNav(navigation, object, busySidewalks, openBusinesses, policeStations, safePlaceInput){
+  // add new items to our object
+  object.set("busySidewalks", busySidewalks);
+  object.set("openBusinesses", openBusinesses);
+  object.set("policeStations", policeStations);
+  object.set("safePlaces", safePlaceInput);
+  console.log("SAFE PLACE: ", safePlaceInput);
+  console.log("in the map: ", object.get("safePlaces"));
+
+  // navigate to next page
+  navigation.navigate('Page3', { object: object });
+
+}
 
 export default SafetyQuizScreen;
