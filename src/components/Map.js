@@ -1,12 +1,14 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { connect } from "react-redux";
 
+const origin = {latitude: 37.3318456, longitude: -122.0296002};
+const destination = {latitude: 37.771707, longitude: -122.4053769};
+
 const GOOGLE_MAPS_APIKEY = 'AIzaSyDXj6OqzRzxbs2nFT5V6N67Tf3QsPY69nY';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
-// const destination = {latitude: 37.771707, longitude: -122.4053769};
 
 const styles = StyleSheet.create({
     versionBox: {

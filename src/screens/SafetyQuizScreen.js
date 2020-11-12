@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import CheckBox from "../../../components/CheckBox";
+import CheckBox from "../components/CheckBox";
 const SafetyQuizScreen = () => {
   const [safePlaceInput, setSafePlaceInput] = useState("");
   return (
