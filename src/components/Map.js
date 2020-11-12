@@ -4,7 +4,7 @@ import MapView from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { connect } from "react-redux";
 
-const GOOGLE_MAPS_APIKEY = 'AIzaSyDXj6OqzRzxbs2nFT5V6N67Tf3QsPY69nY';
+const GOOGLE_MAPS_APIKEY = process.env.REACT_APP_GOOGLE_MAPS_API;
 
 const styles = StyleSheet.create({
     versionBox: {
