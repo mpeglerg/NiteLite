@@ -7,7 +7,7 @@ import BottomSheet from "reanimated-bottom-sheet";
 const renderContent = () => (
   <View
     style={{
-      backgroundColor: "blue",
+      backgroundColor: "#2566E8", // subject to change 
       padding: 16,
       height: 450,
     }}>
@@ -28,7 +28,7 @@ const HomeScreen = () => {
       }}>
       <View
         style={{
-          height: "75%",
+          height: "100%",
           width: "100%",
         }}>
           <MapContainer />

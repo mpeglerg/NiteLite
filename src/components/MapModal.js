@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   Modal,
   StyleSheet,
@@ -15,14 +16,15 @@ const MapModal = () => {
     <View style={styles.centeredView}>
       <View style={styles.modalView}>
         <ModalSearchBar />
+        <View style={styles.textStyle}>
         <View
           style={{
             backgroundColor: "white",
-            borderColor: "green",
+            borderColor: "#30C5F4",
             borderWidth: 3,
             borderRadius: 50,
-            height: 50,
-            width: 50,
+            height: 60,
+            width: 60,
             padding: 14,
             margin: 10,
           }}>
@@ -31,15 +33,16 @@ const MapModal = () => {
         <View
           style={{
             backgroundColor: "white",
-            borderColor: "orange",
+            borderColor: "#30C5F4",
             borderWidth: 3,
             borderRadius: 50,
-            height: 50,
-            width: 50,
-            padding: 15,
+            height: 60,
+            width: 60,
+            padding: 14,
             margin: 10,
           }}>
           <Text>2</Text>
+        </View>
         </View>
       </View>
     </View>
@@ -51,13 +54,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     width: "100%",
-    // marginTop: 30,
+    textAlign: "center",
   },
   modalView: {
     margin: 20,
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     borderRadius: 20,
-    // paddingVertical: 110,
     width: "100%",
     alignItems: "center",
     elevation: 5,
@@ -73,6 +75,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    flexDirection: 'row',
+    marginTop: 20,
   },
   modalText: {
     marginBottom: 15,
