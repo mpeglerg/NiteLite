@@ -18,6 +18,7 @@ import {
 import React from "react";
 import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
 import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
+import directionsReducer from "./src/reducers/DirectionsReducer";
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
   Account: AccountScreen
@@ -47,6 +48,7 @@ const appReducer = combineReducers({
   nav: navigationReducer,
   safeSpots: safeSpotsReducer,
   emergencyContacts: emergencyContactsReducer,
+  directions: directionsReducer,
 });
 
 const appMiddleware = createReactNavigationReduxMiddleware(
@@ -62,6 +64,7 @@ const mapStateToProps = (state) => ({
 const AppWithNavigationState = connect(mapStateToProps)(AppContainer);
 
 const store = createStore(appReducer, applyMiddleware(appMiddleware));
+store.subscribe(() =>  console.log('State after dispatch: ', store.getState()))
 
 const App = () => {
   return (

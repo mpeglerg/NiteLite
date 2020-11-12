@@ -34,6 +34,7 @@ const query = (resource, params) =>
 const getDirections = params => {
     return query(`maps/api/directions/json`, params);
 };
+const destination = '';
 
 export {
     apiHost,

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
-import CheckBox from "../../components/CheckBox";
+import CheckBox from "../components/CheckBox";
 import EmergencyContact from "../components/EmergencyContact";
 import SafeSpot from "../components/SafeSpot";
 
