@@ -5,10 +5,13 @@ export const deleteSafeSpot = (id) => {
   };
 };
 
-export const addSafeSpot = (id) => {
+export const addSafeSpot = () => {
   return {
     type: "ADD_SAFE_SPOT",
-    id: id,
+    payload: {
+      name: id.name,
+      address: id.address,
+    },
   };
 };
 

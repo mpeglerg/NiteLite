@@ -15,6 +15,9 @@ const safeSpotsReducer = (state = initState, action) => {
       ...state,
       safeSpots: newSafeSpots,
     };
+  } else if (action.type == "ADD_SAFE_SPOT") {
+    let newSafeSpots = [...state.safeSpots, action.payload];
+    return { ...state, safeSpots: newSafeSpots };
   } else {
     return state;
   }

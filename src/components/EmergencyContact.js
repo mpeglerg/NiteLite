@@ -16,7 +16,6 @@ const EmergencyContact = ({ props }) => {
   const [newPhoneNumber, setNewPhoneNumber] = React.useState("");
   const [newContactName, setNewContactName] = React.useState("");
 
-  console.log("props", props);
   return (
     <View style={{ borderWidth: "1px" }}>
       <Text>{props.name}</Text>
