@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput } from "react-native";
+import { connect } from "react-redux";
 
 const ModalSearchBar = (props) => {
   const [value, setValue] = React.useState("");
@@ -16,11 +17,22 @@ const ModalSearchBar = (props) => {
       placeholder={"Search here..."}
       onChangeText={(text) => {
         setValue(text);
-        props.performQuery;
+      }}
+      onSubmitEditing={(text) => {
+        props.updateDirections(text);
+        console.log(`TEXT: ${text}`);
       }}
       value={value}
     />
   );
 };
 
-export default ModalSearchBar;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDirections: (destination) => {
+      dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ModalSearchBar);

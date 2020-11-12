@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Text, View } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
 
 const MapModal = () => {
