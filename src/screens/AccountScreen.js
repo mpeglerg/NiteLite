@@ -66,8 +66,7 @@ const AccountScreen = (props) => {
         );
       })}
       <Text>Emergency Contacts</Text>
-      {console.log("PROPS", props)}
-      {props.emergencyContacts.emergencyContacts.map((contact) => {
+      {props.emergencyContacts.contacts.map((contact) => {
         return (
           <EmergencyContact
             props={{

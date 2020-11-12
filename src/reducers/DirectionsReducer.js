@@ -1,23 +1,20 @@
 const initState = {
     directions: [
-        {origin: '',
-        destination: ''}
+        {origin: 'Twitter HQ, Market Street, San Francisco, CA, USA',
+        destination: 'Apple Park Visitor Center'}
     ]
   };
   
   const directionsReducer = (state = initState, action) => {
-    console.log("action", action);
     if (action.type == "UPDATE_DIRECTIONS") {
-      console.log("UPDATE_DIRECTIONS");
-      console.log(`ACTION: ${action}`);
   
-      let newDirections = action.payload;
+      let newDirections = state.directions;
+      newDirections[0].destination = action.payload;
       return {
         ...state,
         directions: newDirections,
       };
     } else {
-      console.log("ELSE");
       return state;
     }
   };

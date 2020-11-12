@@ -9,6 +9,7 @@ const initState = {
 
 const emergencyContactsReducer = (state = initState, action) => {
   if (action.type == "DELETE_EMERGENCY_CONTACT") {
+
     console.log("state", state);
     console.log("action", action);
     let newEmergencyContacts = state.emergencyContacts.filter((contact) => {

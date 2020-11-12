@@ -18,9 +18,8 @@ const ModalSearchBar = (props) => {
       onChangeText={(text) => {
         setValue(text);
       }}
-      onSubmitEditing={(text) => {
-        props.updateDirections(text);
-        console.log(`TEXT: ${text}`);
+      onSubmitEditing={(event) => {
+        props.updateDirections(event.nativeEvent.text);
       }}
       value={value}
     />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
+import { connect } from "react-redux";
 import MapModal from "../components/MapModal";
 import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
@@ -16,7 +17,7 @@ const renderContent = () => (
   </View>
 );
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
   const sheetRef = useState(null);
 
   return (
@@ -32,7 +33,9 @@ const HomeScreen = () => {
           height: "75%",
           width: "100%",
         }}>
-          <MapContainer />
+          <MapContainer
+            props={props}
+          />
       </View>
       <BottomSheet
         ref={sheetRef}
@@ -44,4 +47,9 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+const mapStateToProps = (state) => {
+  return {
+    directions: state.directions,
+  };
+};
+export default connect(mapStateToProps, null) (HomeScreen);
