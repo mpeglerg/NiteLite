@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  ShadowPropTypesIOS,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import CheckBox from "../components/CheckBox";
@@ -60,13 +66,15 @@ const AccountScreen = (props) => {
         );
       })}
       <Text>Emergency Contacts</Text>
-      {props.emergencyContacts.contacts.map((contact) => {
+      {console.log("PROPS", props)}
+      {props.emergencyContacts.emergencyContacts.map((contact) => {
         return (
           <EmergencyContact
             props={{
               name: contact.name,
               number: contact.phoneNumber,
-              handleClick: props.deleteEmergencyContact,
+              deleteEmergencyContact: props.deleteEmergencyContact,
+              editEmergencyContact: props.editEmergencyContact,
             }}
           />
         );
@@ -95,6 +103,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     editSafeSpot: (id) => {
       dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
+    },
+    editEmergencyContact: (id) => {
+      dispatch({ type: "EDIT_EMERGENCY_CONTACT", payload: id });
     },
   };
 };

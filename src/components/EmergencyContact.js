@@ -26,7 +26,15 @@ const EmergencyContact = ({ props }) => {
           setModalVisible(!modalVisible);
         }}
       />
-      <Button title="X" onPress={() => props.handleClick(props.name)} />
+      <Button
+        title="X"
+        onPress={() =>
+          props.deleteEmergencyContact({
+            name: props.name,
+            number: props.number,
+          })
+        }
+      />
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -73,8 +81,19 @@ const EmergencyContact = ({ props }) => {
                 style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
+                  props.editEmergencyContact({
+                    name: newContactName,
+                    number: newPhoneNumber,
+                  });
                 }}>
                 <Text style={styles.textStyle}>Save changes</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "red" }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}>
+                <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
             </View>
           </View>

@@ -15,7 +15,6 @@ const SafeSpot = ({ props }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newPhoneNumber, setNewPhoneNumber] = React.useState("");
   const [newContactName, setNewContactName] = React.useState("");
-  console.log("props", props);
   return (
     <View style={{ borderWidth: "1px" }}>
       <Icon
@@ -79,6 +78,13 @@ const SafeSpot = ({ props }) => {
                   });
                 }}>
                 <Text style={styles.textStyle}>Save changes</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "red" }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}>
+                <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
             </View>
           </View>
