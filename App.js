@@ -3,7 +3,8 @@ import AccountScreen from "./src/screens/AccountScreen";
 import EntryScreen from "./src/screens/EntryScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
-import SetSafeLocations from "./src/screens/SetSafeLocations";
+import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
+import EmergencyContacts from "./src/screens/EmergencyContacts";
 import { writeUserData } from './firebase/firebase.util';
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -30,8 +31,9 @@ const AppModalStack = createStackNavigator({
   NiteLite: LogInScreen,
   Account: AccountScreen,
   Page1: SignUpScreen,  // SignUp 
-  Page2: SetSafeLocations //,
-  // Page3: SetEmergencyContacts
+  Page2: SafetyQuizScreen,
+  Page3: EmergencyContacts,
+  Page4: HomeScreen
   // add 2 more for other pages
 });
 

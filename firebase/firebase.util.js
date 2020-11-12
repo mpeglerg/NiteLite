@@ -37,10 +37,11 @@ export function safeSpots(userKey, safeLocations) {
 });
 }
 
-export function setEergencyContact(userKey, name, phoneNumber) {
+export function setEmergencyContact(userKey, name, phoneNumber) {
   emergencyContact = [name, phoneNumber]
   database.ref('users/' + userKey).set({
     emergencyNumber: emergencyContact,
 });
 }
+
 export default firebase
