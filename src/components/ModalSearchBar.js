@@ -3,7 +3,6 @@ import { TextInput, StyleSheet, View} from "react-native";
 import { connect } from "react-redux";
 import Icon from 'react-native-vector-icons/Fontisto';
 
-
 const ModalSearchBar = (props) => {
   const [value, setValue] = React.useState("");
 
