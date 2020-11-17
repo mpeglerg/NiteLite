@@ -4,13 +4,16 @@ import MapModal from "../../components/MapModal";
 import MapView from "react-native-maps";
 import BottomSheet from "reanimated-bottom-sheet";
 
+const username = navigation.getParam("text", "no_username");
+
 const renderContent = () => (
   <View
     style={{
       backgroundColor: "blue",
       padding: 16,
       height: 450,
-    }}>
+    }}
+  >
     <MapModal></MapModal>
   </View>
 );
@@ -25,12 +28,14 @@ const HomeScreen = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}>
+      }}
+    >
       <View
         style={{
           height: "75%",
           width: "100%",
-        }}>
+        }}
+      >
         <MapView
           style={{ flex: 1 }}
           region={{

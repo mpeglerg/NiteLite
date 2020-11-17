@@ -3,14 +3,10 @@ import { StyleSheet, View, Button, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { verifyLogin } from "../../firebase/firebase.util";
 
-let textFromError;
-
-const LogInScreen = ({ navigation }) => {
+const LogInScreenError = ({ navigation }) => {
   const [returningUserName, setReturningUserName] = useState("");
   const [returningUserPassword, setReturningUserPassword] = useState("");
-  // let textFromError = navigation.getParam('text','');
-  // console.log("this is the text from error");
-  // console.log(textFromError);
+  let textFromError = navigation.getParam("text", "");
 
   return (
     <View style={styles.container}>
@@ -50,43 +46,37 @@ const LogInScreen = ({ navigation }) => {
   );
 };
 
-async function verifyCredentials(navigation, username, password) {
-  // console.log("THIS IS THE PASSWORD", password);
-  // let outputVal = await verifyLogin(username, password);
+function verifyCredentials(navigation, username, password) {
+  console.log("THIS IS THE PASSWORD", password);
+  let outputVal = verifyLogin(username, password);
+  // sleep(3000);
+  console.log("output val ", outputVal);
+
+  // toss an error if missing password
   if (username === "") {
     // "Missing username. Please input or sign up if you are a new user."
     // return and start over
     navigation.navigate("Page5", {
       text: "Missing username. Please input or sign up if you are a new user.",
     });
-  }
-  if (password === "") {
+  } else if (password === "") {
     // "Missing password. Please input or sign up if you are a new user."
     // return and start over
     navigation.navigate("Page5", {
       text: "Missing password. Please input or sign up if you are a new user.",
     });
-  }
-
-  let response = await verifyLogin(username, password); //.then(function (response) {
-  console.log("RESPONSE", response);
-  if (response == 0) {
+  } else if (outputVal == 0) {
     // "Incorrect password. Try again"
     navigation.navigate("Page5", { text: "Incorrect password. Try again." });
-  } else if (response == 1) {
+  } else if (outputVal == 1) {
     // "Username not found. Try again."
     navigation.navigate("Page5", { text: "Username not found. Try again." });
   } else {
-    // response == 2
+    // output val == 2
     // works, sign in and nav to home page
-    navigation.navigate("Page4", { text: username });
+    navigation.navigate("Page4", { text: object.get("name") });
   }
-  // })
-  // .catch(function (response) {
-  //   console.log("something went wrong", response);
-  // });
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -106,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogInScreen;
+export default LogInScreenError;
