@@ -6,7 +6,6 @@ import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 
-const username = navigation.getParam("text", "no_username");
 
 const renderContent = () => (
   <View
@@ -48,7 +47,6 @@ const HomeScreen = (props) => {
           }}
           showsUserLocation={true}
         />
-        }}>
           <MapContainer
             props={props}
           />

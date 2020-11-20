@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import CheckBox from "../../components/CheckBox";
+import CheckBox from "../components/CheckBox";
 
 
 const SafetyQuizScreen = ({navigation}) => {
   let object = navigation.getParam('object','missing');
-
-const SafetyQuizScreen = () => {
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState("");
   const [policeStations, setPoliceStations] = useState("");

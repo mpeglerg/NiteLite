@@ -69,7 +69,6 @@ async function verifyCredentials(navigation, username, password) {
   }
 
   let response = await verifyLogin(username, password); //.then(function (response) {
-  console.log("RESPONSE", response);
   if (response == 0) {
     // "Incorrect password. Try again"
     navigation.navigate("Page5", { text: "Incorrect password. Try again." });
