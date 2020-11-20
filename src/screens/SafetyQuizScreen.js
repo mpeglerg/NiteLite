@@ -6,6 +6,8 @@ import CheckBox from "../../components/CheckBox";
 
 const SafetyQuizScreen = ({navigation}) => {
   let object = navigation.getParam('object','missing');
+
+const SafetyQuizScreen = () => {
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState("");
   const [policeStations, setPoliceStations] = useState("");

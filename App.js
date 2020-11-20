@@ -5,7 +5,6 @@ import LogInScreen from "./src/screens/LogInScreen";
 import LogInScreenError from "./src/screens/LogInScreenError";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
 import EmergencyContacts from "./src/screens/EmergencyContacts";
-import { writeUserData } from './firebase/firebase.util';
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";
@@ -19,6 +18,7 @@ import {
 import React from "react";
 import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
 import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
+import directionsReducer from "./src/reducers/DirectionsReducer";
 
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
@@ -50,6 +50,7 @@ const appReducer = combineReducers({
   nav: navigationReducer,
   safeSpots: safeSpotsReducer,
   emergencyContacts: emergencyContactsReducer,
+  directions: directionsReducer,
 });
 
 const appMiddleware = createReactNavigationReduxMiddleware(
