@@ -1,19 +1,13 @@
-import React, { useState } from "react";
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
+import RouteDirections from "./RouteDirections";
+import { ScrollView } from "react-native-gesture-handler";
 
 const MapModal = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-
   return (
     <View style={styles.centeredView}>
-      <View style={styles.modalView}>
+      <ScrollView style={styles.modalView}>
         <ModalSearchBar />
         <View
           style={{
@@ -41,7 +35,8 @@ const MapModal = () => {
           }}>
           <Text>2</Text>
         </View>
-      </View>
+        <RouteDirections />
+      </ScrollView>
     </View>
   );
 };
@@ -49,7 +44,6 @@ const MapModal = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    alignItems: "center",
     width: "100%",
   },
   modalView: {
@@ -57,7 +51,6 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
     borderRadius: 20,
     width: "100%",
-    alignItems: "center",
     elevation: 5,
   },
   openButton: {
