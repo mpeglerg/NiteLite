@@ -1,26 +1,29 @@
 const initState = {
-    directions: [
-        {origin: '',
-        destination: ''}
-    ]
-  };
-  
-  const directionsReducer = (state = initState, action) => {
-    console.log("action", action);
-    if (action.type == "UPDATE_DIRECTIONS") {
-      console.log("UPDATE_DIRECTIONS");
-      console.log(`ACTION: ${action}`);
-  
-      let newDirections = action.payload;
-      return {
-        ...state,
-        directions: newDirections,
-      };
-    } else {
-      console.log("ELSE");
-      return state;
-    }
-  };
-  
-  export default directionsReducer;
-  
+  directions: [
+    {
+      origin: "Twitter HQ, Market Street, San Francisco, CA, USA",
+      destination: "Apple Park Visitor Center",
+    },
+  ],
+  route: [],
+};
+
+const directionsReducer = (state = initState, action) => {
+  if (action.type == "UPDATE_DIRECTIONS") {
+    let newDirections = state.directions;
+    newDirections[0].destination = action.payload;
+    return {
+      ...state,
+      directions: newDirections,
+    };
+  } else if (action.type == "UPDATE_CURRENT_ROUTE") {
+    let newRoute = action.payload;
+    return {
+      ...state,
+      route: newRoute,
+    };
+  } else {
+    return state;
+  }
+};
+export default directionsReducer;

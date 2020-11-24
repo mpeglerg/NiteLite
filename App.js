@@ -1,10 +1,10 @@
 import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
-import EntryScreen from "./src/screens/EntryScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
-import SetSafeLocations from "./src/screens/SetSafeLocations";
-import { writeUserData } from './firebase/firebase.util';
+import LogInScreenError from "./src/screens/LogInScreenError";
+import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
+import EmergencyContacts from "./src/screens/EmergencyContacts";
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";
@@ -19,6 +19,7 @@ import React from "react";
 import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
 import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
 import directionsReducer from "./src/reducers/DirectionsReducer";
+
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
   Account: AccountScreen
@@ -30,10 +31,18 @@ const AppModalStack = createStackNavigator({
   // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
   NiteLite: LogInScreen,
   Account: AccountScreen,
+<<<<<<< HEAD
   Page1: HomeScreen,  // SignUp 
   Page2: SetSafeLocations //,
   // Page3: SetEmergencyContacts
   // add 2 more for other pages
+=======
+  Page1: SignUpScreen, 
+  Page2: SafetyQuizScreen,
+  Page3: EmergencyContacts,
+  Page4: HomeScreen, 
+  Page5: LogInScreenError
+>>>>>>> 8d7893027d68b784669b141308951aaa0812d136
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
@@ -64,7 +73,6 @@ const mapStateToProps = (state) => ({
 const AppWithNavigationState = connect(mapStateToProps)(AppContainer);
 
 const store = createStore(appReducer, applyMiddleware(appMiddleware));
-store.subscribe(() =>  console.log('State after dispatch: ', store.getState()))
 
 const App = () => {
   return (

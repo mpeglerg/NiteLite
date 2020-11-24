@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-import { registerNewUser } from '../../firebase/firebase.util';
 import { TextInput } from "react-native-gesture-handler";
 
 
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
 
-  const [UserName, setUserName] = useState("");
-  const [UserEmail, setUserEmail] = useState("");
-  const [UserPassword, setUserPassword] = useState("");
-  const [UserPhoneNumber, setUserPhoneNumber] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userPhoneNumber, setUserPhoneNumber] = useState("");
 
   return (
     <View style={styles.container}>
@@ -17,34 +16,45 @@ const SignUpScreen = () => {
           style={styles.inputStyle}
           placeholder="UserName"
           onChangeText={(text) => { setUserName(text); }}
-          value={UserName}
+          value={userName}
         /> 
         <TextInput
           style={styles.inputStyle}
           placeholder="E-Mail"
           onChangeText={(text) => { setUserEmail(text); }}
-          value={UserEmail}
+          value={userEmail}
         /> 
         <TextInput
           style={styles.inputStyle}
           placeholder="Password"
           onChangeText={(text) => { setUserPassword(text); }}
-          value={UserPassword}
+          value={userPassword}
         /> 
         <TextInput
           style={styles.inputStyle}
           placeholder="Phone Number"
           onChangeText={(text) => { setUserPhoneNumber(text); }}
-          value={UserPhoneNumber}
+          value={userPhoneNumber}
         />  
-
         <Button title="Continue" onPress={ () => 
-        {registerNewUser(UserName, UserEmail, UserPassword, UserPhoneNumber);
-        navigation.navigate('Page2', { phoneNumber: UserPhoneNumber })}}>
+        {objectifyAndNav(navigation, userName, userEmail, userPassword, userPhoneNumber);}}>
         </Button>
     </View>
   );
 };
+
+function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhoneNumber){
+  let object = new Map();
+  // add new items to our object
+  object.set("name", userName);
+  object.set("email", userEmail);
+  object.set("password", userPassword);
+  object.set("phoneNumber", userPhoneNumber);
+
+  // navigate to next page
+  navigation.navigate('Page2', {object: object});
+
+}
 
 const styles = StyleSheet.create({
     container: {

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { View } from "react-native";
+import { connect } from "react-redux";
 import MapModal from "../components/MapModal";
+import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
+
 
 const renderContent = () => (
   <View
@@ -10,12 +13,13 @@ const renderContent = () => (
       backgroundColor: "#2566E8", // subject to change 
       padding: 16,
       height: 450,
-    }}>
+    }}
+  >
     <MapModal></MapModal>
   </View>
 );
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
   const sheetRef = useState(null);
 
   return (
@@ -25,13 +29,27 @@ const HomeScreen = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}>
+      }}
+    >
       <View
         style={{
           height: "100%",
           width: "100%",
-        }}>
-          <MapContainer />
+        }}
+      >
+        <MapView
+          style={{ flex: 1 }}
+          region={{
+            latitude: 42.882004,
+            longitude: 74.582748,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          showsUserLocation={true}
+        />
+          <MapContainer
+            props={props}
+          />
       </View>
       <BottomSheet
         ref={sheetRef}
@@ -43,4 +61,9 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+const mapStateToProps = (state) => {
+  return {
+    directions: state.directions,
+  };
+};
+export default connect(mapStateToProps, null) (HomeScreen);
