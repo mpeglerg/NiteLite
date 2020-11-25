@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import React from "react";
+import React, { useState } from "react";
 import { TextInput, StyleSheet, View} from "react-native";
 import { connect } from "react-redux";
 import Icon from 'react-native-vector-icons/Fontisto';
-=======
-import React, { useState } from "react";
-import { TextInput } from "react-native";
-import { connect } from "react-redux";
 import { getDirections } from "../../data/api-placeholder";
->>>>>>> 8d7893027d68b784669b141308951aaa0812d136
 
 const ModalSearchBar = (props) => {
   const [value, setValue] = useState("");

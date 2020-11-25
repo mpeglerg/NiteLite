@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  ShadowPropTypesIOS,
-} from "react-native";
+import { View, Text, TextInput, Button, ShadowPropTypesIOS} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import CheckBox from "../components/CheckBox";
@@ -17,7 +11,7 @@ const AccountScreen = (props) => {
   return (
     <ScrollView>
       <Text>Account</Text>
-      <Text>User Settings</Text>
+      <Text>Route Preferences</Text>
       <Text>What makes you feel safe when walking?</Text>
       <View>
         <CheckBox />

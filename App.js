@@ -31,18 +31,12 @@ const AppModalStack = createStackNavigator({
   // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
   NiteLite: LogInScreen,
   Account: AccountScreen,
-<<<<<<< HEAD
-  Page1: HomeScreen,  // SignUp 
-  Page2: SetSafeLocations //,
-  // Page3: SetEmergencyContacts
-  // add 2 more for other pages
-=======
+  // Page1: HomeScreen,  // SignUp 
   Page1: SignUpScreen, 
   Page2: SafetyQuizScreen,
   Page3: EmergencyContacts,
   Page4: HomeScreen, 
   Page5: LogInScreenError
->>>>>>> 8d7893027d68b784669b141308951aaa0812d136
 });
 
 const AppSwitchNavigator = createSwitchNavigator({

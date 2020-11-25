@@ -36,13 +36,9 @@ const MapModal = () => {
           }}>
           <Text>2</Text>
         </View>
-<<<<<<< HEAD
         </View>
-      </View>
-=======
-        <RouteDirections />
+        {/* <RouteDirections /> */}
       </ScrollView>
->>>>>>> 8d7893027d68b784669b141308951aaa0812d136
     </View>
   );
 };
@@ -51,10 +47,7 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     width: "100%",
-<<<<<<< HEAD
     textAlign: "center",
-=======
->>>>>>> 8d7893027d68b784669b141308951aaa0812d136
   },
   modalView: {
     margin: 20,
