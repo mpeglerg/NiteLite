@@ -20,4 +20,3 @@ const initState = {
   };
   
   export default directionsReducer;
-  
