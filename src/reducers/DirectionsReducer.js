@@ -1,7 +1,7 @@
 const initState = {
     directions: [
-        {origin: 'Twitter HQ, Market Street, San Francisco, CA, USA',
-        destination: 'Apple Park Visitor Center'}
+        {origin: '',
+        destination: ''}
     ]
   };
   
