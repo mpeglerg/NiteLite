@@ -8,3 +8,7 @@ export const updateDirections = (destination) => {
 export const updateRoute = (route) => {
   return { type: "UPDATE_CURRENT_ROUTE", payload: route };
 };
+
+export const updateCurrentLocation = (currentLocation) => {
+  return { type: "UPDATE_CURRENT_LOCATION", payload: currentLocation };
+};
