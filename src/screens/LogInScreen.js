@@ -7,6 +7,7 @@ import logo from '../images/NiteLiteLogo.png';
 import { Image, StyleSheet, View, Button, Text } from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
 import { color } from "react-native-reanimated";
+import {colors} from "../styles/colors.js"
 
 
 let textFromError;
@@ -28,7 +29,7 @@ const LogInScreen = ({ navigation }) => {
         <TextInput
           style={styles.inputStyle}
           placeholder="Username"
-          placeholderTextColor = "#fff"
+          placeholderTextColor = "#A2A2AB"
           onChangeText={(text) => {
             setReturningUserName(text);
           }}
@@ -40,7 +41,7 @@ const LogInScreen = ({ navigation }) => {
         <TextInput
           style={styles.inputStyle}
           placeholder="Password"
-          placeholderTextColor = "#fff"
+          placeholderTextColor = "#A2A2AB"
           onChangeText={(text) => {
             setReturningUserPassword(text);
           }}
@@ -112,10 +113,11 @@ const styles = StyleSheet.create({
       flexDirection: "column",
       justifyContent: "center",
       padding: 35,
-      backgroundColor: '#151965',
-      backgroundColor: '#0f4c75',
-      backgroundColor: '#102849',
-      backgroundColor: '#010068',
+      // backgroundColor: '#151965',
+      // backgroundColor: '#0f4c75',
+      // backgroundColor: '#102849',
+      // backgroundColor: '#010068',
+      backgroundColor: colors.backgroundColor,
       alignItems: 'center',
       // margin: 5
     },
@@ -138,8 +140,7 @@ const styles = StyleSheet.create({
     },
     logInButtonContainer: {
       elevation: 8,
-      backgroundColor: "#072DC2",
-      // backgroundColor: "#0066E7",
+      backgroundColor: colors.secondaryBlue,
       paddingVertical: 12,
       paddingHorizontal: 110,
       marginTop: 20

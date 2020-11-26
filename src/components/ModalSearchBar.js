@@ -58,11 +58,12 @@ const styles = StyleSheet.create({
     width: "90%",
     backgroundColor: "#fff",
     borderRadius: 20,
-    padding: 18,
   },
   searchIcon: {
     paddingBottom: 17,
-    paddingRight: 10
+    paddingRight: 10, 
+    marginLeft: 15,
+    marginTop: 14
   },
 });
 

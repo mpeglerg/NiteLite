@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
 import RouteDirections from "./RouteDirections";
 import { ScrollView } from "react-native-gesture-handler";
+import {colors} from "../styles/colors.js"
 
 const MapModal = () => {
   return (
@@ -10,31 +11,11 @@ const MapModal = () => {
       <ScrollView style={styles.modalView}>
         <ModalSearchBar />
         <View style={styles.textStyle}>
-        <View
-          style={{
-            backgroundColor: "white",
-            borderColor: "#30C5F4",
-            borderWidth: 3,
-            borderRadius: 50,
-            height: 60,
-            width: 60,
-            padding: 14,
-            margin: 10,
-          }}>
-          <Text>17</Text>
+        <View style={styles.buttons}>
+          <Text style={styles.buttonText}>17</Text>
         </View>
-        <View
-          style={{
-            backgroundColor: "white",
-            borderColor: "#30C5F4",
-            borderWidth: 3,
-            borderRadius: 50,
-            height: 60,
-            width: 60,
-            padding: 14,
-            margin: 10,
-          }}>
-          <Text>2</Text>
+        <View style={styles.buttons}>
+          <Text style={styles.buttonText}>2</Text>
         </View>
         </View>
         {/* <RouteDirections /> */}
@@ -74,6 +55,20 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
+  buttons: {
+    backgroundColor: "white",
+    borderColor: colors.tertiaryBlue,
+    borderWidth: 3,
+    borderRadius: 50,
+    height: 60,
+    width: 60,
+    margin: 10,
+    justifyContent: "center"
+  },
+  buttonText: {
+    textAlign: "center",
+    // fontWeight: "bold"
+  }
 });
 
 export default MapModal;

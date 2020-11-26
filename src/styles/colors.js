@@ -1,9 +1,8 @@
-export default {
-    // primaryColor: "black",
-    // errorColor: "red",
-    // primaryGreen: "aed57f",
-    // primaryBlue: "8bd7f8",
-    // beginnerColor: "8fcea0",
-    // intermediateColor: "fdbe62",
-    // difficultColor: "f1697e",
+export const colors = {
+    backgroundColor : "#010068",
+    secondaryBlue: "#072DC2",
+    primaryYellow: "#F2EB46",
+    tertiaryBlue: "#30C5F4"
   };
+
+// backgroundColor: "#0066E7",

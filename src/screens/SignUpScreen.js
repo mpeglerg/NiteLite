@@ -8,6 +8,7 @@ import PhoneIcon from 'react-native-vector-icons/SimpleLineIcons';
 import ArrowIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withOrientation } from "react-navigation";
 import { Header } from "react-navigation-stack";
+import {colors} from "../styles/colors.js"
 
 
 
@@ -26,7 +27,7 @@ const SignUpScreen = ({navigation}) => {
           <TextInput
             style={styles.inputStyle}
             placeholder="UserName"
-            placeholderTextColor = "#fff"
+            placeholderTextColor = "#A2A2AB"
             onChangeText={(text) => { setUserName(text); }}
             value={userName}
           /> 
@@ -36,7 +37,7 @@ const SignUpScreen = ({navigation}) => {
           <TextInput
             style={styles.inputStyle}
             placeholder="E-Mail"
-            placeholderTextColor = "#fff"
+            placeholderTextColor = "#A2A2AB"
             onChangeText={(text) => { setUserEmail(text); }}
             value={userEmail}
           /> 
@@ -46,7 +47,7 @@ const SignUpScreen = ({navigation}) => {
           <TextInput
             style={styles.inputStyle}
             placeholder="Password"
-            placeholderTextColor = "#fff"
+            placeholderTextColor = "#A2A2AB"
             onChangeText={(text) => { setUserPassword(text); }}
             value={userPassword}
           /> 
@@ -56,7 +57,7 @@ const SignUpScreen = ({navigation}) => {
           <TextInput
             style={styles.inputStyle}
             placeholder="Phone Number"
-            placeholderTextColor = "#fff"
+            placeholderTextColor = "#A2A2AB"
             onChangeText={(text) => { setUserPhoneNumber(text); }}
             value={userPhoneNumber}
           />  
@@ -94,9 +95,8 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       paddingBottom: 35,
       paddingHorizontal: 35,
-      backgroundColor: '#fff',
       alignItems: 'center',
-      backgroundColor: '#010068',
+      backgroundColor: colors.backgroundColor,
     },
     icon: {
       flexDirection: 'row',
@@ -117,12 +117,10 @@ const styles = StyleSheet.create({
     },
     ContinueContainer: {
       elevation: 8,
-      backgroundColor: "#072DC2",
-      // backgroundColor: "#0066E7",
+      backgroundColor: colors.secondaryBlue,
       paddingVertical: 10,
       paddingHorizontal: 110,
       marginTop: 20,
-      // flexDirection: 'row',
     },
     ContinueText: {
       fontSize: 19,

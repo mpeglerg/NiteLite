@@ -5,12 +5,14 @@ import MapModal from "../components/MapModal";
 import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
+import {colors} from "../styles/colors.js"
 
 
 const renderContent = () => (
   <View
     style={{
-      backgroundColor: "#2566E8", // subject to change 
+      // backgroundColor: "#05054D",
+      backgroundColor: colors.backgroundColor,
       padding: 16,
       height: 450,
     }}
