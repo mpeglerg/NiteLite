@@ -3,7 +3,7 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 // import Icon from 'react-native-vector-icons/Fontisto';
 import UserIcon from 'react-native-vector-icons/SimpleLineIcons';
 import KeyIcon from 'react-native-vector-icons/SimpleLineIcons';
-import logo from '../images/NiteLiteLogo.png';
+import logo from '../images/Logo1-05.png';
 import { Image, StyleSheet, View, Button, Text } from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
 import { color } from "react-native-reanimated";
@@ -21,7 +21,7 @@ const LogInScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={logo} style={{width:250, height:250}}></Image>
+      <Image source={logo} style={{width:270, height:270}}></Image>
 
       <Text>{textFromError}</Text>
       <View  style={styles.icon}>
