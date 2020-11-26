@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CheckBox from "../components/CheckBox";
+import AddContactIcon from 'react-native-vector-icons/AntDesign';
+import AddContactIcon2 from 'react-native-vector-icons/MaterialIcons';
+import {colors} from "../styles/colors.js"
 
 
 const SafetyQuizScreen = ({navigation}) => {
@@ -12,30 +15,31 @@ const SafetyQuizScreen = ({navigation}) => {
   const [busySidewalks, setBusySidewalks] = useState("");
 
   return (
-    <View>
-      <Text>Account</Text>
-      <Text>User Settings</Text>
-      <Text>What makes you feel safe when walking?</Text>
-      <View>
+    <View style={styles.container}>
+      {/* <Text>Account</Text> */}
+      <Text style={styles.header}>Set Up Your Route Preferences</Text>
+      
+      <Text style={styles.taskText}>1. What makes you feel safe when walking?</Text>
+      <View style={styles.check}>
         <CheckBox 
         onChange={(e) => { setOpenBusinesses(e); }}
         value={openBusinesses}/>
-        <Text>Open Businesses</Text>
-        
+        <Text style={styles.checkOptions}>Open Businesses</Text>  
       </View>
-      <View>
+      <View style={styles.check}>
         <CheckBox  
         onChange={(e) => { setPoliceStations(e); }}
         value={policeStations}/>
-        <Text>Police Stations</Text>
+        <Text style={styles.checkOptions}>Police Stations</Text>
       </View>
-      <View>
+      <View style={styles.check}>
         <CheckBox  
         onChange={(e) => { setBusySidewalks(e); }}
         value={busySidewalks}/>
-        <Text>Busy Sidewalks</Text>
+        <Text style={styles.checkOptions}>Busy Sidewalks</Text>
       </View>
-      <Text>Enter the addresses of places you consider "Safe Spots"</Text>
+      
+      <Text style={styles.taskText}>2. Enter the addresses of places you consider "Safe Spots"</Text>
       <TextInput
         style={{
           height: 40,
@@ -50,9 +54,15 @@ const SafetyQuizScreen = ({navigation}) => {
         }}
         value={safePlaceInput}
       />
-      <Button title="Set up Emergency Contacts" onPress={ () => 
+
+     
+        <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
+        {/* <View> */}
+        <TouchableOpacity onPress={ () => 
         {objectifyAndNav(navigation, object, busySidewalks, openBusinesses, policeStations, safePlaceInput);}}>
-        </Button>
+        <AddContactIcon2 size={38} name="person-add" color="white"/>
+        {/* </View> */}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -72,3 +82,48 @@ function objectifyAndNav(navigation, object, busySidewalks, openBusinesses, poli
 }
 
 export default SafetyQuizScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.backgroundColor,
+    textAlign: "center",
+    alignItems: "center",
+  },
+  header: {
+    fontSize: 22,
+    padding: 10,
+    textAlign: "center",
+    marginTop: 20,
+    marginHorizontal: 18,
+    // marginVertical: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    lineHeight: 34,
+
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 8,
+    textShadowColor: '#F2EB46',
+  },
+  check: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: 'center',
+    padding: 10,
+    // margin: 8
+  },
+  checkOptions: {
+    color: "#fff",
+    // marginLeft: 10,
+    fontSize: 14,
+  },
+  taskText: {
+    fontSize: 16,
+    paddingVertical: 13,
+    paddingHorizontal: 20,
+    textAlign: "center",
+    lineHeight: 24,
+    marginTop: 15,
+    color: "#fff",
+  },
+});

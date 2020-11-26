@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Button, Text } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+// import Icon from 'react-native-vector-icons/Fontisto';
+import UserIcon from 'react-native-vector-icons/SimpleLineIcons';
+import KeyIcon from 'react-native-vector-icons/SimpleLineIcons';
+import logo from '../images/NiteLiteLogo.png';
+import { Image, StyleSheet, View, Button, Text } from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
+import { color } from "react-native-reanimated";
+import {colors} from "../styles/colors.js"
+
 
 let textFromError;
 
@@ -14,25 +21,36 @@ const LogInScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Image source={logo} style={{width:250, height:250}}></Image>
+
       <Text>{textFromError}</Text>
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="Username"
-        onChangeText={(text) => {
-          setReturningUserName(text);
-        }}
-        value={returningUserName}
-      />
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="Password"
-        onChangeText={(text) => {
-          setReturningUserPassword(text);
-        }}
-        value={returningUserPassword}
-      />
-      <Button
-        title="Log In"
+      <View  style={styles.icon}>
+        <UserIcon style={styles.logInIcons} size={18} name="user" color="white" />
+        <TextInput
+          style={styles.inputStyle}
+          placeholder="Username"
+          placeholderTextColor = "#A2A2AB"
+          onChangeText={(text) => {
+            setReturningUserName(text);
+          }}
+          value={returningUserName}
+        />
+      </View>
+      <View  style={styles.icon}>
+        <KeyIcon style={styles.logInIcons} size={18} name="key" color="white"/>
+        <TextInput
+          style={styles.inputStyle}
+          placeholder="Password"
+          placeholderTextColor = "#A2A2AB"
+          onChangeText={(text) => {
+            setReturningUserPassword(text);
+          }}
+          value={returningUserPassword}
+        />
+      </View>
+
+      <TouchableOpacity
+        style={styles.logInButtonContainer}
         onPress={() =>
           verifyCredentials(
             navigation,
@@ -40,12 +58,14 @@ const LogInScreen = ({ navigation }) => {
             returningUserPassword
           )
         }
-      ></Button>
+      >
+        <Text style={styles.logInButtonText}>Log In</Text>
+      </TouchableOpacity>
 
-      <Button
-        title="Don't Already Have an Account? Sign Up!"
-        onPress={() => navigation.navigate("Page1")}
-      ></Button>
+      <TouchableOpacity onPress={() => navigation.navigate("Page1")}>
+        <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
+        <Text style={styles.signUpText2}>Sign Up!</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -88,21 +108,64 @@ async function verifyCredentials(navigation, username, password) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    padding: 35,
-    backgroundColor: "#fff",
-  },
-  inputStyle: {
-    width: "100%",
-    marginBottom: 15,
-    paddingBottom: 15,
-    alignSelf: "center",
-    borderColor: "#ccc",
-    borderBottomWidth: 1,
-  },
-});
+      flex: 1,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      padding: 35,
+      // backgroundColor: '#151965',
+      // backgroundColor: '#0f4c75',
+      // backgroundColor: '#102849',
+      // backgroundColor: '#010068',
+      backgroundColor: colors.backgroundColor,
+      alignItems: 'center',
+      // margin: 5
+    },
+    icon: {
+      flexDirection: 'row',
+      borderColor: "#ccc",
+      borderBottomWidth: 1,
+      margin: 15,
+    },
+    inputStyle: {
+      width: '100%',
+      marginBottom: 5,
+      paddingBottom: 10,
+      alignSelf: "center",
+      color: "#fff",
+    },
+    logInIcons: {
+      paddingBottom: 10,
+      paddingRight: 10
+    },
+    logInButtonContainer: {
+      elevation: 8,
+      backgroundColor: colors.secondaryBlue,
+      paddingVertical: 12,
+      paddingHorizontal: 110,
+      marginTop: 20
+    },
+    logInButtonText: {
+      fontSize: 20,
+      color: "#fff",
+      fontWeight: "bold",
+      alignSelf: "center",
+      textTransform: "uppercase",
+    },  
+    signUpText1: {
+      marginTop: 15,
+      fontSize: 15,
+      textAlign: "center",
+      textAlignVertical: "center" ,
+      color: "#fff",
+    },
+    signUpText2: {
+      paddingTop: 5,
+      fontSize: 15,
+      textAlign: "center",
+      textAlignVertical: "center" ,
+      color: "#fff",
+    },
+  });
 
 export default LogInScreen;

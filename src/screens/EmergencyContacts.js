@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { registerNewUser } from "../../firebase/firebase.util";
+import {colors} from "../styles/colors.js"
 
 const EmergencyContacts = ({ navigation }) => {
   let object = navigation.getParam("object", "missing");
@@ -9,9 +10,9 @@ const EmergencyContacts = ({ navigation }) => {
   const [contactPhone, setContactPhone] = useState("");
 
   return (
-    <View>
-      <Text>Enter who you would like to call during an Emergency.</Text>
-      <Text>Name</Text>
+    <View style={styles.container}> 
+      <Text style={styles.header}>Who you would like to call during an Emergency?</Text>
+      <Text style={styles.taskText}>Name</Text>
       <TextInput
         style={{
           height: 40,
@@ -26,7 +27,7 @@ const EmergencyContacts = ({ navigation }) => {
         }}
         value={name}
       />
-      <Text>Phone number</Text>
+      <Text style={styles.taskText}>Phone number</Text>
       <TextInput
         style={{
           height: 40,
@@ -35,18 +36,23 @@ const EmergencyContacts = ({ navigation }) => {
           borderRadius: 20,
           padding: 15,
         }}
-        placeholder={"1234567890"}
+        placeholder={"123-456-7890"}
         onChangeText={(text) => {
           setContactPhone(text);
         }}
         value={contactPhone}
       />
-      <Button
+      {/* <Button
         title="Complete Profile"
-        onPress={() => {
+        
+      ></Button> */}
+
+  <TouchableOpacity style={styles.signUpButton} onPress={() => {
           objectifyAndNav(navigation, object, name, contactPhone);
-        }}
-      ></Button>
+        }}>
+        <Text style={styles.signUpText}>Complete Profile!</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };
@@ -62,3 +68,52 @@ function objectifyAndNav(navigation, object, name, contactPhone) {
   navigation.navigate("Page4", { text: object.get("name") });
 }
 export default EmergencyContacts;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.backgroundColor,
+    textAlign: "center",
+    alignItems: "center",
+  },
+  header: {
+    fontSize: 22,
+    padding: 10,
+    textAlign: "center",
+    marginTop: 20,
+    marginHorizontal: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    lineHeight: 34,
+    marginBottom: 20,
+
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 8,
+    textShadowColor: '#F2EB46',
+  },
+  taskText: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    // textAlign: "left",
+    lineHeight: 24,
+    marginTop: 15,
+    color: "#fff",
+  },
+  signUpText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlignVertical: "center" ,
+    alignSelf: "center",
+    color: "#fff",
+    textTransform: "uppercase",
+  },
+  signUpButton: {
+    elevation: 8,
+    backgroundColor: "#072DC2",
+    paddingVertical: 15,
+    paddingHorizontal: 90,
+    marginTop: 80
+  }
+});
