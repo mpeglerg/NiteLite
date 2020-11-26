@@ -49,9 +49,7 @@ const HomeScreen = (props) => {
           }}
           showsUserLocation={true}
         />
-          <MapContainer
-            props={props}
-          />
+          <MapContainer/>
       </View>
       <BottomSheet
         ref={sheetRef}

@@ -1,4 +1,8 @@
 const initState = {
+  currentLocation: {
+    latitude: 0,
+    longitude: 0
+  },
   directions: [
     {
       origin: "Twitter HQ, Market Street, San Francisco, CA, USA",
@@ -22,6 +26,13 @@ const directionsReducer = (state = initState, action) => {
       ...state,
       route: newRoute,
     };
+  } else if(action.type == "UPDATE_CURRENT_LOCATION") {
+    let currentLocation = state.currentLocation;
+    currentLocation = action.payload;
+    return {
+      ...state,
+      currentLocation: currentLocation,
+    }
   } else {
     return state;
   }

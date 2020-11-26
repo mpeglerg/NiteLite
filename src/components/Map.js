@@ -1,75 +1,155 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import MapView from "react-native-maps";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Text, Alert } from "react-native";
+import MapView, { Marker, Callout } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { connect } from "react-redux";
+import { getScore } from "../../data/walkScoreApi";
+import Geocoder from 'react-native-geocoding';
 
 const GOOGLE_MAPS_APIKEY = process.env.REACT_APP_GOOGLE_MAPS_API;
 
 const styles = StyleSheet.create({
-  versionBox: {
-    position: "absolute",
-    bottom: 50,
-    right: 50,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-  },
-  versionText: {
-    padding: 4,
-    backgroundColor: "#FFF",
-    color: "#000",
-  },
-});
+    walkScoreView: {
+      flex: 1,
+      width: 150,
+      height: 40,
+      backgroundColor: 'rgba(255,255,255,0.7)',
+      alignItems: 'center',
+    },
+  });
 
-const MapContainer = (props) => {
-  const [coordinates, setCoordinates] = useState([]);
-  const [mapUIView, setMapUIView] = useState(null);
-  const onMapPress = (e) => {
-    setCoordinates([...coordinates, e.nativeEvent.coordinate]);
-  };
+  const MapContainer = (props) => {
+    const [coordinates, setCoordinates] = useState([]);
+    const [mapUIView, setMapUIView] = useState(null);
+    const [list, setList] = useState([]);
+    const [safeSpotCoords, setSafeSpotCoords] = useState([])
 
-  const onReady = (result) => {
-    mapUIView.fitToCoordinates(result.coordinates, {
-      edgePadding: {
-        right: width / 10,
-        bottom: height / 10,
-        left: width / 10,
-        top: height / 10,
-      },
-    });
-  };
+    useEffect(() => {
+      getCurrentLocation()
+      let mounted = true;
+      getScore(props.directions.currentLocation).then(items => {
+        if(mounted) {
+          setList(items)
+        }
+      })
+      getSafeSpotCoords()
+      return() => mounted = false;
+    }, [])
 
-  const onError = (errorMessage) => {
-    console.log(errorMessage); // eslint-disable-line no-console
-  };
+    const getCurrentLocation = () => {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          props.updateCurrentLocation({longitude: position.coords.longitude, latitude: position.coords.latitude})
+        },
+        error => Alert.alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      )
+    }
 
-  return (
-    <View style={StyleSheet.absoluteFill}>
-      <MapView
-        initialRegion={{
-          latitude: 37.771707,
-          longitude: -122.4053769,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0922,
-        }}
-        style={StyleSheet.absoluteFill}
-        ref={(c) => setMapUIView(c)} // eslint-disable-line react/jsx-no-bind
-        onPress={onMapPress}>
-        <MapViewDirections
-          origin={props.directions.directions[0].origin}
-          destination={props.directions.directions[0].destination}
-          apikey={GOOGLE_MAPS_APIKEY}
-          strokeWidth={3}
-          strokeColor="hotpink"
-        />
-      </MapView>
-    </View>
-  );
+    const getSafeSpotCoords = () => {
+      initGeocoder()
+        props.safeSpots.safeSpots.forEach(spot => {
+        Geocoder.from(spot.address)
+          .then(json => {
+              var location = json.results[0].geometry.location
+              setSafeSpotCoords([
+                ...safeSpotCoords,
+                {
+                  longitude: location.lng,
+                  latitude: location.lat
+                },
+              ])
+          })
+          .catch(error => console.warn(error))
+      })
+    }
+
+    const initGeocoder = () => {
+      Geocoder.init(GOOGLE_MAPS_APIKEY)
+    }
+
+    const onMapPress = (e) => {
+      setCoordinates([
+        ...coordinates,
+        e.nativeEvent.coordinate,
+      ])
+    }
+  
+    const onReady = (result) => {
+      mapUIView.fitToCoordinates(result.coordinates, {
+        edgePadding: {
+          right: (width / 10),
+          bottom: (height / 10),
+          left: (width / 10),
+          top: (height / 10),
+        },
+      });
+    };
+  
+    const onError = (errorMessage) => {
+      console.log(errorMessage); // eslint-disable-line no-console
+    };
+  
+      return(
+        <View style={StyleSheet.absoluteFill}>
+          <MapView initialRegion={{
+                latitude: 37.771707,
+                longitude: -122.4053769,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0922,
+              }}
+              style={StyleSheet.absoluteFill}
+              ref={c => setMapUIView(c)} // eslint-disable-line react/jsx-no-bind
+              onPress={onMapPress}>
+            <MapViewDirections
+                origin={props.directions.currentLocation}
+                destination={props.directions.directions[0].destination}
+                apikey={GOOGLE_MAPS_APIKEY}
+                strokeWidth={3}
+                strokeColor="hotpink"
+            />
+            <Marker coordinate={props.directions.currentLocation}>
+              <Callout
+                // alphaHitTest
+                // tooltip
+                // onPress={e => {
+                //   if (
+                //     e.nativeEvent.action === 'marker-inside-overlay-press' ||
+                //     e.nativeEvent.action === 'callout-inside-press'
+                //   ) {
+                //     return;
+                //   }
+
+                //   Alert.alert('callout pressed');
+                // }}
+                style={styles.walkScoreView}
+              >
+                <View>
+                  <Text>{`WalkScore: ${list.walkscore}\n${list.description}`}</Text>
+                </View>
+              </Callout>
+            </Marker>            
+            {safeSpotCoords.map(marker => (
+              <Marker coordinate={marker}/>
+            ))}
+          </MapView>
+        </View>
+      );
 };
 
 const mapStateToProps = (state) => {
   return {
+    safeSpots: state.safeSpots,
     directions: state.directions,
+    currentLocation: state.currentLocation,
   };
 };
-export default connect(mapStateToProps, null)(MapContainer);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCurrentLocation: (currentLocation) => {
+      dispatch({ type: "UPDATE_CURRENT_LOCATION", payload: currentLocation });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);

@@ -1,5 +1,5 @@
 let api = "https://api.walkscore.com/";
-const API_KEY = "8da8eaf8f825124f0ffed61606d080aa";
+const API_KEY = process.env.REACT_APP_WALK_SCORE_API;
 
 const apiHost = host => {
     api = host;
@@ -22,13 +22,8 @@ if (successStatuses.includes(response.status)) {
 }
 };
 const okCheck = statusCheck([HTTP_OK]);
-const paramsWithApiKey = params => {
-    const result = new URLSearchParams(params);
-    result.set("wsapikey", API_KEY);
-    return result;
-};
 const query = (resource, params) =>
-    fetch(`${urlFor(resource)}?${paramsWithApiKey(params)}`)
+    fetch(`${urlFor(resource)}?format=json&lat=${params.latitude}&lon=${params.longitude}&wsapikey=${API_KEY}`)
         .then(okCheck, emitNativeError)
         .then(response => response.json());
 const getScore = params => {
