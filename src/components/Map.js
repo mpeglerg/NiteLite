@@ -21,14 +21,13 @@ const styles = StyleSheet.create({
   const MapContainer = (props) => {
     const [coordinates, setCoordinates] = useState([]);
     const [mapUIView, setMapUIView] = useState(null);
-    const [currLoc, setCurrLoc] = useState({latitude: 0, longitude: 0});
     const [list, setList] = useState([]);
     const [safeSpotCoords, setSafeSpotCoords] = useState([])
 
     useEffect(() => {
       getCurrentLocation()
       let mounted = true;
-      getScore(currLoc).then(items => {
+      getScore(props.directions.currentLocation).then(items => {
         if(mounted) {
           setList(items)
         }
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
     const getCurrentLocation = () => {
       navigator.geolocation.getCurrentPosition(
         position => {
-          setCurrLoc({longitude: position.coords.longitude, latitude: position.coords.latitude})
+          props.updateCurrentLocation({longitude: position.coords.longitude, latitude: position.coords.latitude})
         },
         error => Alert.alert(error.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -103,13 +102,13 @@ const styles = StyleSheet.create({
               ref={c => setMapUIView(c)} // eslint-disable-line react/jsx-no-bind
               onPress={onMapPress}>
             <MapViewDirections
-                origin={currLoc}
+                origin={props.directions.currentLocation}
                 destination={props.directions.directions[0].destination}
                 apikey={GOOGLE_MAPS_APIKEY}
                 strokeWidth={3}
                 strokeColor="hotpink"
             />
-            <Marker coordinate={currLoc}>
+            <Marker coordinate={props.directions.currentLocation}>
               <Callout
                 // alphaHitTest
                 // tooltip
@@ -142,6 +141,15 @@ const mapStateToProps = (state) => {
   return {
     safeSpots: state.safeSpots,
     directions: state.directions,
+    currentLocation: state.currentLocation,
   };
 };
-export default connect(mapStateToProps, null)(MapContainer);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCurrentLocation: (currentLocation) => {
+      dispatch({ type: "UPDATE_CURRENT_LOCATION", payload: currentLocation });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);
