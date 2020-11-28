@@ -4,6 +4,7 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
 import LogInScreenError from "./src/screens/LogInScreenError";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
+import EditProfileScreen from "./src/screens/EditProfileScreen";
 import EmergencyContacts from "./src/screens/EmergencyContacts";
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -31,12 +32,12 @@ const AppModalStack = createStackNavigator({
   // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
   NiteLite: LogInScreen,
   Account: AccountScreen,
-  // Page1: HomeScreen,  // SignUp 
   Page1: SignUpScreen, 
   Page2: SafetyQuizScreen,
   Page3: EmergencyContacts,
   Page4: HomeScreen, 
-  Page5: LogInScreenError
+  Page5: LogInScreenError, 
+  Page6: EditProfileScreen
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
