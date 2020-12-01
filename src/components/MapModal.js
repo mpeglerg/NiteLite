@@ -1,22 +1,44 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Platform, Linking } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
 import RouteDirections from "./RouteDirections";
 import { ScrollView } from "react-native-gesture-handler";
 import {colors} from "../styles/colors.js"
+import { connect } from "react-redux";
 
-const MapModal = () => {
+const MapModal = (props) => {
+  const [callNumber, setCallNumber] = useState("");
+
+  const triggerCall = () => {
+    const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(/-/g, "")
+
+    if(Platform.OS == 'android') {
+      setCallNumber(`tel:${formattedNumber}`)
+    } else {
+      setCallNumber(`telprompt:${formattedNumber}`)
+    }
+    if(callNumber.length !== 0) {
+      Linking.openURL(callNumber)
+    }
+  }
+
   return (
     <View style={styles.centeredView}>
       <ScrollView style={styles.modalView}>
         <ModalSearchBar />
         <View style={styles.textStyle}>
-        <View style={styles.buttons}>
-          <Text style={styles.buttonText}>17</Text>
-        </View>
-        <View style={styles.buttons}>
-          <Text style={styles.buttonText}>2</Text>
-        </View>
+          <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttons}
+          onPress={triggerCall}>
+            <Text style={styles.buttonText}>Call</Text>
+          </TouchableOpacity>
+          <View style={styles.buttons}>
+            <Text style={styles.buttonText}>17</Text>
+          </View>
+          <View style={styles.buttons}>
+            <Text style={styles.buttonText}>2</Text>
+          </View>
         </View>
         {/* <RouteDirections /> */}
       </ScrollView>
@@ -71,4 +93,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MapModal;
+const mapStateToProps = (state) => {
+  return {
+    emergencyContacts: state.emergencyContacts,
+  };
+};
+
+export default connect(mapStateToProps, null)(MapModal);
