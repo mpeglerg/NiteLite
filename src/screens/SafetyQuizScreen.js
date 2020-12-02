@@ -77,7 +77,7 @@ function objectifyAndNav(navigation, object, busySidewalks, openBusinesses, poli
   console.log("in the map: ", object.get("safePlaces"));
 
   // navigate to next page
-  navigation.navigate('Page3', { object: object });
+  navigation.navigate('EmergencyContacts', { object: object });
 
 }
 
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: 'center',
     padding: 10,
+    color: "#fff"
     // margin: 8
   },
   checkOptions: {

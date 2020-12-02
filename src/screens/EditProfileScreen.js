@@ -21,6 +21,7 @@ const EditProfileScreen = ({ navigation }) => {
    - checkboxes populated with preferences, same with safe spots and emergency contact
    - figure out correct styles
    - keep an object, update it with the new traits and write to firebase
+   - currently not attached to any account, mock data 
   */
 
   return (

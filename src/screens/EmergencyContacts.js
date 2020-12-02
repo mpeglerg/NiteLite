@@ -65,7 +65,7 @@ function objectifyAndNav(navigation, object, name, contactPhone) {
   // call firebase function to set all of these items in the object
   registerNewUser(object);
   // navigate to next page
-  navigation.navigate("Page4", { text: object.get("name") });
+  navigation.navigate("Home", { text: object.get("name") });
 }
 export default EmergencyContacts;
 

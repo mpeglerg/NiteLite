@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import MapModal from "../components/MapModal";
 import MapView from "react-native-maps";
@@ -21,7 +21,8 @@ const renderContent = () => (
   </View>
 );
 
-const HomeScreen = (props) => {
+const HomeScreen = ({ navigation }) => {
+  let username = navigation.getParam("text", "sample");
   const sheetRef = useState(null);
 
   return (

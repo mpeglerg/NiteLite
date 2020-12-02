@@ -40,7 +40,7 @@ const LogInScreenError = ({ navigation }) => {
 
       <Button
         title="Don't Already Have an Account? Sign Up!"
-        onPress={() => navigation.navigate("Page1")}
+        onPress={() => navigation.navigate("SignUp")}
       ></Button>
     </View>
   );
@@ -74,7 +74,7 @@ function verifyCredentials(navigation, username, password) {
   } else {
     // output val == 2
     // works, sign in and nav to home page
-    navigation.navigate("Page4", { text: object.get("name") });
+    navigation.navigate("Home", { text: object.get("name") });
   }
 }
 const styles = StyleSheet.create({

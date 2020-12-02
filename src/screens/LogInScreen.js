@@ -62,7 +62,7 @@ const LogInScreen = ({ navigation }) => {
         <Text style={styles.logInButtonText}>Log In</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Page1")}>
+      <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
         <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
         <Text style={styles.signUpText2}>Sign Up!</Text>
       </TouchableOpacity>
@@ -98,7 +98,7 @@ async function verifyCredentials(navigation, username, password) {
   } else {
     // response == 2
     // works, sign in and nav to home page
-    navigation.navigate("Page4", { text: username });
+    navigation.navigate("Home", { text: username });
   }
   // })
   // .catch(function (response) {

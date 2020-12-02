@@ -83,7 +83,7 @@ function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhon
   object.set("phoneNumber", userPhoneNumber);
 
   // navigate to next page
-  navigation.navigate('Page2', {object: object});
+  navigation.navigate('SafetyPreferences', {object: object});
 
 }
 
