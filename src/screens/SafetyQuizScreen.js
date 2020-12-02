@@ -5,7 +5,19 @@ import CheckBox from "../components/CheckBox";
 import AddContactIcon from 'react-native-vector-icons/AntDesign';
 import AddContactIcon2 from 'react-native-vector-icons/MaterialIcons';
 import {colors} from "../styles/colors.js"
-
+import SearchIcon from 'react-native-vector-icons/Fontisto';
+import {AppLoading} from "expo"
+import { 
+  useFonts,
+  Nunito_600SemiBold,
+  Nunito_400Regular,
+} from '@expo-google-fonts/nunito'
+import { 
+  CoveredByYourGrace_400Regular 
+} from '@expo-google-fonts/covered-by-your-grace'
+import { 
+  Quicksand_600SemiBold,
+} from '@expo-google-fonts/quicksand'
 
 const SafetyQuizScreen = ({navigation}) => {
   let object = navigation.getParam('object','missing');
@@ -13,7 +25,16 @@ const SafetyQuizScreen = ({navigation}) => {
   const [openBusinesses, setOpenBusinesses] = useState("");
   const [policeStations, setPoliceStations] = useState("");
   const [busySidewalks, setBusySidewalks] = useState("");
-
+  let [fontsLoaded] = useFonts({
+    Nunito_400Regular,
+    Nunito_600SemiBold,
+    // Quicksand_400Regular,
+    CoveredByYourGrace_400Regular,
+    Quicksand_600SemiBold,
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
   return (
     <View style={styles.container}>
       {/* <Text>Account</Text> */}
@@ -38,24 +59,26 @@ const SafetyQuizScreen = ({navigation}) => {
         value={busySidewalks}/>
         <Text style={styles.checkOptions}>Busy Sidewalks</Text>
       </View>
-      
-      <Text style={styles.taskText}>2. Enter the addresses of places you consider "Safe Spots"</Text>
+      <Text style={styles.taskText} >2. Enter the addresses of places you consider "Safe Spots"</Text>
       <TextInput
         style={{
           height: 40,
-          width: "90%",
-          backgroundColor: "white",
-          borderRadius: 20,
-          padding: 15,
+          width: "75%",
+          // backgroundColor: "white",
+          // borderRadius: 20,
+          // padding: 15,
+          borderBottomColor: "white",
+          borderBottomWidth: 2,
+          // padding: 15,
+          color: "white"
         }}
         placeholder={"Enter safe spots..."}
+        placeholderTextColor = "#A2A2AB"
         onChangeText={(text) => {
           setSafePlaceInput(text);
         }}
         value={safePlaceInput}
       />
-
-     
         <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
         {/* <View> */}
         <TouchableOpacity onPress={ () => 
@@ -65,6 +88,7 @@ const SafetyQuizScreen = ({navigation}) => {
       </TouchableOpacity>
     </View>
   );
+  }
 };
 
 function objectifyAndNav(navigation, object, busySidewalks, openBusinesses, policeStations, safePlaceInput){
@@ -91,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   header: {
-    fontSize: 22,
+    fontSize: 28,
     padding: 10,
     textAlign: "center",
     marginTop: 20,
@@ -99,8 +123,8 @@ const styles = StyleSheet.create({
     // marginVertical: 18,
     color: "#fff",
     fontWeight: "bold",
-    lineHeight: 34,
-
+    lineHeight: 40,
+    fontFamily: "Quicksand_600SemiBold",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 8,
     textShadowColor: '#F2EB46',
@@ -125,5 +149,10 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginTop: 15,
     color: "#fff",
+    fontFamily: "Nunito_400Regular",
+    fontFamily: "Quicksand_400Regular"
   },
+  inputStyle: {
+    fontFamily: "Nunito_300Light"
+  }
 });

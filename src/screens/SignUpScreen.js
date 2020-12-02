@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import EmailIcon from 'react-native-vector-icons/Fontisto';
 import UserIcon from 'react-native-vector-icons/SimpleLineIcons';
@@ -9,8 +9,23 @@ import ArrowIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withOrientation } from "react-navigation";
 import { Header } from "react-navigation-stack";
 import {colors} from "../styles/colors.js"
-
-
+import {owl} from '../images/owl2-08.png';
+import {AppLoading} from "expo";
+import { 
+  useFonts,
+  Nunito_300Light,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+} from '@expo-google-fonts/nunito';
+import { 
+  CoveredByYourGrace_400Regular 
+} from '@expo-google-fonts/covered-by-your-grace';
+import { 
+  Quicksand_400Regular,
+  Quicksand_500Medium,
+  Quicksand_600SemiBold,
+  Quicksand_700Bold,
+s} from '@expo-google-fonts/quicksand'
 
 const SignUpScreen = ({navigation}) => {
 
@@ -18,9 +33,21 @@ const SignUpScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
-
+  let [fontsLoaded] = useFonts({
+    Nunito_300Light,
+    Nunito_700Bold,
+    Nunito_800ExtraBold,
+    CoveredByYourGrace_400Regular,
+    Quicksand_500Medium,
+    Quicksand_600SemiBold,
+    Quicksand_700Bold 
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
   return (
     <View style={styles.container}>
+        {/* <Image source={owl} style={{width:150, height:150, alignSelf: "flex-start", backgroundColor:"pink"}}/> */}
         <Text style={styles.header}>Welcome Owlette!</Text>
         <View style={styles.icon}>
           <UserIcon style={styles.SignUpIcons} size={18} name="user" color="white" />
@@ -72,6 +99,7 @@ const SignUpScreen = ({navigation}) => {
         </TouchableOpacity>
     </View>
   );
+  }
 };
 
 function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhoneNumber){
@@ -101,7 +129,7 @@ const styles = StyleSheet.create({
     icon: {
       flexDirection: 'row',
       borderColor: "#ccc",
-      borderBottomWidth: 1,
+      borderBottomWidth: 2,
       margin: 15,
     },
     inputStyle: {
@@ -110,6 +138,7 @@ const styles = StyleSheet.create({
       paddingBottom: 12,
       alignSelf: "center",
       color: "#fff",
+      fontFamily: "Nunito_300Light"
     },
     SignUpIcons: {
       paddingBottom: 10,
@@ -127,16 +156,20 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
       textAlign: "center",
       color: "#fff",
+      fontFamily: "Quicksand_700Bold",
+      // fontFamily: "Nunito_800ExtraBold",
     },
     header: {
       color:'#fff',
       fontWeight: "bold",
-      fontSize: 30,
+      fontSize: 35,
       marginBottom: 40,
-
-      textShadowOffset: { width: 2, height: 2 },
-      textShadowRadius: 8,
-      textShadowColor: '#F2EB46',
+      fontFamily: "Quicksand_600SemiBold",
+      color: "#F0F2D6",
+      opacity: 0.9,
+      textShadowColor: "#F2EA45",
+      textShadowOffset: {width: 1.5, height: 1},
+      textShadowRadius: 12
     }
   });
 
