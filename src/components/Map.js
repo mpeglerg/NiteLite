@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { getScore } from "../../data/walkScoreApi";
 import Geocoder from 'react-native-geocoding';
 import {colors} from "../styles/colors.js"
+import safespotMarker from '../images/marker-04.png';
+
 
 const GOOGLE_MAPS_APIKEY = process.env.REACT_APP_GOOGLE_MAPS_API;
 
@@ -152,7 +154,7 @@ const styles = StyleSheet.create({
               </Callout>
             </Marker>            
             {safeSpotCoords.map(marker => (
-              <Marker coordinate={marker}>
+              <Marker image={safespotMarker} coordinate={marker}>
                 <Callout 
                 style={styles.safeSpotView}
                 onPress={() => {
