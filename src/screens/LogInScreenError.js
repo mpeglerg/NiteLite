@@ -40,7 +40,7 @@ const LogInScreenError = ({ navigation }) => {
 
       <Button
         title="Don't Already Have an Account? Sign Up!"
-        onPress={() => navigation.navigate("Page1")}
+        onPress={() => navigation.navigate("SignUp")}
       ></Button>
     </View>
   );
@@ -56,25 +56,25 @@ function verifyCredentials(navigation, username, password) {
   if (username === "") {
     // "Missing username. Please input or sign up if you are a new user."
     // return and start over
-    navigation.navigate("Page5", {
+    navigation.navigate("LogIn", {
       text: "Missing username. Please input or sign up if you are a new user.",
     });
   } else if (password === "") {
     // "Missing password. Please input or sign up if you are a new user."
     // return and start over
-    navigation.navigate("Page5", {
+    navigation.navigate("LogIn", {
       text: "Missing password. Please input or sign up if you are a new user.",
     });
   } else if (outputVal == 0) {
     // "Incorrect password. Try again"
-    navigation.navigate("Page5", { text: "Incorrect password. Try again." });
+    navigation.navigate("LogIn", { text: "Incorrect password. Try again." });
   } else if (outputVal == 1) {
     // "Username not found. Try again."
-    navigation.navigate("Page5", { text: "Username not found. Try again." });
+    navigation.navigate("LogIn", { text: "Username not found. Try again." });
   } else {
     // output val == 2
     // works, sign in and nav to home page
-    navigation.navigate("Page4", { text: object.get("name") });
+    navigation.navigate("Home", { text: object.get("name") });
   }
 }
 const styles = StyleSheet.create({

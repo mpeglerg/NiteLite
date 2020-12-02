@@ -101,7 +101,7 @@ function objectifyAndNav(navigation, object, busySidewalks, openBusinesses, poli
   console.log("in the map: ", object.get("safePlaces"));
 
   // navigate to next page
-  navigation.navigate('Page3', { object: object });
+  navigation.navigate('EmergencyContacts', { object: object });
 
 }
 
