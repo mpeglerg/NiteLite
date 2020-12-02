@@ -5,6 +5,7 @@ import MapViewDirections from "react-native-maps-directions";
 import { connect } from "react-redux";
 import { getScore } from "../../data/walkScoreApi";
 import Geocoder from 'react-native-geocoding';
+import {colors} from "../styles/colors.js"
 
 const GOOGLE_MAPS_APIKEY = process.env.REACT_APP_GOOGLE_MAPS_API;
 
@@ -15,6 +16,22 @@ const styles = StyleSheet.create({
       height: 40,
       backgroundColor: 'rgba(255,255,255,0.7)',
       alignItems: 'center',
+    },
+    safeSpotView: {
+      flex: 1,
+      width: 150,
+      height: 40,
+      backgroundColor: 'rgba(255,255,255,0.7)',
+      alignItems: 'center',
+    },
+    buttons: {
+      backgroundColor: colors.tertiaryBlue,
+      borderColor: colors.tertiaryBlue,
+      borderWidth: 3,
+      height: 40,
+      width: 150,
+      margin: 10,
+      justifyContent: "center"
     },
   });
 
@@ -62,6 +79,11 @@ const styles = StyleSheet.create({
           })
           .catch(error => console.warn(error))
       })
+    }
+
+    const directToSafeSpot = (marker) => {
+      // TODO: navigate to directions page with new route
+      props.updateDirections(marker)
     }
 
     const initGeocoder = () => {
@@ -130,7 +152,15 @@ const styles = StyleSheet.create({
               </Callout>
             </Marker>            
             {safeSpotCoords.map(marker => (
-              <Marker coordinate={marker}/>
+              <Marker coordinate={marker}>
+                <Callout 
+                style={styles.safeSpotView}
+                onPress={() => {
+                  directToSafeSpot(marker)
+                }}>
+                  <Text>{`Route to this location`}</Text>
+                </Callout>
+              </Marker>
             ))}
           </MapView>
         </View>
@@ -149,6 +179,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateCurrentLocation: (currentLocation) => {
       dispatch({ type: "UPDATE_CURRENT_LOCATION", payload: currentLocation });
+    },
+    updateDirections: (destination) => {
+      dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
     },
   };
 };
