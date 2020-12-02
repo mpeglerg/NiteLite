@@ -4,6 +4,7 @@ import ModalSearchBar from "./ModalSearchBar";
 import RouteDirections from "./RouteDirections";
 import { ScrollView } from "react-native-gesture-handler";
 import {colors} from "../styles/colors.js"
+import CallIcon from 'react-native-vector-icons/Ionicons';
 import { connect } from "react-redux";
 
 const MapModal = (props) => {
@@ -31,14 +32,15 @@ const MapModal = (props) => {
           activeOpacity={0.7}
           style={styles.buttons}
           onPress={triggerCall}>
-            <Text style={styles.buttonText}>Call</Text>
+            <CallIcon size={38} name="md-call" style={{alignSelf: "center"}}/>
+            {/* <Text style={styles.buttonText}>Call</Text> */}
           </TouchableOpacity>
-          <View style={styles.buttons}>
+          {/* <View style={styles.buttons}>
             <Text style={styles.buttonText}>17</Text>
           </View>
           <View style={styles.buttons}>
             <Text style={styles.buttonText}>2</Text>
-          </View>
+          </View> */}
         </View>
         {/* <RouteDirections /> */}
       </ScrollView>

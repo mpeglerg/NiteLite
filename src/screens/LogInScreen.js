@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import UserIcon from 'react-native-vector-icons/SimpleLineIcons';
 import KeyIcon from 'react-native-vector-icons/SimpleLineIcons';
-import logo from '../images/new6-03.png';
+import logo from '../images/logo.png';
 import { Image, StyleSheet, View, Button, Text } from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
 import { color } from "react-native-reanimated";
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
       fontFamily: "Nunito_400Regular"
     },
     signUpText2: {
-      paddingTop:4,
+      paddingTop:2,
       fontSize: 15,
       textAlign: "center",
       textAlignVertical: "center" ,

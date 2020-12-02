@@ -21,12 +21,11 @@ import {
   CoveredByYourGrace_400Regular 
 } from '@expo-google-fonts/covered-by-your-grace';
 import { 
-  // Quicksand_300Light,
   Quicksand_400Regular,
   Quicksand_500Medium,
   Quicksand_600SemiBold,
-  Quicksand_700Bold 
-} from '@expo-google-fonts/quicksand'
+  Quicksand_700Bold,
+s} from '@expo-google-fonts/quicksand'
 
 const SignUpScreen = ({navigation}) => {
 
@@ -48,7 +47,7 @@ const SignUpScreen = ({navigation}) => {
   } else {
   return (
     <View style={styles.container}>
-        <Image source={owl} style={{width:150, height:150, alignSelf: "flex-start", backgroundColor:"pink"}}/>
+        {/* <Image source={owl} style={{width:150, height:150, alignSelf: "flex-start", backgroundColor:"pink"}}/> */}
         <Text style={styles.header}>Welcome Owlette!</Text>
         <View style={styles.icon}>
           <UserIcon style={styles.SignUpIcons} size={18} name="user" color="white" />
@@ -163,9 +162,9 @@ const styles = StyleSheet.create({
     header: {
       color:'#fff',
       fontWeight: "bold",
-      fontSize: 45,
+      fontSize: 35,
       marginBottom: 40,
-      fontFamily: "CoveredByYourGrace_400Regular",
+      fontFamily: "Quicksand_600SemiBold",
       color: "#F0F2D6",
       opacity: 0.9,
       textShadowColor: "#F2EA45",

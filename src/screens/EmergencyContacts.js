@@ -31,8 +31,8 @@ const EmergencyContacts = ({ navigation }) => {
     CoveredByYourGrace_400Regular,
     Nunito_800ExtraBold,
     Quicksand_700Bold,
+    Quicksand_600SemiBold,
     Quicksand_400Regular,
-
   });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   header: {
-    fontSize: 35,
+    fontSize:25,
     padding: 10,
     textAlign: "center",
     marginTop: 20,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 38,
     marginBottom: 20,
-    fontFamily: "CoveredByYourGrace_400Regular",
+    fontFamily: "Quicksand_600SemiBold",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 8,
     textShadowColor: '#F2EB46',
