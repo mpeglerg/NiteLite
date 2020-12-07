@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Platform, Linking } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Platform, Linking, Share } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
 import RouteDirections from "./RouteDirections";
 import { ScrollView } from "react-native-gesture-handler";
 import {colors} from "../styles/colors.js"
-import CallIcon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from "react-redux";
 
 const MapModal = (props) => {
@@ -23,6 +23,26 @@ const MapModal = (props) => {
     }
   }
 
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'View my NiteLite walking route:',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   return (
     <View style={styles.centeredView}>
       <ScrollView style={styles.modalView}>
@@ -32,8 +52,13 @@ const MapModal = (props) => {
           activeOpacity={0.7}
           style={styles.buttons}
           onPress={triggerCall}>
-            <CallIcon size={38} name="md-call" style={{alignSelf: "center"}}/>
-            {/* <Text style={styles.buttonText}>Call</Text> */}
+            <Icon size={38} name="ios-call" style={{alignSelf: "center"}}/>
+          </TouchableOpacity>
+          <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttons}
+          onPress={onShare}>
+            <Icon size={38} name="ios-share" style={{alignSelf: "center"}}/>
           </TouchableOpacity>
           {/* <View style={styles.buttons}>
             <Text style={styles.buttonText}>17</Text>
