@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { getScore } from "../../data/walkScoreApi";
 import Geocoder from 'react-native-geocoding';
 import {colors} from "../styles/colors.js"
-import safespotMarker from '../images/marker-04.png';
+import safespotMarker from '../images/marker-04-big.png';
 
 
 const GOOGLE_MAPS_APIKEY = process.env.REACT_APP_GOOGLE_MAPS_API;
@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
       return(
         <View style={StyleSheet.absoluteFill}>
           <MapView initialRegion={{
-                latitude: 37.771707,
-                longitude: -122.4053769,
+                latitude: 33.9707666,
+                longitude: -118.4192316,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0922,
               }}
