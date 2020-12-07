@@ -116,15 +116,20 @@ const styles = StyleSheet.create({
   
       return(
         <View style={StyleSheet.absoluteFill}>
-          <MapView initialRegion={{
-                latitude: 33.9707666,
-                longitude: -118.4192316,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0922,
-              }}
+          <MapView
               style={StyleSheet.absoluteFill}
               ref={c => setMapUIView(c)} // eslint-disable-line react/jsx-no-bind
-              onPress={onMapPress}>
+              onMapReady={getCurrentLocation}
+              onPress={onMapPress}
+              followsUserLocation={true}
+              showsUserLocation={true}
+              showsMyLocationButton={true}
+              initialRegion={{
+                latitude: props.directions.currentLocation.latitude,
+                longitude: props.directions.currentLocation.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0922,
+              }}>
             <MapViewDirections
                 origin={props.directions.currentLocation}
                 destination={props.directions.directions[0].destination}
