@@ -64,33 +64,26 @@ const LogInScreen = ({ navigation }) => {
   );
 };
 
-function verifyCredentials(navigation, username, password) {
+async function verifyCredentials(navigation, username, password) {
   username = username.trim();
   if (username === "") {
     alert("Missing username. Please input or sign up if you are a new user.");
+    return;
   }
   if (password === "") {
     alert("Missing password. Please input or sign up if you are a new user.");
+    return;
   }
-  let response = verifyLogin(username, password)
+  let response = await verifyLogin(username, password)
   console.log("response " +  response);
-
-  // let response = await verifyLogin(username, password); //.then(function (response) {
-  // if (response == 0) {
-  //   // "Incorrect password. Try again"
-  //   navigation.navigate("Page5", { text: "Incorrect password. Try again." });
-  // } else if (response == 1) {
-  //   // "Username not found. Try again."
-  //   navigation.navigate("Page5", { text: "Username not found. Try again." });
-  // } else {
-  //   // response == 2
-  //   // works, sign in and nav to home page
-  //   navigation.navigate("Home", { text: username });
-  // }
-  // })
-  // .catch(function (response) {
-  //   console.log("something went wrong", response);
-  // });
+  if (response == 1){
+    // poss set state with username here?
+    navigation.navigate("Home");
+  } else if (response == 2){
+    alert("Username not found. Try again.");
+  } else {
+    alert("Incorrect password. Try again.");
+  }
 }
 
 const styles = StyleSheet.create({

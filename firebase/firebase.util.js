@@ -35,19 +35,24 @@ export function registerNewUser(object) {
   });
 }
 
-export function verifyLogin(username, password){
-  var ref = firebase.database().ref("users/" + username);
+export async function verifyLogin(username, password){
+  var ref = await firebase.database().ref("users/" + username);
   let retVal = 0;
-  ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function(snapshot) {
     var dbUsername = snapshot.child("name").val(); 
     var dbPassword = snapshot.child("password").val();
     if(username === dbUsername && password === dbPassword){
-      console.log("in if statement");
+      // case: auth granted
       retVal = 1;
+    } else if (dbUsername == null){
+      // case: username not found
+      retVal = 2;
+    } else {
+      // case: incorrect password
+      retVal = 3;
     }
-    console.log("just here");
+    return retVal;
   });
-  return retVal;
 }
 
 export default firebase;
