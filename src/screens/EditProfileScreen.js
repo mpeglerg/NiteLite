@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Button, Text } from "react-native";
+import { StyleSheet, View, Button, Text,TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { verifyLogin } from "../../firebase/firebase.util";
 import CheckBox from "../components/CheckBox";
+import {colors} from "../styles/colors.js"
+
 
 const EditProfileScreen = ({ navigation }) => {
-  const [returningUserName, setReturningUserName] = useState("");
-  const [returningUserPassword, setReturningUserPassword] = useState("");
-  let textFromError = navigation.getParam("text", "");
+  const [returningUserName, setReturningUserName] = useState("curr_username");
+  const [returningUserPassword, setReturningUserPassword] = useState("curr_password");
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState("");
   const [policeStations, setPoliceStations] = useState("");
@@ -26,18 +27,18 @@ const EditProfileScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>{textFromError}</Text>
+      <Text>Edit Profile</Text>
+      <Text>UserName</Text>
       <TextInput
         style={styles.inputStyle}
-        placeholder="Username"
         onChangeText={(text) => {
           setReturningUserName(text);
         }}
         value={returningUserName}
       />
+       <Text>Password</Text>
       <TextInput
         style={styles.inputStyle}
-        placeholder="Password"
         onChangeText={(text) => {
           setReturningUserPassword(text);
         }}
@@ -125,6 +126,11 @@ const EditProfileScreen = ({ navigation }) => {
         }}
         value={contactPhone}
       />
+      <TouchableOpacity style={styles.signUpButton} onPress={() => {
+          objectifyAndNav(navigation, object, name, contactPhone);
+        }}>
+        <Text style={styles.signUpText}>Save Changes</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -134,14 +140,14 @@ function verifyCredentials(navigation, username, password) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    padding: 35,
-    backgroundColor: "#fff",
-  },
+  // container: {
+  //   flex: 1,
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   justifyContent: "center",
+  //   padding: 35,
+  //   backgroundColor: "#fff",
+  // },
   inputStyle: {
     width: "100%",
     marginBottom: 15,
@@ -150,6 +156,52 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderBottomWidth: 1,
   },
+  //   container: {
+  //     flex: 1,
+  //     backgroundColor: colors.backgroundColor,
+  //     textAlign: "center",
+  //     alignItems: "center",
+  //   },
+  //   header: {
+  //     fontSize: 22,
+  //     padding: 10,
+  //     textAlign: "center",
+  //     marginTop: 20,
+  //     marginHorizontal: 18,
+  //     color: "#fff",
+  //     fontWeight: "bold",
+  //     lineHeight: 34,
+  //     marginBottom: 20,
+  
+  //     textShadowOffset: { width: 2, height: 2 },
+  //     textShadowRadius: 8,
+  //     textShadowColor: '#F2EB46',
+  //   },
+  //   taskText: {
+  //     fontSize: 16,
+  //     paddingVertical: 12,
+  //     paddingHorizontal: 20,
+  //     // textAlign: "left",
+  //     lineHeight: 24,
+  //     marginTop: 15,
+  //     color: "#fff",
+  //   },
+  //   signUpText: {
+  //     fontSize: 15,
+  //     fontWeight: "bold",
+  //     textAlign: "center",
+  //     textAlignVertical: "center" ,
+  //     alignSelf: "center",
+  //     color: "#fff",
+  //     textTransform: "uppercase",
+  //   },
+    signUpButton: {
+      elevation: 8,
+      backgroundColor: "#072DC2",
+      paddingVertical: 15,
+      paddingHorizontal: 90,
+      marginTop: 80
+    }
   
 });
 

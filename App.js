@@ -2,7 +2,6 @@ import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
-import LogInScreenError from "./src/screens/LogInScreenError";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
 import EditProfileScreen from "./src/screens/EditProfileScreen";
 import EmergencyContacts from "./src/screens/EmergencyContacts";
@@ -20,6 +19,7 @@ import React from "react";
 import safeSpotsReducer from "./src/reducers/SafeSpotsReducer";
 import emergencyContactsReducer from "./src/reducers/EmergencyContactReducer";
 import directionsReducer from "./src/reducers/DirectionsReducer";
+import userReducer from "./src/reducers/UserReducer";
 
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
@@ -30,13 +30,12 @@ const AppModalStack = createStackNavigator({
   // NiteLite: AppDrawer,
 
   // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
-  NiteLite: EditProfileScreen,
+  NiteLite: LogInScreen,
   Account: AccountScreen,
   SignUp: SignUpScreen, 
   SafetyPreferences: SafetyQuizScreen,
   EmergencyContacts: EmergencyContacts,
   Home: HomeScreen, 
-  Page5: LogInScreenError, 
   EditProfile: EditProfileScreen
 });
 
@@ -53,6 +52,7 @@ const appReducer = combineReducers({
   safeSpots: safeSpotsReducer,
   emergencyContacts: emergencyContactsReducer,
   directions: directionsReducer,
+  userInfo: userReducer
 });
 
 const appMiddleware = createReactNavigationReduxMiddleware(

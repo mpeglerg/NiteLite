@@ -10,20 +10,14 @@ import { color } from "react-native-reanimated";
 import {colors} from "../styles/colors.js"
 
 
-let textFromError;
-
 const LogInScreen = ({ navigation }) => {
   const [returningUserName, setReturningUserName] = useState("");
   const [returningUserPassword, setReturningUserPassword] = useState("");
-  // let textFromError = navigation.getParam('text','');
-  // console.log("this is the text from error");
-  // console.log(textFromError);
 
   return (
     <View style={styles.container}>
       <Image source={logo} style={{width:270, height:270}}></Image>
 
-      <Text>{textFromError}</Text>
       <View  style={styles.icon}>
         <UserIcon style={styles.logInIcons} size={18} name="user" color="white" />
         <TextInput
@@ -70,36 +64,29 @@ const LogInScreen = ({ navigation }) => {
   );
 };
 
-async function verifyCredentials(navigation, username, password) {
-  // console.log("THIS IS THE PASSWORD", password);
-  // let outputVal = await verifyLogin(username, password);
+function verifyCredentials(navigation, username, password) {
+  username = username.trim();
   if (username === "") {
-    // "Missing username. Please input or sign up if you are a new user."
-    // return and start over
-    navigation.navigate("Page5", {
-      text: "Missing username. Please input or sign up if you are a new user.",
-    });
+    alert("Missing username. Please input or sign up if you are a new user.");
   }
   if (password === "") {
-    // "Missing password. Please input or sign up if you are a new user."
-    // return and start over
-    navigation.navigate("Page5", {
-      text: "Missing password. Please input or sign up if you are a new user.",
-    });
+    alert("Missing password. Please input or sign up if you are a new user.");
   }
+  let response = verifyLogin(username, password)
+  console.log("response " +  response);
 
-  let response = await verifyLogin(username, password); //.then(function (response) {
-  if (response == 0) {
-    // "Incorrect password. Try again"
-    navigation.navigate("Page5", { text: "Incorrect password. Try again." });
-  } else if (response == 1) {
-    // "Username not found. Try again."
-    navigation.navigate("Page5", { text: "Username not found. Try again." });
-  } else {
-    // response == 2
-    // works, sign in and nav to home page
-    navigation.navigate("Home", { text: username });
-  }
+  // let response = await verifyLogin(username, password); //.then(function (response) {
+  // if (response == 0) {
+  //   // "Incorrect password. Try again"
+  //   navigation.navigate("Page5", { text: "Incorrect password. Try again." });
+  // } else if (response == 1) {
+  //   // "Username not found. Try again."
+  //   navigation.navigate("Page5", { text: "Username not found. Try again." });
+  // } else {
+  //   // response == 2
+  //   // works, sign in and nav to home page
+  //   navigation.navigate("Home", { text: username });
+  // }
   // })
   // .catch(function (response) {
   //   console.log("something went wrong", response);
