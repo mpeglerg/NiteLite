@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CheckBox from "../components/CheckBox";
+// import { CheckBox } from '@react-native-community/checkbox';
 import AddContactIcon from 'react-native-vector-icons/AntDesign';
 import AddContactIcon2 from 'react-native-vector-icons/MaterialIcons';
 import {colors} from "../styles/colors.js"
 
-
 const SafetyQuizScreen = ({navigation}) => {
   let object = navigation.getParam('object','missing');
   const [safePlaceInput, setSafePlaceInput] = useState("");
-  const [openBusinesses, setOpenBusinesses] = useState("");
-  const [policeStations, setPoliceStations] = useState("");
-  const [busySidewalks, setBusySidewalks] = useState("");
+  const [openBusinesses, setOpenBusinesses] = useState(false);
+  const [policeStations, setPoliceStations] = useState(false);
+  const [busySidewalks, setBusySidewalks] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -22,20 +22,23 @@ const SafetyQuizScreen = ({navigation}) => {
       <Text style={styles.taskText}>1. What makes you feel safe when walking?</Text>
       <View style={styles.check}>
         <CheckBox 
-        onChange={(e) => { setOpenBusinesses(e); }}
-        value={openBusinesses}/>
-        <Text style={styles.checkOptions}>Open Businesses</Text>  
+        value={openBusinesses}
+        onValueChange={(isSelected)=> {alert("toggled!"); setOpenBusinesses(isSelected)}}
+        />
+        <Text style={styles.checkOptions}>Open Businesses</Text>
       </View>
       <View style={styles.check}>
-        <CheckBox  
-        onChange={(e) => { setPoliceStations(e); }}
-        value={policeStations}/>
+        <CheckBox
+        value={policeStations}
+        onValueChange={setPoliceStations}
+        />
         <Text style={styles.checkOptions}>Police Stations</Text>
       </View>
       <View style={styles.check}>
-        <CheckBox  
-        onChange={(e) => { setBusySidewalks(e); }}
-        value={busySidewalks}/>
+        <CheckBox
+        value={busySidewalks}
+        onValueChange={setBusySidewalks}
+        />
         <Text style={styles.checkOptions}>Busy Sidewalks</Text>
       </View>
       
@@ -69,12 +72,22 @@ const SafetyQuizScreen = ({navigation}) => {
 
 function objectifyAndNav(navigation, object, busySidewalks, openBusinesses, policeStations, safePlaceInput){
   // add new items to our object
+  console.log("busy sidewalks " + busySidewalks)
+  console.log("openBusinesses " + openBusinesses)
+  console.log("policeStations " + policeStations)
+
+
+  // if(busySidewalks == false) { busySidewalks = !busySidewalks; }
+  // if(openBusinesses == false) { openBusinesses = !openBusinesses; }
+  // if(policeStations == false) { policeStations = !policeStations; }
+  // if(busySidewalks == "") { busySidewalks = false; }
+  // if(openBusinesses == "") { busySidewalks = false; }
+  // if(policeStations == "") { busySidewalks = false; }
+
   object.set("busySidewalks", busySidewalks);
   object.set("openBusinesses", openBusinesses);
   object.set("policeStations", policeStations);
   object.set("safePlaces", safePlaceInput);
-  console.log("SAFE PLACE: ", safePlaceInput);
-  console.log("in the map: ", object.get("safePlaces"));
 
   // navigate to next page
   navigation.navigate('EmergencyContacts', { object: object });
