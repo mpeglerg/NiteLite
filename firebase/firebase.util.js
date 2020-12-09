@@ -21,6 +21,8 @@ if (!firebase.apps.length) {
 export const database = firebase.database();
 
 export function registerNewUser(object) {
+  addNumber(object.get("phoneNumber"));
+  addEmail(object.get("email"));
   let emergencyContact = [object.get("eName"), object.get("eNumber")];
   database.ref("users/" + object.get("name")).set({
     name: object.get("name"),
@@ -32,6 +34,20 @@ export function registerNewUser(object) {
     policeStations: object.get("policeStations"),
     safeLocations: object.get("safePlaces"),
     emergencyNumber: emergencyContact,
+  });
+}
+
+
+function addNumber(phoneNumber) {
+  database.ref("users/numbers" + phoneNumber).set({
+    username: phoneNumber,   
+  });
+}
+
+function addEmail(email) {
+  var emailMod = email.replace(/./g, "");
+  database.ref("users/emails" + emailMod).set({
+    username: email,
   });
 }
 
@@ -51,6 +67,33 @@ export async function verifyLogin(username, password){
       // case: incorrect password
       retVal = 3;
     }
+    return retVal;
+  });
+}
+
+export async function verifyEmail(email){
+  var emailMod = email.replace(/./g, "");
+  var ref = await firebase.database().ref("users/emails/" + emailMod);
+  let retVal = "";
+  return ref.once("value").then(function(snapshot) {
+    var username = snapshot.child("username").val(); 
+    if (username != null){
+      // case: email in use
+      retVal = username;
+    } 
+    return retVal;
+  });
+}
+
+export async function verifyPhone(phoneNumber){
+  var ref = await firebase.database().ref("users/numbers/" + phoneNumber);
+  let retVal = "";
+  return ref.once("value").then(function(snapshot) {
+    var username = snapshot.child("username").val(); 
+    if (username != null){
+      // case: phone number in use
+      retVal = username;
+    } 
     return retVal;
   });
 }

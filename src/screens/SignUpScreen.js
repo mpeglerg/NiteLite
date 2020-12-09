@@ -9,7 +9,8 @@ import ArrowIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withOrientation } from "react-navigation";
 import { Header } from "react-navigation-stack";
 import {colors} from "../styles/colors.js"
-
+import { verifyPhone } from "../../firebase/firebase.util.js";
+import { verifyEmail } from "../../firebase/firebase.util.js";
 
 
 const SignUpScreen = ({navigation}) => {
@@ -74,8 +75,31 @@ const SignUpScreen = ({navigation}) => {
   );
 };
 
-function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhoneNumber){
-  let object = new Map();
+async function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhoneNumber){
+  if(userName.charAt(0) === " " || userName.charAt(userName.length - 1) === " "){
+    alert("Username cannot start or end with a space.");
+    return;
+  }
+  if(userPassword.charAt(0) === " " || userPassword.charAt(userPassword.length - 1) === " "){
+    alert("Password cannot start or end with a space.");
+    return;
+  }
+  if(!isStrongPassword(userPassword)){
+    alert("Password is not strong enough. Must include one uppercase letter, one lowercase letter, one number, and be at least 8 characters long.");
+  }
+
+  var emailUsername = await verifyEmail(userEmail);
+  var phoneUsername = await verifyPhone(userPhoneNumber);
+  if(emailUsername !== ""){
+    alert("Email in use. Log in using username: " + emailUsername);
+    return;
+  }
+  if(phoneUsername !== ""){
+    alert("Phone number in use. Log in using username: " + phoneUsername);
+    return;
+  }
+
+  var object = new Map();
   // add new items to our object
   object.set("name", userName);
   object.set("email", userEmail);
@@ -85,6 +109,28 @@ function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhon
   // navigate to next page
   navigation.navigate('SafetyPreferences', {object: object});
 
+}
+
+function isStrongPassword(password){
+  var hasUpper = false;
+  var hasLower = false;
+  var hasNumber = false;
+  if(password.length < 8){
+    return false;
+  }
+  for(var i = 0; i < password.length; i++){
+    var char = password.substring(i, i+1);
+    if(!hasLower && char.toUpperCase() !== char){
+      hasLower = true;
+    }
+    if(!hasUpper && char.toLowerCase() !== char){
+      hasUpper = true;
+    }
+    if(!hasNumber && char >= '0' && char <= '9'){
+      hasNumber = true;
+    }
+  }
+  return hasUpper && hasLower && hasNumber;
 }
 
 const styles = StyleSheet.create({

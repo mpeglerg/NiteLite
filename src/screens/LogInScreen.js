@@ -66,6 +66,7 @@ const LogInScreen = ({ navigation }) => {
 
 async function verifyCredentials(navigation, username, password) {
   username = username.trim();
+  password = password.trim();
   if (username === "") {
     alert("Missing username. Please input or sign up if you are a new user.");
     return;
