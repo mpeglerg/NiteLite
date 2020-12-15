@@ -11,7 +11,8 @@ const CheckBox = () => {
         flexDirection: "row",
         alignItems: "center",
       }}
-      onPress={() => setSelection(!isSelected)}>
+      onPress={() => setSelection(!isSelected)}
+    >
       <Icon
         size={30}
         color={"#FFFFFF"}

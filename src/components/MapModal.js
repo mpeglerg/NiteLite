@@ -1,33 +1,42 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Platform, Linking, Share } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Platform,
+  Linking,
+  Share,
+} from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
-import RouteDirections from "./RouteDirections";
+// import RouteDirections from "./RouteDirections";
 import { ScrollView } from "react-native-gesture-handler";
-import {colors} from "../styles/colors.js"
-import Icon from 'react-native-vector-icons/Ionicons';
+import { colors } from "../styles/colors.js";
+import Icon from "react-native-vector-icons/Ionicons";
 import { connect } from "react-redux";
 
 const MapModal = (props) => {
   const [callNumber, setCallNumber] = useState("");
 
   const triggerCall = () => {
-    const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(/-/g, "")
+    const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(
+      /-/g,
+      ""
+    );
 
-    if(Platform.OS == 'android') {
-      setCallNumber(`tel:${formattedNumber}`)
+    if (Platform.OS == "android") {
+      setCallNumber(`tel:${formattedNumber}`);
     } else {
-      setCallNumber(`telprompt:${formattedNumber}`)
+      setCallNumber(`telprompt:${formattedNumber}`);
     }
-    if(callNumber.length !== 0) {
-      Linking.openURL(callNumber)
+    if (callNumber.length !== 0) {
+      Linking.openURL(callNumber);
     }
-  }
+  };
 
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message:
-          'View my NiteLite walking route:',
+        message: "View my NiteLite walking route:",
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -41,7 +50,7 @@ const MapModal = (props) => {
     } catch (error) {
       alert(error.message);
     }
-  }
+  };
 
   return (
     <View style={styles.centeredView}>
@@ -49,16 +58,18 @@ const MapModal = (props) => {
         <ModalSearchBar />
         <View style={styles.textStyle}>
           <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.buttons}
-          onPress={triggerCall}>
-            <Icon size={38} name="ios-call" style={{alignSelf: "center"}}/>
+            activeOpacity={0.7}
+            style={styles.buttons}
+            onPress={triggerCall}
+          >
+            <Icon size={38} name="ios-call" style={{ alignSelf: "center" }} />
           </TouchableOpacity>
           <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.buttons}
-          onPress={onShare}>
-            <Icon size={38} name="ios-share" style={{alignSelf: "center"}}/>
+            activeOpacity={0.7}
+            style={styles.buttons}
+            onPress={onShare}
+          >
+            <Icon size={38} name="ios-share" style={{ alignSelf: "center" }} />
           </TouchableOpacity>
           {/* <View style={styles.buttons}>
             <Text style={styles.buttonText}>17</Text>
@@ -97,7 +108,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 20,
   },
   modalText: {
@@ -112,12 +123,12 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
     margin: 10,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   buttonText: {
     textAlign: "center",
     // fontWeight: "bold"
-  }
+  },
 });
 
 const mapStateToProps = (state) => {

@@ -1,7 +1,7 @@
 const initState = {
   currentLocation: {
     latitude: 0,
-    longitude: 0
+    longitude: 0,
   },
   directions: [
     {
@@ -26,13 +26,13 @@ const directionsReducer = (state = initState, action) => {
       ...state,
       route: newRoute,
     };
-  } else if(action.type == "UPDATE_CURRENT_LOCATION") {
+  } else if (action.type == "UPDATE_CURRENT_LOCATION") {
     let currentLocation = state.currentLocation;
     currentLocation = action.payload;
     return {
       ...state,
       currentLocation: currentLocation,
-    }
+    };
   } else {
     return state;
   }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TextInput, StyleSheet, View} from "react-native";
+import { TextInput, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
-import Icon from 'react-native-vector-icons/Fontisto';
+import Icon from "react-native-vector-icons/Fontisto";
 import { getDirections } from "../../data/api-placeholder";
 
 const ModalSearchBar = (props) => {
@@ -19,22 +19,22 @@ const ModalSearchBar = (props) => {
     }
   };
   return (
-    <View  style={styles.searchSection}>
-    <Icon style={styles.searchIcon} size={16} name="search" />
-    <TextInput
-      style={{
-        height: 40,        
-      }}
-      placeholder={"Search for an address"}
-      onChangeText={(text) => {
-        setValue(text);
-      }}
-      onSubmitEditing={(event) => {
-        performQuery();
-        props.updateDirections(event.nativeEvent.text);
-      }}
-      value={value}
-    />
+    <View style={styles.searchSection}>
+      <Icon style={styles.searchIcon} size={16} name="search" />
+      <TextInput
+        style={{
+          height: 40,
+        }}
+        placeholder={"Search for an address"}
+        onChangeText={(text) => {
+          setValue(text);
+        }}
+        onSubmitEditing={(event) => {
+          performQuery();
+          props.updateDirections(event.nativeEvent.text);
+        }}
+        value={value}
+      />
     </View>
   );
 };
@@ -53,17 +53,17 @@ const mapDispatchToProps = (dispatch) => {
 const styles = StyleSheet.create({
   searchSection: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     width: "90%",
     backgroundColor: "#fff",
     borderRadius: 20,
   },
   searchIcon: {
     paddingBottom: 17,
-    paddingRight: 10, 
+    paddingRight: 10,
     marginLeft: 15,
-    marginTop: 14
+    marginTop: 14,
   },
 });
 

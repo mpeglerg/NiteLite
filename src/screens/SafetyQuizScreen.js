@@ -3,25 +3,21 @@ import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AddContactIcon from 'react-native-vector-icons/AntDesign';
-import AddContactIcon2 from 'react-native-vector-icons/MaterialIcons';
-import {colors} from "../styles/colors.js"
-import SearchIcon from 'react-native-vector-icons/Fontisto';
-import {AppLoading} from "expo"
-import { 
+// import AddContactIcon from "react-native-vector-icons/AntDesign";
+import AddContactIcon2 from "react-native-vector-icons/MaterialIcons";
+import { colors } from "../styles/colors.js";
+// import SearchIcon from "react-native-vector-icons/Fontisto";
+import { AppLoading } from "expo";
+import {
   useFonts,
   Nunito_600SemiBold,
   Nunito_400Regular,
-} from '@expo-google-fonts/nunito'
-import { 
-  CoveredByYourGrace_400Regular 
-} from '@expo-google-fonts/covered-by-your-grace'
-import { 
-  Quicksand_600SemiBold,
-} from '@expo-google-fonts/quicksand'
+} from "@expo-google-fonts/nunito";
+import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-your-grace";
+import { Quicksand_600SemiBold } from "@expo-google-fonts/quicksand";
 
-const SafetyQuizScreen = ({navigation}) => {
-  let object = navigation.getParam('object','missing');
+const SafetyQuizScreen = ({ navigation }) => {
+  let object = navigation.getParam("object", "missing");
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState(false);
   const [policeStations, setPoliceStations] = useState(false);
@@ -36,105 +32,105 @@ const SafetyQuizScreen = ({navigation}) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
-  return (
-    <View style={styles.container}>
-      {/* <Text>Account</Text> */}
-      <Text style={styles.header}>Set Up Your Route Preferences</Text>
+    return (
+      <View style={styles.container}>
+        {/* <Text>Account</Text> */}
+        <Text style={styles.header}>Set Up Your Route Preferences</Text>
 
-      <Text style={styles.taskText}>
-        1. What makes you feel safe when walking?
-      </Text>
-      <View style={styles.check}>
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-          onPress={() => setOpenBusinesses(!openBusinesses)}
-        >
-          <Icon
-            size={30}
-            color={"#FFFFFF"}
-            name={openBusinesses ? "check-box" : "check-box-outline-blank"}
-          />
-        </TouchableOpacity>
-        <Text style={styles.checkOptions}>Open Businesses</Text>
-      </View>
-      <View style={styles.check}>
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-          onPress={() => setPoliceStations(!policeStations)}
-        >
-          <Icon
-            size={30}
-            color={"#FFFFFF"}
-            name={policeStations ? "check-box" : "check-box-outline-blank"}
-          />
-        </TouchableOpacity>
-        <Text style={styles.checkOptions}>Police Stations</Text>
-      </View>
-      <View style={styles.check}>
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-          onPress={() => setBusySidewalks(!busySidewalks)}
-        >
-          <Icon
-            size={30}
-            color={"#FFFFFF"}
-            name={busySidewalks ? "check-box" : "check-box-outline-blank"}
-          />
-        </TouchableOpacity>
-        <Text style={styles.checkOptions}>Busy Sidewalks</Text>
-      </View>
+        <Text style={styles.taskText}>
+          1. What makes you feel safe when walking?
+        </Text>
+        <View style={styles.check}>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            onPress={() => setOpenBusinesses(!openBusinesses)}
+          >
+            <Icon
+              size={30}
+              color={"#FFFFFF"}
+              name={openBusinesses ? "check-box" : "check-box-outline-blank"}
+            />
+          </TouchableOpacity>
+          <Text style={styles.checkOptions}>Open Businesses</Text>
+        </View>
+        <View style={styles.check}>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            onPress={() => setPoliceStations(!policeStations)}
+          >
+            <Icon
+              size={30}
+              color={"#FFFFFF"}
+              name={policeStations ? "check-box" : "check-box-outline-blank"}
+            />
+          </TouchableOpacity>
+          <Text style={styles.checkOptions}>Police Stations</Text>
+        </View>
+        <View style={styles.check}>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            onPress={() => setBusySidewalks(!busySidewalks)}
+          >
+            <Icon
+              size={30}
+              color={"#FFFFFF"}
+              name={busySidewalks ? "check-box" : "check-box-outline-blank"}
+            />
+          </TouchableOpacity>
+          <Text style={styles.checkOptions}>Busy Sidewalks</Text>
+        </View>
 
-      <Text style={styles.taskText}>
-        2. Enter the addresses of places you consider "Safe Spots"
-      </Text>
-      <TextInput
-        style={{
-          height: 40,
-          width: "75%",
-          // backgroundColor: "white",
-          // borderRadius: 20,
-          // padding: 15,
-          borderBottomColor: "white",
-          borderBottomWidth: 2,
-          // padding: 15,
-          color: "white"
-        }}
-        placeholder={"Enter safe spots..."}
-        placeholderTextColor = "#A2A2AB"
-        onChangeText={(text) => {
-          setSafePlaceInput(text);
-        }}
-        value={safePlaceInput}
-      />
+        <Text style={styles.taskText}>
+          2. Enter the addresses of places you consider "Safe Spots"
+        </Text>
+        <TextInput
+          style={{
+            height: 40,
+            width: "75%",
+            // backgroundColor: "white",
+            // borderRadius: 20,
+            // padding: 15,
+            borderBottomColor: "white",
+            borderBottomWidth: 2,
+            // padding: 15,
+            color: "white",
+          }}
+          placeholder={"Enter safe spots..."}
+          placeholderTextColor="#A2A2AB"
+          onChangeText={(text) => {
+            setSafePlaceInput(text);
+          }}
+          value={safePlaceInput}
+        />
 
-      <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
-      {/* <View> */}
-      <TouchableOpacity
-        onPress={() => {
-          objectifyAndNav(
-            navigation,
-            object,
-            openBusinesses,
-            policeStations,
-            busySidewalks,
-            safePlaceInput
-          );
-        }}
-      >
-        <AddContactIcon2 size={38} name="person-add" color="white" />
-        {/* </View> */}
-      </TouchableOpacity>
-    </View>
-  );
+        <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
+        {/* <View> */}
+        <TouchableOpacity
+          onPress={() => {
+            objectifyAndNav(
+              navigation,
+              object,
+              openBusinesses,
+              policeStations,
+              busySidewalks,
+              safePlaceInput
+            );
+          }}
+        >
+          <AddContactIcon2 size={38} name="person-add" color="white" />
+          {/* </View> */}
+        </TouchableOpacity>
+      </View>
+    );
   }
 };
 
@@ -202,9 +198,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: "#fff",
     fontFamily: "Nunito_400Regular",
-    fontFamily: "Quicksand_400Regular"
+    fontFamily: "Quicksand_400Regular",
   },
   inputStyle: {
-    fontFamily: "Nunito_300Light"
-  }
+    fontFamily: "Nunito_300Light",
+  },
 });

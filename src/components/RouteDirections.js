@@ -14,7 +14,7 @@ const RouteDirections = (props) => {
             <Text>{routeLeg.duration.text}</Text>
           </View>
         );
-      })} 
+      })}
       {props.route.route[0].routes[0].legs[0].steps.map((step, index) => {
         return (
           <View>
@@ -27,7 +27,7 @@ const RouteDirections = (props) => {
             </Text>
           </View>
         );
-     })}
+      })}
     </View>
   );
 };

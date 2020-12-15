@@ -1,25 +1,23 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { registerNewUser } from "../../firebase/firebase.util";
-import {colors} from "../styles/colors.js"
-import {AppLoading} from "expo"
-import { 
+import { colors } from "../styles/colors.js";
+import { AppLoading } from "expo";
+import {
   useFonts,
   Nunito_600SemiBold,
   Nunito_400Regular,
   Nunito_800ExtraBold,
-} from '@expo-google-fonts/nunito'
-import { 
-  CoveredByYourGrace_400Regular 
-} from '@expo-google-fonts/covered-by-your-grace'
-import { 
+} from "@expo-google-fonts/nunito";
+import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-your-grace";
+import {
   // Quicksand_300Light,
   Quicksand_400Regular,
   Quicksand_500Medium,
   Quicksand_600SemiBold,
-  Quicksand_700Bold 
-} from '@expo-google-fonts/quicksand'
+  Quicksand_700Bold,
+} from "@expo-google-fonts/quicksand";
 
 const EmergencyContacts = ({ navigation }) => {
   let object = navigation.getParam("object", "missing");
@@ -37,64 +35,64 @@ const EmergencyContacts = ({ navigation }) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>
-        Who you would like to call during an Emergency?
-      </Text>
-      <Text style={styles.taskText}>Name</Text>
-      <TextInput
-        style={{
-          height: 40,
-          width: "75%",
-          // backgroundColor: "white",
-          // borderRadius: 5,
-          borderBottomColor: "white",
-          borderBottomWidth: 2,
-          // padding: 15,
-          color: "white"
-        }}
-        placeholder={"Police, Mom, Roommate..."}
-        placeholderTextColor = "#A2A2AB"
-        onChangeText={(text) => {
-          setName(text);
-        }}
-        value={name}
-      />
-      <Text style={styles.taskText}>Phone number</Text>
-      <TextInput
-        style={{
-          height: 40,
-          width: "75%",
-          // backgroundColor: "white",
-          // borderRadius: 5,
-          borderBottomColor: "white",
-          borderBottomWidth: 2,
-          // padding: 15,
-          color: "white"
-        }}
-        placeholder={"123-456-7890"}
-        placeholderTextColor = "#A2A2AB"
-        onChangeText={(text) => {
-          setContactPhone(text);
-        }}
-        value={contactPhone}
-      />
-      {/* <Button
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>
+          Who you would like to call during an Emergency?
+        </Text>
+        <Text style={styles.taskText}>Name</Text>
+        <TextInput
+          style={{
+            height: 40,
+            width: "75%",
+            // backgroundColor: "white",
+            // borderRadius: 5,
+            borderBottomColor: "white",
+            borderBottomWidth: 2,
+            // padding: 15,
+            color: "white",
+          }}
+          placeholder={"Police, Mom, Roommate..."}
+          placeholderTextColor="#A2A2AB"
+          onChangeText={(text) => {
+            setName(text);
+          }}
+          value={name}
+        />
+        <Text style={styles.taskText}>Phone number</Text>
+        <TextInput
+          style={{
+            height: 40,
+            width: "75%",
+            // backgroundColor: "white",
+            // borderRadius: 5,
+            borderBottomColor: "white",
+            borderBottomWidth: 2,
+            // padding: 15,
+            color: "white",
+          }}
+          placeholder={"123-456-7890"}
+          placeholderTextColor="#A2A2AB"
+          onChangeText={(text) => {
+            setContactPhone(text);
+          }}
+          value={contactPhone}
+        />
+        {/* <Button
         title="Complete Profile"
         
       ></Button> */}
 
-      <TouchableOpacity
-        style={styles.signUpButton}
-        onPress={() => {
-          objectifyAndNav(navigation, object, name, contactPhone);
-        }}
-      >
-        <Text style={styles.signUpText}>Complete Profile!</Text>
-      </TouchableOpacity>
-    </View>
-  );
+        <TouchableOpacity
+          style={styles.signUpButton}
+          onPress={() => {
+            objectifyAndNav(navigation, object, name, contactPhone);
+          }}
+        >
+          <Text style={styles.signUpText}>Complete Profile!</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 };
 
@@ -118,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   header: {
-    fontSize:25,
+    fontSize: 25,
     padding: 10,
     textAlign: "center",
     marginTop: 20,
@@ -134,7 +132,7 @@ const styles = StyleSheet.create({
   },
   taskText: {
     fontSize: 16,
-    paddingVertical:8,
+    paddingVertical: 8,
     paddingHorizontal: 20,
     fontFamily: "Quicksand_400Regular",
     // fontFamily: "Nunito_400Regular",
@@ -158,6 +156,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 90,
     marginTop: 80,
-    fontFamily:"Quicksand_700Bold"
-  }
+    fontFamily: "Quicksand_700Bold",
+  },
 });

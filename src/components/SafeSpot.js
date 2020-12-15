@@ -33,7 +33,8 @@ const SafeSpot = ({ props }) => {
           visible={modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
-          }}>
+          }}
+        >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{props.name}</Text>
@@ -76,14 +77,16 @@ const SafeSpot = ({ props }) => {
                     name: "TEST",
                     address: "1 LMU DRIVE???",
                   });
-                }}>
+                }}
+              >
                 <Text style={styles.textStyle}>Save changes</Text>
               </TouchableHighlight>
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "red" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
-                }}>
+                }}
+              >
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
             </View>
