@@ -25,7 +25,7 @@ const ModalSearchBar = (props) => {
       style={{
         height: 40,        
       }}
-      placeholder={"Search here..."}
+      placeholder={"Search for an address"}
       onChangeText={(text) => {
         setValue(text);
       }}

@@ -3,7 +3,6 @@ import AccountScreen from "./src/screens/AccountScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
-import EditProfileScreen from "./src/screens/EditProfileScreen";
 import EmergencyContacts from "./src/screens/EmergencyContacts";
 import { createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -34,8 +33,7 @@ const AppModalStack = createStackNavigator({
   SignUp: SignUpScreen, 
   SafetyPreferences: SafetyQuizScreen,
   EmergencyContacts: EmergencyContacts,
-  Home: HomeScreen, 
-  EditProfile: EditProfileScreen
+  Home: HomeScreen
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
