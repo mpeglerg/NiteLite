@@ -74,6 +74,19 @@ export async function verifyLogin(username, password){
   });
 }
 
+export async function verifyUsername(username){
+  var ref = await firebase.database().ref("users/" + username);
+  let taken = false;
+  return ref.once("value").then(function(snapshot) {
+    var dbUsername = snapshot.child("name").val(); 
+    if (dbUsername != null){
+      // case: no username found
+      taken = true;
+    } 
+    return taken;
+  });
+}
+
 export async function verifyEmail(email){
   var emailMod = email.replace(/[.]/g, "");
   var ref = await firebase.database().ref("users/emails/" + emailMod);

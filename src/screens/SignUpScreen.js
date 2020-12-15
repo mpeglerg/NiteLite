@@ -6,8 +6,7 @@ import UserIcon from "react-native-vector-icons/SimpleLineIcons";
 import KeyIcon from "react-native-vector-icons/SimpleLineIcons";
 import PhoneIcon from "react-native-vector-icons/SimpleLineIcons";
 import { colors } from "../styles/colors.js";
-import { verifyPhone } from "../../firebase/firebase.util.js";
-import { verifyEmail } from "../../firebase/firebase.util.js";
+import { verifyUsername, verifyPhone, verifyEmail } from "../../firebase/firebase.util.js";
 
 const SignUpScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -135,7 +134,11 @@ async function objectifyAndNav(
     );
     return;
   }
-
+  var taken = await verifyUsername(userName);
+  if(taken){
+    alert("Username already in use. Choose another username.");
+    return;
+  }
   var emailUsername = await verifyEmail(userEmail);
   var phoneUsername = await verifyPhone(userPhoneNumber);
   if (emailUsername !== "") {
