@@ -21,14 +21,17 @@ if (!firebase.apps.length) {
 export const database = firebase.database();
 
 export function registerNewUser(object) {
-  addNumber(object.get("phoneNumber"));
-  addEmail(object.get("email"));
+  let phoneNumber = object.get("phoneNumber");
+  let email = object.get("email");
+  let username = object.get("name");
+  addNumber(phoneNumber, username);
+  addEmail(email, username);
   let emergencyContact = [object.get("eName"), object.get("eNumber")];
   database.ref("users/" + object.get("name")).set({
-    name: object.get("name"),
-    email: object.get("email"),
+    name: username,
+    email: email,
     password: object.get("password"),
-    phoneNumber: object.get("phoneNumber"),
+    phoneNumber: phoneNumber,
     busySidewalks: object.get("busySidewalks"),
     openBusinesses: object.get("openBusinesses"),
     policeStations: object.get("policeStations"),
@@ -38,16 +41,16 @@ export function registerNewUser(object) {
 }
 
 
-function addNumber(phoneNumber) {
-  database.ref("users/numbers" + phoneNumber).set({
-    username: phoneNumber,   
+function addNumber(phoneNumber, username) {
+  database.ref("users/numbers/" + phoneNumber).set({
+    username: username,   
   });
 }
 
-function addEmail(email) {
-  var emailMod = email.replace(/./g, "");
-  database.ref("users/emails" + emailMod).set({
-    username: email,
+function addEmail(email, username) {
+  var emailMod = email.replace(/[.]/g, "");
+  database.ref("users/emails/" + emailMod).set({
+    username: username,
   });
 }
 
@@ -72,7 +75,7 @@ export async function verifyLogin(username, password){
 }
 
 export async function verifyEmail(email){
-  var emailMod = email.replace(/./g, "");
+  var emailMod = email.replace(/[.]/g, "");
   var ref = await firebase.database().ref("users/emails/" + emailMod);
   let retVal = "";
   return ref.once("value").then(function(snapshot) {
