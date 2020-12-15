@@ -17,16 +17,10 @@ import {
   Nunito_800ExtraBold,
 } from '@expo-google-fonts/nunito'
 
-
-let textFromError;
-
 const LogInScreen = ({ navigation }) => {
 
   const [returningUserName, setReturningUserName] = useState("");
   const [returningUserPassword, setReturningUserPassword] = useState("");
-  // let textFromError = navigation.getParam('text','');
-  // console.log("this is the text from error");
-  // console.log(textFromError);
   let [fontsLoaded] = useFonts({
     Nunito_200ExtraLight,
     Nunito_300Light,
@@ -40,7 +34,6 @@ const LogInScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <Image source={logo} style={{width:270, height:270}}></Image>
-        <Text>{textFromError}</Text>
         <View  style={styles.icon}>
           <UserIcon style={styles.logInIcons} size={18} name="user" color="white" />
           <TextInput
@@ -89,39 +82,25 @@ const LogInScreen = ({ navigation }) => {
 };
 
 async function verifyCredentials(navigation, username, password) {
-  // console.log("THIS IS THE PASSWORD", password);
-  // let outputVal = await verifyLogin(username, password);
+  username = username.trim();
+  password = password.trim();
   if (username === "") {
-    // "Missing username. Please input or sign up if you are a new user."
-    // return and start over
-    navigation.navigate("LogIn", {
-      text: "Missing username. Please input or sign up if you are a new user.",
-    });
+    alert("Missing username. Please input or sign up if you are a new user.");
+    return;
   }
   if (password === "") {
-    // "Missing password. Please input or sign up if you are a new user."
-    // return and start over
-    navigation.navigate("LogIn", {
-      text: "Missing password. Please input or sign up if you are a new user.",
-    });
+    alert("Missing password. Please input or sign up if you are a new user.");
+    return;
   }
-
-  let response = await verifyLogin(username, password); //.then(function (response) {
-  if (response == 0) {
-    // "Incorrect password. Try again"
-    navigation.navigate("LogIn", { text: "Incorrect password. Try again." });
-  } else if (response == 1) {
-    // "Username not found. Try again."
-    navigation.navigate("LogIn", { text: "Username not found. Try again." });
+  let response = await verifyLogin(username, password);
+  if (response == 1) {
+    // TODO: set state with username here
+    navigation.navigate("Home");
+  } else if (response == 2) {
+    alert("Username not found. Try again.");
   } else {
-    // response == 2
-    // works, sign in and nav to home page
-    navigation.navigate("Home", { text: username });
+    alert("Incorrect password. Try again.");
   }
-  // })
-  // .catch(function (response) {
-  //   console.log("something went wrong", response);
-  // });
 }
 
 

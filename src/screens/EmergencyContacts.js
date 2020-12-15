@@ -38,8 +38,10 @@ const EmergencyContacts = ({ navigation }) => {
     return <AppLoading />;
   } else {
   return (
-    <View style={styles.container}> 
-      <Text style={styles.header}>Who you would like to call during an Emergency?</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>
+        Who you would like to call during an Emergency?
+      </Text>
       <Text style={styles.taskText}>Name</Text>
       <TextInput
         style={{
@@ -83,12 +85,14 @@ const EmergencyContacts = ({ navigation }) => {
         
       ></Button> */}
 
-  <TouchableOpacity style={styles.signUpButton} onPress={() => {
+      <TouchableOpacity
+        style={styles.signUpButton}
+        onPress={() => {
           objectifyAndNav(navigation, object, name, contactPhone);
-        }}>
+        }}
+      >
         <Text style={styles.signUpText}>Complete Profile!</Text>
       </TouchableOpacity>
-
     </View>
   );
   }
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
     fontFamily: "Quicksand_600SemiBold",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 8,
-    textShadowColor: '#F2EB46',
+    textShadowColor: "#F2EB46",
   },
   taskText: {
     fontSize: 16,
@@ -143,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
-    textAlignVertical: "center" ,
+    textAlignVertical: "center",
     alignSelf: "center",
     color: "#fff",
     textTransform: "uppercase",

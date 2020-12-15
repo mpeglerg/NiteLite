@@ -3,7 +3,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const CheckBox = () => {
-  const [isBusinessesSelected, setBusinessesSelection] = useState(false);
   const [isSelected, setSelection] = useState(false);
 
   return (
@@ -15,7 +14,7 @@ const CheckBox = () => {
       onPress={() => setSelection(!isSelected)}>
       <Icon
         size={30}
-        color={"#211f30"}
+        color={"#FFFFFF"}
         name={isSelected ? "check-box" : "check-box-outline-blank"}
       />
     </TouchableOpacity>

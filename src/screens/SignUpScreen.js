@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+import { verifyUsername, verifyEmail, verifyPhone } from "../../firebase/firebase.util";
 import EmailIcon from 'react-native-vector-icons/Fontisto';
 import UserIcon from 'react-native-vector-icons/SimpleLineIcons';
 import KeyIcon from 'react-native-vector-icons/SimpleLineIcons';
@@ -25,10 +26,9 @@ import {
   Quicksand_500Medium,
   Quicksand_600SemiBold,
   Quicksand_700Bold,
-s} from '@expo-google-fonts/quicksand'
+} from '@expo-google-fonts/quicksand'
 
-const SignUpScreen = ({navigation}) => {
-
+const SignUpScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -90,20 +90,72 @@ const SignUpScreen = ({navigation}) => {
           />  
         </View>
 
-        <TouchableOpacity style={styles.ContinueContainer} 
-        onPress={ () => {objectifyAndNav(navigation, userName, userEmail, userPassword, userPhoneNumber);}}>
+      <TouchableOpacity
+        style={styles.ContinueContainer}
+        onPress={() => {
+          objectifyAndNav(
+            navigation,
+            userName,
+            userEmail,
+            userPassword,
+            userPhoneNumber
+          );
+        }}
+      >
         <View>
-        <Text style={styles.ContinueText}>Continue</Text>
-        {/* <ArrowIcon style={styles.SignUpIcons} size={18} name="arrow-right" color="white"/> */}
+          <Text style={styles.ContinueText}>Continue</Text>
+          {/* <ArrowIcon style={styles.SignUpIcons} size={18} name="arrow-right" color="white"/> */}
         </View>
-        </TouchableOpacity>
+      </TouchableOpacity>
     </View>
   );
   }
 };
 
-function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhoneNumber){
-  let object = new Map();
+async function objectifyAndNav(
+  navigation,
+  userName,
+  userEmail,
+  userPassword,
+  userPhoneNumber
+) {
+  if (
+    userName.charAt(0) === " " ||
+    userName.charAt(userName.length - 1) === " "
+  ) {
+    alert("Username cannot start or end with a space.");
+    return;
+  }
+  if (
+    userPassword.charAt(0) === " " ||
+    userPassword.charAt(userPassword.length - 1) === " "
+  ) {
+    alert("Password cannot start or end with a space.");
+    return;
+  }
+  if (!isStrongPassword(userPassword)) {
+    alert(
+      "Password is not strong enough. Must include one uppercase letter, one lowercase letter, one number, and be at least 8 characters long."
+    );
+    return;
+  }
+  var taken = await verifyUsername(userName);
+  if(taken){
+    alert("Username already in use. Choose another username.");
+    return;
+  }
+  var emailUsername = await verifyEmail(userEmail);
+  var phoneUsername = await verifyPhone(userPhoneNumber);
+  if (emailUsername !== "") {
+    alert("Email in use. Log in using username: " + emailUsername);
+    return;
+  }
+  if (phoneUsername !== "") {
+    alert("Phone number in use. Log in using username: " + phoneUsername);
+    return;
+  }
+
+  var object = new Map();
   // add new items to our object
   object.set("name", userName);
   object.set("email", userEmail);
@@ -111,8 +163,29 @@ function objectifyAndNav(navigation, userName, userEmail, userPassword, userPhon
   object.set("phoneNumber", userPhoneNumber);
 
   // navigate to next page
-  navigation.navigate('SafetyPreferences', {object: object});
+  navigation.navigate("SafetyPreferences", { object: object });
+}
 
+function isStrongPassword(password) {
+  var hasUpper = false;
+  var hasLower = false;
+  var hasNumber = false;
+  if (password.length < 8) {
+    return false;
+  }
+  for (var i = 0; i < password.length; i++) {
+    var char = password.substring(i, i + 1);
+    if (!hasLower && char.toUpperCase() !== char) {
+      hasLower = true;
+    }
+    if (!hasUpper && char.toLowerCase() !== char) {
+      hasUpper = true;
+    }
+    if (!hasNumber && char >= "0" && char <= "9") {
+      hasNumber = true;
+    }
+  }
+  return hasUpper && hasLower && hasNumber;
 }
 
 const styles = StyleSheet.create({
