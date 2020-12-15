@@ -34,7 +34,6 @@ const LogInScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <Image source={logo} style={{width:270, height:270}}></Image>
-        <Text>{textFromError}</Text>
         <View  style={styles.icon}>
           <UserIcon style={styles.logInIcons} size={18} name="user" color="white" />
           <TextInput
@@ -94,7 +93,6 @@ async function verifyCredentials(navigation, username, password) {
     return;
   }
   let response = await verifyLogin(username, password);
-  console.log("response " + response);
   if (response == 1) {
     // TODO: set state with username here
     navigation.navigate("Home");

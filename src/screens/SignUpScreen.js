@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+import { verifyUsername, verifyEmail, verifyPhone } from "../../firebase/firebase.util";
 import EmailIcon from 'react-native-vector-icons/Fontisto';
 import UserIcon from 'react-native-vector-icons/SimpleLineIcons';
 import KeyIcon from 'react-native-vector-icons/SimpleLineIcons';
@@ -25,7 +26,7 @@ import {
   Quicksand_500Medium,
   Quicksand_600SemiBold,
   Quicksand_700Bold,
-s} from '@expo-google-fonts/quicksand'
+} from '@expo-google-fonts/quicksand'
 
 const SignUpScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");

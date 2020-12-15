@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-gesture-handler";
-import CheckBox from "../components/CheckBox";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import AddContactIcon from 'react-native-vector-icons/AntDesign';
 import AddContactIcon2 from 'react-native-vector-icons/MaterialIcons';
 import {colors} from "../styles/colors.js"
@@ -130,7 +130,7 @@ const SafetyQuizScreen = ({navigation}) => {
           );
         }}
       >
-        <AddContactIcon size={38} name="person-add" color="white" />
+        <AddContactIcon2 size={38} name="person-add" color="white" />
         {/* </View> */}
       </TouchableOpacity>
     </View>
