@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { registerNewUser } from "../../firebase/firebase.util";
-import {colors} from "../styles/colors.js"
+import { colors } from "../styles/colors.js";
 
 const EmergencyContacts = ({ navigation }) => {
   let object = navigation.getParam("object", "missing");
@@ -10,8 +10,10 @@ const EmergencyContacts = ({ navigation }) => {
   const [contactPhone, setContactPhone] = useState("");
 
   return (
-    <View style={styles.container}> 
-      <Text style={styles.header}>Who you would like to call during an Emergency?</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>
+        Who you would like to call during an Emergency?
+      </Text>
       <Text style={styles.taskText}>Name</Text>
       <TextInput
         style={{
@@ -47,12 +49,14 @@ const EmergencyContacts = ({ navigation }) => {
         
       ></Button> */}
 
-  <TouchableOpacity style={styles.signUpButton} onPress={() => {
+      <TouchableOpacity
+        style={styles.signUpButton}
+        onPress={() => {
           objectifyAndNav(navigation, object, name, contactPhone);
-        }}>
+        }}
+      >
         <Text style={styles.signUpText}>Complete Profile!</Text>
       </TouchableOpacity>
-
     </View>
   );
 };
@@ -89,7 +93,7 @@ const styles = StyleSheet.create({
 
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 8,
-    textShadowColor: '#F2EB46',
+    textShadowColor: "#F2EB46",
   },
   taskText: {
     fontSize: 16,
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
-    textAlignVertical: "center" ,
+    textAlignVertical: "center",
     alignSelf: "center",
     color: "#fff",
     textTransform: "uppercase",
@@ -114,6 +118,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#072DC2",
     paddingVertical: 15,
     paddingHorizontal: 90,
-    marginTop: 80
-  }
+    marginTop: 80,
+  },
 });
