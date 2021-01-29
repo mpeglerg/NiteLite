@@ -4,8 +4,8 @@ A React Native project by Maya Pegler-Gordon, Shanaya Nagendran, Lauren Lindsey,
 This repository serves as a parent directory for our NiteLite React project, which is linked below. This repository holds our documentation, Agile workflows, and misc assignments for the 401 course.
 
 ### Helpful Links
-- [Project Proposal Slide Deck](https://github.com/laurenlindsey1/nitelite/blob/master/project_proposal/NiteLite.pdf)
-- [Software Development Folder](https://github.com/laurenlindsey1/nitelite/wiki/SoftwareDevelopmentFolder)
+- [Project Proposal Slide Deck](https://github.com/mpeglerg/NiteLite/tree/master/docs/Spring2021Proposal.pdf)
+- [Software Development Folder](https://github.com/mpeglerg/NiteLite/wiki/SoftwareDevelopmentFolder)
 - [NiteLite App Repository](https://github.com/mpeglerg/NiteLite)
 
 ![](images/poster.png)
