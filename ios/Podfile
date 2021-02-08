@@ -1,0 +1,20 @@
+install! 'cocoapods', :disable_input_output_paths => true
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/react-native-unimodules/cocoapods.rb'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '10.0'
+
+target 'NiteLite' do
+  use_unimodules!
+  config = use_native_modules!
+  
+  pod 'MapboxNavigation', '~> 1.2.1'
+  pod 'MapboxCoreNavigation', '~> 1.2.1'
+  use_react_native!(:path => config["reactNativePath"])
+
+  use_flipper!({ 'Flipper-Folly' => '2.3.0' }) 
+  post_install do |installer|
+    flipper_post_install(installer)
+  end
+end
