@@ -6,6 +6,7 @@ import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
+import NavRoute from "../components/NavRoute";
 
 const renderContent = () => (
   <View
@@ -14,8 +15,7 @@ const renderContent = () => (
       backgroundColor: colors.backgroundColor,
       padding: 16,
       height: 450,
-    }}
-  >
+    }}>
     <MapModal></MapModal>
   </View>
 );
@@ -31,14 +31,13 @@ const HomeScreen = ({ navigation }) => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}
-    >
-      <View
+      }}>
+      <NavRoute />
+      {/* <View
         style={{
           height: "100%",
           width: "100%",
-        }}
-      >
+        }}>
         <MapView
           style={{ flex: 1 }}
           region={{
@@ -56,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
         snapPoints={[450, 300, 100]}
         borderRadius={20}
         renderContent={renderContent}
-      />
+      /> */}
     </View>
   );
 };
