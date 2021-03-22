@@ -52,6 +52,7 @@ const SafeSpot = ({ props }) => {
                 }}
                 value={newContactName}
               />
+              {/* TODO: Create a styles.textInput below (Line 101) and replace with style={{styles.textInput}} */}
               <Text>{props.address}</Text>
               <TextInput
                 style={{
@@ -69,6 +70,7 @@ const SafeSpot = ({ props }) => {
                 }}
                 value={newPhoneNumber}
               />
+              {/* TODO: Same as above */}
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                 onPress={() => {

@@ -19,6 +19,7 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
+// TODO: remove extraneous comments
 const EmergencyContacts = ({ navigation }) => {
   let object = navigation.getParam("object", "missing");
   const [name, setName] = useState("");
@@ -39,6 +40,7 @@ const EmergencyContacts = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.header}>
           Who you would like to call during an Emergency?
+          {/* TODO: change wording */}
         </Text>
         <Text style={styles.taskText}>Name</Text>
         <TextInput
@@ -59,6 +61,7 @@ const EmergencyContacts = ({ navigation }) => {
           }}
           value={name}
         />
+        {/* TODO: Create style objects for text inputs instead of repeating them for each TextInput object */}
         <Text style={styles.taskText}>Phone number</Text>
         <TextInput
           style={{
