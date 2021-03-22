@@ -1,6 +1,7 @@
 # Command to run: python3 crime-code-loader.py
 
 from pymongo import MongoClient
+from decouple import config
 import csv
 import re
 import sys
@@ -8,9 +9,7 @@ import json
 import pymongo
 
 CRIME_SOURCE = 'Crime_Data_from_2010_to_2019.csv'
-
-
-mongo_client = pymongo.MongoClient("mongodb+srv://snagendran:EOcJhkCgpeJP3Z0h@cluster0.eo6ns.mongodb.net/NiteLite?retryWrites=true&w=majority")
+mongo_client = pymongo.MongoClient(config('REACT_APP_MONGO_URI'))
 mongo_db = mongo_client["NiteLite"]
 mongo_collection = mongo_db["crimecodes"]
 

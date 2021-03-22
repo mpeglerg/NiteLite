@@ -1,6 +1,7 @@
 # Command to run: python3 crime-loader.py
 
 from pymongo import MongoClient
+from decouple import config
 import csv
 import re
 import sys
@@ -16,7 +17,7 @@ def to_iso8601_date(value):
     return output.strftime("%Y-%m-%d")
 
 
-mongo_client = pymongo.MongoClient("mongodb+srv://snagendran:EOcJhkCgpeJP3Z0h@cluster0.eo6ns.mongodb.net/NiteLite?retryWrites=true&w=majority")
+mongo_client = pymongo.MongoClient(config('REACT_APP_MONGO_URI'))
 mongo_db = mongo_client["NiteLite"]
 mongo_collection = mongo_db["crimes"]
 
