@@ -1,7 +1,9 @@
-// Example mongo query for all crimes within a 
+// Example mongo query for all crimes within a certain radius
+import { REACT_APP_MONGO_URI } from 'react-native-dotenv'
 
 const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb+srv://snagendran:EOcJhkCgpeJP3Z0h@cluster0.eo6ns.mongodb.net/NiteLite?retryWrites=true&w=majority"
+const uri = REACT_APP_MONGO_URI
+console.log(uri)
 const client = new MongoClient(uri, { useUnifiedTopology: true, useNewUrlParser: true })
 client.connect(async (err) => {
     const collection = client.db("NiteLite").collection("streetlights")
