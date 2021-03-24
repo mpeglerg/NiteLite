@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import { registerNewUser } from "../../firebase/firebase.util";
-import { colors } from "../styles/colors.js";
-import { AppLoading } from "expo";
 import {
-  useFonts,
-  Nunito_600SemiBold,
   Nunito_400Regular,
+  Nunito_600SemiBold,
   Nunito_800ExtraBold,
+  useFonts,
 } from "@expo-google-fonts/nunito";
-import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-your-grace";
 import {
-  // Quicksand_300Light,
   Quicksand_400Regular,
   Quicksand_500Medium,
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+import { AppLoading } from "expo";
+import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-your-grace";
+import { TextInput } from "react-native-gesture-handler";
+import { colors } from "../styles/colors.js";
+import { registerNewUser } from "../../firebase/firebase.util";
 
 // TODO: remove extraneous comments
 const EmergencyContacts = ({ navigation }) => {
