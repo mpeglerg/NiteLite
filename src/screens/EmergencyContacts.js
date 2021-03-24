@@ -21,9 +21,14 @@ import {
 
 // TODO: remove extraneous comments
 const EmergencyContacts = ({ navigation }) => {
+  // [Ian]: I would recommend updating to React Navigation 5.x.x so you can use Hooks and
+  //        reduce the ability to run into any deprecating errors.
   let object = navigation.getParam("object", "missing");
   const [name, setName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
+  // [Ian]: I'm not well versed in this package, but if you find yourself setting fonts
+  //        and waiting for loading in your component, I would recommend maybe rendering
+  //        it at the top level with your App.js (if possible).
   let [fontsLoaded] = useFonts({
     Nunito_400Regular,
     Nunito_600SemiBold,
@@ -44,6 +49,8 @@ const EmergencyContacts = ({ navigation }) => {
         </Text>
         <Text style={styles.taskText}>Name</Text>
         <TextInput
+          // [Ian]: I would try and keep your styling consistent, and add it to
+          //        your Stylesheet.
           style={{
             height: 40,
             width: "75%",
@@ -99,8 +106,11 @@ const EmergencyContacts = ({ navigation }) => {
   }
 };
 
+// [Ian]: This function should be moved above the `return` to keep with React convention.
+// [Ian]: I would also change the name of the function as it is a bit confusing.
 function objectifyAndNav(navigation, object, name, contactPhone) {
   // add new items to our object
+  // [Ian]: I would also try to use something more verbose and explicit instead of `object`.
   object.set("eName", name);
   object.set("eNumber", contactPhone);
 
@@ -111,6 +121,8 @@ function objectifyAndNav(navigation, object, name, contactPhone) {
 }
 export default EmergencyContacts;
 
+// [Ian]: I would either move this to a separate styles file (my pref) or
+//        move it above the React function.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
