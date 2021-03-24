@@ -25,9 +25,8 @@ const AppDrawer = createDrawerNavigator({
 });
 
 const AppModalStack = createStackNavigator({
+  // TODO: Refactor stack nav to CreateAccountFlow and MainAppFlow with switch nav
   // NiteLite: AppDrawer,
-
-  // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
   NiteLite: LogInScreen,
   Account: AccountScreen,
   SignUp: SignUpScreen, 
