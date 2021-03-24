@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 
 const MapModal = (props) => {
   const [callNumber, setCallNumber] = useState("");
-
+  // TODO: implement try catch, to account for when a call is unable to be made
   const triggerCall = () => {
     const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(
       /-/g,
@@ -54,6 +54,7 @@ const MapModal = (props) => {
 
   return (
     <View style={styles.centeredView}>
+      {/* TODO: ScrollView is not accounting for the keyboard covering the textboxes upon user input. Need to import built-in React Native Keyboard component instead so screen adjusts accordingly */}
       <ScrollView style={styles.modalView}>
         <ModalSearchBar />
         <View style={styles.textStyle}>
