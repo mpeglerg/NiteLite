@@ -87,6 +87,7 @@ export async function verifyUsername(username){
   });
 }
 
+// TODO: instead of verifying with information in firebase, can we set it up with Google Accounts?
 export async function verifyEmail(email){
   var emailMod = email.replace(/[.]/g, "");
   var ref = await firebase.database().ref("users/emails/" + emailMod);
@@ -101,6 +102,7 @@ export async function verifyEmail(email){
   });
 }
 
+// TODO: if changing verification to Google Accounts, do we need the user phone number?
 export async function verifyPhone(phoneNumber){
   var ref = await firebase.database().ref("users/numbers/" + phoneNumber);
   let retVal = "";
