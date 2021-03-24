@@ -1,29 +1,34 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import { registerNewUser } from "../../firebase/firebase.util";
-import { colors } from "../styles/colors.js";
-import { AppLoading } from "expo";
 import {
-  useFonts,
-  Nunito_600SemiBold,
   Nunito_400Regular,
+  Nunito_600SemiBold,
   Nunito_800ExtraBold,
+  useFonts,
 } from "@expo-google-fonts/nunito";
-import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-your-grace";
 import {
-  // Quicksand_300Light,
   Quicksand_400Regular,
   Quicksand_500Medium,
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+import { AppLoading } from "expo";
+import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-your-grace";
+import { TextInput } from "react-native-gesture-handler";
+import { colors } from "../styles/colors.js";
+import { registerNewUser } from "../../firebase/firebase.util";
 
 // TODO: remove extraneous comments
 const EmergencyContacts = ({ navigation }) => {
+  // [Ian]: I would recommend updating to React Navigation 5.x.x so you can use Hooks and
+  //        reduce the ability to run into any deprecating errors.
   let object = navigation.getParam("object", "missing");
   const [name, setName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
+  // [Ian]: I'm not well versed in this package, but if you find yourself setting fonts
+  //        and waiting for loading in your component, I would recommend maybe rendering
+  //        it at the top level with your App.js (if possible).
   let [fontsLoaded] = useFonts({
     Nunito_400Regular,
     Nunito_600SemiBold,
@@ -39,11 +44,13 @@ const EmergencyContacts = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
-          Who you would like to call during an Emergency?
+          Who would you like to call during an Emergency?
           {/* TODO: change wording */}
         </Text>
         <Text style={styles.taskText}>Name</Text>
         <TextInput
+          // [Ian]: I would try and keep your styling consistent, and add it to
+          //        your Stylesheet.
           style={{
             height: 40,
             width: "75%",
@@ -99,8 +106,11 @@ const EmergencyContacts = ({ navigation }) => {
   }
 };
 
+// [Ian]: This function should be moved above the `return` to keep with React convention.
+// [Ian]: I would also change the name of the function as it is a bit confusing.
 function objectifyAndNav(navigation, object, name, contactPhone) {
   // add new items to our object
+  // [Ian]: I would also try to use something more verbose and explicit instead of `object`.
   object.set("eName", name);
   object.set("eNumber", contactPhone);
 
