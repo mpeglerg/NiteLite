@@ -121,8 +121,6 @@ function objectifyAndNav(navigation, object, name, contactPhone) {
 }
 export default EmergencyContacts;
 
-// [Ian]: I would either move this to a separate styles file (my pref) or
-//        move it above the React function.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
