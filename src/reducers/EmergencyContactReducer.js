@@ -8,6 +8,7 @@ const initState = {
 };
 
 const emergencyContactsReducer = (state = initState, action) => {
+  // TODO: Add reducer for ADD_EMERGENCY_CONTACT
   if (action.type == "DELETE_EMERGENCY_CONTACT") {
     let newEmergencyContacts = state.emergencyContacts.filter((contact) => {
       return action.id.name !== contact.name;
