@@ -6,6 +6,7 @@ import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
+import SearchPageModal from "../components/SearchPageModal";
 
 const renderContent = () => (
   <View
@@ -14,8 +15,8 @@ const renderContent = () => (
       backgroundColor: colors.backgroundColor,
       padding: 16,
       height: 450,
-    }}
-  >
+    }}>
+    {/* <SearchPageModal></SearchPageModal> */}
     <MapModal></MapModal>
   </View>
 );
@@ -31,14 +32,12 @@ const HomeScreen = ({ navigation }) => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}
-    >
+      }}>
       <View
         style={{
           height: "100%",
           width: "100%",
-        }}
-      >
+        }}>
         <MapView
           style={{ flex: 1 }}
           region={{
