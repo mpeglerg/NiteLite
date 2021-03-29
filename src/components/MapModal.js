@@ -6,6 +6,7 @@ import {
   Platform,
   Linking,
   Share,
+  Text
 } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
 // import RouteDirections from "./RouteDirections";
@@ -13,6 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { colors } from "../styles/colors.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import { connect } from "react-redux";
+import RecentSpots from "./RecentSpots";
 
 const MapModal = (props) => {
   const [callNumber, setCallNumber] = useState("");
@@ -72,12 +74,7 @@ const MapModal = (props) => {
           >
             <Icon size={38} name="ios-share" style={{ alignSelf: "center" }} />
           </TouchableOpacity>
-          {/* <View style={styles.buttons}>
-            <Text style={styles.buttonText}>17</Text>
-          </View>
-          <View style={styles.buttons}>
-            <Text style={styles.buttonText}>2</Text>
-          </View> */}
+          <RecentSpots/>
         </View>
         {/* <RouteDirections /> */}
       </ScrollView>
@@ -93,7 +90,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    // backgroundColor: "blue",
     borderRadius: 20,
     width: "100%",
     elevation: 5,
@@ -128,7 +124,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
-    // fontWeight: "bold"
   },
 });
 

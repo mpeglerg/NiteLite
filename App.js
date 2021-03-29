@@ -27,11 +27,11 @@ const AppDrawer = createDrawerNavigator({
 const AppModalStack = createStackNavigator({
   // TODO: Refactor stack nav to CreateAccountFlow and MainAppFlow with switch nav
   // NiteLite: AppDrawer,
-  NiteLite: LogInScreen,
-  Account: AccountScreen,
-  SignUp: SignUpScreen, 
-  SafetyPreferences: SafetyQuizScreen,
-  EmergencyContacts: EmergencyContacts,
+  // NiteLite: LogInScreen,
+  // Account: AccountScreen,
+  // SignUp: SignUpScreen, 
+  // SafetyPreferences: SafetyQuizScreen,
+  // EmergencyContacts: EmergencyContacts,
   Home: HomeScreen
 });
 
