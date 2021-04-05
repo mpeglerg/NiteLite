@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../styles/colors.js";
@@ -7,59 +7,74 @@ import AlongRouteIcon from "./AlongRouteIcon.js";
 
 const AlongRoute = () => {
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-      }}>
-      <Text> Along Route...</Text>
-      <AlongRouteIcon />
+    <View>
+      <Text style={styles.headerText}> Along Route...</Text>
+      {/* <AlongRouteIcon /> */}
+      <View style={{ alignItems: "center", marginTop: 10 }}>
+        <View>
+          <View style={{ flexDirection: "row" }}>
+            <View style={styles.infoButtons}>
+              <Text style={styles.valueText}>Val</Text>
+            </View>
+            <View style={styles.infoButtons}>
+              <Text style={styles.valueText}>Val</Text>
+            </View>
+            <View style={styles.infoButtons}>
+              <Text style={styles.valueText}>Val</Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: "row" }}>
+            <View style={styles.infoButtons}>
+              <Text style={styles.valueText}>Val</Text>
+            </View>
+            <View style={styles.infoButtons}>
+              <Text style={styles.valueText}>Val</Text>
+            </View>
+            <View style={styles.infoButtons}>
+              <Text style={styles.valueText}>Val</Text>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    width: "100%",
-    textAlign: "center",
-  },
-  modalView: {
-    margin: 20,
-    borderRadius: 20,
-    width: "100%",
-    elevation: 5,
-  },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    width: "100%",
-  },
-  textStyle: {
+  headerText: {
+    marginTop: 25,
     color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-    flexDirection: "row",
-    marginTop: 20,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+    fontSize: 20,
   },
   buttons: {
     backgroundColor: "white",
     borderColor: colors.tertiaryBlue,
     borderWidth: 3,
     borderRadius: 50,
-    height: 60,
-    width: 60,
+    height: 45,
+    width: "45%",
     margin: 10,
     justifyContent: "center",
   },
   buttonText: {
     textAlign: "center",
+  },
+  infoButtons: {
+    backgroundColor: "white",
+    borderColor: colors.tertiaryBlue,
+    borderWidth: 3,
+    borderRadius: 50,
+    height: 70,
+    width: 70,
+    margin: 13,
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "bold",
+    marginHorizontal: 15,
+  },
+  valueText: {
+    fontSize: 20,
   },
 });
 export default AlongRoute;

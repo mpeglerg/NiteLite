@@ -55,9 +55,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    width: "90%",
+    // alignSelf: "center",
+    alignContent: "center",
+    width: "100%",
     backgroundColor: "#fff",
-    borderRadius: 20,
+    borderRadius: 25,
   },
   searchIcon: {
     paddingBottom: 17,

@@ -6,7 +6,7 @@ import {
   Platform,
   Linking,
   Share,
-  Text
+  Text,
 } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
 // import RouteDirections from "./RouteDirections";
@@ -14,11 +14,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import { colors } from "../styles/colors.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import { connect } from "react-redux";
-import RecentSpots from "./RecentSpots";
 
 const MapModal = (props) => {
   const [callNumber, setCallNumber] = useState("");
-  // TODO: implement try catch, to account for when a call is unable to be made
+
   const triggerCall = () => {
     const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(
       /-/g,
@@ -56,9 +55,28 @@ const MapModal = (props) => {
 
   return (
     <View style={styles.centeredView}>
-      {/* TODO: ScrollView is not accounting for the keyboard covering the textboxes upon user input. Need to import built-in React Native Keyboard component instead so screen adjusts accordingly */}
       <ScrollView style={styles.modalView}>
         <ModalSearchBar />
+        <View style={styles.tabs}>
+          <Text style={styles.tabsText}>Recents</Text>
+        </View>
+        <View>
+          <TouchableOpacity style={styles.recentContainer}>
+            <Text>Recent #1</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.recentContainer}>
+            <Text>Recent #2</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.recentContainer}>
+            <Text>Recent #3</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.recentContainer}>
+            <Text>Recent #4</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.recentContainer}>
+            <Text>Recent #5</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.textStyle}>
           <TouchableOpacity
             activeOpacity={0.7}
@@ -74,7 +92,6 @@ const MapModal = (props) => {
           >
             <Icon size={38} name="ios-share" style={{ alignSelf: "center" }} />
           </TouchableOpacity>
-          <RecentSpots/>
         </View>
         {/* <RouteDirections /> */}
       </ScrollView>
@@ -87,11 +104,16 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     textAlign: "center",
+
+    // alignItems: "center",
   },
   modalView: {
+    flex: 1,
+    alignSelf: "center",
     margin: 20,
+    // backgroundColor: "blue",
     borderRadius: 20,
-    width: "100%",
+    width: "95%",
     elevation: 5,
   },
   openButton: {
@@ -124,6 +146,22 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
+    // fontWeight: "bold"
+  },
+  tabsText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  tabs: {
+    paddingTop: 20,
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+  },
+  recentContainer: {
+    backgroundColor: "#fff",
+    padding: 15,
+    marginVertical: 10,
+    borderRadius: 10,
   },
 });
 
