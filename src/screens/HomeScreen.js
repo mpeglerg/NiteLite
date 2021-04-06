@@ -14,7 +14,7 @@ const renderContent = () => (
       // backgroundColor: "#05054D",
       backgroundColor: colors.backgroundColor,
       padding: 16,
-      height: 450,
+      height: 500,
     }}
   >
     {/* <SearchPageModal></SearchPageModal> */}
@@ -55,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <BottomSheet
         ref={sheetRef}
-        snapPoints={[500, 300, 100]}
+        snapPoints={[532, 300, 100]}
         borderRadius={20}
         renderContent={renderContent}
       />
