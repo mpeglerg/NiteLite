@@ -15,7 +15,8 @@ const renderContent = () => (
       backgroundColor: colors.backgroundColor,
       padding: 16,
       height: 450,
-    }}>
+    }}
+  >
     {/* <SearchPageModal></SearchPageModal> */}
     <MapModal></MapModal>
   </View>
@@ -32,12 +33,14 @@ const HomeScreen = ({ navigation }) => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}>
+      }}
+    >
       <View
         style={{
           height: "100%",
           width: "100%",
-        }}>
+        }}
+      >
         <MapView
           style={{ flex: 1 }}
           region={{
@@ -52,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <BottomSheet
         ref={sheetRef}
-        snapPoints={[450, 300, 100]}
+        snapPoints={[500, 300, 100]}
         borderRadius={20}
         renderContent={renderContent}
       />

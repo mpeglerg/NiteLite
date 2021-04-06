@@ -10,59 +10,39 @@ const AlongRouteIcon = () => {
       style={{
         flexDirection: "row",
         alignItems: "center",
-      }}>
+      }}
+    >
       <View style={styles.textStyle}>
-        <View activeOpacity={0.7} style={styles.buttons} />
-        <View activeOpacity={0.7} style={styles.buttons} />
-        <View activeOpacity={0.7} style={styles.buttons} />
-        <View activeOpacity={0.7} style={styles.buttons} />
-        <View activeOpacity={0.7} style={styles.buttons} />
-        <View activeOpacity={0.7} style={styles.buttons} />
-        <View activeOpacity={0.7} style={styles.buttons} />
+        <View style={{ flexDirection: "row" }}>
+          <View activeOpacity={0.7} style={styles.iconCircle} />
+          <View activeOpacity={0.7} style={styles.iconCircle} />
+          <View activeOpacity={0.7} style={styles.iconCircle} />
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <View activeOpacity={0.7} style={styles.iconCircle} />
+          <View activeOpacity={0.7} style={styles.iconCircle} />
+          <View activeOpacity={0.7} style={styles.iconCircle} />
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    width: "100%",
-    textAlign: "center",
-  },
-  modalView: {
-    margin: 20,
-    borderRadius: 20,
-    width: "100%",
-    elevation: 5,
-  },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    width: "100%",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-    flexDirection: "row",
-    marginTop: 20,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-  buttons: {
+  iconCircle: {
+    // display: "flex",
+    // flex: 1,
     backgroundColor: "white",
     borderColor: colors.tertiaryBlue,
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 50,
-    height: 60,
-    width: 60,
+    height: 42,
+    width: 42,
     margin: 10,
     justifyContent: "center",
+    alignContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
   },
   buttonText: {
     textAlign: "center",
