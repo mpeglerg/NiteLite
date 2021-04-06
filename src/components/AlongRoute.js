@@ -11,26 +11,32 @@ const AlongRoute = () => {
       <Text style={styles.headerText}> Along Route...</Text>
       {/* <AlongRouteIcon /> */}
       <View style={{ alignItems: "center", marginTop: 10 }}>
-        <View>
+        <View style={{ marginRight: 20 }}>
           <View style={{ flexDirection: "row" }}>
+            <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
+            <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
+            <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
           </View>
 
           <View style={{ flexDirection: "row" }}>
+            <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
+            <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
+            <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
@@ -47,19 +53,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
-  buttons: {
-    backgroundColor: "white",
-    borderColor: colors.tertiaryBlue,
-    borderWidth: 3,
-    borderRadius: 50,
-    height: 45,
-    width: "45%",
-    margin: 10,
-    justifyContent: "center",
-  },
-  buttonText: {
-    textAlign: "center",
-  },
   infoButtons: {
     backgroundColor: "white",
     borderColor: colors.tertiaryBlue,
@@ -71,10 +64,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontWeight: "bold",
-    marginHorizontal: 15,
+    marginHorizontal: -0.5,
   },
   valueText: {
     fontSize: 20,
+  },
+  iconCircle: {
+    backgroundColor: "white",
+    borderColor: colors.tertiaryBlue,
+    borderWidth: 2,
+    borderRadius: 50,
+    height: 38,
+    width: 38,
+    left: 20,
+    top: 48,
+    zIndex: 1,
   },
 });
 export default AlongRoute;
