@@ -4,7 +4,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../styles/colors.js";
 import AlongRouteIcon from "./AlongRouteIcon.js";
-import SafetyScoreIcon from "react-native-vector-icons/SimpleLineIcons";
+import SafetyScoreIcon from "react-native-vector-icons/FontAwesome";
+import WalkScoreIcon from "react-native-vector-icons/FontAwesome5";
+
 import { withOrientation } from "react-navigation";
 
 const AlongRoute = () => {
@@ -15,7 +17,14 @@ const AlongRoute = () => {
       <View style={{ alignItems: "center", marginTop: 10 }}>
         <View style={{ marginRight: 20 }}>
           <View style={{ flexDirection: "row" }}>
+            {/* <SafetyScoreIcon
+              size={22}
+              name="heartbeat"
+              color="black"
+              style={styles.icon}
+            /> */}
             <View activeOpacity={0.7} style={styles.iconCircle} />
+
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
@@ -24,6 +33,13 @@ const AlongRoute = () => {
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
+
+            {/* <WalkScoreIcon
+              size={22}
+              name="walking"
+              color="black"
+              style={styles.icon}
+            /> */}
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
@@ -92,6 +108,11 @@ const styles = StyleSheet.create({
     left: 20,
     top: 48,
     zIndex: 1,
+  },
+  icon: {
+    left: 50,
+    top: 57,
+    zIndex: 2,
   },
   infoText: {
     color: "white",

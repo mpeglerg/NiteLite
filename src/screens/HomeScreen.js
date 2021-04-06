@@ -17,8 +17,8 @@ const renderContent = () => (
       height: 500,
     }}
   >
-    <SearchPageModal></SearchPageModal>
-    {/* <MapModal></MapModal> */}
+    {/* <SearchPageModal></SearchPageModal> */}
+    <MapModal></MapModal>
   </View>
 );
 
