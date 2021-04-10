@@ -14,3 +14,6 @@ src/mongo/STLIGHT.csv
 
 # macOS
 .DS_Store
+node_modules
+ios/
+android/

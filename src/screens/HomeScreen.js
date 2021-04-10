@@ -6,6 +6,7 @@ import MapView from "react-native-maps";
 import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
+import SearchPageModal from "../components/SearchPageModal";
 
 const renderContent = () => (
   <View
@@ -13,9 +14,10 @@ const renderContent = () => (
       // backgroundColor: "#05054D",
       backgroundColor: colors.backgroundColor,
       padding: 16,
-      height: 450,
+      height: 500,
     }}
   >
+    {/* <SearchPageModal></SearchPageModal> */}
     <MapModal></MapModal>
   </View>
 );
@@ -53,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <BottomSheet
         ref={sheetRef}
-        snapPoints={[450, 300, 100]}
+        snapPoints={[532, 300, 100]}
         borderRadius={20}
         renderContent={renderContent}
       />

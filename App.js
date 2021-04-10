@@ -21,18 +21,18 @@ import directionsReducer from "./src/reducers/DirectionsReducer";
 
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
-  Account: AccountScreen
+  Account: AccountScreen,
 });
 
 const AppModalStack = createStackNavigator({
   // TODO: Refactor stack nav to CreateAccountFlow and MainAppFlow with switch nav
   // NiteLite: AppDrawer,
-  NiteLite: LogInScreen,
-  Account: AccountScreen,
-  SignUp: SignUpScreen, 
-  SafetyPreferences: SafetyQuizScreen,
-  EmergencyContacts: EmergencyContacts,
-  Home: HomeScreen
+  // NiteLite: LogInScreen,
+  // Account: AccountScreen,
+  // SignUp: SignUpScreen,
+  // SafetyPreferences: SafetyQuizScreen,
+  // EmergencyContacts: EmergencyContacts,
+  Home: HomeScreen,
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
@@ -47,7 +47,7 @@ const appReducer = combineReducers({
   nav: navigationReducer,
   safeSpots: safeSpotsReducer,
   emergencyContacts: emergencyContactsReducer,
-  directions: directionsReducer
+  directions: directionsReducer,
 });
 
 const appMiddleware = createReactNavigationReduxMiddleware(
