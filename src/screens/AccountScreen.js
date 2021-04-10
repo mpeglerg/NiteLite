@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, ShadowPropTypesIOS} from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  // ShadowPropTypesIOS,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import CheckBox from "../components/CheckBox";
@@ -45,7 +51,8 @@ const AccountScreen = (props) => {
           title="Add safe spot"
           onPress={() =>
             props.addSafeSpot({ name: safePlaceInput, address: "1 LMU Drive" })
-          }></Button>
+          }
+        ></Button>
       ) : null}
       {props.safeSpots.safeSpots.map((safeSpot) => {
         return (

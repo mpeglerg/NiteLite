@@ -1,3 +1,5 @@
+// TODO: Create action for ADD_EMERGENCY_CONTACT
+
 export const deleteEmergencyContact = (id) => {
   return {
     type: "DELETE_EMERGENCY_CONTACT",

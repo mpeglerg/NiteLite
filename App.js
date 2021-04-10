@@ -2,7 +2,6 @@ import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
-import LogInScreenError from "./src/screens/LogInScreenError";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
 import EmergencyContacts from "./src/screens/EmergencyContacts";
 import { createSwitchNavigator } from "react-navigation";
@@ -26,17 +25,14 @@ const AppDrawer = createDrawerNavigator({
 });
 
 const AppModalStack = createStackNavigator({
+  // TODO: Refactor stack nav to CreateAccountFlow and MainAppFlow with switch nav
   // NiteLite: AppDrawer,
-
-  // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
   NiteLite: LogInScreen,
   Account: AccountScreen,
-  // Page1: HomeScreen,  // SignUp 
-  Page1: SignUpScreen, 
-  Page2: SafetyQuizScreen,
-  Page3: EmergencyContacts,
-  Page4: HomeScreen, 
-  Page5: LogInScreenError
+  SignUp: SignUpScreen, 
+  SafetyPreferences: SafetyQuizScreen,
+  EmergencyContacts: EmergencyContacts,
+  Home: HomeScreen
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
@@ -51,7 +47,7 @@ const appReducer = combineReducers({
   nav: navigationReducer,
   safeSpots: safeSpotsReducer,
   emergencyContacts: emergencyContactsReducer,
-  directions: directionsReducer,
+  directions: directionsReducer
 });
 
 const appMiddleware = createReactNavigationReduxMiddleware(
