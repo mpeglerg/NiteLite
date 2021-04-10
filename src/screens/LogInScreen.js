@@ -6,6 +6,8 @@ import logo from '../images/logo.png';
 import { Image, StyleSheet, View, Button, Text } from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
 import { color } from "react-native-reanimated";
+import UserProfile from "../components/UserProfile";
+import { connect } from "react-redux";
 import {colors} from "../styles/colors.js"
 import {AppLoading} from "expo"
 import { 
@@ -17,7 +19,7 @@ import {
   Nunito_800ExtraBold,
 } from '@expo-google-fonts/nunito'
 
-const LogInScreen = ({ navigation }) => {
+const LogInScreen = (props, { navigation }) => {
 
   const [returningUserName, setReturningUserName] = useState("");
   const [returningUserPassword, setReturningUserPassword] = useState("");
@@ -42,6 +44,7 @@ const LogInScreen = ({ navigation }) => {
             placeholderTextColor = "#A2A2AB"
             onChangeText={(text) => {
               setReturningUserName(text);
+              props.updateUsername({ name: returningUserName })
             }}
             value={returningUserName}
           />
@@ -72,6 +75,19 @@ const LogInScreen = ({ navigation }) => {
           <Text style={styles.logInButtonText}>Log In</Text>
         </TouchableOpacity>
 
+        {/* <Text>Emergency Contacts</Text> */}
+        {props.userProfile.user.map((user) => {
+          return (
+            <UserProfile
+              props={{
+                name: user.name,
+                updateUsername: props.updateUsername,
+              }}
+            />
+          );
+        })}
+
+
         <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
           <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
           <Text style={styles.signUpText2}>Sign Up!</Text>
@@ -95,7 +111,7 @@ async function verifyCredentials(navigation, username, password) {
   let response = await verifyLogin(username, password);
   if (response == 1) {
     // TODO: set state with username here
-    navigation.navigate("Home");
+    navigation.navigate("EditProfile");
   } else if (response == 2) {
     alert("Username not found. Try again.");
   } else {
@@ -171,4 +187,30 @@ const styles = StyleSheet.create({
   });
 
 
-export default LogInScreen;
+  const mapStateToProps = (state) => {
+    return {
+      username: state.username,
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      updateUsername: (username) => {
+        dispatch({ type: "UPDATE_USERNAME", username: username });
+      },
+      // deleteEmergencyContact: (contact) => {
+      //   dispatch({ type: "DELETE_EMERGENCY_CONTACT", id: contact });
+      // },
+      // addSafeSpot: (newSafeSpot) => {
+      //   dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
+      // },
+      // editSafeSpot: (id) => {
+      //   dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
+      // },
+      // editEmergencyContact: (id) => {
+      //   dispatch({ type: "EDIT_EMERGENCY_CONTACT", payload: id });
+      // },
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInScreen);

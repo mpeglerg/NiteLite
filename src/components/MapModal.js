@@ -23,6 +23,16 @@ const MapModal = (props) => {
     }
   }
 
+  // const editProfile = (navigation) => {
+  //   // open edit profile page
+  //   navigation.navigate("EditProfile");
+  // }
+
+  // const openAudios = (navigation) => {
+  //   // open audio page
+  //   navigation.navigate("Audios");
+  // }
+
   return (
     <View style={styles.centeredView}>
       <ScrollView style={styles.modalView}>
@@ -41,6 +51,23 @@ const MapModal = (props) => {
           <View style={styles.buttons}>
             <Text style={styles.buttonText}>2</Text>
           </View> */}
+        
+          {/* <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttons}
+          onPress={editProfile(navigation)}
+          title="Edit Profile">
+            { <Text style={styles.buttonText}>Edit Profile</Text> }
+          </TouchableOpacity>
+
+          <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttons}
+          onPress={openAudios(navigation)}
+          title="Audio">
+            { <Text style={styles.buttonText}>Audio</Text> }
+          </TouchableOpacity> */}
+
         </View>
         {/* <RouteDirections /> */}
       </ScrollView>
@@ -91,6 +118,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
+    color: "black"
     // fontWeight: "bold"
   }
 });

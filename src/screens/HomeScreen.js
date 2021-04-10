@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import MapModal from "../components/MapModal";
 import MapView from "react-native-maps";
@@ -7,6 +7,15 @@ import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 import {colors} from "../styles/colors.js"
 
+const editProfile = (navigation) => {
+  // open edit profile page
+  navigation.navigate("EditProfile");
+}
+
+const openAudios = (navigation) => {
+  // open audio page
+  navigation.navigate("Audios");
+}
 
 const renderContent = () => (
   <View
@@ -52,6 +61,21 @@ const HomeScreen = ({ navigation }) => {
         />
           <MapContainer/>
       </View>
+      <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttons}
+          onPress={editProfile(navigation)}
+          title="Edit Profile">
+            { <Text style={styles.buttonText}>Edit Profile</Text> }
+          </TouchableOpacity>
+
+          <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttons}
+          onPress={openAudios(navigation)}
+          title="Audio">
+            { <Text style={styles.buttonText}>Audio</Text> }
+          </TouchableOpacity>
       <BottomSheet
         ref={sheetRef}
         snapPoints={[450, 300, 100]}
@@ -67,4 +91,53 @@ const mapStateToProps = (state) => {
     directions: state.directions,
   };
 };
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    width: "100%",
+    textAlign: "center",
+  },
+  modalView: {
+    margin: 20,
+    // backgroundColor: "blue",
+    borderRadius: 20,
+    width: "100%",
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    width: "100%",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    flexDirection: 'row',
+    marginTop: 20,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  buttons: {
+    backgroundColor: "white",
+    borderColor: colors.tertiaryBlue,
+    borderWidth: 3,
+    borderRadius: 50,
+    height: 60,
+    width: 60,
+    margin: 10,
+    justifyContent: "center"
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "black"
+    // fontWeight: "bold"
+  }
+});
+
 export default connect(mapStateToProps, null) (HomeScreen);
