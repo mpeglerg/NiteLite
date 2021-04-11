@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddContactIcon from 'react-native-vector-icons/AntDesign';
 import AddContactIcon2 from 'react-native-vector-icons/MaterialIcons';
+import SafeSpot from "../components/SafeSpot";
+import { connect } from "react-redux";
 import {colors} from "../styles/colors.js"
 import SearchIcon from 'react-native-vector-icons/Fontisto';
 import {AppLoading} from "expo"
@@ -20,8 +22,8 @@ import {
   Quicksand_600SemiBold,
 } from '@expo-google-fonts/quicksand'
 
-const SafetyQuizScreen = ({navigation}) => {
-  let object = navigation.getParam('object','missing');
+const SafetyQuizScreen = (props, {navigation}) => {
+  // let object = navigation.getParam('object','missing');
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState(false);
   const [policeStations, setPoliceStations] = useState(false);
@@ -115,6 +117,25 @@ const SafetyQuizScreen = ({navigation}) => {
         }}
         value={safePlaceInput}
       />
+      {safePlaceInput != "" ? (
+        <Button
+          title="Add safe spot"
+          onPress={() =>
+            props.addSafeSpot({ name: safePlaceInput, address: "1 LMU Drive" })
+          }></Button>
+      ) : null}
+      {props.safeSpots.safeSpots.map((safeSpot) => {
+        return (
+          <SafeSpot
+            props={{
+              name: safeSpot.name,
+              address: safeSpot.address,
+              deleteSafeSpot: props.deleteSafeSpot,
+              editSafeSpot: props.editSafeSpot,
+            }}
+          />
+        );
+      })}
 
       <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
       {/* <View> */}
@@ -156,7 +177,28 @@ function objectifyAndNav(
   navigation.navigate("EmergencyContacts", { object: object });
 }
 
-export default SafetyQuizScreen;
+const mapStateToProps = (state) => {
+  return {
+    safeSpots: state.safeSpots,
+    emergencyContacts: state.emergencyContacts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteSafeSpot: (id) => {
+      dispatch({ type: "DELETE_SAFE_SPOT", id: id });
+    },
+    addSafeSpot: (newSafeSpot) => {
+      dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
+    },
+    editSafeSpot: (id) => {
+      dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SafetyQuizScreen);
 
 const styles = StyleSheet.create({
   container: {

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { registerNewUser } from "../../firebase/firebase.util";
+import EmergencyContact from "../components/EmergencyContact";
 import {colors} from "../styles/colors.js"
+import { connect } from "react-redux";
 import {AppLoading} from "expo"
 import { 
   useFonts,
@@ -21,8 +23,12 @@ import {
   Quicksand_700Bold 
 } from '@expo-google-fonts/quicksand'
 
-const EmergencyContacts = ({ navigation }) => {
-  let object = navigation.getParam("object", "missing");
+const EmergencyContacts = (props, { navigation }) => {
+  // pull out props from navigation?
+  // maybe print this out, idk what the props are
+  // let props = navigation[0];
+  // navigation = 
+  // let object = navigation.getParam("object", "missing");
   const [name, setName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   let [fontsLoaded] = useFonts({
@@ -80,6 +86,18 @@ const EmergencyContacts = ({ navigation }) => {
         }}
         value={contactPhone}
       />
+       {props.emergencyContacts.contacts.map((contact) => {
+        return (
+          <EmergencyContact
+            props={{
+              name: contact.name,
+              number: contact.phoneNumber,
+              deleteEmergencyContact: props.deleteEmergencyContact,
+              editEmergencyContact: props.editEmergencyContact,
+            }}
+          />
+        );
+      })}
       {/* <Button
         title="Complete Profile"
         
@@ -108,7 +126,26 @@ function objectifyAndNav(navigation, object, name, contactPhone) {
   // navigate to next page
   navigation.navigate("Home", { text: object.get("name") });
 }
-export default EmergencyContacts;
+
+const mapStateToProps = (state) => {
+  return {
+    emergencyContacts: state.emergencyContacts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteEmergencyContact: (contact) => {
+      dispatch({ type: "DELETE_EMERGENCY_CONTACT", id: contact });
+    },
+    editEmergencyContact: (id) => {
+      dispatch({ type: "EDIT_EMERGENCY_CONTACT", payload: id });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmergencyContacts);
+
 
 const styles = StyleSheet.create({
   container: {

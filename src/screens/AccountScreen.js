@@ -6,6 +6,7 @@ import CheckBox from "../components/CheckBox";
 import EmergencyContact from "../components/EmergencyContact";
 import SafeSpot from "../components/SafeSpot";
 
+//TODO: this isn't being used
 const AccountScreen = (props) => {
   const [safePlaceInput, setSafePlaceInput] = useState("");
   return (

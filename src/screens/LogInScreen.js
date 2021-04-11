@@ -19,7 +19,7 @@ import {
   Nunito_800ExtraBold,
 } from '@expo-google-fonts/nunito'
 
-const LogInScreen = (props, { navigation }) => {
+const LogInScreen = ({ navigation }) => {
 
   const [returningUserName, setReturningUserName] = useState("");
   const [returningUserPassword, setReturningUserPassword] = useState("");
@@ -76,7 +76,7 @@ const LogInScreen = (props, { navigation }) => {
         </TouchableOpacity>
 
         {/* <Text>Emergency Contacts</Text> */}
-        {props.userProfile.user.map((user) => {
+        {/* {props.userProfile.user.map((user) => {
           return (
             <UserProfile
               props={{
@@ -85,7 +85,7 @@ const LogInScreen = (props, { navigation }) => {
               }}
             />
           );
-        })}
+        })} */}
 
 
         <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
