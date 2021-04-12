@@ -1,5 +1,4 @@
 import HomeScreen from "./src/screens/HomeScreen";
-import AccountScreen from "./src/screens/AccountScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
@@ -24,7 +23,6 @@ import userProfileReducer from "./src/reducers/UserProfileReducer";
 
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
-  Account: AccountScreen
 });
 
 const AppModalStack = createStackNavigator({
@@ -32,7 +30,6 @@ const AppModalStack = createStackNavigator({
 
   // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
   NiteLite: LogInScreen,
-  Account: AccountScreen,
   SignUp: SignUpScreen, 
   SafetyPreferences: SafetyQuizScreen,
   EmergencyContacts: EmergencyContacts,

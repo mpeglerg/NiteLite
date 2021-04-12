@@ -22,8 +22,10 @@ import {
   Quicksand_600SemiBold,
 } from '@expo-google-fonts/quicksand'
 
-const SafetyQuizScreen = (props, {navigation}) => {
-  // let object = navigation.getParam('object','missing');
+const SafetyQuizScreen = ( {navigation}) => {
+  // console.log("this is props " + props);
+  // console.log("this is navigation " + navigation);
+  let object = navigation.getParam('object','missing');
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState(false);
   const [policeStations, setPoliceStations] = useState(false);
