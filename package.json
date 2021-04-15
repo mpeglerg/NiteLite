@@ -31,6 +31,7 @@
     "react-native-screens": "^2.12.0",
     "react-native-shimmer": "^0.6.0",
     "react-native-side-drawer": "^1.2.8",
+    "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.3",

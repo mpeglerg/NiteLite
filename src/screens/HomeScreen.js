@@ -7,6 +7,7 @@ import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
 import SearchPageModal from "../components/SearchPageModal";
+import RouteDirections from "../components/RouteDirections";
 
 const renderContent = () => (
   <View
@@ -41,7 +42,8 @@ const HomeScreen = ({ navigation }) => {
           width: "100%",
         }}
       >
-        <MapView
+        <RouteDirections></RouteDirections>
+        {/* <MapView
           style={{ flex: 1 }}
           region={{
             latitude: 42.882004,
@@ -51,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
           }}
           showsUserLocation={true}
         />
-        <MapContainer />
+        <MapContainer /> */}
       </View>
       <BottomSheet
         ref={sheetRef}

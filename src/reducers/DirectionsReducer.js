@@ -9,7 +9,82 @@ const initState = {
       destination: "Apple Park Visitor Center",
     },
   ],
-  route: [],
+  route: [{
+    "steps": [ {
+      "travel_mode": "DRIVING",
+      "start_location": {
+        "lat": 41.8507300,
+        "lng": -87.6512600
+      },
+      "end_location": {
+        "lat": 41.8525800,
+        "lng": -87.6514100
+      },
+      "polyline": {
+        "points": "a~l~Fjk~uOwHJy@P"
+      },
+      "duration": {
+        "value": 19,
+        "text": "1 min"
+      },
+      "html_instructions": "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eS Morgan St\u003c/b\u003e toward \u003cb\u003eW Cermak Rd\u003c/b\u003e",
+      "distance": {
+        "value": 207,
+        "text": "0.1 mi"
+      }
+      }]
+    },
+    {
+      "steps": [ {
+        "travel_mode": "DRIVING",
+        "start_location": {
+          "lat": 41.8507300,
+          "lng": -87.6512600
+        },
+        "end_location": {
+          "lat": 41.8525800,
+          "lng": -87.6514100
+        },
+        "polyline": {
+          "points": "a~l~Fjk~uOwHJy@P"
+        },
+        "duration": {
+          "value": 19,
+          "text": "1 min"
+        },
+        "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eS Panay Way\u003c/b\u003e",
+        "distance": {
+          "value": 207,
+          "text": "0.5 mi"
+        }
+      }]
+    },
+    {
+      "steps": [ {
+        "travel_mode": "DRIVING",
+        "start_location": {
+          "lat": 41.8507300,
+          "lng": -87.6512600
+        },
+        "end_location": {
+          "lat": 41.8525800,
+          "lng": -87.6514100
+        },
+        "polyline": {
+          "points": "a~l~Fjk~uOwHJy@P"
+        },
+        "duration": {
+          "value": 19,
+          "text": "1 min"
+        },
+        "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eS Panay Way\u003c/b\u003e",
+        "distance": {
+          "value": 207,
+          "text": "800 feet"
+        }
+      }]
+    }
+  ]
 };
 
 const directionsReducer = (state = initState, action) => {
