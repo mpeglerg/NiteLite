@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  // ShadowPropTypesIOS,
-} from "react-native";
+import { View, Text, TextInput, Button } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import CheckBox from "../components/CheckBox";
@@ -52,7 +46,7 @@ const AccountScreen = (props) => {
           onPress={() =>
             props.addSafeSpot({ name: safePlaceInput, address: "1 LMU Drive" })
           }
-        ></Button>
+        />
       ) : null}
       {props.safeSpots.safeSpots.map((safeSpot) => {
         return (
@@ -67,7 +61,7 @@ const AccountScreen = (props) => {
         );
       })}
       <Text>Emergency Contacts</Text>
-      {props.emergencyContacts.contacts.map((contact) => {
+      {props.emergencyContacts.emergencyContacts.map((contact) => {
         return (
           <EmergencyContact
             props={{
@@ -79,6 +73,7 @@ const AccountScreen = (props) => {
           />
         );
       })}
+      {/* TODO: Log Out button */}
     </ScrollView>
   );
 };

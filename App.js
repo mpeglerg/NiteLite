@@ -24,21 +24,22 @@ const AppDrawer = createDrawerNavigator({
   Account: AccountScreen,
 });
 
-const AppModalStack = createStackNavigator({
-  // TODO: Refactor stack nav to CreateAccountFlow and MainAppFlow with switch nav
-  // NiteLite: AppDrawer,
-  // NiteLite: LogInScreen,
-  // Account: AccountScreen,
-  // SignUp: SignUpScreen,
-  // SafetyPreferences: SafetyQuizScreen,
-  // EmergencyContacts: EmergencyContacts,
+const AppStack = createStackNavigator({
+  NiteLite: AppDrawer,
+  Account: AccountScreen,
   Home: HomeScreen,
 });
 
+const AuthStack = createStackNavigator({
+  NiteLite: LogInScreen,
+  SignUp: SignUpScreen,
+  SafetyPreferences: SafetyQuizScreen,
+  EmergencyContacts: EmergencyContacts,
+});
+
 const AppSwitchNavigator = createSwitchNavigator({
-  App: {
-    screen: AppModalStack,
-  },
+  Auth: AuthStack,
+  App: AppStack,
 });
 
 const navigationReducer = createNavigationReducer(AppSwitchNavigator);
