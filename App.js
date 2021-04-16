@@ -31,7 +31,7 @@ const AppStack = createStackNavigator({
 });
 
 const AuthStack = createStackNavigator({
-  NiteLite: LogInScreen,
+  "Log In": LogInScreen,
   SignUp: SignUpScreen,
   SafetyPreferences: SafetyQuizScreen,
   EmergencyContacts: EmergencyContacts,

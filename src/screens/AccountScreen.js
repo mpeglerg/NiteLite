@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import CheckBox from "../components/CheckBox";
 import EmergencyContact from "../components/EmergencyContact";
+import LogOutButton from "../components/LogOutButton";
 import SafeSpot from "../components/SafeSpot";
 
 const AccountScreen = (props) => {
@@ -73,7 +74,7 @@ const AccountScreen = (props) => {
           />
         );
       })}
-      {/* TODO: Log Out button */}
+      <LogOutButton props={props.navigation} />
     </ScrollView>
   );
 };
