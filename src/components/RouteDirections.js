@@ -4,21 +4,19 @@ import { connect } from "react-redux";
 import Swiper from 'react-native-swiper'
 
 const RouteDirections = (props) => {
-  // props.route.route[0].routes[0].legs[0].steps.map((step) => {
-  //   console.log(step)
-  // })
+  if(props.route.route.length === 0) return null
 
-  // const routeSteps = props.route.route[0].routes[0].legs[0].steps.map((step) => {
-  const routeSteps = props.route.route.map((step) => {
+  const routeSteps = props.route.route[0].routes[0].legs[0].steps.map((step) => {
+  // const routeSteps = props.route.route.map((step) => {
     return(
     <View style={styles.slide1}>
       <Text style={styles.text}>
-        {/* {step.distance.text ? step.distance.text : null} */}
-        {step.steps[0].distance.text ? step.steps[0].distance.text : null}
+        {step.distance.text ? step.distance.text : null}
+        {/* {step.steps[0].distance.text ? step.steps[0].distance.text : null} */}
       </Text>
       <Text style={styles.text}>
-        {/* {step.html_instructions ? step.html_instructions : null} */}
-        {step.steps[0].html_instructions ? step.steps[0].html_instructions : null}
+        {step.html_instructions ? step.html_instructions : null}
+        {/* {step.steps[0].html_instructions ? step.steps[0].html_instructions : null} */}
       </Text>
     </View>
     );
@@ -26,7 +24,7 @@ const RouteDirections = (props) => {
 
   return (
     <View style={styles.container}>
-      <Swiper key={props.route.route[0].steps.length} style={styles.wrapper} showsButtons={true} height={200}>
+      <Swiper key={props.route.route[0].routes[0].legs[0].steps.length} style={styles.wrapper} showsButtons={true} height={200}>
           {routeSteps}
       </Swiper>
     </View>

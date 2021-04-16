@@ -9,11 +9,11 @@ import {
   Text,
 } from "react-native";
 import ModalSearchBar from "./ModalSearchBar";
-// import RouteDirections from "./RouteDirections";
 import { ScrollView } from "react-native-gesture-handler";
 import { colors } from "../styles/colors.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import { connect } from "react-redux";
+import RouteList from "./RouteList";
 
 const MapModal = (props) => {
   const [callNumber, setCallNumber] = useState("");
@@ -93,7 +93,7 @@ const MapModal = (props) => {
             <Icon size={38} name="ios-share" style={{ alignSelf: "center" }} />
           </TouchableOpacity>
         </View>
-        {/* <RouteDirections /> */}
+        {/* <RouteList /> */}
       </ScrollView>
     </View>
   );

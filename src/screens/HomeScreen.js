@@ -18,14 +18,15 @@ const renderContent = () => (
       height: 500,
     }}
   >
-    {/* <SearchPageModal></SearchPageModal> */}
+    <SearchPageModal></SearchPageModal>
     <MapModal></MapModal>
   </View>
 );
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }, props) => {
   let username = navigation.getParam("text", "sample");
   const sheetRef = useState(null);
+  console.log(`IN HOME: ${props.route}`)
 
   return (
     <View
@@ -42,8 +43,8 @@ const HomeScreen = ({ navigation }) => {
           width: "100%",
         }}
       >
-        <RouteDirections></RouteDirections>
-        {/* <MapView
+        {/* <RouteDirections></RouteDirections> */}
+        <MapView
           style={{ flex: 1 }}
           region={{
             latitude: 42.882004,
@@ -53,7 +54,7 @@ const HomeScreen = ({ navigation }) => {
           }}
           showsUserLocation={true}
         />
-        <MapContainer /> */}
+        <MapContainer />
       </View>
       <BottomSheet
         ref={sheetRef}
@@ -67,7 +68,8 @@ const HomeScreen = ({ navigation }) => {
 
 const mapStateToProps = (state) => {
   return {
-    directions: state.directions,
+    // directions: state.directions,
+    route: state.directions,
   };
 };
 export default connect(mapStateToProps, null)(HomeScreen);
