@@ -26,15 +26,13 @@ const AppDrawer = createDrawerNavigator({
 
 const AppStack = createStackNavigator({
   NiteLite: AppDrawer,
-  Account: AccountScreen,
-  Home: HomeScreen,
 });
 
 const AuthStack = createStackNavigator({
   "Log In": LogInScreen,
-  SignUp: SignUpScreen,
-  SafetyPreferences: SafetyQuizScreen,
-  EmergencyContacts: EmergencyContacts,
+  "Sign Up": SignUpScreen,
+  "Safety Preferences": SafetyQuizScreen,
+  "Emergency Contacts": EmergencyContacts,
 });
 
 const AppSwitchNavigator = createSwitchNavigator({

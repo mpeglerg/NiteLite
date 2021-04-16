@@ -76,12 +76,11 @@ const LogInScreen = ({ navigation }) => {
               returningUserName,
               returningUserPassword
             )
-          }
-        >
+          }>
           <Text style={styles.logInButtonText}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
           <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
           <Text style={styles.signUpText2}>Sign Up!</Text>
         </TouchableOpacity>
