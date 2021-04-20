@@ -23,12 +23,12 @@ import {
   Quicksand_700Bold 
 } from '@expo-google-fonts/quicksand'
 
-const EmergencyContacts = (props, { navigation }) => {
+const EmergencyContacts = ({ navigation }) => {
   // pull out props from navigation?
   // maybe print this out, idk what the props are
   // let props = navigation[0];
   // navigation = 
-  // let object = navigation.getParam("object", "missing");
+  let props = navigation.getParam("props", "missing");
   const [name, setName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   let [fontsLoaded] = useFonts({
@@ -106,7 +106,7 @@ const EmergencyContacts = (props, { navigation }) => {
       <TouchableOpacity
         style={styles.signUpButton}
         onPress={() => {
-          objectifyAndNav(navigation, object, name, contactPhone);
+          objectifyAndNav(navigation, props, name, contactPhone);
         }}
       >
         <Text style={styles.signUpText}>Complete Profile!</Text>
@@ -116,15 +116,15 @@ const EmergencyContacts = (props, { navigation }) => {
   }
 };
 
-function objectifyAndNav(navigation, object, name, contactPhone) {
+function objectifyAndNav(navigation, props, name, contactPhone) {
   // add new items to our object
-  object.set("eName", name);
-  object.set("eNumber", contactPhone);
+  props.set("eName", name);
+  props.set("eNumber", contactPhone);
 
   // call firebase function to set all of these items in the object
-  registerNewUser(object);
+  registerNewUser(props);
   // navigate to next page
-  navigation.navigate("Home", { text: object.get("name") });
+  navigation.navigate("Home", { text: props.get("name") });
 }
 
 const mapStateToProps = (state) => {

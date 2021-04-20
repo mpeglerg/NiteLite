@@ -22,10 +22,20 @@ import {
   Quicksand_600SemiBold,
 } from '@expo-google-fonts/quicksand'
 
-const SafetyQuizScreen = ( {navigation}) => {
-  // console.log("this is props " + props);
-  // console.log("this is navigation " + navigation);
-  let object = navigation.getParam('object','missing');
+const SafetyQuizScreen = (  {navigation}) =>{
+  //TODO figure out props + nav
+  console.log("this is navigation " + navigation);
+
+  console.log(JSON.stringify(navigation, null, 4));
+
+  let props = navigation.getParam('props','missing');
+  console.log("this is props " + props);
+  
+  // Object.keys(props).forEach((prop)=> console.log(prop));
+  console.log(JSON.stringify(props, null, 4));
+
+
+
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [openBusinesses, setOpenBusinesses] = useState(false);
   const [policeStations, setPoliceStations] = useState(false);
@@ -126,7 +136,7 @@ const SafetyQuizScreen = ( {navigation}) => {
             props.addSafeSpot({ name: safePlaceInput, address: "1 LMU Drive" })
           }></Button>
       ) : null}
-      {props.safeSpots.safeSpots.map((safeSpot) => {
+      {props.safeSpots.map((safeSpot) => {
         return (
           <SafeSpot
             props={{
@@ -145,7 +155,7 @@ const SafetyQuizScreen = ( {navigation}) => {
         onPress={() => {
           objectifyAndNav(
             navigation,
-            object,
+            props,
             openBusinesses,
             policeStations,
             busySidewalks,
@@ -163,20 +173,20 @@ const SafetyQuizScreen = ( {navigation}) => {
 
 function objectifyAndNav(
   navigation,
-  object,
+  props,
   openBusinesses,
   policeStations,
   busySidewalks,
   safePlaceInput
 ) {
   // add new items to our object
-  object.set("busySidewalks", busySidewalks);
-  object.set("openBusinesses", openBusinesses);
-  object.set("policeStations", policeStations);
-  object.set("safePlaces", safePlaceInput);
+  props.set("busySidewalks", busySidewalks);
+  props.set("openBusinesses", openBusinesses);
+  props.set("policeStations", policeStations);
+  props.set("safePlaces", safePlaceInput);
 
   // navigate to next page
-  navigation.navigate("EmergencyContacts", { object: object });
+  navigation.navigate("EmergencyContacts", { props: props });
 }
 
 const mapStateToProps = (state) => {

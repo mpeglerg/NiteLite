@@ -197,19 +197,7 @@ const styles = StyleSheet.create({
     return {
       updateUsername: (username) => {
         dispatch({ type: "UPDATE_USERNAME", username: username });
-      },
-      // deleteEmergencyContact: (contact) => {
-      //   dispatch({ type: "DELETE_EMERGENCY_CONTACT", id: contact });
-      // },
-      // addSafeSpot: (newSafeSpot) => {
-      //   dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
-      // },
-      // editSafeSpot: (id) => {
-      //   dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
-      // },
-      // editEmergencyContact: (id) => {
-      //   dispatch({ type: "EDIT_EMERGENCY_CONTACT", payload: id });
-      // },
+      }
     };
   };
 

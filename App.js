@@ -30,6 +30,7 @@ const AppModalStack = createStackNavigator({
 
   // NiteLite -> Entry -> LogIn or SignUp -> AppDrawer 
   NiteLite: LogInScreen,
+  // NiteLite: AudioScreen,
   SignUp: SignUpScreen, 
   SafetyPreferences: SafetyQuizScreen,
   EmergencyContacts: EmergencyContacts,

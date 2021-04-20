@@ -155,15 +155,19 @@ async function objectifyAndNav(
     return;
   }
 
-  var object = new Map();
+  var props = new Map();
   // add new items to our object
-  object.set("name", userName);
-  object.set("email", userEmail);
-  object.set("password", userPassword);
-  object.set("phoneNumber", userPhoneNumber);
+  props.set("name", userName);
+  props.set("email", userEmail);
+  props.set("password", userPassword);
+  props.set("phoneNumber", userPhoneNumber);
+  props.set("safeSpots", new Map());
+  props.set("emergencyContacts", new Map());
+
+
 
   // navigate to next page
-  navigation.navigate("SafetyPreferences", { object: object });
+  navigation.navigate("SafetyPreferences", { props: props });
 }
 
 function isStrongPassword(password) {
