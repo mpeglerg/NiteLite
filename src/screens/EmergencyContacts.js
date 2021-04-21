@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { registerNewUser } from "../../firebase/firebase.util";
 import { colors } from "../styles/colors.js";
@@ -18,6 +18,8 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import owl1 from "./../images/owl1.png";
+import owl2 from "./../images/owl2.png";
 
 // TODO: remove extraneous comments
 const EmergencyContacts = ({ navigation }) => {
@@ -53,7 +55,7 @@ const EmergencyContacts = ({ navigation }) => {
             // padding: 15,
             color: "white",
           }}
-          placeholder={"Police, Mom, Roommate..."}
+          placeholder={"Police, Campus Security, Roommate..."}
           placeholderTextColor="#A2A2AB"
           onChangeText={(text) => {
             setName(text);
@@ -84,7 +86,6 @@ const EmergencyContacts = ({ navigation }) => {
         title="Complete Profile"
         
       ></Button> */}
-
         <TouchableOpacity
           style={styles.signUpButton}
           onPress={() => {
@@ -93,6 +94,9 @@ const EmergencyContacts = ({ navigation }) => {
         >
           <Text style={styles.signUpText}>Complete Profile!</Text>
         </TouchableOpacity>
+        <View style={{ flex: 1, justifyContent: "flex-end", marginTop: 15 }}>
+          <Image source={owl2} style={{ width: 160, height: 140 }}></Image>
+        </View>
       </View>
     );
   }
@@ -133,7 +137,7 @@ const styles = StyleSheet.create({
     textShadowColor: "#F2EB46",
   },
   taskText: {
-    fontSize: 16,
+    fontSize: 18,
     paddingVertical: 8,
     paddingHorizontal: 20,
     fontFamily: "Quicksand_400Regular",
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondaryBlue,
     paddingVertical: 15,
     paddingHorizontal: 90,
-    marginTop: 80,
+    marginTop: 50,
     fontFamily: "Quicksand_700Bold",
   },
 });
