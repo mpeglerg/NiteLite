@@ -39,8 +39,7 @@ const EmergencyContacts = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
-          Who you would like to call during an Emergency?
-          {/* TODO: change wording */}
+          Who would you like to call during an Emergency?
         </Text>
         <Text style={styles.taskText}>Name</Text>
         <TextInput
