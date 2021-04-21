@@ -7,27 +7,23 @@ import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
 import SearchPageModal from "../components/SearchPageModal";
-import RouteDirections from "../components/RouteDirections";
 
-const renderContent = () => (
-  <View
-    style={{
-      // backgroundColor: "#05054D",
-      backgroundColor: colors.backgroundColor,
-      padding: 16,
-      height: 500,
-    }}
-  >
-    <SearchPageModal></SearchPageModal>
-    <MapModal></MapModal>
-  </View>
-);
-
-const HomeScreen = ({ navigation }, props) => {
-  let username = navigation.getParam("text", "sample");
+const HomeScreen = (props) => {
   const sheetRef = useState(null);
   console.log(`IN HOME: ${props.route}`)
 
+  const renderContent = () => (
+    <View
+      style={{
+        // backgroundColor: "#05054D",
+        backgroundColor: colors.backgroundColor,
+        padding: 16,
+        height: 500,
+      }}
+    >
+      {(props.route.route.length === 0) ? <MapModal/>: <SearchPageModal/>}
+    </View>
+  );
   return (
     <View
       style={{
@@ -43,7 +39,6 @@ const HomeScreen = ({ navigation }, props) => {
           width: "100%",
         }}
       >
-        {/* <RouteDirections></RouteDirections> */}
         <MapView
           style={{ flex: 1 }}
           region={{
@@ -68,7 +63,6 @@ const HomeScreen = ({ navigation }, props) => {
 
 const mapStateToProps = (state) => {
   return {
-    // directions: state.directions,
     route: state.directions,
   };
 };
