@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import {
   verifyUsername,
@@ -49,94 +55,96 @@ const SignUpScreen = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        {/* <Image source={owl} style={{width:150, height:150, alignSelf: "flex-start", backgroundColor:"pink"}}/> */}
-        <Text style={styles.header}>Welcome Owlette!</Text>
-        <View style={styles.icon}>
-          <UserIcon
-            style={styles.SignUpIcons}
-            size={18}
-            name="user"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="UserName"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setUserName(text);
-            }}
-            value={userName}
-          />
-        </View>
-        <View style={styles.icon}>
-          <EmailIcon
-            style={styles.SignUpIcons}
-            size={18}
-            name="email"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="E-Mail"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setUserEmail(text);
-            }}
-            value={userEmail}
-          />
-        </View>
-        <View style={styles.icon}>
-          <KeyIcon
-            style={styles.SignUpIcons}
-            size={18}
-            name="key"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Password"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setUserPassword(text);
-            }}
-            value={userPassword}
-          />
-        </View>
-        <View style={styles.icon}>
-          <PhoneIcon
-            style={styles.SignUpIcons}
-            size={18}
-            name="phone"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Phone Number"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setUserPhoneNumber(text);
-            }}
-            value={userPhoneNumber}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={styles.ContinueContainer}
-          onPress={() => {
-            objectifyAndNav(
-              navigation,
-              userName,
-              userEmail,
-              userPassword,
-              userPhoneNumber
-            );
-          }}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <View>
-            <Text style={styles.ContinueText}>Continue</Text>
-            {/* <ArrowIcon style={styles.SignUpIcons} size={18} name="arrow-right" color="white"/> */}
+          <Text style={styles.header}>Welcome Owlette!</Text>
+          <View style={styles.icon}>
+            <UserIcon
+              style={styles.SignUpIcons}
+              size={18}
+              name="user"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="UserName"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setUserName(text);
+              }}
+              value={userName}
+            />
           </View>
-        </TouchableOpacity>
+          <View style={styles.icon}>
+            <EmailIcon
+              style={styles.SignUpIcons}
+              size={18}
+              name="email"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="E-Mail"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setUserEmail(text);
+              }}
+              value={userEmail}
+            />
+          </View>
+          <View style={styles.icon}>
+            <KeyIcon
+              style={styles.SignUpIcons}
+              size={18}
+              name="key"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Password"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setUserPassword(text);
+              }}
+              value={userPassword}
+            />
+          </View>
+          <View style={styles.icon}>
+            <PhoneIcon
+              style={styles.SignUpIcons}
+              size={18}
+              name="phone"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Phone Number"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setUserPhoneNumber(text);
+              }}
+              value={userPhoneNumber}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.ContinueContainer}
+            onPress={() => {
+              objectifyAndNav(
+                navigation,
+                userName,
+                userEmail,
+                userPassword,
+                userPhoneNumber
+              );
+            }}
+          >
+            <View>
+              <Text style={styles.ContinueText}>Continue</Text>
+              {/* <ArrowIcon style={styles.SignUpIcons} size={18} name="arrow-right" color="white"/> */}
+            </View>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
       </View>
     );
   }

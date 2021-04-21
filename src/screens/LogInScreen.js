@@ -3,7 +3,13 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import UserIcon from "react-native-vector-icons/SimpleLineIcons";
 import KeyIcon from "react-native-vector-icons/SimpleLineIcons";
 import logo from "../images/logo.png";
-import { Image, StyleSheet, View, Button, Text } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  KeyboardAvoidingView,
+} from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
 // import { color } from "react-native-reanimated";
 import { colors } from "../styles/colors.js";
@@ -32,59 +38,68 @@ const LogInScreen = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        <Image source={logo} style={{ width: 270, height: 270 }}></Image>
-        <View style={styles.icon}>
-          <UserIcon
-            style={styles.logInIcons}
-            size={18}
-            name="user"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Username"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setReturningUserName(text);
-            }}
-            value={returningUserName}
-          />
-        </View>
-        <View style={styles.icon}>
-          <KeyIcon
-            style={styles.logInIcons}
-            size={18}
-            name="key"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Password"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setReturningUserPassword(text);
-            }}
-            value={returningUserPassword}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={styles.logInButtonContainer}
-          onPress={() =>
-            verifyCredentials(
-              navigation,
-              returningUserName,
-              returningUserPassword
-            )
-          }
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <Text style={styles.logInButtonText}>Log In</Text>
-        </TouchableOpacity>
+          <Image
+            source={logo}
+            style={{ width: 270, height: 270, alignSelf: "center" }}
+          ></Image>
+          <View style={styles.icon}>
+            <UserIcon
+              style={styles.logInIcons}
+              size={18}
+              name="user"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Username"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setReturningUserName(text);
+              }}
+              value={returningUserName}
+            />
+          </View>
+          <View style={styles.icon}>
+            <KeyIcon
+              style={styles.logInIcons}
+              size={18}
+              name="key"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Password"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setReturningUserPassword(text);
+              }}
+              value={returningUserPassword}
+            />
+          </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-          <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
-          <Text style={styles.signUpText2}>Sign Up!</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.logInButtonContainer}
+            onPress={() =>
+              verifyCredentials(
+                navigation,
+                returningUserName,
+                returningUserPassword
+              )
+            }
+          >
+            <Text style={styles.logInButtonText}>Log In</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+            <Text style={styles.signUpText1}>
+              Don't Already Have an Account?
+            </Text>
+            <Text style={styles.signUpText2}>Sign Up!</Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
       </View>
     );
   }

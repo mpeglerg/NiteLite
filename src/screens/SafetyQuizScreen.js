@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, KeyboardAvoidingView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -37,7 +37,6 @@ const SafetyQuizScreen = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        {/* <Text>Account</Text> */}
         <Text style={styles.header}>Set Route Preferences</Text>
 
         <Text style={styles.taskText}>
