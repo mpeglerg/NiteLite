@@ -33,8 +33,8 @@ const AppModalStack = createStackNavigator({
   // SafetyPreferences: SafetyQuizScreen,
   // EmergencyContacts: EmergencyContacts,
 
-  // Home: HomeScreen,
-  Home: AccountScreen,
+  Home: HomeScreen,
+  // Home: AccountScreen,
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
