@@ -10,8 +10,7 @@ const SearchPageModal = (props) => {
     <View style={styles.centeredView}>
       <View>
       <Button style={styles.buttons} title="Cancel Route" onPress={() =>props.updateCurrentRoute([])}></Button>
-
-        <Text style={styles.textStyle}>To 1 LMU Drive, Los Angeles, CA</Text>
+      <Text style={styles.textStyle}>To {props.route.route.routes[0].legs[0].end_address}</Text>
         <View
           style={{
             flexDirection: "row",

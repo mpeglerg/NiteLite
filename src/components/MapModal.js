@@ -77,6 +77,7 @@ const MapModal = (props) => {
             <Text>Recent #5</Text>
           </TouchableOpacity>
         </View>
+        {/* TODO: make seperate emergency call component */}
         <View style={styles.textStyle}>
           <TouchableOpacity
             activeOpacity={0.7}
