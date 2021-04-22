@@ -9,6 +9,8 @@ const SearchPageModal = (props) => {
   return (
     <View style={styles.centeredView}>
       <View>
+      <Button style={styles.buttons} title="Cancel Route" onPress={() =>props.updateCurrentRoute([])}></Button>
+
         <Text style={styles.textStyle}>To 1 LMU Drive, Los Angeles, CA</Text>
         <View
           style={{
@@ -55,10 +57,22 @@ const styles = StyleSheet.create({
   },
 });
 
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDirections: (destination) => {
+      dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
+    },
+    updateCurrentRoute: (route) => {
+      dispatch({ type: "UPDATE_CURRENT_ROUTE", payload: route });
+    },
+  };
+};
 const mapStateToProps = (state) => {
   return {
     emergencyContacts: state.emergencyContacts,
+    route: state.directions
   };
 };
 
-export default connect(mapStateToProps, null)(SearchPageModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPageModal);
