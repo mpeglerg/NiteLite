@@ -21,7 +21,7 @@ const HomeScreen = (props) => {
         height: 500,
       }}
     >
-      {(props.route.route.length === 0) ? <MapModal/>: <SearchPageModal/>}
+      {(props.route.route.length === 0) ? <MapModal/> : <SearchPageModal/>}
     </View>
   );
   return (
@@ -39,8 +39,8 @@ const HomeScreen = (props) => {
           width: "100%",
         }}
       >
-        <RouteDirections></RouteDirections>
-        {/* <MapView
+        {(props.route.route.length !== 0) ? <RouteDirections/> : null}
+        <MapView
           style={{ flex: 1 }}
           region={{
             latitude: 42.882004,
@@ -50,7 +50,7 @@ const HomeScreen = (props) => {
           }}
           showsUserLocation={true}
         />
-        <MapContainer /> */}
+        <MapContainer />
       </View>
       <BottomSheet
         ref={sheetRef}
