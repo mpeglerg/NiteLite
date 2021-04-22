@@ -23,17 +23,15 @@ if (successStatuses.includes(response.status)) {
 };
 const okCheck = statusCheck([HTTP_OK]);
 const paramsWithApiKey = params => {
-    const result = new URLSearchParams(params);
-    result.set("key", API_KEY);
+    const result = new URLSearchParams({...params, key: API_KEY});
+    console.log("RESULT!!!!!!!", result)
     return result;
 };
 const query = (resource, params) =>
     fetch(`${urlFor(resource)}?${paramsWithApiKey(params)}`)
         .then(okCheck, emitNativeError)
         .then(response => response.json());
-const getDirections = params => {
-    return query(`maps/api/directions/json`, params);
-};
+const getDirections = params =>  query(`maps/api/directions/json`, params);
 const destination = '';
 
 export {

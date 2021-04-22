@@ -6,10 +6,21 @@ import { connect } from "react-redux";
 import AlongRoute from "./AlongRoute";
 
 const SearchPageModal = (props) => {
+  // if(props.route.route.length === 0) return null
+
+  console.log(props.route)
   return (
+    props.route.route.routes.length !== 0 ? 
     <View style={styles.centeredView}>
       <View>
-        <Text style={styles.textStyle}>To 1 LMU Drive, Los Angeles, CA</Text>
+      <Button style={styles.buttons} title="Cancel Route" onPress={() =>props.updateCurrentRoute([])}></Button>
+
+      <View style={styles.buttons}>
+          <Button style={styles.buttons} title="Start Route"></Button>
+        </View>
+        {console.log(props.route)}
+              {/* {props.route.route.routes[0] && */}
+               <Text style={styles.textStyle}>To {props.route.route.routes[0].legs[0].end_address}</Text>
         <View
           style={{
             flexDirection: "row",
@@ -26,11 +37,8 @@ const SearchPageModal = (props) => {
         <View style={styles.buttons}>
           <Button title="Cancel"></Button>
         </View>
-        <View style={styles.buttons}>
-          <Button style={styles.buttons} title="Start Route"></Button>
-        </View>
       </View>
-    </View>
+    </View> : null
   );
 };
 
@@ -55,10 +63,22 @@ const styles = StyleSheet.create({
   },
 });
 
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDirections: (destination) => {
+      dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
+    },
+    updateCurrentRoute: (route) => {
+      dispatch({ type: "UPDATE_CURRENT_ROUTE", payload: route });
+    },
+  };
+};
 const mapStateToProps = (state) => {
   return {
     emergencyContacts: state.emergencyContacts,
+    route: state.directions
   };
 };
 
-export default connect(mapStateToProps, null)(SearchPageModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPageModal);

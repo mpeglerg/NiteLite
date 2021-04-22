@@ -7,10 +7,10 @@ import MapContainer from "../components/Map";
 import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
 import SearchPageModal from "../components/SearchPageModal";
+import RouteDirections from "../components/RouteDirections";
 
 const HomeScreen = (props) => {
   const sheetRef = useState(null);
-  console.log(`IN HOME: ${props.route}`)
 
   const renderContent = () => (
     <View
@@ -39,7 +39,8 @@ const HomeScreen = (props) => {
           width: "100%",
         }}
       >
-        <MapView
+        <RouteDirections></RouteDirections>
+        {/* <MapView
           style={{ flex: 1 }}
           region={{
             latitude: 42.882004,
@@ -49,7 +50,7 @@ const HomeScreen = (props) => {
           }}
           showsUserLocation={true}
         />
-        <MapContainer />
+        <MapContainer /> */}
       </View>
       <BottomSheet
         ref={sheetRef}
