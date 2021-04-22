@@ -10,7 +10,6 @@ import SearchPageModal from "../components/SearchPageModal";
 
 const HomeScreen = (props) => {
   const sheetRef = useState(null);
-  console.log(`IN HOME: ${props.route}`)
 
   const renderContent = () => (
     <View

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { TextInput, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/Fontisto";
-import { getDirections } from "../../data/api-placeholder";
+import { getDirections } from "../../data/directionsApi";
+
 
 const ModalSearchBar = (props) => {
   const [value, setValue] = useState("");
@@ -10,9 +11,11 @@ const ModalSearchBar = (props) => {
 
   const performQuery = async (event) => {
     setError(null);
-
     try {
-      const directions = await getDirections({});
+      const directions = await getDirections({
+        origin: `${props.directions.currentLocation.latitude},${props.directions.currentLocation.longitude}`,
+        destination: event.nativeEvent.text
+      });
       props.updateCurrentRoute(directions);
     } catch (error) {
       setError("Sorry, but something went wrong.");
@@ -30,7 +33,7 @@ const ModalSearchBar = (props) => {
           setValue(text);
         }}
         onSubmitEditing={(event) => {
-          performQuery();
+          performQuery(event);
           props.updateDirections(event.nativeEvent.text);
         }}
         value={value}
@@ -69,4 +72,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, mapDispatchToProps)(ModalSearchBar);
+const mapStateToProps = (state) => {
+  return {
+    directions: state.directions,
+    currentLocation: state.currentLocation,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalSearchBar);
