@@ -3,7 +3,13 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import UserIcon from "react-native-vector-icons/SimpleLineIcons";
 import KeyIcon from "react-native-vector-icons/SimpleLineIcons";
 import logo from "../images/logo.png";
-import { Image, StyleSheet, View, Button, Text } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  KeyboardAvoidingView,
+} from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
 // import { color } from "react-native-reanimated";
 import { colors } from "../styles/colors.js";
@@ -81,7 +87,7 @@ const LogInScreen = ({ navigation }) => {
           <Text style={styles.logInButtonText}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
           <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
           <Text style={styles.signUpText2}>Sign Up!</Text>
         </TouchableOpacity>

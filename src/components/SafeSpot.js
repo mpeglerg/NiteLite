@@ -1,5 +1,6 @@
 import Icon from "react-native-vector-icons/MaterialIcons";
 import React, { useState } from "react";
+import { AppLoading } from "expo";
 import {
   View,
   Text,
@@ -8,106 +9,143 @@ import {
   Modal,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
+import { colors } from "../styles/colors.js";
 import { connect } from "react-redux";
+import {
+  useFonts,
+  Quicksand_400Regular,
+  Quicksand_500Medium,
+  Quicksand_600SemiBold,
+  Quicksand_700Bold,
+} from "@expo-google-fonts/quicksand";
 
 const SafeSpot = ({ props }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newPhoneNumber, setNewPhoneNumber] = React.useState("");
   const [newContactName, setNewContactName] = React.useState("");
-  return (
-    <View style={{ borderWidth: "1px" }}>
-      <Icon
-        size={30}
-        color={"#211f30"}
-        name={"check-box" /* find icon name*/}
-      />
-      <Text>{props.name}</Text>
-      <Text>{props.address}</Text>
-      <Button title="edit" onPress={() => setModalVisible(!modalVisible)} />
-      <Button title="X" onPress={() => props.deleteSafeSpot(props.name)} />
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>{props.name}</Text>
-              <TextInput
-                style={{
-                  height: 40,
-                  width: "90%",
-                  backgroundColor: "white",
-                  borderRadius: 20,
-                  padding: 15,
-                }}
-                placeholder={"New contact name"}
-                onChangeText={(text) => {
-                  setNewContactName(text);
-                }}
-                value={newContactName}
-              />
-              {/* TODO: Create a styles.textInput below (Line 101) and replace with style={{styles.textInput}} */}
-              <Text>{props.address}</Text>
-              <TextInput
-                style={{
-                  height: 40,
-                  width: "90%",
-                  backgroundColor: "white",
-                  borderRadius: 20,
-                  padding: 15,
-                }}
-                keyboardType="number-pad"
-                placeholder={"New street address"}
-                onChangeText={(text) => {
-                  setNewPhoneNumber(text);
-                  props.performQuery;
-                }}
-                value={newPhoneNumber}
-              />
-              {/* TODO: Same as above */}
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                  props.editSafeSpot({
-                    name: "TEST",
-                    address: "1 LMU DRIVE???",
-                  });
-                }}
-              >
-                <Text style={styles.textStyle}>Save changes</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "red" }}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <Text style={styles.textStyle}>Cancel</Text>
-              </TouchableHighlight>
+  let [fontsLoaded] = useFonts({
+    Quicksand_500Medium,
+    Quicksand_700Bold,
+    Quicksand_600SemiBold,
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <View
+        style={{
+          borderWidth: "1px",
+          marginBottom: 15,
+          backgroundColor: "white",
+          borderRadius: 15,
+        }}
+      >
+        <Text style={styles.infoTextName}>{props.name}</Text>
+        <Text style={styles.infoTextAddress}>{props.address}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            style={styles.editBtn}
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <Text>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.editBtn}
+            onPress={() => props.deleteSafeSpot(props.name)}
+          >
+            <Text>Delete</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Current Name: {props.name}</Text>
+                <TextInput
+                  style={{
+                    height: 40,
+                    width: "90%",
+                    backgroundColor: "white",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 2,
+                    marginBottom: 30,
+                  }}
+                  placeholder={"Enter contact name"}
+                  onChangeText={(text) => {
+                    setNewContactName(text);
+                  }}
+                  value={newContactName}
+                />
+                {/* TODO: Create a styles.textInput below (Line 101) and replace with style={{styles.textInput}} */}
+                <Text style={styles.modalText}>
+                  Current Address: {props.address}
+                </Text>
+                <TextInput
+                  style={{
+                    height: 40,
+                    width: "90%",
+                    backgroundColor: "white",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 2,
+                    marginBottom: 30,
+                  }}
+                  keyboardType="name-phone-pad"
+                  placeholder={"Enter street address"}
+                  onChangeText={(text) => {
+                    setNewPhoneNumber(text);
+                    props.performQuery;
+                  }}
+                  value={newPhoneNumber}
+                  autoCompleteType="street-address"
+                />
+                {/* TODO: Same as above */}
+                <TouchableHighlight
+                  style={{ ...styles.openButton, backgroundColor: "#30C5F4" }}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                    props.editSafeSpot({
+                      name: "TEST",
+                      address: "1 LMU DRIVE???",
+                    });
+                  }}
+                >
+                  <Text style={styles.textStyle}>Save Changes</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={{ ...styles.openButton, backgroundColor: "red" }}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Cancel</Text>
+                </TouchableHighlight>
+              </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
   },
   modalView: {
-    width: "100%",
+    width: "90%",
     height: "60%",
     margin: 20,
     backgroundColor: "white",
@@ -126,17 +164,47 @@ const styles = StyleSheet.create({
   openButton: {
     backgroundColor: "#F194FF",
     borderRadius: 20,
-    padding: 10,
+    padding: 13,
     elevation: 2,
+    marginVertical: 8,
+    fontSize: 15,
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "Quicksand_700Bold",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+    fontFamily: "Quicksand_600SemiBold",
+    fontSize: 16,
+  },
+  editBtn: {
+    borderRadius: 40,
+    backgroundColor: "#30C5F4",
+    color: "white",
+    padding: 12,
+    width: 80,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+    // marginTop: 10,
+  },
+  infoTextName: {
+    fontSize: 16,
+    padding: 4,
+    fontFamily: "Quicksand_700Bold",
+    marginLeft: 15,
+    marginTop: 10,
+  },
+  infoTextAddress: {
+    fontSize: 16,
+    padding: 4,
+    fontFamily: "Quicksand_600SemiBold",
+    marginLeft: 15,
+    marginBottom: 10,
   },
 });
 
