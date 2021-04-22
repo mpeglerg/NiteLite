@@ -5,7 +5,7 @@ const initState = {
   },
   directions: [
     {
-      origin: "Twitter HQ, Market Street, San Francisco, CA, USA",
+      origin: "1 LMU Drive",
       destination: "Apple Park Visitor Center",
     },
   ],

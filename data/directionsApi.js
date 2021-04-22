@@ -24,6 +24,7 @@ if (successStatuses.includes(response.status)) {
 const okCheck = statusCheck([HTTP_OK]);
 const paramsWithApiKey = params => {
     const result = new URLSearchParams({...params, key: API_KEY});
+    console.log("RESULT!!!!!!!", result)
     return result;
 };
 const query = (resource, params) =>
