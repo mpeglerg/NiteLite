@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, KeyboardAvoidingView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -14,7 +14,10 @@ import {
   Nunito_400Regular,
 } from "@expo-google-fonts/nunito";
 import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-your-grace";
-import { Quicksand_600SemiBold } from "@expo-google-fonts/quicksand";
+import {
+  Quicksand_400Regular,
+  Quicksand_600SemiBold,
+} from "@expo-google-fonts/quicksand";
 
 const SafetyQuizScreen = ({ navigation }) => {
   let object = navigation.getParam("object", "missing");
@@ -25,7 +28,7 @@ const SafetyQuizScreen = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     Nunito_400Regular,
     Nunito_600SemiBold,
-    // Quicksand_400Regular,
+    Quicksand_400Regular,
     CoveredByYourGrace_400Regular,
     Quicksand_600SemiBold,
   });
@@ -34,8 +37,7 @@ const SafetyQuizScreen = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        {/* <Text>Account</Text> */}
-        <Text style={styles.header}>Set Up Your Route Preferences</Text>
+        <Text style={styles.header}>Set Route Preferences</Text>
 
         <Text style={styles.taskText}>
           1. What makes you feel safe when walking?
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   header: {
-    fontSize: 28,
+    fontSize: 29,
     padding: 10,
     textAlign: "center",
     marginTop: 20,
@@ -183,20 +185,24 @@ const styles = StyleSheet.create({
   checkOptions: {
     color: "#fff",
     // marginLeft: 10,
-    fontSize: 14,
+    fontSize: 15,
+    fontFamily: "Quicksand_400Regular",
+    // fontFamily: "Quicksand_600SemiBold",
   },
   taskText: {
-    fontSize: 16,
+    fontSize: 18,
     paddingVertical: 13,
     paddingHorizontal: 20,
     textAlign: "center",
     lineHeight: 24,
-    marginTop: 15,
+    marginTop: 18,
     color: "#fff",
     fontFamily: "Nunito_400Regular",
     fontFamily: "Quicksand_400Regular",
+    fontFamily: "Quicksand_600SemiBold",
   },
   inputStyle: {
     fontFamily: "Nunito_300Light",
+    fontFamily: "Quicksand_400Regular",
   },
 });
