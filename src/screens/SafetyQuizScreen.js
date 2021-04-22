@@ -48,8 +48,7 @@ const SafetyQuizScreen = ({ navigation }) => {
               flexDirection: "row",
               alignItems: "center",
             }}
-            onPress={() => setOpenBusinesses(!openBusinesses)}
-          >
+            onPress={() => setOpenBusinesses(!openBusinesses)}>
             <Icon
               size={30}
               color={"#FFFFFF"}
@@ -64,8 +63,7 @@ const SafetyQuizScreen = ({ navigation }) => {
               flexDirection: "row",
               alignItems: "center",
             }}
-            onPress={() => setPoliceStations(!policeStations)}
-          >
+            onPress={() => setPoliceStations(!policeStations)}>
             <Icon
               size={30}
               color={"#FFFFFF"}
@@ -80,8 +78,7 @@ const SafetyQuizScreen = ({ navigation }) => {
               flexDirection: "row",
               alignItems: "center",
             }}
-            onPress={() => setBusySidewalks(!busySidewalks)}
-          >
+            onPress={() => setBusySidewalks(!busySidewalks)}>
             <Icon
               size={30}
               color={"#FFFFFF"}
@@ -126,8 +123,7 @@ const SafetyQuizScreen = ({ navigation }) => {
               busySidewalks,
               safePlaceInput
             );
-          }}
-        >
+          }}>
           <AddContactIcon2 size={38} name="person-add" color="white" />
           {/* </View> */}
         </TouchableOpacity>
@@ -151,7 +147,7 @@ function objectifyAndNav(
   object.set("safePlaces", safePlaceInput);
 
   // navigate to next page
-  navigation.navigate("EmergencyContacts", { object: object });
+  navigation.navigate("Emergency Contacts", { object: object });
 }
 
 export default SafetyQuizScreen;

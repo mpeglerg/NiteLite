@@ -1,5 +1,6 @@
 import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
+import AudioScreen from "./src/screens/AudioScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
@@ -24,23 +25,20 @@ const AppDrawer = createDrawerNavigator({
   Account: AccountScreen,
 });
 
-const AppModalStack = createStackNavigator({
-  // TODO: Refactor stack nav to CreateAccountFlow and MainAppFlow with switch nav
-  // NiteLite: AppDrawer,
-  // NiteLite: LogInScreen,
-  // Account: AccountScreen,
-  // SignUp: SignUpScreen,
-  // SafetyPreferences: SafetyQuizScreen,
-  // EmergencyContacts: EmergencyContacts,
+const AppStack = createStackNavigator({
+  NiteLite: AppDrawer,
+});
 
-  Home: HomeScreen,
-  // Home: AccountScreen,
+const AuthStack = createStackNavigator({
+  "Log In": LogInScreen,
+  "Sign Up": SignUpScreen,
+  "Safety Preferences": SafetyQuizScreen,
+  "Emergency Contacts": EmergencyContacts,
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
-  App: {
-    screen: AppModalStack,
-  },
+  Auth: AuthStack,
+  App: AppStack,
 });
 
 const navigationReducer = createNavigationReducer(AppSwitchNavigator);

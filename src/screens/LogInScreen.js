@@ -38,68 +38,59 @@ const LogInScreen = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <Image source={logo} style={{ width: 270, height: 270 }}></Image>
+        <View style={styles.icon}>
+          <UserIcon
+            style={styles.logInIcons}
+            size={18}
+            name="user"
+            color="white"
+          />
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Username"
+            placeholderTextColor="#A2A2AB"
+            onChangeText={(text) => {
+              setReturningUserName(text);
+            }}
+            value={returningUserName}
+          />
+        </View>
+        <View style={styles.icon}>
+          <KeyIcon
+            style={styles.logInIcons}
+            size={18}
+            name="key"
+            color="white"
+          />
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Password"
+            placeholderTextColor="#A2A2AB"
+            onChangeText={(text) => {
+              setReturningUserPassword(text);
+            }}
+            value={returningUserPassword}
+          />
+        </View>
+
+        <TouchableOpacity
+          style={styles.logInButtonContainer}
+          onPress={() =>
+            verifyCredentials(
+              navigation,
+              returningUserName,
+              returningUserPassword
+            )
+          }
         >
-          <Image
-            source={logo}
-            style={{ width: 270, height: 270, alignSelf: "center" }}
-          ></Image>
-          <View style={styles.icon}>
-            <UserIcon
-              style={styles.logInIcons}
-              size={18}
-              name="user"
-              color="white"
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Username"
-              placeholderTextColor="#A2A2AB"
-              onChangeText={(text) => {
-                setReturningUserName(text);
-              }}
-              value={returningUserName}
-            />
-          </View>
-          <View style={styles.icon}>
-            <KeyIcon
-              style={styles.logInIcons}
-              size={18}
-              name="key"
-              color="white"
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Password"
-              placeholderTextColor="#A2A2AB"
-              onChangeText={(text) => {
-                setReturningUserPassword(text);
-              }}
-              value={returningUserPassword}
-            />
-          </View>
+          <Text style={styles.logInButtonText}>Log In</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.logInButtonContainer}
-            onPress={() =>
-              verifyCredentials(
-                navigation,
-                returningUserName,
-                returningUserPassword
-              )
-            }
-          >
-            <Text style={styles.logInButtonText}>Log In</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-            <Text style={styles.signUpText1}>
-              Don't Already Have an Account?
-            </Text>
-            <Text style={styles.signUpText2}>Sign Up!</Text>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
+        <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
+          <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
+          <Text style={styles.signUpText2}>Sign Up!</Text>
+        </TouchableOpacity>
       </View>
     );
   }

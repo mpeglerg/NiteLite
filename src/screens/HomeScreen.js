@@ -8,24 +8,22 @@ import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
 import SearchPageModal from "../components/SearchPageModal";
 
-const renderContent = () => (
-  <View
-    style={{
-      // backgroundColor: "#05054D",
-      backgroundColor: colors.backgroundColor,
-      padding: 16,
-      height: 500,
-    }}
-  >
-    {/* <SearchPageModal></SearchPageModal> */}
-    <MapModal></MapModal>
-  </View>
-);
-
-const HomeScreen = ({ navigation }) => {
-  let username = navigation.getParam("text", "sample");
+const HomeScreen = (props) => {
   const sheetRef = useState(null);
+  console.log(`IN HOME: ${props.route}`)
 
+  const renderContent = () => (
+    <View
+      style={{
+        // backgroundColor: "#05054D",
+        backgroundColor: colors.backgroundColor,
+        padding: 16,
+        height: 500,
+      }}
+    >
+      {(props.route.route.length === 0) ? <MapModal/>: <SearchPageModal/>}
+    </View>
+  );
   return (
     <View
       style={{
@@ -65,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
 
 const mapStateToProps = (state) => {
   return {
-    directions: state.directions,
+    route: state.directions,
   };
 };
 export default connect(mapStateToProps, null)(HomeScreen);

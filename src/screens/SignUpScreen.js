@@ -194,14 +194,13 @@ async function objectifyAndNav(
   }
 
   var object = new Map();
-  // add new items to our object
+
   object.set("name", userName);
   object.set("email", userEmail);
   object.set("password", userPassword);
   object.set("phoneNumber", userPhoneNumber);
 
-  // navigate to next page
-  navigation.navigate("SafetyPreferences", { object: object });
+  navigation.navigate("Safety Preferences", { object: object });
 }
 
 function isStrongPassword(password) {
