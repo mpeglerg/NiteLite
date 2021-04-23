@@ -48,8 +48,7 @@ const AccountScreen = (props) => {
               fontSize: 40,
               color: "white",
               marginTop: 20,
-            }}
-          >
+            }}>
             Account Settings
           </Text>
           <Text style={styles.header}>Route Preferences</Text>
@@ -62,8 +61,7 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setOpenBusinesses(!openBusinesses)}
-            >
+              onPress={() => setOpenBusinesses(!openBusinesses)}>
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -78,8 +76,7 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setPoliceStations(!policeStations)}
-            >
+              onPress={() => setPoliceStations(!policeStations)}>
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -94,8 +91,7 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setBusySidewalks(!busySidewalks)}
-            >
+              onPress={() => setBusySidewalks(!busySidewalks)}>
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -131,8 +127,7 @@ const AccountScreen = (props) => {
                   name: safePlaceInput,
                   address: "1 LMU Drive",
                 })
-              }
-            ></Button>
+              }></Button>
           ) : null}
           {props.safeSpots.safeSpots.map((safeSpot) => {
             return (
@@ -148,7 +143,8 @@ const AccountScreen = (props) => {
           })}
         </View>
         <Text style={styles.header}>Emergency Contacts</Text>
-        {/* {props.emergencyContacts.contacts.map((contact) => {
+        {console.log("props", props)}
+        {props.emergencyContacts.emergencyContacts.map((contact) => {
           return (
             <EmergencyContact
               props={{
@@ -159,7 +155,7 @@ const AccountScreen = (props) => {
               }}
             />
           );
-        })} */}
+        })}
       </ScrollView>
     );
   }
