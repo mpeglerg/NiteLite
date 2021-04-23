@@ -8,6 +8,7 @@ import BottomSheet from "reanimated-bottom-sheet";
 import { colors } from "../styles/colors.js";
 import SearchPageModal from "../components/SearchPageModal";
 import RouteDirections from "../components/RouteDirections";
+import AudioButton from "../components/AudioButton";
 
 const HomeScreen = (props) => {
   const sheetRef = useState(null);
@@ -21,7 +22,7 @@ const HomeScreen = (props) => {
         height: 500,
       }}
     >
-      {(props.route.route.length === 0) ? <MapModal/>: <SearchPageModal/>}
+      {props.route.route.length === 0 ? <MapModal /> : <SearchPageModal />}
     </View>
   );
   return (
@@ -39,9 +40,8 @@ const HomeScreen = (props) => {
           width: "100%",
         }}
       >
-        <RouteDirections></RouteDirections>
-        {/* <MapView
-          style={{ flex: 1 }}
+        {/* <RouteDirections /> */}
+        <MapView
           region={{
             latitude: 42.882004,
             longitude: 74.582748,
@@ -50,7 +50,8 @@ const HomeScreen = (props) => {
           }}
           showsUserLocation={true}
         />
-        <MapContainer /> */}
+        <MapContainer />
+        <AudioButton />
       </View>
       <BottomSheet
         ref={sheetRef}
