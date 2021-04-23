@@ -1,25 +1,37 @@
-import { Sound } from "expo-av/build/Audio";
 import React from "react";
-import {
-  View,
-  Button,
-  TouchableOpacity,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-} from "react-native";
+import { Audio } from "expo-av";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import SoundIcon from "react-native-vector-icons/Entypo";
 import { colors } from "../styles/colors.js";
 
 const AudioButton = ({ props }) => {
   return (
     <View>
-      <TouchableOpacity title="Sounds" style={styles.button}>
+      <TouchableOpacity
+        title="Sounds"
+        style={styles.button}
+        onPress={playSound}
+      >
         <SoundIcon size={28} name="sound" color="white" />
       </TouchableOpacity>
     </View>
   );
 };
+
+async function playSound() {
+  Audio.setAudioModeAsync({
+    playsInSilentModeIOS: true,
+    allowsRecordingIOS: false,
+    staysActiveInBackground: true,
+  });
+  const sound = new Audio.Sound();
+  try {
+    await sound.loadAsync(require("../sounds/sound1.mp3"));
+    await sound.playAsync();
+  } catch (error) {
+    console.log("Something went wrong.");
+  }
+}
 
 export default AudioButton;
 
