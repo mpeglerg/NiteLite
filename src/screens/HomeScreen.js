@@ -52,8 +52,11 @@ const HomeScreen = (props) => {
           showsUserLocation={true}
         />
         <MapContainer />
-        <AudioButton />
+        <View style={{ flex: 20 }}>
+          <AudioButton />
+        </View>
       </View>
+
       <BottomSheet
         ref={sheetRef}
         snapPoints={[532, 300, 100]}
