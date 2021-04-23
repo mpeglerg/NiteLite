@@ -40,8 +40,9 @@ const HomeScreen = (props) => {
           width: "100%",
         }}
       >
-        {/* <RouteDirections /> */}
+        {props.route.route.length !== 0 ? <RouteDirections /> : null}
         <MapView
+          style={{ flex: 1 }}
           region={{
             latitude: 42.882004,
             longitude: 74.582748,
