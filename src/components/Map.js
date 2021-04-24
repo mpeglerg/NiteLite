@@ -45,11 +45,6 @@ const MapContainer = (props) => {
   useEffect(() => {
     getCurrentLocation();
     let mounted = true;
-    getScore(props.directions.currentLocation).then((items) => {
-      if (mounted) {
-        setList(items);
-      }
-    });
     getSafeSpotCoords();
     return () => (mounted = false);
   }, []);

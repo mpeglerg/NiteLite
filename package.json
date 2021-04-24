@@ -3,6 +3,7 @@
   "scripts": {
     "prestart": "npm install",
     "start": "expo start",
+    "dev": "node -r dotenv/config",
     "lint": "eslint",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -24,6 +25,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
+    "react-native-dotenv": "^2.5.5",
     "react-native-geocoding": "^0.4.0",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-maps": "^0.27.1",
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
