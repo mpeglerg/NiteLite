@@ -40,21 +40,18 @@ const SafeSpot = ({ props }) => {
           marginBottom: 15,
           backgroundColor: "white",
           borderRadius: 15,
-        }}
-      >
+        }}>
         <Text style={styles.infoTextName}>{props.name}</Text>
         <Text style={styles.infoTextAddress}>{props.address}</Text>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             style={styles.editBtn}
-            onPress={() => setModalVisible(!modalVisible)}
-          >
+            onPress={() => setModalVisible(!modalVisible)}>
             <Text>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.editBtn}
-            onPress={() => props.deleteSafeSpot(props.name)}
-          >
+            onPress={() => props.deleteSafeSpot(props.name)}>
             <Text>Delete</Text>
           </TouchableOpacity>
         </View>
@@ -65,8 +62,7 @@ const SafeSpot = ({ props }) => {
             visible={modalVisible}
             onRequestClose={() => {
               Alert.alert("Modal has been closed.");
-            }}
-          >
+            }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Current Name: {props.name}</Text>
@@ -113,19 +109,18 @@ const SafeSpot = ({ props }) => {
                   onPress={() => {
                     setModalVisible(!modalVisible);
                     props.editSafeSpot({
-                      name: "TEST",
-                      address: "1 LMU DRIVE???",
+                      name: newContactName,
+                      address: newPhoneNumber,
+                      oldName: props.name,
                     });
-                  }}
-                >
+                  }}>
                   <Text style={styles.textStyle}>Save Changes</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   style={{ ...styles.openButton, backgroundColor: "red" }}
                   onPress={() => {
                     setModalVisible(!modalVisible);
-                  }}
-                >
+                  }}>
                   <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableHighlight>
               </View>

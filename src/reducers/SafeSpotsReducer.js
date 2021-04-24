@@ -19,15 +19,20 @@ const safeSpotsReducer = (state = initState, action) => {
     let newSafeSpots = [...state.safeSpots, action.payload];
     return { ...state, safeSpots: newSafeSpots };
   } else if (action.type == "EDIT_SAFE_SPOT") {
-    // .replace()?
-    let newSafeSpots = state.safeSpots.filter((safeSpot) => {
-      return action.payload.name !== safeSpot.name;
+    let newSafeSpots = state.safeSpots.map((safeSpot) => {
+      return safeSpot.name === action.payload.oldName
+        ? {
+            name: action.payload.name ? action.payload.name : safeSpot.name,
+            address: action.payload.address
+              ? action.payload.address
+              : safeSpot.address,
+          }
+        : safeSpot;
     });
-    newSafeSpots.push({
-      name: action.payload.name,
-      address: action.payload.address,
-    });
-    return { ...state, safeSpots: newSafeSpots };
+    return {
+      ...state,
+      safeSpots: newSafeSpots,
+    };
   } else {
     return state;
   }
