@@ -143,7 +143,6 @@ const AccountScreen = (props) => {
           })}
         </View>
         <Text style={styles.header}>Emergency Contacts</Text>
-        {console.log("props", props)}
         {props.emergencyContacts.emergencyContacts.map((contact) => {
           return (
             <EmergencyContact
@@ -180,6 +179,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
     },
     editSafeSpot: (id) => {
+      console.log("ID", id);
       dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
     },
     editEmergencyContact: (id) => {
