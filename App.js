@@ -22,6 +22,7 @@ import directionsReducer from "./src/reducers/DirectionsReducer";
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
   Account: AccountScreen,
+  "Log Out": LogInScreen,
 });
 
 const AppStack = createStackNavigator({
