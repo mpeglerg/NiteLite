@@ -11,10 +11,13 @@ const SearchPageModal = (props) => {
     props.route.route.routes.length !== 0 ? 
     <View style={styles.centeredView}>
       <View>
-      <Button style={styles.buttons} title="Cancel Route" onPress={() =>props.updateCurrentRoute([])}></Button>
+      <Button style={styles.buttons} title="Cancel Route" onPress={() => {
+        props.updateCurrentRoute([])
+        props.displayRoute(false)
+      }}></Button>
 
       <View style={styles.buttons}>
-          <Button style={styles.buttons} title="Start Route"></Button>
+          <Button style={styles.buttons} title="Start Route" onPress={() => props.displayRoute(true)}></Button>
         </View>
         <Text style={styles.textStyle}>To {props.route.route.routes[0].legs[0].end_address}</Text>
         <View
@@ -62,11 +65,11 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateDirections: (destination) => {
-      dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
-    },
     updateCurrentRoute: (route) => {
       dispatch({ type: "UPDATE_CURRENT_ROUTE", payload: route });
+    },
+    displayRoute: (bool) => {
+      dispatch({ type: "DISPLAY_ROUTE", payload: bool });
     },
   };
 };

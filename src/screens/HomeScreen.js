@@ -49,7 +49,7 @@ const HomeScreen = (props) => {
         />
         <MapContainer />
         <View style={{ flex: 10 }}>
-          {props.route.route.length !== 0 ? <RouteDirections /> : null}
+          {props.route.displayRoute ? <RouteDirections /> : null}
         </View>
         <View style={{ flex: 20 }}>
           <AudioButton />

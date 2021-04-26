@@ -127,7 +127,7 @@ const MapContainer = (props) => {
       >
         <MapViewDirections
           origin={props.directions.currentLocation}
-          destination={props.directions.directions[0].destination}
+          destination={props.directions.directions.destination}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={3}
           strokeColor="hotpink"
