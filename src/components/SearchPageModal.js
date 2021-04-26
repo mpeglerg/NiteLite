@@ -6,6 +6,14 @@ import { connect } from "react-redux";
 import AlongRoute from "./AlongRoute";
 
 const SearchPageModal = (props) => {
+  const durationString = props.route.route.routes[0].legs[0].duration.text
+  const durationNum = parseInt(durationString.match(/\d+/g)[0])
+  
+  const distance = props.route.route.routes[0].legs[0].distance.text
+
+  const eta = new Date()
+  eta.setMinutes( eta.getMinutes() + durationNum )
+  const splitEta = eta.toLocaleTimeString("en-US").split(/:| /)
 
   return (
     props.route.route.routes.length !== 0 ? 
@@ -27,8 +35,8 @@ const SearchPageModal = (props) => {
             paddingHorizontal: 20,
           }}
         >
-          <Text style={styles.textStyle}>15 min (5 mi)</Text>
-          <Text style={styles.textStyle}>ETA: 3:48pm</Text>
+          <Text style={styles.textStyle}>{`${durationString} (${distance})`}</Text>
+          <Text style={styles.textStyle}>{`ETA: ${splitEta[0]}:${splitEta[1]} ${splitEta[3]}`}</Text>
         </View>
       </View>
       <AlongRoute />
