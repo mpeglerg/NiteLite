@@ -57,7 +57,7 @@ const AlongRoute = (props) => {
             /> */}
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
-              <Text style={styles.valueText}>Val</Text>
+              <Text style={styles.valueText}>{walkscore}</Text>
             </View>
           </View>
           <View style={styles.infoTextRow1}>
@@ -76,7 +76,7 @@ const AlongRoute = (props) => {
             </View>
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
-              <Text style={styles.valueText}>{walkscore}</Text>
+              <Text style={styles.valueText}>Val</Text>
             </View>
           </View>
           <View style={styles.infoTextRow2}>
