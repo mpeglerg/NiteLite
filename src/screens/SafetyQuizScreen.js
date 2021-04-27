@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { connect } from "react-redux";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddContactIcon2 from "react-native-vector-icons/MaterialIcons";
@@ -22,9 +22,12 @@ import SafeSpot from "../components/SafeSpot.js";
 const SafetyQuizScreen = (props) => {
   const [safePlaceNameInput, setSafePlaceNameInput] = useState("");
   const [safePlaceAddressInput, setSafePlaceAddressInput] = useState("");
+  const [safetyScore, setSafetyScore] = useState(false);
+  const [crimeRate, setCrimeRate] = useState(false);
+  const [walkscore, setWalkscore] = useState(false);
+  const [safeSpots, setSafeSpots] = useState(false);
   const [openBusinesses, setOpenBusinesses] = useState(false);
-  const [policeStations, setPoliceStations] = useState(false);
-  const [busySidewalks, setBusySidewalks] = useState(false);
+  const [streetlights, setStreetlights] = useState(false);
   const [enterNewSafeSpot, setEnterNewSafeSpot] = useState(false);
 
   let [fontsLoaded] = useFonts({
@@ -39,134 +42,182 @@ const SafetyQuizScreen = (props) => {
   } else {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Set Route Preferences</Text>
-        <Text style={styles.taskText}>
-          1. What makes you feel safe when walking?
-        </Text>
-        <View style={styles.check}>
-          <TouchableOpacity
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-            onPress={() => setOpenBusinesses(!openBusinesses)}>
-            <Icon
-              size={30}
-              color={"#FFFFFF"}
-              name={openBusinesses ? "check-box" : "check-box-outline-blank"}
-            />
-          </TouchableOpacity>
-          <Text style={styles.checkOptions}>Open Businesses</Text>
-        </View>
-        <View style={styles.check}>
-          <TouchableOpacity
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-            onPress={() => setPoliceStations(!policeStations)}>
-            <Icon
-              size={30}
-              color={"#FFFFFF"}
-              name={policeStations ? "check-box" : "check-box-outline-blank"}
-            />
-          </TouchableOpacity>
-          <Text style={styles.checkOptions}>Police Stations</Text>
-        </View>
-        <View style={styles.check}>
-          <TouchableOpacity
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-            onPress={() => setBusySidewalks(!busySidewalks)}>
-            <Icon
-              size={30}
-              color={"#FFFFFF"}
-              name={busySidewalks ? "check-box" : "check-box-outline-blank"}
-            />
-          </TouchableOpacity>
-          <Text style={styles.checkOptions}>Busy Sidewalks</Text>
-        </View>
-
-        <Text style={styles.taskText}> 2. Set Up Your "Safe Spots" </Text>
-        {enterNewSafeSpot ? (
-          <View>
-            <TextInput
+        <ScrollView>
+          <Text style={styles.header}>Set Route Preferences</Text>
+          <Text style={styles.taskText}>
+            1. What makes you feel safe when walking?
+          </Text>
+          <View style={styles.check}>
+            <TouchableOpacity
               style={{
-                height: 40,
-                width: "75%",
-                borderBottomColor: "white",
-                borderBottomWidth: 2,
-                color: "white",
+                flexDirection: "row",
+                alignItems: "center",
               }}
-              placeholder={"Enter safe spot name..."}
-              placeholderTextColor="#A2A2AB"
-              onChangeText={(text) => {
-                setSafePlaceNameInput(text);
-              }}
-              value={safePlaceNameInput}
-            />
-            <TextInput
-              style={{
-                height: 40,
-                width: "75%",
-                borderBottomColor: "white",
-                borderBottomWidth: 2,
-                color: "white",
-              }}
-              placeholder={"Enter safe spot address..."}
-              placeholderTextColor="#A2A2AB"
-              onChangeText={(text) => {
-                setSafePlaceAddressInput(text);
-              }}
-              value={safePlaceAddressInput}
-            />
-            <Button
-              title="Save"
-              onPress={() => {
-                setEnterNewSafeSpot(false);
-                props.addSafeSpot({
-                  name: safePlaceNameInput,
-                  address: safePlaceAddressInput,
-                });
-                setSafePlaceAddressInput("");
-                setSafePlaceNameInput("");
-              }}
-            />
-            <Button
-              title="Cancel"
-              onPress={() => {
-                setEnterNewSafeSpot(false);
-                setSafePlaceAddressInput("");
-                setSafePlaceNameInput("");
-              }}
-            />
+              onPress={() => setSafetyScore(!safetyScore)}>
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={safetyScore ? "check-box" : "check-box-outline-blank"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Safety Score</Text>
           </View>
-        ) : (
-          <Button title="+" onPress={() => setEnterNewSafeSpot(true)}></Button>
-        )}
-        {props.safeSpots.safeSpots.length === 0
-          ? null
-          : props.safeSpots.safeSpots.map((safeSpot) => {
-              return (
-                <SafeSpot
-                  props={{
-                    name: safeSpot.name,
-                    address: safeSpot.address,
-                    deleteSafeSpot: props.deleteSafeSpot,
-                    editSafeSpot: props.editSafeSpot,
-                  }}
-                />
-              );
-            })}
-        <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("Emergency Contacts");
-          }}>
-          <AddContactIcon2 size={38} name="person-add" color="white" />
-        </TouchableOpacity>
+          <View style={styles.check}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setCrimeRate(!crimeRate)}>
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={crimeRate ? "check-box" : "check-box-outline-blank"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Crime Rate</Text>
+          </View>
+          <View style={styles.check}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setWalkscore(!walkscore)}>
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={walkscore ? "check-box" : "check-box-outline-blank"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Walkscore</Text>
+          </View>
+          <View style={styles.check}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setSafeSpots(!safeSpots)}>
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={safeSpots ? "check-box" : "check-box-outline-blank"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Safe Spots</Text>
+          </View>
+          <View style={styles.check}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setOpenBusinesses(!openBusinesses)}>
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={openBusinesses ? "check-box" : "check-box-outline-blank"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Open Businesses</Text>
+          </View>
+          <View style={styles.check}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setStreetlights(!streetlights)}>
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={streetlights ? "check-box" : "check-box-outline-blank"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Streetlights</Text>
+          </View>
+          <Text style={styles.taskText}> 2. Set Up Your "Safe Spots" </Text>
+          {enterNewSafeSpot ? (
+            <View>
+              <TextInput
+                style={{
+                  height: 40,
+                  width: "75%",
+                  borderBottomColor: "white",
+                  borderBottomWidth: 2,
+                  color: "white",
+                }}
+                placeholder={"Enter safe spot name..."}
+                placeholderTextColor="#A2A2AB"
+                onChangeText={(text) => {
+                  setSafePlaceNameInput(text);
+                }}
+                value={safePlaceNameInput}
+              />
+              <TextInput
+                style={{
+                  height: 40,
+                  width: "75%",
+                  borderBottomColor: "white",
+                  borderBottomWidth: 2,
+                  color: "white",
+                }}
+                placeholder={"Enter safe spot address..."}
+                placeholderTextColor="#A2A2AB"
+                onChangeText={(text) => {
+                  setSafePlaceAddressInput(text);
+                }}
+                value={safePlaceAddressInput}
+              />
+              <Button
+                title="Save"
+                onPress={() => {
+                  setEnterNewSafeSpot(false);
+                  props.addSafeSpot({
+                    name: safePlaceNameInput,
+                    address: safePlaceAddressInput,
+                  });
+                  setSafePlaceAddressInput("");
+                  setSafePlaceNameInput("");
+                }}
+              />
+              <Button
+                title="Cancel"
+                onPress={() => {
+                  setEnterNewSafeSpot(false);
+                  setSafePlaceAddressInput("");
+                  setSafePlaceNameInput("");
+                }}
+              />
+            </View>
+          ) : (
+            <Button
+              title="+"
+              onPress={() => setEnterNewSafeSpot(true)}></Button>
+          )}
+          {props.safeSpots.safeSpots.length === 0
+            ? null
+            : props.safeSpots.safeSpots.map((safeSpot) => {
+                return (
+                  <SafeSpot
+                    props={{
+                      name: safeSpot.name,
+                      address: safeSpot.address,
+                      deleteSafeSpot: props.deleteSafeSpot,
+                      editSafeSpot: props.editSafeSpot,
+                    }}
+                  />
+                );
+              })}
+          <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate("Emergency Contacts");
+            }}>
+            <AddContactIcon2 size={38} name="person-add" color="white" />
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     );
   }

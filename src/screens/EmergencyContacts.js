@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { registerNewUser } from "../../firebase/firebase.util";
 import { colors } from "../styles/colors.js";
 import { AppLoading } from "expo";
@@ -40,60 +40,62 @@ const EmergencyContacts = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>
-          Who would you like to call during an Emergency?
-        </Text>
-        <Text style={styles.taskText}>Name</Text>
-        <TextInput
-          style={{
-            height: 40,
-            width: "75%",
-            // backgroundColor: "white",
-            // borderRadius: 5,
-            borderBottomColor: "white",
-            borderBottomWidth: 2,
-            // padding: 15,
-            color: "white",
-          }}
-          placeholder={"Police, Campus Security, Roommate..."}
-          placeholderTextColor="#A2A2AB"
-          onChangeText={(text) => {
-            setName(text);
-          }}
-          value={name}
-        />
-        {/* TODO: Create style objects for text inputs instead of repeating them for each TextInput object */}
-        <Text style={styles.taskText}>Phone number</Text>
-        <TextInput
-          style={{
-            height: 40,
-            width: "75%",
-            // backgroundColor: "white",
-            // borderRadius: 5,
-            borderBottomColor: "white",
-            borderBottomWidth: 2,
-            // padding: 15,
-            color: "white",
-          }}
-          placeholder={"123-456-7890"}
-          placeholderTextColor="#A2A2AB"
-          onChangeText={(text) => {
-            setContactPhone(text);
-          }}
-          value={contactPhone}
-        />
-        {/* <Button
-        title="Complete Profile"
-        
-      ></Button> */}
-        <TouchableOpacity
-          style={styles.signUpButton}
-          onPress={() => {
-            objectifyAndNav(navigation, object, name, contactPhone);
-          }}
-        >
-          <Text style={styles.signUpText}>Complete Profile!</Text>
-        </TouchableOpacity>
+        <ScrollView style={styles.scroll}>
+          <Text style={styles.header}>
+            Who would you like to call during an Emergency?
+          </Text>
+          <Text style={styles.subheader}>
+            Set up your primary emergency contact now. Add more contacts through
+            your Account Preferences page!
+          </Text>
+          <Text style={styles.taskText}>Name</Text>
+          <TextInput
+            style={{
+              height: 40,
+              width: "75%",
+              // backgroundColor: "white",
+              // borderRadius: 5,
+              borderBottomColor: "white",
+              borderBottomWidth: 2,
+              // padding: 15,
+              color: "white",
+            }}
+            placeholder={"Police, Campus Security, Roommate..."}
+            placeholderTextColor="#A2A2AB"
+            onChangeText={(text) => {
+              setName(text);
+            }}
+            value={name}
+          />
+          {/* TODO: Create style objects for text inputs instead of repeating them for each TextInput object */}
+          <Text style={styles.taskText}>Phone number</Text>
+          <TextInput
+            style={{
+              height: 40,
+              width: "75%",
+              // backgroundColor: "white",
+              // borderRadius: 5,
+              borderBottomColor: "white",
+              borderBottomWidth: 2,
+              // padding: 15,
+              color: "white",
+            }}
+            placeholder={"123-456-7890"}
+            placeholderTextColor="#A2A2AB"
+            onChangeText={(text) => {
+              setContactPhone(text);
+            }}
+            value={contactPhone}
+          />
+
+          <TouchableOpacity
+            style={styles.signUpButton}
+            onPress={() => {
+              objectifyAndNav(navigation, object, name, contactPhone);
+            }}>
+            <Text style={styles.signUpText}>Complete Profile!</Text>
+          </TouchableOpacity>
+        </ScrollView>
         <View style={{ flex: 1, justifyContent: "flex-end", marginTop: 15 }}>
           <Image source={owl2} style={{ width: 160, height: 140 }}></Image>
         </View>
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
     textAlign: "center",
     alignItems: "center",
+    // paddingBottom: "10%",
   },
   header: {
     fontSize: 25,
@@ -135,6 +138,20 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 8,
     textShadowColor: "#F2EB46",
+  },
+  subheader: {
+    fontSize: 15,
+    textAlign: "center",
+    // marginTop: 20,
+    marginHorizontal: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    lineHeight: 38,
+    // marginBottom: 20,
+    fontFamily: "Quicksand_600SemiBold",
+    // textShadowOffset: { width: 2, height: 2 },
+    // textShadowRadius: 8,
+    // textShadowColor: "#F2EB46",
   },
   taskText: {
     fontSize: 18,
