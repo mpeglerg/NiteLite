@@ -21,22 +21,37 @@ if (!firebase.apps.length) {
 export const database = firebase.database();
 
 export function registerNewUser(object) {
-  let phoneNumber = object.get("phoneNumber");
-  let email = object.get("email");
-  let username = object.get("name");
+  console.log("OBJECT", object);
+  let phoneNumber = object.phoneNumber;
+  let email = object.email;
+  let username = object.name;
   addNumber(phoneNumber, username);
   addEmail(email, username);
-  let emergencyContact = [object.get("eName"), object.get("eNumber")];
-  database.ref("users/" + object.get("name")).set({
+  let emergencyContact = [object.emergencyNumber[0], object.emergencyNumber[1]];
+  console.log("DATABASE SET", {
     name: username,
     email: email,
-    password: object.get("password"),
+    password: object.password,
     phoneNumber: phoneNumber,
-    crimeRates: object.get("crimeRates"),
-    walkScore: object.get("walkScore"),
-    lighting: object.get("lighting"),
-    construction: object.get("construction"),
-    safeLocations: object.get("safePlaces"),
+    crimeRates: object.crimeRates,
+    walkScore: object.walkScore,
+    lighting: object.lighting,
+    construction: object.construction,
+    safeLocations: "",
+    // safeLocations: object.safeLocations,
+    emergencyNumber: emergencyContact,
+  });
+
+  database.ref("users/" + username).set({
+    name: username,
+    email: email,
+    password: object.password,
+    phoneNumber: phoneNumber,
+    crimeRates: object.crimeRates,
+    walkScore: object.walkScore,
+    lighting: object.lighting,
+    construction: object.construction,
+    safeLocations: object.safeLocations,
     emergencyNumber: emergencyContact,
   });
 }

@@ -1,10 +1,5 @@
 const initState = {
-  emergencyContacts: [
-    // { name: "Maya", number: "123-456-7890" },
-    // { name: "Talia", number: "123-456-7890" },
-    // { name: "Lauren", number: "123-456-7890" },
-    // { name: "Shanaya", number: "123-456-7890" },
-  ],
+  emergencyContacts: [],
   user: {
     username: "Test",
     password: "TestPassword",
@@ -21,20 +16,12 @@ const initState = {
 const emergencyContactsReducer = (state = initState, action) => {
   // TODO: Add reducer for ADD_EMERGENCY_CONTACT
   if (action.type == "ADD_EMERGENCY_CONTACT") {
-    console.log("ADD EMERGENCY CONTACT PAYLOAD", action.id);
     let newContactName = action.id.name.name;
     let newContactNumber = action.id.name.number;
-    console.log("newContactName", newContactName);
-    console.log("newContactNumber", newContactNumber);
-
     let newEmergencyContacts = [
       ...state.emergencyContacts,
       { name: newContactName, number: newContactNumber },
     ];
-    console.log("NEW STATE", {
-      ...state,
-      emergencyContacts: newEmergencyContacts,
-    });
     return {
       ...state,
       emergencyContacts: newEmergencyContacts,

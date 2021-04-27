@@ -42,7 +42,6 @@ const EmergencyContacts = (props) => {
   } else {
     return (
       <View style={styles.container}>
-        {console.log("EMERGENCY CONTACT PROPS", props)}
         <Text style={styles.header}>
           Who would you like to call during an Emergency?
         </Text>
@@ -93,9 +92,22 @@ const EmergencyContacts = (props) => {
           style={styles.signUpButton}
           onPress={() => {
             props.addEmergencyContact({ name: name, number: contactPhone });
-            // registerNewUser({name: , });
+            registerNewUser({
+              ...props.user,
+              emergencyNumber: [
+                props.emergencyContacts.emergencyContacts[0].name
+                  ? props.emergencyContacts.emergencyContacts[0].name
+                  : "Emergency Services",
+                props.emergencyContacts.emergencyContacts[0].number
+                  ? props.emergencyContacts.emergencyContacts[0].number
+                  : "911",
+              ],
+              safeLocations: props.safeSpots.safeSpots[0].address
+                ? props.safeSpots.safeSpots[0].address
+                : "",
+              name: props.user.username,
+            });
             props.navigation.navigate("Home");
-            // objectifyAndNav(props.navigation, object, name, contactPhone);
           }}>
           <Text style={styles.signUpText}>Complete Profile!</Text>
         </TouchableOpacity>
@@ -107,24 +119,11 @@ const EmergencyContacts = (props) => {
   }
 };
 
-function objectifyAndNav(navigation, object, name, contactPhone) {
-  // add new items to our object
-  object.set("eName", name);
-  object.set("eNumber", contactPhone);
-
-  // call firebase function to set all of these items in the object
-  // {usernamename, number: password: email, crimeRates, walkscore, lightning, construction, safeSpots{} emergencyContacts}
-
-  // add to redux store: email, phone number, emergencyContact from userSetUp
-  registerNewUser(object);
-  // navigate to next page
-  navigation.navigate("Home", { text: object.get("name") });
-}
-
 const mapStateToProps = (state) => {
   return {
     emergencyContacts: state.emergencyContacts,
     user: state.emergencyContacts.user,
+    safeSpots: state.safeSpots,
   };
 };
 
