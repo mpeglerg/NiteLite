@@ -22,7 +22,8 @@ import { AppLoading } from "expo";
 
 const AlongRoute = (props) => {
   //TODO: set states to user preferences
-  const [crimeRates, setCrimeRates] = useState(true);
+  const space = "          ";
+  const [crimeRates, setCrimeRates] = useState(false);
   const [walkScore, setWalkScore] = useState(true);
   const [lighting, setLighting] = useState(true);
   const [construction, setConstruction] = useState(true);
@@ -107,7 +108,7 @@ const AlongRoute = (props) => {
             </View>
             <View style={styles.infoTextRow1}>
               <Text style={styles.infoText}>Safety Score</Text>
-              {crimeRates? <Text style={styles.infoText}>Area Crime Rate</Text> : null}
+              {crimeRates? <Text style={styles.infoText}>Area Crime Rate</Text> : <Text style={styles.infoText}>{space}</Text>}
               {walkScore? <Text style={styles.infoText}>Avg Walkscore</Text> : null}
             </View>
             <View style={{ flexDirection: "row" }}>
@@ -154,7 +155,7 @@ const AlongRoute = (props) => {
             </View>
             <View style={styles.infoTextRow2}>
               <Text style={styles.infoText}>Safe Spots</Text>
-              {construction ?<Text style={styles.infoText}>Construction</Text> : null}
+              {construction ?<Text style={styles.infoText}>Construction</Text> : <Text style={styles.infoText}>{space}</Text>}
               {lighting ? <Text style={styles.infoText}>Lighting</Text> : null}
             </View>
           </View>
@@ -214,22 +215,31 @@ const styles = StyleSheet.create({
     //OPTION 1
     // marginHorizontal: 13,
     //OPTION 2
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     paddingLeft: 30,
   },
   infoTextRow2: {
+    // display: "flex",
+    // flexDirection: "row",
+    // //OPTION 1
+    // // marginHorizontal: 13,
+    // //OPTION 2
+    // // justifyContent: "space-between",
+    // justifyContent: "flex-start",
+    // // alignContent: "center",
+    // // paddingLeft: 25,
+    // alignItems: "center",
+    // // alignSelf: "center",
+    // marginLeft: 30,
+
+
     display: "flex",
     flexDirection: "row",
     //OPTION 1
     // marginHorizontal: 13,
     //OPTION 2
-    // justifyContent: "space-between",
-    justifyContent: "space-around",
-    // alignContent: "center",
-    // paddingLeft: 25,
-    alignItems: "center",
-    // alignSelf: "center",
-    marginLeft: 30,
+    justifyContent: "space-between",
+    paddingLeft: 30,
   },
 });
 const mapStateToProps = (state) => {
