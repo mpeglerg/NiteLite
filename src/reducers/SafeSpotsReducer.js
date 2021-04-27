@@ -1,8 +1,8 @@
 const initState = {
   safeSpots: [
-    { name: "Maya's", address: "1 LMU Drive" },
-    { name: "Campus", address: "1 LMU Drive" },
-    { name: "Lauren and Shanaya's", address: "1 LMU Drive" },
+    // { name: "Maya's", address: "1 LMU Drive" },
+    // { name: "Campus", address: "1 LMU Drive" },
+    // { name: "Lauren and Shanaya's", address: "1 LMU Drive" },
   ],
 };
 
