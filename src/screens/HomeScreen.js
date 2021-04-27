@@ -15,6 +15,10 @@ const HomeScreen = (props) => {
   const sheetRef = useState(null);
   const [userData, setUserData] = useState(null);
   useEffect(() => {
+    {
+      console.log("HOME SCREEN PROPS", props);
+    }
+
     async function loadData() {
       const result = await loadUserData("Demo401!");
       setUserData(result);
@@ -79,7 +83,8 @@ const HomeScreen = (props) => {
 const mapStateToProps = (state) => {
   return {
     route: state.directions,
-    userData: state.user,
+    // user: state.user,
+    emergencyContacts: state.emergencyContacts,
   };
 };
 export default connect(mapStateToProps, null)(HomeScreen);

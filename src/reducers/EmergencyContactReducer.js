@@ -5,6 +5,18 @@ const initState = {
     { name: "Lauren", number: "123-456-7890" },
     { name: "Shanaya", number: "123-456-7890" },
   ],
+  user: "Test",
+  // {
+  //   username: "Demo401!",
+  //   password: "Demo401!",
+  //   email: "sample@gmail.com",
+  //   phoneNumber: "1234567890",
+  //   busySidewalks: true,
+  //   openBusinesses: true,
+  //   policeStations: true,
+  //   safeLocations: true,
+  //   emergencyNumber: true,
+  // },
 };
 
 const emergencyContactsReducer = (state = initState, action) => {
@@ -31,6 +43,19 @@ const emergencyContactsReducer = (state = initState, action) => {
     return {
       ...state,
       emergencyContacts: newEmergencyContacts,
+    };
+  } else if (action.type == "UPDATE_USERNAME") {
+    let newUsername = action.payload;
+    console.log("UPDATE_USERNAME PAYLOAD", action.payload);
+    // newProfile[0].username = action.payload;
+    // console.log("state", state);
+    console.log("NEW STATE: ", {
+      ...state,
+      user: newUsername,
+    });
+    return {
+      ...state,
+      user: newUsername,
     };
   } else {
     return state;

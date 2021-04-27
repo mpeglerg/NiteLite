@@ -5,25 +5,30 @@ const initState = {
     password: "Demo401!",
     email: "sample@gmail.com",
     phoneNumber: "1234567890",
-    busySidewalks: userData.busySidewalks,
-    openBusinesses: userData.openBusinesses,
-    policeStations: userData.policeStations,
-    safeLocations: userData.safeLocations,
-    emergencyNumber: userData.emergencyNumber,
+    busySidewalks: true,
+    openBusinesses: true,
+    policeStations: true,
+    safeLocations: true,
+    emergencyNumber: true,
+    // busySidewalks: userData.busySidewalks,
+    // openBusinesses: userData.openBusinesses,
+    // policeStations: userData.policeStations,
+    // safeLocations: userData.safeLocations,
+    // emergencyNumber: userData.emergencyNumber,
   },
 };
 
 const userProfileReducer = (state = initState, action) => {
-  if (action.type == "UPDATE_USERNAME") {
-    let newUsername = action.payload;
-    console.log("PAYLOAD", action.payload);
-    // newProfile[0].username = action.payload;
-    // console.log("state", state);
-    return {
-      ...state,
-      user: newUsername,
-    };
-  }
+  // if (action.type == "UPDATE_USERNAME") {
+  //   let newUsername = action.payload;
+  //   console.log("PAYLOAD", action.payload);
+  //   // newProfile[0].username = action.payload;
+  //   // console.log("state", state);
+  //   return {
+  //     ...state,
+  //     user: newUsername,
+  //   };
+  // }
   // else if (action.type == "UPDATE_PASSWORD") {
   //   let newProfile = state.user;
   //   newProfile[0].password = action.payload;
@@ -82,8 +87,8 @@ const userProfileReducer = (state = initState, action) => {
   //     user: newProfile,
   //   };
   // }
-  else {
-    return state;
-  }
+  // else {
+  return state;
+  // }
 };
 export default userProfileReducer;

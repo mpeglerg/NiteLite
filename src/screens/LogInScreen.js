@@ -39,6 +39,7 @@ const LogInScreen = (props) => {
   } else {
     return (
       <View style={styles.container}>
+        {console.log("LOGIN SCREEN PROPS", props)}
         <Image source={logo} style={{ width: 270, height: 270 }}></Image>
         <View style={styles.icon}>
           <UserIcon
@@ -78,7 +79,7 @@ const LogInScreen = (props) => {
         <TouchableOpacity
           style={styles.logInButtonContainer}
           onPress={() => {
-            // props.updateUserName(returningUserName);
+            props.updateUserName(returningUserName);
             // props.updatePassword(returningUserPassword);
             verifyCredentials(
               props.navigation,
@@ -188,6 +189,15 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapStateToProps = (state) => {
+  return {
+    // safeSpots: state.safeSpots,
+    // directions: state.directions,
+    user: state.user,
+    emergencyContacts: state.emergencyContacts,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updateUserName: (id) => {
@@ -200,4 +210,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(LogInScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LogInScreen);
