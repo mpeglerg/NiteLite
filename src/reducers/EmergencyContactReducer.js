@@ -45,26 +45,12 @@ const emergencyContactsReducer = (state = initState, action) => {
     };
   } else if (action.type == "UPDATE_USERNAME") {
     let newUsername = action.payload;
-    console.log("UPDATE_USERNAME PAYLOAD", action.payload);
-    // newProfile[0].username = action.payload;
-    // console.log("state", state);
-    console.log("NEW STATE: ", {
-      ...state,
-      user: { ...state.user, username: newUsername },
-    });
     return {
       ...state,
       user: { ...state.user, username: newUsername },
     };
   } else if (action.type == "UPDATE_PASSWORD") {
     let newPassword = action.payload;
-    console.log("UPDATE_PASSWORD PAYLOAD", action.payload);
-    // newProfile[0].username = action.payload;
-    // console.log("state", state);
-    console.log("NEW STATE: ", {
-      ...state,
-      user: { ...state.user, password: newPassword },
-    });
     return {
       ...state,
       user: { ...state.user, password: newPassword },

@@ -15,12 +15,12 @@ const HomeScreen = (props) => {
   const sheetRef = useState(null);
   const [userData, setUserData] = useState(null);
   useEffect(() => {
-    {
-      console.log("HOME SCREEN PROPS", props);
-    }
-
     async function loadData() {
-      const result = await loadUserData("Demo401!");
+      const result = await loadUserData(
+        props.emergencyContacts.user.username
+          ? props.emergencyContacts.user.username
+          : "Demo401!"
+      );
       setUserData(result);
       return;
     }
@@ -30,7 +30,6 @@ const HomeScreen = (props) => {
   const renderContent = () => (
     <View
       style={{
-        // backgroundColor: "#05054D",
         backgroundColor: colors.backgroundColor,
         padding: 16,
         height: 500,
@@ -83,7 +82,6 @@ const HomeScreen = (props) => {
 const mapStateToProps = (state) => {
   return {
     route: state.directions,
-    // user: state.user,
     emergencyContacts: state.emergencyContacts,
   };
 };

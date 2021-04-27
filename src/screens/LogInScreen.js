@@ -39,7 +39,6 @@ const LogInScreen = (props) => {
   } else {
     return (
       <View style={styles.container}>
-        {console.log("LOGIN SCREEN PROPS", props)}
         <Image source={logo} style={{ width: 270, height: 270 }}></Image>
         <View style={styles.icon}>
           <UserIcon
@@ -79,10 +78,10 @@ const LogInScreen = (props) => {
         <TouchableOpacity
           style={styles.logInButtonContainer}
           onPress={() => {
-            props.updateUserName(returningUserName);
-            props.updatePassword(returningUserPassword);
             verifyCredentials(
               props.navigation,
+              props.updateUserName,
+              props.updatePassword,
               returningUserName,
               returningUserPassword
             );
@@ -99,7 +98,13 @@ const LogInScreen = (props) => {
   }
 };
 
-async function verifyCredentials(navigation, username, password) {
+async function verifyCredentials(
+  navigation,
+  updateUserName,
+  updatePassword,
+  username,
+  password
+) {
   username = username.trim();
   password = password.trim();
   if (username === "") {
@@ -112,9 +117,8 @@ async function verifyCredentials(navigation, username, password) {
   }
   let response = await verifyLogin(username, password);
   if (response == 1) {
-    // TODO: set state with username here
-    // updateUserName(username);
-    // updatePassword(password);
+    updateUserName(username);
+    updatePassword(password);
     navigation.navigate("Home");
   } else if (response == 2) {
     alert("Username not found. Try again.");
@@ -130,13 +134,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     padding: 35,
-    // backgroundColor: '#151965',
-    // backgroundColor: '#0f4c75',
-    // backgroundColor: '#102849',
-    // backgroundColor: '#010068',
     backgroundColor: colors.backgroundColor,
     alignItems: "center",
-    // margin: 5
   },
   icon: {
     flexDirection: "row",
@@ -191,9 +190,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    // safeSpots: state.safeSpots,
-    // directions: state.directions,
-    user: state.user,
     emergencyContacts: state.emergencyContacts,
   };
 };
