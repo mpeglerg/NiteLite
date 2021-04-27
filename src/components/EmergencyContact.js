@@ -39,7 +39,7 @@ const EmergencyContact = ({ props }) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.editBtn}
+          style={styles.cancelBtn}
           onPress={() =>
             props.deleteEmergencyContact({
               name: props.name,
@@ -187,6 +187,16 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 12,
     width: 80,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  cancelBtn: {
+    borderRadius: 40,
+    backgroundColor: "#F94545",
+    color: "white",
+    padding: 12,
+    width: 100,
     alignItems: "center",
     fontSize: 16,
     marginLeft: 15,

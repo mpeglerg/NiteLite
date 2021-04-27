@@ -3,14 +3,7 @@ import { colors } from "../styles/colors.js";
 import { AppLoading } from "expo";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  // ShadowPropTypesIOS,
-} from "react-native";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import EmergencyContact from "../components/EmergencyContact";
@@ -30,6 +23,10 @@ const AccountScreen = (props) => {
   const [policeStations, setPoliceStations] = useState(false);
   const [busySidewalks, setBusySidewalks] = useState(false);
   const [safePlaceInput, setSafePlaceInput] = useState("");
+  const [enterNewSafeSpot, setEnterNewSafeSpot] = useState(false);
+  const [safePlaceNameInput, setSafePlaceNameInput] = useState("");
+  const [safePlaceAddressInput, setSafePlaceAddressInput] = useState("");
+
   let [fontsLoaded] = useFonts({
     CoveredByYourGrace_400Regular,
     Quicksand_500Medium,
@@ -105,37 +102,107 @@ const AccountScreen = (props) => {
             <Text style={styles.checkOptions}>Busy Sidewalks</Text>
           </View>
           <Text style={styles.header}>Safe Spots</Text>
-          <TextInput
-            style={{
-              height: 40,
-              width: "90%",
-              backgroundColor: "white",
-              borderRadius: 20,
-              padding: 15,
-              marginBottom: 30,
-              marginTop: 10,
-            }}
-            placeholder={"Enter new safe spot..."}
-            onChangeText={(text) => {
-              setSafePlaceInput(text);
-            }}
-            value={safePlaceInput}
-          />
+          {enterNewSafeSpot ? (
+            <View>
+              <TextInput
+                style={{
+                  height: 40,
+                  width: 220,
+                  backgroundColor: "white",
+                  borderRadius: 22,
+                  padding: 8,
+                  marginBottom: 25,
+                  marginTop: 14,
+                  alignSelf: "center",
+                }}
+                placeholder={"Enter location name"}
+                onChangeText={(text) => {
+                  setSafePlaceNameInput(text);
+                }}
+                value={safePlaceNameInput}
+              />
+              <TextInput
+                style={{
+                  height: 40,
+                  width: 320,
+                  backgroundColor: "white",
+                  borderRadius: 20,
+                  padding: 15,
+                  marginBottom: 30,
+                  alignSelf: "center",
+                  padding: 8,
+                }}
+                placeholder={"Enter address"}
+                onChangeText={(text) => {
+                  setSafePlaceAddressInput(text);
+                }}
+                value={safePlaceAddressInput}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "center",
+                  marginBottom: 30,
+                  // justifyContent: "space-between",
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.editBtn}
+                  onPress={() => {
+                    props.addSafeSpot({
+                      name: safePlaceNameInput,
+                      address: safePlaceAddressInput,
+                    });
+                    setSafePlaceAddressInput("");
+                    setSafePlaceNameInput("");
+                    setEnterNewSafeSpot(!enterNewSafeSpot);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Save new safe spot</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.cancelBtn}
+                  onPress={() => {
+                    setSafePlaceAddressInput("");
+                    setSafePlaceNameInput("");
+                    setEnterNewSafeSpot(!enterNewSafeSpot);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+              {/* <Button
+                title="Save new safe spot"
+                onPress={() => {
+                  props.addSafeSpot({
+                    name: safePlaceNameInput,
+                    address: safePlaceAddressInput,
+                  });
+                  setSafePlaceAddressInput("");
+                  setSafePlaceNameInput("");
+                  setEnterNewSafeSpot(!enterNewSafeSpot);
+                }}
+              ></Button>
+              <Button
+                title="Cancel"
+                onPress={() => {
+                  setSafePlaceAddressInput("");
+                  setSafePlaceNameInput("");
+                  setEnterNewSafeSpot(!enterNewSafeSpot);
+                }}
+              ></Button> */}
+            </View>
+          ) : null}
         </View>
         <View style={styles.safeSpotContainer}>
-          {safePlaceInput != "" ? (
+          {enterNewSafeSpot ? null : (
             <TouchableOpacity
               style={styles.addSafeSpotBtn}
-              onPress={() =>
-                props.addSafeSpot({
-                  name: safePlaceInput,
-                  address: "1 LMU Drive",
-                })
-              }
+              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}
             >
               <Text style={styles.btnText}>Add safe spot</Text>
             </TouchableOpacity>
-          ) : null}
+          )}
           {props.safeSpots.safeSpots.map((safeSpot) => {
             return (
               <SafeSpot
@@ -188,7 +255,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
     },
     editSafeSpot: (id) => {
-      console.log("ID", id);
       dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
     },
     editEmergencyContact: (id) => {
@@ -277,5 +343,31 @@ const styles = StyleSheet.create({
   btnText: {
     fontFamily: "Quicksand_700Bold",
     fontSize: 16,
+  },
+  editBtn: {
+    borderRadius: 40,
+    backgroundColor: "#30C5F4",
+    color: "white",
+    padding: 12,
+    width: 170,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  cancelBtn: {
+    borderRadius: 40,
+    backgroundColor: "#F94545",
+    color: "white",
+    padding: 12,
+    width: 100,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "Quicksand_700Bold",
   },
 });
