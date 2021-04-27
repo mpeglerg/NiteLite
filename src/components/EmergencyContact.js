@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableHighlight,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -17,24 +18,39 @@ const EmergencyContact = ({ props }) => {
   const [newContactName, setNewContactName] = React.useState("");
 
   return (
-    <View style={{ borderWidth: "1px" }}>
-      <Text>{props.name}</Text>
-      <Text>{props.number}</Text>
-      <Button
-        title="edit"
-        onPress={() => {
-          setModalVisible(!modalVisible);
-        }}
-      />
-      <Button
-        title="X"
-        onPress={() =>
-          props.deleteEmergencyContact({
-            name: props.name,
-            number: props.number,
-          })
-        }
-      />
+    <View
+      style={{
+        borderWidth: "1px",
+        marginBottom: 15,
+        backgroundColor: "white",
+        borderRadius: 15,
+      }}
+    >
+      <Text style={styles.infoTextName}>{props.name}</Text>
+      <Text style={styles.infoTextNumber}>{props.number}</Text>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity
+          style={styles.editBtn}
+          onPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <Text>Edit</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.cancelBtn}
+          onPress={() =>
+            props.deleteEmergencyContact({
+              name: props.name,
+              number: props.number,
+            })
+          }
+        >
+          <Text>Delete</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -42,7 +58,8 @@ const EmergencyContact = ({ props }) => {
           visible={modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
-          }}>
+          }}
+        >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{props.name}</Text>
@@ -51,8 +68,9 @@ const EmergencyContact = ({ props }) => {
                   height: 40,
                   width: "90%",
                   backgroundColor: "white",
-                  borderRadius: 20,
-                  padding: 15,
+                  borderBottomColor: "black",
+                  borderBottomWidth: 2,
+                  marginBottom: 30,
                 }}
                 placeholder={"New contact name"}
                 onChangeText={(text) => {
@@ -66,8 +84,9 @@ const EmergencyContact = ({ props }) => {
                   height: 40,
                   width: "90%",
                   backgroundColor: "white",
-                  borderRadius: 20,
-                  padding: 15,
+                  borderBottomColor: "black",
+                  borderBottomWidth: 2,
+                  marginBottom: 30,
                 }}
                 keyboardType="number-pad"
                 placeholder={"New phone number"}
@@ -78,7 +97,7 @@ const EmergencyContact = ({ props }) => {
                 value={newPhoneNumber}
               />
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                style={{ ...styles.openButton, backgroundColor: "#30C5F4" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
                   props.editEmergencyContact({
@@ -86,14 +105,16 @@ const EmergencyContact = ({ props }) => {
                     number: newPhoneNumber,
                     oldName: props.name,
                   });
-                }}>
+                }}
+              >
                 <Text style={styles.textStyle}>Save changes</Text>
               </TouchableHighlight>
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "red" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
-                }}>
+                }}
+              >
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
             </View>
@@ -125,7 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    width: "100%",
+    width: "90%",
     height: "60%",
     margin: 20,
     backgroundColor: "white",
@@ -144,8 +165,10 @@ const styles = StyleSheet.create({
   openButton: {
     backgroundColor: "#F194FF",
     borderRadius: 20,
-    padding: 10,
+    padding: 13,
     elevation: 2,
+    marginVertical: 8,
+    fontSize: 15,
   },
   textStyle: {
     color: "white",
@@ -155,6 +178,42 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+    fontFamily: "Quicksand_700Bold",
+    fontSize: 16,
+  },
+  editBtn: {
+    borderRadius: 40,
+    backgroundColor: "#30C5F4",
+    color: "white",
+    padding: 12,
+    width: 80,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  cancelBtn: {
+    borderRadius: 40,
+    backgroundColor: "#F94545",
+    color: "white",
+    padding: 12,
+    width: 100,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  infoTextName: {
+    fontSize: 16,
+    padding: 4,
+    fontFamily: "Quicksand_700Bold",
+    marginLeft: 15,
+    marginTop: 10,
+  },
+  infoTextNumber: {
+    fontSize: 16,
+    padding: 4,
+    fontFamily: "Quicksand_600SemiBold",
+    marginLeft: 15,
+    marginBottom: 10,
   },
 });
 
