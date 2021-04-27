@@ -80,7 +80,7 @@ const LogInScreen = (props) => {
           style={styles.logInButtonContainer}
           onPress={() => {
             props.updateUserName(returningUserName);
-            // props.updatePassword(returningUserPassword);
+            props.updatePassword(returningUserPassword);
             verifyCredentials(
               props.navigation,
               returningUserName,

@@ -5,18 +5,17 @@ const initState = {
     { name: "Lauren", number: "123-456-7890" },
     { name: "Shanaya", number: "123-456-7890" },
   ],
-  user: "Test",
-  // {
-  //   username: "Demo401!",
-  //   password: "Demo401!",
-  //   email: "sample@gmail.com",
-  //   phoneNumber: "1234567890",
-  //   busySidewalks: true,
-  //   openBusinesses: true,
-  //   policeStations: true,
-  //   safeLocations: true,
-  //   emergencyNumber: true,
-  // },
+  user: {
+    username: "Test",
+    password: "TestPassword",
+    email: "sample@gmail.com",
+    phoneNumber: "1234567890",
+    busySidewalks: true,
+    openBusinesses: true,
+    policeStations: true,
+    safeLocations: true,
+    emergencyNumber: true,
+  },
 };
 
 const emergencyContactsReducer = (state = initState, action) => {
@@ -51,11 +50,24 @@ const emergencyContactsReducer = (state = initState, action) => {
     // console.log("state", state);
     console.log("NEW STATE: ", {
       ...state,
-      user: newUsername,
+      user: { ...state.user, username: newUsername },
     });
     return {
       ...state,
-      user: newUsername,
+      user: { ...state.user, username: newUsername },
+    };
+  } else if (action.type == "UPDATE_PASSWORD") {
+    let newPassword = action.payload;
+    console.log("UPDATE_PASSWORD PAYLOAD", action.payload);
+    // newProfile[0].username = action.payload;
+    // console.log("state", state);
+    console.log("NEW STATE: ", {
+      ...state,
+      user: { ...state.user, password: newPassword },
+    });
+    return {
+      ...state,
+      user: { ...state.user, password: newPassword },
     };
   } else {
     return state;
