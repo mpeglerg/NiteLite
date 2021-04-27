@@ -22,8 +22,9 @@ import {
   Nunito_700Bold,
   Nunito_800ExtraBold,
 } from "@expo-google-fonts/nunito";
+import { connect } from "react-redux";
 
-const LogInScreen = ({ navigation }) => {
+const LogInScreen = (props) => {
   const [returningUserName, setReturningUserName] = useState("");
   const [returningUserPassword, setReturningUserPassword] = useState("");
   let [fontsLoaded] = useFonts({
@@ -76,18 +77,19 @@ const LogInScreen = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.logInButtonContainer}
-          onPress={() =>
+          onPress={() => {
+            // props.updateUserName(returningUserName);
+            // props.updatePassword(returningUserPassword);
             verifyCredentials(
-              navigation,
+              props.navigation,
               returningUserName,
               returningUserPassword
-            )
-          }
-        >
+            );
+          }}>
           <Text style={styles.logInButtonText}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Sign Up")}>
           <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
           <Text style={styles.signUpText2}>Sign Up!</Text>
         </TouchableOpacity>
@@ -110,6 +112,8 @@ async function verifyCredentials(navigation, username, password) {
   let response = await verifyLogin(username, password);
   if (response == 1) {
     // TODO: set state with username here
+    // updateUserName(username);
+    // updatePassword(password);
     navigation.navigate("Home");
   } else if (response == 2) {
     alert("Username not found. Try again.");
@@ -184,4 +188,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogInScreen;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUserName: (id) => {
+      console.log("CALLED", id);
+      dispatch({ type: "UPDATE_USERNAME", payload: id });
+    },
+    updatePassword: (id) => {
+      dispatch({ type: "UPDATE_PASSWORD", payload: id });
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LogInScreen);
