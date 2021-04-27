@@ -22,6 +22,7 @@ const AccountScreen = (props) => {
   const [openBusinesses, setOpenBusinesses] = useState(false);
   const [policeStations, setPoliceStations] = useState(false);
   const [busySidewalks, setBusySidewalks] = useState(false);
+  const [safePlaceInput, setSafePlaceInput] = useState("");
   const [enterNewSafeSpot, setEnterNewSafeSpot] = useState(false);
   const [safePlaceNameInput, setSafePlaceNameInput] = useState("");
   const [safePlaceAddressInput, setSafePlaceAddressInput] = useState("");
@@ -142,13 +143,22 @@ const AccountScreen = (props) => {
                   setSafePlaceNameInput("");
                   setEnterNewSafeSpot(!enterNewSafeSpot);
                 }}></Button>
+              <Button
+                title="Cancel"
+                onPress={() => {
+                  setSafePlaceAddressInput("");
+                  setSafePlaceNameInput("");
+                  setEnterNewSafeSpot(!enterNewSafeSpot);
+                }}></Button>
             </View>
           ) : null}
         </View>
         <View style={styles.safeSpotContainer}>
-          <Button
-            title="Add safe spot"
-            onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}></Button>
+          {enterNewSafeSpot ? null : (
+            <Button
+              title="Add safe spot"
+              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}></Button>
+          )}
           {props.safeSpots.safeSpots.map((safeSpot) => {
             return (
               <SafeSpot
