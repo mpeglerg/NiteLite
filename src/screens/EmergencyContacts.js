@@ -18,7 +18,6 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
-import owl1 from "./../images/owl1.png";
 import owl2 from "./../images/owl2.png";
 
 // TODO: remove extraneous comments
@@ -34,6 +33,7 @@ const EmergencyContacts = ({ navigation }) => {
     Quicksand_700Bold,
     Quicksand_600SemiBold,
     Quicksand_400Regular,
+    Quicksand_500Medium,
   });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -42,6 +42,10 @@ const EmergencyContacts = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.header}>
           Who would you like to call during an Emergency?
+        </Text>
+        <Text style={styles.subtitle}>
+          Set up your primary contact now and add more later in your account
+          settings
         </Text>
         <Text style={styles.taskText}>Name</Text>
         <TextInput
@@ -94,7 +98,7 @@ const EmergencyContacts = ({ navigation }) => {
         >
           <Text style={styles.signUpText}>Complete Profile!</Text>
         </TouchableOpacity>
-        <View style={{ flex: 1, justifyContent: "flex-end", marginTop: 15 }}>
+        <View style={{ flex: 1, justifyContent: "flex-end", marginTop: 20 }}>
           <Image source={owl2} style={{ width: 160, height: 140 }}></Image>
         </View>
       </View>
@@ -161,7 +165,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondaryBlue,
     paddingVertical: 15,
     paddingHorizontal: 90,
-    marginTop: 50,
+    marginTop: 40,
     fontFamily: "Quicksand_700Bold",
+  },
+  subtitle: {
+    color: "white",
+    fontFamily: "Quicksand_500Medium",
+    textAlign: "center",
+    paddingHorizontal: 34,
+    marginTop: -13,
   },
 });
