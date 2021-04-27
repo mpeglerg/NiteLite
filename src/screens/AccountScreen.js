@@ -45,7 +45,8 @@ const AccountScreen = (props) => {
               fontSize: 40,
               color: "white",
               marginTop: 20,
-            }}>
+            }}
+          >
             Account Settings
           </Text>
           <Text style={styles.header}>Route Preferences</Text>
@@ -58,7 +59,8 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setOpenBusinesses(!openBusinesses)}>
+              onPress={() => setOpenBusinesses(!openBusinesses)}
+            >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -73,7 +75,8 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setPoliceStations(!policeStations)}>
+              onPress={() => setPoliceStations(!policeStations)}
+            >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -88,7 +91,8 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setBusySidewalks(!busySidewalks)}>
+              onPress={() => setBusySidewalks(!busySidewalks)}
+            >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -103,14 +107,15 @@ const AccountScreen = (props) => {
               <TextInput
                 style={{
                   height: 40,
-                  width: "90%",
+                  width: 220,
                   backgroundColor: "white",
-                  borderRadius: 20,
-                  padding: 15,
-                  marginBottom: 30,
-                  marginTop: 10,
+                  borderRadius: 22,
+                  padding: 8,
+                  marginBottom: 25,
+                  marginTop: 14,
+                  alignSelf: "center",
                 }}
-                placeholder={"Safe spot name"}
+                placeholder={"Enter location name"}
                 onChangeText={(text) => {
                   setSafePlaceNameInput(text);
                 }}
@@ -119,20 +124,54 @@ const AccountScreen = (props) => {
               <TextInput
                 style={{
                   height: 40,
-                  width: "90%",
+                  width: 320,
                   backgroundColor: "white",
                   borderRadius: 20,
                   padding: 15,
                   marginBottom: 30,
-                  marginTop: 10,
+                  alignSelf: "center",
+                  padding: 8,
                 }}
-                placeholder={"Safe spot address"}
+                placeholder={"Enter address"}
                 onChangeText={(text) => {
                   setSafePlaceAddressInput(text);
                 }}
                 value={safePlaceAddressInput}
               />
-              <Button
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "center",
+                  marginBottom: 30,
+                  // justifyContent: "space-between",
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.editBtn}
+                  onPress={() => {
+                    props.addSafeSpot({
+                      name: safePlaceNameInput,
+                      address: safePlaceAddressInput,
+                    });
+                    setSafePlaceAddressInput("");
+                    setSafePlaceNameInput("");
+                    setEnterNewSafeSpot(!enterNewSafeSpot);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Save new safe spot</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.cancelBtn}
+                  onPress={() => {
+                    setSafePlaceAddressInput("");
+                    setSafePlaceNameInput("");
+                    setEnterNewSafeSpot(!enterNewSafeSpot);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+              {/* <Button
                 title="Save new safe spot"
                 onPress={() => {
                   props.addSafeSpot({
@@ -142,22 +181,27 @@ const AccountScreen = (props) => {
                   setSafePlaceAddressInput("");
                   setSafePlaceNameInput("");
                   setEnterNewSafeSpot(!enterNewSafeSpot);
-                }}></Button>
+                }}
+              ></Button>
               <Button
                 title="Cancel"
                 onPress={() => {
                   setSafePlaceAddressInput("");
                   setSafePlaceNameInput("");
                   setEnterNewSafeSpot(!enterNewSafeSpot);
-                }}></Button>
+                }}
+              ></Button> */}
             </View>
           ) : null}
         </View>
         <View style={styles.safeSpotContainer}>
           {enterNewSafeSpot ? null : (
-            <Button
-              title="Add safe spot"
-              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}></Button>
+            <TouchableOpacity
+              style={styles.addSafeSpotBtn}
+              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}
+            >
+              <Text style={styles.btnText}>Add safe spot</Text>
+            </TouchableOpacity>
           )}
           {props.safeSpots.safeSpots.map((safeSpot) => {
             return (
@@ -172,17 +216,19 @@ const AccountScreen = (props) => {
             );
           })}
         </View>
-        <Text style={styles.header}>Emergency Contacts</Text>
+        <Text style={styles.contactHeader}>Emergency Contacts</Text>
         {props.emergencyContacts.emergencyContacts.map((contact) => {
           return (
-            <EmergencyContact
-              props={{
-                name: contact.name,
-                number: contact.phoneNumber,
-                deleteEmergencyContact: props.deleteEmergencyContact,
-                editEmergencyContact: props.editEmergencyContact,
-              }}
-            />
+            <View style={styles.safeSpotContainer}>
+              <EmergencyContact
+                props={{
+                  name: contact.name,
+                  number: contact.phoneNumber,
+                  deleteEmergencyContact: props.deleteEmergencyContact,
+                  editEmergencyContact: props.editEmergencyContact,
+                }}
+              />
+            </View>
           );
         })}
       </ScrollView>
@@ -247,6 +293,21 @@ const styles = StyleSheet.create({
     textShadowRadius: 8,
     textShadowColor: "#F2EB46",
   },
+  contactHeader: {
+    fontSize: 25,
+    // padding: 10,
+    textAlign: "center",
+    marginTop: 20,
+    marginHorizontal: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    lineHeight: 38,
+    fontFamily: "Quicksand_600SemiBold",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 8,
+    textShadowColor: "#F2EB46",
+    marginBottom: 15,
+  },
   taskText: {
     fontSize: 16,
     paddingVertical: 8,
@@ -268,5 +329,45 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontFamily: "Quicksand_600SemiBold",
+  },
+  addSafeSpotBtn: {
+    borderRadius: 40,
+    backgroundColor: "#30C5F4",
+    color: "white",
+    padding: 12,
+    // width: 90 ,
+    alignItems: "center",
+    // marginLeft: 15,
+    marginBottom: 18,
+  },
+  btnText: {
+    fontFamily: "Quicksand_700Bold",
+    fontSize: 16,
+  },
+  editBtn: {
+    borderRadius: 40,
+    backgroundColor: "#30C5F4",
+    color: "white",
+    padding: 12,
+    width: 170,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  cancelBtn: {
+    borderRadius: 40,
+    backgroundColor: "#F94545",
+    color: "white",
+    padding: 12,
+    width: 100,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "Quicksand_700Bold",
   },
 });

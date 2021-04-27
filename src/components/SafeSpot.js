@@ -40,18 +40,21 @@ const SafeSpot = ({ props }) => {
           marginBottom: 15,
           backgroundColor: "white",
           borderRadius: 15,
-        }}>
+        }}
+      >
         <Text style={styles.infoTextName}>{props.name}</Text>
         <Text style={styles.infoTextAddress}>{props.address}</Text>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             style={styles.editBtn}
-            onPress={() => setModalVisible(!modalVisible)}>
+            onPress={() => setModalVisible(!modalVisible)}
+          >
             <Text>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.editBtn}
-            onPress={() => props.deleteSafeSpot(props.name)}>
+            style={styles.cancelBtn}
+            onPress={() => props.deleteSafeSpot(props.name)}
+          >
             <Text>Delete</Text>
           </TouchableOpacity>
         </View>
@@ -62,7 +65,8 @@ const SafeSpot = ({ props }) => {
             visible={modalVisible}
             onRequestClose={() => {
               Alert.alert("Modal has been closed.");
-            }}>
+            }}
+          >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Current Name: {props.name}</Text>
@@ -113,14 +117,16 @@ const SafeSpot = ({ props }) => {
                       address: newPhoneNumber,
                       oldName: props.name,
                     });
-                  }}>
+                  }}
+                >
                   <Text style={styles.textStyle}>Save Changes</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   style={{ ...styles.openButton, backgroundColor: "red" }}
                   onPress={() => {
                     setModalVisible(!modalVisible);
-                  }}>
+                  }}
+                >
                   <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableHighlight>
               </View>
@@ -173,7 +179,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontFamily: "Quicksand_600SemiBold",
+    fontFamily: "Quicksand_700Bold",
     fontSize: 16,
   },
   editBtn: {
@@ -185,7 +191,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 16,
     marginLeft: 15,
-    // marginTop: 10,
+  },
+  cancelBtn: {
+    borderRadius: 40,
+    backgroundColor: "#F94545",
+    color: "white",
+    padding: 12,
+    width: 100,
+    alignItems: "center",
+    fontSize: 16,
+    marginLeft: 15,
   },
   infoTextName: {
     fontSize: 16,
