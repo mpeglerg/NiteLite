@@ -86,13 +86,6 @@ const MapModal = (props) => {
           >
             <Icon size={38} name="ios-call" style={{ alignSelf: "center" }} />
           </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.buttons}
-            onPress={onShare}
-          >
-            <Icon size={38} name="ios-share" style={{ alignSelf: "center" }} />
-          </TouchableOpacity>
         </View>
         {/* <RouteList /> */}
       </ScrollView>

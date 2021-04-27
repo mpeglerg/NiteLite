@@ -22,8 +22,9 @@ import {
   Nunito_700Bold,
   Nunito_800ExtraBold,
 } from "@expo-google-fonts/nunito";
+import { connect } from "react-redux";
 
-const LogInScreen = ({ navigation }) => {
+const LogInScreen = (props) => {
   const [returningUserName, setReturningUserName] = useState("");
   const [returningUserPassword, setReturningUserPassword] = useState("");
   let [fontsLoaded] = useFonts({
@@ -76,18 +77,19 @@ const LogInScreen = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.logInButtonContainer}
-          onPress={() =>
+          onPress={() => {
             verifyCredentials(
-              navigation,
+              props.navigation,
+              props.updateUserName,
+              props.updatePassword,
               returningUserName,
               returningUserPassword
-            )
-          }
-        >
+            );
+          }}>
           <Text style={styles.logInButtonText}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Sign Up")}>
           <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
           <Text style={styles.signUpText2}>Sign Up!</Text>
         </TouchableOpacity>
@@ -96,7 +98,13 @@ const LogInScreen = ({ navigation }) => {
   }
 };
 
-async function verifyCredentials(navigation, username, password) {
+async function verifyCredentials(
+  navigation,
+  updateUserName,
+  updatePassword,
+  username,
+  password
+) {
   username = username.trim();
   password = password.trim();
   if (username === "") {
@@ -109,7 +117,8 @@ async function verifyCredentials(navigation, username, password) {
   }
   let response = await verifyLogin(username, password);
   if (response == 1) {
-    // TODO: set state with username here
+    updateUserName(username);
+    updatePassword(password);
     navigation.navigate("Home");
   } else if (response == 2) {
     alert("Username not found. Try again.");
@@ -125,13 +134,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     padding: 35,
-    // backgroundColor: '#151965',
-    // backgroundColor: '#0f4c75',
-    // backgroundColor: '#102849',
-    // backgroundColor: '#010068',
     backgroundColor: colors.backgroundColor,
     alignItems: "center",
-    // margin: 5
   },
   icon: {
     flexDirection: "row",
@@ -184,4 +188,22 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogInScreen;
+const mapStateToProps = (state) => {
+  return {
+    emergencyContacts: state.emergencyContacts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUserName: (id) => {
+      console.log("CALLED", id);
+      dispatch({ type: "UPDATE_USERNAME", payload: id });
+    },
+    updatePassword: (id) => {
+      dispatch({ type: "UPDATE_PASSWORD", payload: id });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInScreen);

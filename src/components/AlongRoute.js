@@ -102,7 +102,7 @@ const AlongRoute = (props) => {
               {walkScore? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
               {walkScore? 
               <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>Val</Text>
+                <Text style={styles.valueText}>{walkscore}</Text>
               </View>
               : null}
             </View>
