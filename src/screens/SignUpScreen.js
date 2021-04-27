@@ -35,8 +35,9 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { connect } from "react-redux";
 
-const SignUpScreen = ({ navigation }) => {
+const SignUpScreen = (props) => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -56,8 +57,7 @@ const SignUpScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+          behavior={Platform.OS === "ios" ? "padding" : "height"}>
           <Text style={styles.header}>Welcome Owlette!</Text>
           <View style={styles.icon}>
             <UserIcon
@@ -130,15 +130,20 @@ const SignUpScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.ContinueContainer}
             onPress={() => {
-              objectifyAndNav(
-                navigation,
-                userName,
-                userEmail,
-                userPassword,
-                userPhoneNumber
-              );
-            }}
-          >
+              {
+                props.updateUserName(userName);
+                props.updatePassword(userPassword);
+                props.updatePhoneNumber(userPhoneNumber);
+                props.updateEmail(userEmail);
+                objectifyAndNav(
+                  props.navigation,
+                  userName,
+                  userEmail,
+                  userPassword,
+                  userPhoneNumber
+                );
+              }
+            }}>
             <View>
               <Text style={styles.ContinueText}>Continue</Text>
               {/* <ArrowIcon style={styles.SignUpIcons} size={18} name="arrow-right" color="white"/> */}
@@ -283,4 +288,30 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+const mapStateToProps = (state) => {
+  return {
+    emergencyContacts: state.emergencyContacts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUserName: (id) => {
+      console.log("CALLED", id);
+      dispatch({ type: "UPDATE_USERNAME", payload: id });
+    },
+    updatePassword: (id) => {
+      dispatch({ type: "UPDATE_PASSWORD", payload: id });
+    },
+    updateEmail: (id) => {
+      console.log("CALLED", id);
+      dispatch({ type: "UPDATE_EMAIL", payload: id });
+    },
+    updatePhoneNumber: (id) => {
+      console.log("CALLED", id);
+      dispatch({ type: "UPDATE_PHONE_NUMBER", payload: id });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);

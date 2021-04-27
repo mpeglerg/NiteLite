@@ -18,11 +18,13 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import owl1 from "./../images/owl1.png";
 import owl2 from "./../images/owl2.png";
+import { connect } from "react-redux";
 
 // TODO: remove extraneous comments
-const EmergencyContacts = ({ navigation }) => {
-  let object = navigation.getParam("object", "missing");
+const EmergencyContacts = (props) => {
+  let object = props.navigation.getParam("object", "missing");
   const [name, setName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   let [fontsLoaded] = useFonts({
@@ -40,6 +42,7 @@ const EmergencyContacts = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
+        {console.log("EMERGENCY CONTACT PROPS", props)}
         <Text style={styles.header}>
           Who would you like to call during an Emergency?
         </Text>
@@ -86,16 +89,14 @@ const EmergencyContacts = ({ navigation }) => {
           }}
           value={contactPhone}
         />
-        {/* <Button
-        title="Complete Profile"
-        
-      ></Button> */}
         <TouchableOpacity
           style={styles.signUpButton}
           onPress={() => {
-            objectifyAndNav(navigation, object, name, contactPhone);
-          }}
-        >
+            props.addEmergencyContact({ name: name, number: contactPhone });
+            // registerNewUser({name: , });
+            props.navigation.navigate("Home");
+            // objectifyAndNav(props.navigation, object, name, contactPhone);
+          }}>
           <Text style={styles.signUpText}>Complete Profile!</Text>
         </TouchableOpacity>
         <View style={{ flex: 1, justifyContent: "flex-end", marginTop: 20 }}>
@@ -112,11 +113,30 @@ function objectifyAndNav(navigation, object, name, contactPhone) {
   object.set("eNumber", contactPhone);
 
   // call firebase function to set all of these items in the object
+  // {usernamename, number: password: email, crimeRates, walkscore, lightning, construction, safeSpots{} emergencyContacts}
+
+  // add to redux store: email, phone number, emergencyContact from userSetUp
   registerNewUser(object);
   // navigate to next page
   navigation.navigate("Home", { text: object.get("name") });
 }
-export default EmergencyContacts;
+
+const mapStateToProps = (state) => {
+  return {
+    emergencyContacts: state.emergencyContacts,
+    user: state.emergencyContacts.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addEmergencyContact: (name, number) => {
+      dispatch({ type: "ADD_EMERGENCY_CONTACT", id: { name, number } });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmergencyContacts);
 
 const styles = StyleSheet.create({
   container: {

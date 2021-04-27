@@ -20,7 +20,26 @@ const initState = {
 
 const emergencyContactsReducer = (state = initState, action) => {
   // TODO: Add reducer for ADD_EMERGENCY_CONTACT
-  if (action.type == "DELETE_EMERGENCY_CONTACT") {
+  if (action.type == "ADD_EMERGENCY_CONTACT") {
+    console.log("ADD EMERGENCY CONTACT PAYLOAD", action.id);
+    let newContactName = action.id.name.name;
+    let newContactNumber = action.id.name.number;
+    console.log("newContactName", newContactName);
+    console.log("newContactNumber", newContactNumber);
+
+    let newEmergencyContacts = [
+      ...state.emergencyContacts,
+      { name: newContactName, number: newContactNumber },
+    ];
+    console.log("NEW STATE", {
+      ...state,
+      emergencyContacts: newEmergencyContacts,
+    });
+    return {
+      ...state,
+      emergencyContacts: newEmergencyContacts,
+    };
+  } else if (action.type == "DELETE_EMERGENCY_CONTACT") {
     let newEmergencyContacts = state.emergencyContacts.filter((contact) => {
       return action.id.name !== contact.name;
     });
@@ -54,6 +73,18 @@ const emergencyContactsReducer = (state = initState, action) => {
     return {
       ...state,
       user: { ...state.user, password: newPassword },
+    };
+  } else if (action.type == "UPDATE_EMAIL") {
+    let newEmail = action.payload;
+    return {
+      ...state,
+      user: { ...state.user, email: newEmail },
+    };
+  } else if (action.type == "UPDATE_PHONE_NUMBER") {
+    let newPhoneNumber = action.payload;
+    return {
+      ...state,
+      user: { ...state.user, phoneNumber: newPhoneNumber },
     };
   } else if (action.type == "UPDATE_CONSTRUCTION_PREFERENCES") {
     let construction = action.payload;
