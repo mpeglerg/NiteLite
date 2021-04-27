@@ -124,15 +124,17 @@ const AccountScreen = (props) => {
         </View>
         <View style={styles.safeSpotContainer}>
           {safePlaceInput != "" ? (
-            <Button
-              title="Add safe spot"
+            <TouchableOpacity
+              style={styles.addSafeSpotBtn}
               onPress={() =>
                 props.addSafeSpot({
                   name: safePlaceInput,
                   address: "1 LMU Drive",
                 })
               }
-            ></Button>
+            >
+              <Text style={styles.btnText}>Add safe spot</Text>
+            </TouchableOpacity>
           ) : null}
           {props.safeSpots.safeSpots.map((safeSpot) => {
             return (
@@ -243,5 +245,19 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontFamily: "Quicksand_600SemiBold",
+  },
+  addSafeSpotBtn: {
+    borderRadius: 40,
+    backgroundColor: "#30C5F4",
+    color: "white",
+    padding: 12,
+    // width: 90 ,
+    alignItems: "center",
+    // marginLeft: 15,
+    marginBottom: 18,
+  },
+  btnText: {
+    fontFamily: "Quicksand_700Bold",
+    fontSize: 16,
   },
 });
