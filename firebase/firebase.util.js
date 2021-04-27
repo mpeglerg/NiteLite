@@ -32,9 +32,10 @@ export function registerNewUser(object) {
     email: email,
     password: object.get("password"),
     phoneNumber: phoneNumber,
-    busySidewalks: object.get("busySidewalks"),
-    openBusinesses: object.get("openBusinesses"),
-    policeStations: object.get("policeStations"),
+    crimeRates: object.get("crimeRates"),
+    walkScore: object.get("walkScore"),
+    lighting: object.get("lighting"),
+    construction: object.get("construction"),
     safeLocations: object.get("safePlaces"),
     emergencyNumber: emergencyContact,
   });
@@ -117,17 +118,18 @@ export async function verifyPhone(phoneNumber) {
 
 export async function loadUserData(userName) {
   var ref = await firebase.database().ref("users/" + userName);
-
   return ref.once("value").then(function (snapshot) {
-    var busySidewalks = snapshot.child("busySidewalks").val();
-    var policeStations = snapshot.child("policeStations").val();
-    var openBusinesses = snapshot.child("openBusinesses").val();
+    var crimeRates = snapshot.child("crimeRates").val();
+    var construction = snapshot.child("construction").val();
+    var lighting = snapshot.child("lighting").val();
+    var walkScore = snapshot.child("walkScore").val();
     var emergencyNumber = snapshot.child("emergencyNumber").val();
     var safeLocations = snapshot.child("safeLocations").val();
     let userData = {
-      busySidewalks,
-      policeStations,
-      openBusinesses,
+      construction,
+      crimeRates,
+      lighting,
+      walkScore,
       emergencyNumber,
       safeLocations,
     };
