@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { colors } from "../styles/colors.js";
 
 const AlongRouteIcon = () => {
@@ -14,7 +14,14 @@ const AlongRouteIcon = () => {
     >
       <View style={styles.textStyle}>
         <View style={{ flexDirection: "row" }}>
-          <View activeOpacity={0.7} style={styles.iconCircle} />
+          <View activeOpacity={0.7} style={styles.iconCircle}>
+            <Icon
+              // style={styles.logInIcons}
+              size={18}
+              name="heart-pulse"
+              // color="white"
+            />
+          </View>
           <View activeOpacity={0.7} style={styles.iconCircle} />
           <View activeOpacity={0.7} style={styles.iconCircle} />
         </View>
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
   iconCircle: {
     // display: "flex",
     // flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "red",
     borderColor: colors.tertiaryBlue,
     borderWidth: 2,
     borderRadius: 50,
