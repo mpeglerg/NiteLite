@@ -63,12 +63,12 @@ const AlongRoute = (props) => {
           <View style={styles.infoTextRow1}>
             <Text style={styles.infoText}>Safety Score</Text>
             <Text style={styles.infoText}>Area Crime Rate</Text>
-            <Text style={styles.infoText}> {walkscore} </Text>
+            <Text style={styles.infoText}>Avg Walkscore</Text>
           </View>
           <View style={{ flexDirection: "row" }}>
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
-              <Text style={styles.valueText}>Val</Text>
+              <Text style={styles.valueText}>{props.safeSpots.safeSpots.length}</Text>
             </View>
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
@@ -76,7 +76,7 @@ const AlongRoute = (props) => {
             </View>
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
-              <Text style={styles.valueText}>Val</Text>
+              <Text style={styles.valueText}>{walkscore}</Text>
             </View>
           </View>
           <View style={styles.infoTextRow2}>
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => {
   return {
+    safeSpots: state.safeSpots,
     directions: state.directions,
     currentLocation: state.currentLocation,
   };
