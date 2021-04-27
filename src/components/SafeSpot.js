@@ -113,8 +113,9 @@ const SafeSpot = ({ props }) => {
                   onPress={() => {
                     setModalVisible(!modalVisible);
                     props.editSafeSpot({
-                      name: "TEST",
-                      address: "1 LMU DRIVE???",
+                      name: newContactName,
+                      address: newPhoneNumber,
+                      oldName: props.name,
                     });
                   }}
                 >
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontFamily: "Quicksand_600SemiBold",
+    fontFamily: "Quicksand_700Bold",
     fontSize: 16,
   },
   editBtn: {
@@ -190,7 +191,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 16,
     marginLeft: 15,
-    // marginTop: 10,
   },
   infoTextName: {
     fontSize: 16,

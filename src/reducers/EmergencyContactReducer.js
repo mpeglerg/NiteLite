@@ -18,17 +18,20 @@ const emergencyContactsReducer = (state = initState, action) => {
       emergencyContacts: newEmergencyContacts,
     };
   } else if (action.type == "EDIT_EMERGENCY_CONTACT") {
-    console.log("action", action);
-    console.log("state", state);
-    // .replace()?
-    let newEmergencyContacts = state.emergencyContacts.filter((contact) => {
-      return action.payload.name !== contact.name;
+    let newEmergencyContacts = state.emergencyContacts.map((contact) => {
+      return contact.name === action.payload.oldName
+        ? {
+            name: action.payload.name ? action.payload.name : contact.name,
+            number: action.payload.number
+              ? action.payload.number
+              : contact.number,
+          }
+        : contact;
     });
-    newEmergencyContacts.push({
-      name: action.payload.name,
-      number: action.payload.number,
-    });
-    return { ...state, emergencyContacts: newEmergencyContacts };
+    return {
+      ...state,
+      emergencyContacts: newEmergencyContacts,
+    };
   } else {
     return state;
   }

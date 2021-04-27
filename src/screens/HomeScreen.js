@@ -20,8 +20,7 @@ const HomeScreen = (props) => {
         backgroundColor: colors.backgroundColor,
         padding: 16,
         height: 500,
-      }}
-    >
+      }}>
       {props.route.route.length === 0 ? <MapModal /> : <SearchPageModal />}
     </View>
   );
@@ -32,15 +31,12 @@ const HomeScreen = (props) => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}
-    >
+      }}>
       <View
         style={{
           height: "100%",
           width: "100%",
-        }}
-      >
-        {props.route.route.length !== 0 ? <RouteDirections /> : null}
+        }}>
         <MapView
           style={{ flex: 1 }}
           region={{
@@ -52,6 +48,9 @@ const HomeScreen = (props) => {
           showsUserLocation={true}
         />
         <MapContainer />
+        <View style={{ flex: 10 }}>
+          {props.route.displayRoute ? <RouteDirections /> : null}
+        </View>
         <View style={{ flex: 20 }}>
           <AudioButton />
         </View>

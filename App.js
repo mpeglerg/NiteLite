@@ -1,6 +1,5 @@
 import HomeScreen from "./src/screens/HomeScreen";
 import AccountScreen from "./src/screens/AccountScreen";
-// import AudioScreen from "./src/screens/AudioScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import LogInScreen from "./src/screens/LogInScreen";
 import SafetyQuizScreen from "./src/screens/SafetyQuizScreen";
@@ -23,6 +22,7 @@ import directionsReducer from "./src/reducers/DirectionsReducer";
 const AppDrawer = createDrawerNavigator({
   Home: HomeScreen,
   Account: AccountScreen,
+  "Log Out": LogInScreen,
 });
 
 const AppStack = createStackNavigator({

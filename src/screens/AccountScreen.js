@@ -149,19 +149,21 @@ const AccountScreen = (props) => {
             );
           })}
         </View>
-        <Text style={styles.header}>Emergency Contacts</Text>
-        {/* {props.emergencyContacts.contacts.map((contact) => {
+        <Text style={styles.contactHeader}>Emergency Contacts</Text>
+        {props.emergencyContacts.emergencyContacts.map((contact) => {
           return (
-            <EmergencyContact
-              props={{
-                name: contact.name,
-                number: contact.phoneNumber,
-                deleteEmergencyContact: props.deleteEmergencyContact,
-                editEmergencyContact: props.editEmergencyContact,
-              }}
-            />
+            <View style={styles.safeSpotContainer}>
+              <EmergencyContact
+                props={{
+                  name: contact.name,
+                  number: contact.phoneNumber,
+                  deleteEmergencyContact: props.deleteEmergencyContact,
+                  editEmergencyContact: props.editEmergencyContact,
+                }}
+              />
+            </View>
           );
-        })} */}
+        })}
       </ScrollView>
     );
   }
@@ -186,6 +188,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
     },
     editSafeSpot: (id) => {
+      console.log("ID", id);
       dispatch({ type: "EDIT_SAFE_SPOT", payload: id });
     },
     editEmergencyContact: (id) => {
@@ -223,6 +226,21 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 8,
     textShadowColor: "#F2EB46",
+  },
+  contactHeader: {
+    fontSize: 25,
+    // padding: 10,
+    textAlign: "center",
+    marginTop: 20,
+    marginHorizontal: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    lineHeight: 38,
+    fontFamily: "Quicksand_600SemiBold",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 8,
+    textShadowColor: "#F2EB46",
+    marginBottom: 15,
   },
   taskText: {
     fontSize: 16,

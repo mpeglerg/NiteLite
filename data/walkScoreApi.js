@@ -22,13 +22,15 @@ if (successStatuses.includes(response.status)) {
 }
 };
 const okCheck = statusCheck([HTTP_OK]);
+const paramsWithApiKey = params => {
+    const result = new URLSearchParams({...params, format: "json", wsapikey: API_KEY});
+    return result;
+};
 const query = (resource, params) =>
-    fetch(`${urlFor(resource)}?format=json&lat=${params.latitude}&lon=${params.longitude}&wsapikey=${API_KEY}`)
+    fetch(`${urlFor(resource)}?${paramsWithApiKey(params)}`)
         .then(okCheck, emitNativeError)
         .then(response => response.json());
-const getScore = params => {
-    return query(`score`, params);
-};
+const getScore = params => query(`score`, params);
 
 export {
     apiHost,

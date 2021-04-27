@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../styles/colors.js";
 import AlongRouteIcon from "./AlongRouteIcon.js";
 import SafetyScoreIcon from "react-native-vector-icons/FontAwesome";
 import WalkScoreIcon from "react-native-vector-icons/FontAwesome5";
-
+import { getScore } from "../../data/walkScoreApi";
 import { withOrientation } from "react-navigation";
 
-const AlongRoute = () => {
+const AlongRoute = (props) => {
+  const [error, setError] = useState(error !== null ? null : "Sorry, but something went wrong.");
+  const [walkscore, setWalkscore] = useState(0);
+
+  useEffect (() => {
+    async function getWalkScore() {
+      try {
+        const originScore = await getScore({
+          lat: props.directions.currentLocation.latitude, lon: props.directions.currentLocation.longitude
+        });
+        setWalkscore(originScore.walkscore)
+      } catch (error) {
+        setError("Sorry, but something went wrong.");
+      }
+    };
+    getWalkScore()
+  }, [])
+
   return (
     <View>
       <Text style={styles.headerText}> Along Route...</Text>
@@ -24,16 +42,13 @@ const AlongRoute = () => {
               style={styles.icon}
             /> */}
             <View activeOpacity={0.7} style={styles.iconCircle} />
-
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
-
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
               <Text style={styles.valueText}>Val</Text>
             </View>
-
             {/* <WalkScoreIcon
               size={22}
               name="walking"
@@ -50,11 +65,10 @@ const AlongRoute = () => {
             <Text style={styles.infoText}>Area Crime Rate</Text>
             <Text style={styles.infoText}>Avg Walkscore</Text>
           </View>
-
           <View style={{ flexDirection: "row" }}>
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
-              <Text style={styles.valueText}>Val</Text>
+              <Text style={styles.valueText}>{props.safeSpots.safeSpots.length}</Text>
             </View>
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
@@ -62,7 +76,7 @@ const AlongRoute = () => {
             </View>
             <View activeOpacity={0.7} style={styles.iconCircle} />
             <View style={styles.infoButtons}>
-              <Text style={styles.valueText}>Val</Text>
+              <Text style={styles.valueText}>{walkscore}</Text>
             </View>
           </View>
           <View style={styles.infoTextRow2}>
@@ -75,7 +89,6 @@ const AlongRoute = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   headerText: {
     marginTop: 25,
@@ -139,4 +152,11 @@ const styles = StyleSheet.create({
     paddingLeft: 13,
   },
 });
-export default AlongRoute;
+const mapStateToProps = (state) => {
+  return {
+    safeSpots: state.safeSpots,
+    directions: state.directions,
+    currentLocation: state.currentLocation,
+  };
+};
+export default connect(mapStateToProps, null)(AlongRoute);

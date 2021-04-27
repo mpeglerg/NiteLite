@@ -4,38 +4,66 @@ import { colors } from "../styles/colors.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import { connect } from "react-redux";
 import AlongRoute from "./AlongRoute";
+import { ScrollView } from "react-native-gesture-handler";
 
 const SearchPageModal = (props) => {
+  const durationString = props.route.route.routes[0].legs[0].duration.text;
+  const durationNum = parseInt(durationString.match(/\d+/g)[0]);
 
-  return (
-    props.route.route.routes.length !== 0 ? 
-    <View style={styles.centeredView}>
-      <View>
-      <Button style={styles.buttons} title="Cancel Route" onPress={() =>props.updateCurrentRoute([])}></Button>
+  const distance = props.route.route.routes[0].legs[0].distance.text;
 
-      <View style={styles.buttons}>
-          <Button style={styles.buttons} title="Start Route"></Button>
+  const eta = new Date();
+  eta.setMinutes(eta.getMinutes() + durationNum);
+  const splitEta = eta.toLocaleTimeString("en-US").split(/:| /);
+
+  return props.route.route.routes.length !== 0 ? (
+    <ScrollView>
+      <View style={styles.centeredView}>
+        <View>
+          {props.route.displayRoute ? null : (
+            <View>
+              <View style={styles.buttons}>
+                <Button
+                  style={styles.buttons}
+                  title="Start Route"
+                  onPress={() => props.displayRoute(true)}></Button>
+              </View>
+
+              <Text style={styles.textStyle}>
+                To {props.route.route.routes[0].legs[0].end_address}
+              </Text>
+            </View>
+          )}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              paddingHorizontal: 20,
+            }}>
+            <Text
+              style={
+                styles.textStyle
+              }>{`${durationString} (${distance})`}</Text>
+            <Text
+              style={
+                styles.textStyle
+              }>{`ETA: ${splitEta[0]}:${splitEta[1]} ${splitEta[3]}`}</Text>
+          </View>
         </View>
-        <Text style={styles.textStyle}>To {props.route.route.routes[0].legs[0].end_address}</Text>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-around",
-            paddingHorizontal: 20,
-          }}
-        >
-          <Text style={styles.textStyle}>15 min (5 mi)</Text>
-          <Text style={styles.textStyle}>ETA: 3:48pm</Text>
+        <AlongRoute />
+        <View style={{ flexDirection: "row", marginTop: 20 }}>
+          <View style={styles.buttons}>
+            <Button
+              title="Cancel"
+              onPress={() => {
+                props.updateCurrentRoute([]);
+                props.displayRoute(false);
+              }}></Button>
+          </View>
         </View>
       </View>
-      <AlongRoute />
-      <View style={{ flexDirection: "row", marginTop: 20 }}>
-        <View style={styles.buttons}>
-          <Button title="Cancel"></Button>
-        </View>
-      </View>
-    </View> : null
-  );
+    </ScrollView>
+  ) : null;
 };
 
 const styles = StyleSheet.create({
@@ -59,21 +87,20 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateDirections: (destination) => {
-      dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
-    },
     updateCurrentRoute: (route) => {
       dispatch({ type: "UPDATE_CURRENT_ROUTE", payload: route });
+    },
+    displayRoute: (bool) => {
+      dispatch({ type: "DISPLAY_ROUTE", payload: bool });
     },
   };
 };
 const mapStateToProps = (state) => {
   return {
     emergencyContacts: state.emergencyContacts,
-    route: state.directions
+    route: state.directions,
   };
 };
 
