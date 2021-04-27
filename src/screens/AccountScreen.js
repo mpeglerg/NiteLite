@@ -17,16 +17,15 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
-
 const AccountScreen = (props) => {
-  const [openBusinesses, setOpenBusinesses] = useState(false);
-  const [policeStations, setPoliceStations] = useState(false);
-  const [busySidewalks, setBusySidewalks] = useState(false);
+  const [crimeRates, setCrimeRates] = useState(false);
+  const [walkScore, setWalkScore] = useState(false);
+  const [lighting, setLighting] = useState(false);
+  const [construction, setConstruction] = useState(false);
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [enterNewSafeSpot, setEnterNewSafeSpot] = useState(false);
   const [safePlaceNameInput, setSafePlaceNameInput] = useState("");
   const [safePlaceAddressInput, setSafePlaceAddressInput] = useState("");
-
   let [fontsLoaded] = useFonts({
     CoveredByYourGrace_400Regular,
     Quicksand_500Medium,
@@ -59,15 +58,15 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setOpenBusinesses(!openBusinesses)}
+              onPress={() => setCrimeRates(!crimeRates)}
             >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
-                name={openBusinesses ? "check-box" : "check-box-outline-blank"}
+                name={crimeRates ? "check-box" : "check-box-outline-blank"}
               />
             </TouchableOpacity>
-            <Text style={styles.checkOptions}>Open Businesses</Text>
+            <Text style={styles.checkOptions}>Crime Rates</Text>
           </View>
           <View style={styles.check}>
             <TouchableOpacity
@@ -75,15 +74,15 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setPoliceStations(!policeStations)}
+              onPress={() => setWalkScore(!walkScore)}
             >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
-                name={policeStations ? "check-box" : "check-box-outline-blank"}
+                name={walkScore ? "check-box" : "check-box-outline-blank"}
               />
             </TouchableOpacity>
-            <Text style={styles.checkOptions}>Police Stations</Text>
+            <Text style={styles.checkOptions}>Walk Score</Text>
           </View>
           <View style={styles.check}>
             <TouchableOpacity
@@ -91,15 +90,31 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setBusySidewalks(!busySidewalks)}
+              onPress={() => setLighting(!lighting)}
             >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
-                name={busySidewalks ? "check-box" : "check-box-outline-blank"}
+                name={lighting ? "check-box" : "check-box-outline-blank"}
               />
             </TouchableOpacity>
-            <Text style={styles.checkOptions}>Busy Sidewalks</Text>
+            <Text style={styles.checkOptions}>Lighting</Text>
+          </View>
+          <View style={styles.check}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setConstruction(!construction)}
+            >
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={construction ? "check-box" : "check-box-outline-blank"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Construction</Text>
           </View>
           <Text style={styles.header}>Safe Spots</Text>
           {enterNewSafeSpot ? (
@@ -235,14 +250,12 @@ const AccountScreen = (props) => {
     );
   }
 };
-
 const mapStateToProps = (state) => {
   return {
     safeSpots: state.safeSpots,
     emergencyContacts: state.emergencyContacts,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteSafeSpot: (id) => {
@@ -262,9 +275,7 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(AccountScreen);
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

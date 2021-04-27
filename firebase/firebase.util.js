@@ -10,16 +10,13 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
   measurementId: process.env.MEASURE_ID,
 };
-
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }else {
   firebase.app(); // if already initialized, use that one
 }
-
 // Get a reference to the database service
 export const database = firebase.database();
-
 export function registerNewUser(object) {
   let phoneNumber = object.get("phoneNumber");
   let email = object.get("email");
@@ -32,28 +29,25 @@ export function registerNewUser(object) {
     email: email,
     password: object.get("password"),
     phoneNumber: phoneNumber,
-    busySidewalks: object.get("busySidewalks"),
-    openBusinesses: object.get("openBusinesses"),
-    policeStations: object.get("policeStations"),
+    crimeRates: object.get("crimeRates"),
+    walkScore: object.get("walkScore"),
+    lighting: object.get("lighting"),
+    construction: object.get("construction"),
     safeLocations: object.get("safePlaces"),
     emergencyNumber: emergencyContact,
   });
 }
-
-
 function addNumber(phoneNumber, username) {
   database.ref("users/numbers/" + phoneNumber).set({
     username: username,   
   });
 }
-
 function addEmail(email, username) {
   var emailMod = email.replace(/[.]/g, "");
   database.ref("users/emails/" + emailMod).set({
     username: username,
   });
 }
-
 export async function verifyLogin(username, password){
   var ref = await firebase.database().ref("users/" + username);
   let retVal = 0;
@@ -73,7 +67,6 @@ export async function verifyLogin(username, password){
     return retVal;
   });
 }
-
 export async function verifyUsername(username){
   var ref = await firebase.database().ref("users/" + username);
   let taken = false;
@@ -86,7 +79,6 @@ export async function verifyUsername(username){
     return taken;
   });
 }
-
 // TODO: instead of verifying with information in firebase, can we set it up with Google Accounts?
 export async function verifyEmail(email){
   var emailMod = email.replace(/[.]/g, "");
@@ -101,7 +93,6 @@ export async function verifyEmail(email){
     return retVal;
   });
 }
-
 // TODO: if changing verification to Google Accounts, do we need the user phone number?
 export async function verifyPhone(phoneNumber){
   var ref = await firebase.database().ref("users/numbers/" + phoneNumber);
@@ -115,5 +106,4 @@ export async function verifyPhone(phoneNumber){
     return retVal;
   });
 }
-
 export default firebase;

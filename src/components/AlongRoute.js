@@ -21,6 +21,11 @@ import {
 import { AppLoading } from "expo";
 
 const AlongRoute = (props) => {
+  //TODO: set states to user preferences
+  const [crimeRates, setCrimeRates] = useState(true);
+  const [walkScore, setWalkScore] = useState(true);
+  const [lighting, setLighting] = useState(true);
+  const [construction, setConstruction] = useState(true);
   const [error, setError] = useState(
     error !== null ? null : "Sorry, but something went wrong."
   );
@@ -71,31 +76,39 @@ const AlongRoute = (props) => {
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>Val</Text>
               </View>
+              {crimeRates?
               <CrimeRateIcon
                 size={22}
                 name="alert-octagram"
                 color="black"
                 style={styles.icon}
               />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              : null
+              }
+              {crimeRates? <View activeOpacity={0.7} style={styles.iconCircle} /> :null}
+              {crimeRates?
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>Val</Text>
               </View>
+              : null}
+              {walkScore?
               <WalkScoreIcon
                 size={22}
                 name="walking"
                 color="black"
                 style={styles.icon}
-              />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              /> : null}
+              {walkScore? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
+              {walkScore? 
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>Val</Text>
               </View>
+              : null}
             </View>
             <View style={styles.infoTextRow1}>
               <Text style={styles.infoText}>Safety Score</Text>
-              <Text style={styles.infoText}>Area Crime Rate</Text>
-              <Text style={styles.infoText}>Avg Walkscore</Text>
+              {crimeRates? <Text style={styles.infoText}>Area Crime Rate</Text> : null}
+              {walkScore? <Text style={styles.infoText}>Avg Walkscore</Text> : null}
             </View>
             <View style={{ flexDirection: "row" }}>
               <SafeSpotsIcon
@@ -110,31 +123,39 @@ const AlongRoute = (props) => {
                   {props.safeSpots.safeSpots.length}
                 </Text>
               </View>
+              {construction ?
               <OpenBizIcon
                 size={22}
                 name="shop"
                 color="black"
                 style={styles.icon}
               />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              : null}
+              {construction ? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
+              {construction ?
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>Val</Text>
               </View>
+              : null}
+              {lighting ?
               <LightingIcon
                 size={22}
                 name="lightbulb"
                 color="black"
                 style={styles.icon}
               />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              : null}
+              {lighting ? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
+              {lighting ?
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>{walkscore}</Text>
               </View>
+              : null}
             </View>
             <View style={styles.infoTextRow2}>
               <Text style={styles.infoText}>Safe Spots</Text>
-              <Text style={styles.infoText}>Open Biz</Text>
-              <Text style={styles.infoText}>Lighting</Text>
+              {construction ?<Text style={styles.infoText}>Construction</Text> : null}
+              {lighting ? <Text style={styles.infoText}>Lighting</Text> : null}
             </View>
           </View>
         </View>

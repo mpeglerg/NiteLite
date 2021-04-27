@@ -18,13 +18,13 @@ import {
   Quicksand_400Regular,
   Quicksand_600SemiBold,
 } from "@expo-google-fonts/quicksand";
-
 const SafetyQuizScreen = ({ navigation }) => {
   let object = navigation.getParam("object", "missing");
   const [safePlaceInput, setSafePlaceInput] = useState("");
-  const [openBusinesses, setOpenBusinesses] = useState(false);
-  const [policeStations, setPoliceStations] = useState(false);
-  const [busySidewalks, setBusySidewalks] = useState(false);
+  const [crimeRates, setCrimeRates] = useState(false);
+  const [walkScore, setWalkScore] = useState(false);
+  const [lighting, setLighting] = useState(false);
+  const [construction, setConstruction] = useState(false);
   let [fontsLoaded] = useFonts({
     Nunito_400Regular,
     Nunito_600SemiBold,
@@ -38,9 +38,8 @@ const SafetyQuizScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Set Route Preferences</Text>
-
         <Text style={styles.taskText}>
-          1. What makes you feel safe when walking?
+          1. What information is important to you?
         </Text>
         <View style={styles.check}>
           <TouchableOpacity
@@ -48,14 +47,14 @@ const SafetyQuizScreen = ({ navigation }) => {
               flexDirection: "row",
               alignItems: "center",
             }}
-            onPress={() => setOpenBusinesses(!openBusinesses)}>
+            onPress={() => setCrimeRates(!crimeRates)}>
             <Icon
               size={30}
               color={"#FFFFFF"}
-              name={openBusinesses ? "check-box" : "check-box-outline-blank"}
+              name={crimeRates ? "check-box" : "check-box-outline-blank"}
             />
           </TouchableOpacity>
-          <Text style={styles.checkOptions}>Open Businesses</Text>
+          <Text style={styles.checkOptions}>Crime Rates</Text>
         </View>
         <View style={styles.check}>
           <TouchableOpacity
@@ -63,14 +62,14 @@ const SafetyQuizScreen = ({ navigation }) => {
               flexDirection: "row",
               alignItems: "center",
             }}
-            onPress={() => setPoliceStations(!policeStations)}>
+            onPress={() => setWalkScore(!walkScore)}>
             <Icon
               size={30}
               color={"#FFFFFF"}
-              name={policeStations ? "check-box" : "check-box-outline-blank"}
+              name={walkScore ? "check-box" : "check-box-outline-blank"}
             />
           </TouchableOpacity>
-          <Text style={styles.checkOptions}>Police Stations</Text>
+          <Text style={styles.checkOptions}>Walk Score</Text>
         </View>
         <View style={styles.check}>
           <TouchableOpacity
@@ -78,16 +77,30 @@ const SafetyQuizScreen = ({ navigation }) => {
               flexDirection: "row",
               alignItems: "center",
             }}
-            onPress={() => setBusySidewalks(!busySidewalks)}>
+            onPress={() => setLighting(!lighting)}>
             <Icon
               size={30}
               color={"#FFFFFF"}
-              name={busySidewalks ? "check-box" : "check-box-outline-blank"}
+              name={lighting ? "check-box" : "check-box-outline-blank"}
             />
           </TouchableOpacity>
-          <Text style={styles.checkOptions}>Busy Sidewalks</Text>
+          <Text style={styles.checkOptions}>Lighting</Text>
         </View>
-
+        <View style={styles.check}>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            onPress={() => setConstruction(!construction)}>
+            <Icon
+              size={30}
+              color={"#FFFFFF"}
+              name={construction ? "check-box" : "check-box-outline-blank"}
+            />
+          </TouchableOpacity>
+          <Text style={styles.checkOptions}>Construction</Text>
+        </View>
         <Text style={styles.taskText}>
           2. Enter the addresses of places you consider "Safe Spots"
         </Text>
@@ -110,7 +123,6 @@ const SafetyQuizScreen = ({ navigation }) => {
           }}
           value={safePlaceInput}
         />
-
         <Text style={styles.taskText}>3. Set up Emergency Contacts</Text>
         {/* <View> */}
         <TouchableOpacity
@@ -118,9 +130,10 @@ const SafetyQuizScreen = ({ navigation }) => {
             objectifyAndNav(
               navigation,
               object,
-              openBusinesses,
-              policeStations,
-              busySidewalks,
+              crimeRates,
+              walkScore,
+              lighting,
+              construction,
               safePlaceInput
             );
           }}>
@@ -131,27 +144,25 @@ const SafetyQuizScreen = ({ navigation }) => {
     );
   }
 };
-
 function objectifyAndNav(
   navigation,
   object,
-  openBusinesses,
-  policeStations,
-  busySidewalks,
+  crimeRates,
+  walkScore,
+  lighting,
+  construction,
   safePlaceInput
 ) {
   // add new items to our object
-  object.set("busySidewalks", busySidewalks);
-  object.set("openBusinesses", openBusinesses);
-  object.set("policeStations", policeStations);
+  object.set("lighting", lighting);
+  object.set("crimeRates", crimeRates);
+  object.set("walkScore", walkScore);
+  object.set("construction", construction);
   object.set("safePlaces", safePlaceInput);
-
   // navigate to next page
   navigation.navigate("Emergency Contacts", { object: object });
 }
-
 export default SafetyQuizScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
