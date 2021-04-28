@@ -42,6 +42,8 @@ const MapContainer = (props) => {
   const [list, setList] = useState([]);
   const [safeSpotCoords, setSafeSpotCoords] = useState([]);
   const [error, setError] = useState(null);
+  let markers = []
+  let id = 0
 
   useEffect(() => {
     getCurrentLocation();
@@ -89,9 +91,6 @@ const MapContainer = (props) => {
         destination: `${destination.latitude},${destination.longitude}`
       });
     props.updateCurrentRoute(directions)
-    // TODO: props not updating with new directions I think???
-    console.log("after end address: ", props.route.route.routes[0].legs[0].end_address)
-    console.log("after end location: ", props.route.route.routes[0].legs[0].end_location)
   } catch (error) {
       setError("Sorry, but something went wrong.")
     }
@@ -99,11 +98,7 @@ const MapContainer = (props) => {
 
   const directToSafeSpot = (marker) => {
     props.displayRoute(false)
-    // TODO: navigate to directions page with new route
-    console.log("before end address: ", props.route.route.routes[0].legs[0].end_address)
-    console.log("before end location: ", props.route.route.routes[0].legs[0].end_location)
     props.updateDirections(marker)
-    // console.log("marker: ", marker)
     performQuery(marker)
   };
 
@@ -155,32 +150,19 @@ const MapContainer = (props) => {
           strokeColor="hotpink"
         />
         <Marker coordinate={props.directions.currentLocation}>
-          <Callout
-            // alphaHitTest
-            // tooltip
-            // onPress={e => {
-            //   if (
-            //     e.nativeEvent.action === 'marker-inside-overlay-press' ||
-            //     e.nativeEvent.action === 'callout-inside-press'
-            //   ) {
-            //     return;
-            //   }
-
-            //   Alert.alert('callout pressed');
-            // }}
-            style={styles.walkScoreView}
-          >
+          <Callout style={styles.walkScoreView}>
             <View>
               <Text>{`WalkScore: ${list.walkscore}\n${list.description}`}</Text>
             </View>
           </Callout>
         </Marker>
         {safeSpotCoords.map((marker) => (
-          <Marker image={safespotMarker} coordinate={marker}>
+          <Marker key={id++} image={safespotMarker} coordinate={marker} ref={ref => {markers[id] = ref}}>
             <Callout
               style={styles.safeSpotView}
               onPress={() => {
-                directToSafeSpot(marker);
+                directToSafeSpot(marker)
+                markers[id].hideCallout()
               }}
             >
               <Text>{`Route to this location`}</Text>
