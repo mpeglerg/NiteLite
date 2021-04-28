@@ -44,12 +44,7 @@ const EmergencyContacts = (props) => {
       <View style={styles.container}>
         <Text style={styles.header}>
           Who would you like to call during an Emergency?
-          {console.log("props", props)}
         </Text>
-        {console.log("props.emergencyContacts", props.emergencyContacts)}
-        {console.log("props.safeSpots", props.safeSpots)}
-        {console.log("props.user", props.user)}
-
         <Text style={styles.subtitle}>
           Set up your primary contact now and add more later in your account
           settings
@@ -106,19 +101,6 @@ const EmergencyContacts = (props) => {
               ...props.user,
               emergencyNumber: props.emergencyContacts.emergencyContacts,
               safeSpots: props.safeSpots.safeSpots,
-              // emergencyNumber: [
-              //   props.emergencyContacts.emergencyContacts[0] &&
-              //   props.emergencyContacts.emergencyContacts[0].name
-              //     ? props.emergencyContacts.emergencyContacts[0].name
-              //     : "Emergency Services",
-              //   props.emergencyContacts.emergencyContacts[0].number
-              //     ? props.emergencyContacts.emergencyContacts[0].number
-              //     : "911",
-              // ],
-              // safeSpots: props.safeSpots.safeSpots[0].address
-              //   ? props.safeSpots.safeSpots[0].address
-              //   : "",
-              // name: props.user.username,
             });
             props.navigation.navigate("Home");
           }}>

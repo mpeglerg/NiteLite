@@ -224,13 +224,14 @@ const AccountScreen = (props) => {
           })}
         </View>
         <Text style={styles.contactHeader}>Emergency Contacts</Text>
+        {console.log(props.emergencyContacts.emergencyContacts)}
         {props.emergencyContacts.emergencyContacts.map((contact) => {
           return (
             <View style={styles.safeSpotContainer}>
               <EmergencyContact
                 props={{
                   name: contact.name,
-                  number: contact.phoneNumber,
+                  number: contact.number,
                   deleteEmergencyContact: props.deleteEmergencyContact,
                   editEmergencyContact: props.editEmergencyContact,
                 }}
