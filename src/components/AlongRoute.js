@@ -23,7 +23,7 @@ import { AppLoading } from "expo";
 const AlongRoute = (props) => {
   //TODO: set states to user preferences
   const space = "          ";
-  const [crimeRates, setCrimeRates] = useState(false);
+  const [crimeRates, setCrimeRates] = useState(true);
   const [walkScore, setWalkScore] = useState(true);
   const [lighting, setLighting] = useState(true);
   const [construction, setConstruction] = useState(true);
