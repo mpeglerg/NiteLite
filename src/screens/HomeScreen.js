@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Linking } from "react-native";
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import MapModal from "../components/MapModal";
@@ -66,18 +66,22 @@ const HomeScreen = (props) => {
   const [callNumber, setCallNumber] = useState("");
 
   const triggerCall = () => {
-    const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(
-      /-/g,
-      ""
-    );
-
-    if (Platform.OS == "android") {
-      setCallNumber(`tel:${formattedNumber}`);
+    if (props.emergencyContacts.emergencyContacts.length === 0) {
+      return;
     } else {
-      setCallNumber(`telprompt:${formattedNumber}`);
-    }
-    if (callNumber.length !== 0) {
-      Linking.openURL(callNumber);
+      const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(
+        /-/g,
+        ""
+      );
+
+      if (Platform.OS == "android") {
+        setCallNumber(`tel:${formattedNumber}`);
+      } else {
+        setCallNumber(`telprompt:${formattedNumber}`);
+      }
+      if (callNumber.length !== 0) {
+        Linking.openURL(callNumber);
+      }
     }
   };
 

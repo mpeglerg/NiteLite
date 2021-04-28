@@ -255,7 +255,7 @@ const SafetyQuizScreen = (props) => {
               size={38}
               name="person-add"
               color="white"
-              style={{ alignSelf: "center" }}
+              style={{ alignSelf: "center", marginBottom: 55 }}
             />
           </TouchableOpacity>
         </ScrollView>

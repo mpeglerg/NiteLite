@@ -78,7 +78,7 @@ const MapModal = (props) => {
           </TouchableOpacity>
         </View>
         {/* TODO: make seperate emergency call component */}
-        <View style={styles.textStyle}>
+        {/* <View style={styles.textStyle}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.buttons}
@@ -86,7 +86,7 @@ const MapModal = (props) => {
           >
             <Icon size={38} name="ios-call" style={{ alignSelf: "center" }} />
           </TouchableOpacity>
-        </View>
+        </View> */}
         {/* <RouteList /> */}
       </ScrollView>
     </View>
