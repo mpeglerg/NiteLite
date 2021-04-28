@@ -99,39 +99,49 @@ const AlongRoute = (props) => {
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>{aggregateScore}</Text>
               </View>
-              {crimeRates?
-              <CrimeRateIcon
-                size={22}
-                name="alert-octagram"
-                color="black"
-                style={styles.icon}
-              />
-              : null
-              }
-              {crimeRates? <View activeOpacity={0.7} style={styles.iconCircle} /> :null}
-              {crimeRates?
-              <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>{crimeScore}</Text>
-              </View>
-              : null}
-              {walkScore?
-              <WalkScoreIcon
-                size={22}
-                name="walking"
-                color="black"
-                style={styles.icon}
-              /> : null}
-              {walkScore? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
-              {walkScore? 
-              <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>{walkscore}</Text>
-              </View>
-              : null}
+              {crimeRates ? (
+                <CrimeRateIcon
+                  size={22}
+                  name="alert-octagram"
+                  color="black"
+                  style={styles.icon}
+                />
+              ) : null}
+              {crimeRates ? (
+                <View activeOpacity={0.7} style={styles.iconCircle} />
+              ) : null}
+              {crimeRates ? (
+                <View style={styles.infoButtons}>
+                  <Text style={styles.valueText}>{crimeScore}</Text>
+                </View>
+              ) : null}
+              {walkScore ? (
+                <WalkScoreIcon
+                  size={22}
+                  name="walking"
+                  color="black"
+                  style={styles.icon}
+                />
+              ) : null}
+              {walkScore ? (
+                <View activeOpacity={0.7} style={styles.iconCircle} />
+              ) : null}
+              {walkScore ? (
+                <View style={styles.infoButtons}>
+                  <Text style={styles.valueText}>{walkscore}</Text>
+                </View>
+              ) : null}
             </View>
             <View style={styles.infoTextRow1}>
               <Text style={styles.infoText}>Safety Score</Text>
-              {crimeRates? <Text style={styles.infoText}>Area Crime Rate</Text> : <Text style={styles.infoText}>{space}</Text>}
-              {walkScore? <Text style={styles.infoText}>Avg Walkscore</Text> : null}
+              {crimeRates ? (
+                <Text style={styles.infoText}>Area Crime Rate</Text>
+              ) : (
+                <Text style={styles.infoText}>{space}</Text>
+              )}
+              {walkScore ? (
+                <Text style={styles.infoText}>Avg Walkscore</Text>
+              ) : null}
             </View>
             <View style={{ flexDirection: "row" }}>
               <SafeSpotsIcon
@@ -146,38 +156,46 @@ const AlongRoute = (props) => {
                   {props.safeSpots.safeSpots.length}
                 </Text>
               </View>
-              {construction ?
-              <ConstructionIcon
-                size={22}
-                name="ios-hammer"
-                color="black"
-                style={styles.icon}
-              />
-              : null}
-              {construction ? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
-              {construction ?
-              <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>{constructionScore}</Text>
-              </View>
-              : null}
-              {lighting ?
-              <LightingIcon
-                size={22}
-                name="lightbulb"
-                color="black"
-                style={styles.icon}
-              />
-              : null}
-              {lighting ? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
-              {lighting ?
-              <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>{streetlightScore}</Text>
-              </View>
-              : null}
+              {construction ? (
+                <ConstructionIcon
+                  size={22}
+                  name="ios-hammer"
+                  color="black"
+                  style={styles.icon}
+                />
+              ) : null}
+              {construction ? (
+                <View activeOpacity={0.7} style={styles.iconCircle} />
+              ) : null}
+              {construction ? (
+                <View style={styles.infoButtons}>
+                  <Text style={styles.valueText}>{constructionScore}</Text>
+                </View>
+              ) : null}
+              {lighting ? (
+                <LightingIcon
+                  size={22}
+                  name="lightbulb"
+                  color="black"
+                  style={styles.icon}
+                />
+              ) : null}
+              {lighting ? (
+                <View activeOpacity={0.7} style={styles.iconCircle} />
+              ) : null}
+              {lighting ? (
+                <View style={styles.infoButtons}>
+                  <Text style={styles.valueText}>{streetlightScore}</Text>
+                </View>
+              ) : null}
             </View>
             <View style={styles.infoTextRow2}>
               <Text style={styles.infoText}>Safe Spots</Text>
-              {construction ?<Text style={styles.infoText}>Construction</Text> : <Text style={styles.infoText}>{space}</Text>}
+              {construction ? (
+                <Text style={styles.infoText}>Construction</Text>
+              ) : (
+                <Text style={styles.infoText}>{space}</Text>
+              )}
               {lighting ? <Text style={styles.infoText}>Lighting</Text> : null}
             </View>
           </View>
@@ -238,6 +256,8 @@ const styles = StyleSheet.create({
     // marginHorizontal: 13,
     //OPTION 2
     justifyContent: "flex-start",
+    justifyContent: "space-around",
+    justifyContent: "space-between",
     paddingLeft: 30,
   },
   infoTextRow2: {
@@ -254,14 +274,14 @@ const styles = StyleSheet.create({
     // // alignSelf: "center",
     // marginLeft: 30,
 
-
     display: "flex",
     flexDirection: "row",
     //OPTION 1
-    // marginHorizontal: 13,
+    // marginHorizontal: 2,
     //OPTION 2
     justifyContent: "space-between",
-    paddingLeft: 30,
+    justifyContent: "space-evenly",
+    paddingLeft: 25,
   },
 });
 const mapStateToProps = (state) => {
