@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import MenuIcon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../styles/colors.js";
 import { AppLoading } from "expo";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -32,222 +33,251 @@ const AccountScreen = (props) => {
     Quicksand_700Bold,
     Quicksand_600SemiBold,
   });
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
-      <ScrollView contentContainerStyle={{ backgroundColor: "#010068" }}>
-        <View style={styles.container}>
-          <Text
+      <View>
+        <ScrollView contentContainerStyle={{ backgroundColor: "#010068" }}>
+          <TouchableOpacity
+            activeOpacity={0.7}
             style={{
-              fontFamily: "CoveredByYourGrace_400Regular",
-              fontSize: 40,
-              color: "white",
-              marginTop: 20,
+              position: "relative",
+              left: 0,
+              top: 10,
+              borderRadius: 5,
+              backgroundColor: colors.tertiaryBlue,
+              borderColor: colors.backgroundColor,
+              borderWidth: 3,
+              width: 47,
+              height: 47,
+              marginBottom: 10,
+              marginLeft: 7,
+              justifyContent: "center",
+              alignItems: "center",
             }}
+            // TODO:
+            // onPress={}
           >
-            Account Settings
-          </Text>
-          <Text style={styles.header}>Route Preferences</Text>
-          <Text style={styles.taskText}>
-            What makes you feel safe when walking?
-          </Text>
-          <View style={styles.check}>
-            <TouchableOpacity
+            <MenuIcon size={35} color="white" name="menu" />
+          </TouchableOpacity>
+          <View style={styles.container}>
+            <Text
               style={{
-                flexDirection: "row",
-                alignItems: "center",
+                fontFamily: "CoveredByYourGrace_400Regular",
+                fontSize: 40,
+                color: "white",
+                marginTop: 20,
               }}
-              onPress={() =>
-                props.updateWalkscorePreferences(!props.user.walkScore)
-              }
             >
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.user.walkScore ? "check-box" : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Walkscore</Text>
-          </View>
-          <View style={styles.check}>
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onPress={() =>
-                props.updateStreetlightPreferences(!props.user.lighting)
-              }
-            >
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.user.lighting ? "check-box" : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Streetlights</Text>
-          </View>
-          <View style={styles.check}>
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onPress={() =>
-                props.updateConstructionPreferences(!props.user.construction)
-              }
-            >
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.user.construction
-                    ? "check-box"
-                    : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Active Construction Sites</Text>
-          </View>
-          <View style={styles.check}>
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onPress={() =>
-                props.updateCrimeRatePreferences(!props.user.crimeRates)
-              }
-            >
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.user.crimeRates
-                    ? "check-box"
-                    : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Crime Rates</Text>
-          </View>
-          <Text style={styles.header}>Safe Spots</Text>
-          {enterNewSafeSpot ? (
-            <View>
-              <TextInput
-                style={{
-                  height: 40,
-                  width: 220,
-                  backgroundColor: "white",
-                  borderRadius: 22,
-                  padding: 8,
-                  marginBottom: 25,
-                  marginTop: 14,
-                  alignSelf: "center",
-                }}
-                placeholder={"Enter location name"}
-                onChangeText={(text) => {
-                  setSafePlaceNameInput(text);
-                }}
-                value={safePlaceNameInput}
-              />
-              <TextInput
-                style={{
-                  height: 40,
-                  width: 320,
-                  backgroundColor: "white",
-                  borderRadius: 20,
-                  padding: 15,
-                  marginBottom: 30,
-                  alignSelf: "center",
-                  padding: 8,
-                }}
-                placeholder={"Enter address"}
-                onChangeText={(text) => {
-                  setSafePlaceAddressInput(text);
-                }}
-                value={safePlaceAddressInput}
-              />
-              <View
+              Account Settings
+            </Text>
+            <Text style={styles.header}>Route Preferences</Text>
+            <Text style={styles.taskText}>
+              What makes you feel safe when walking?
+            </Text>
+            <View style={styles.check}>
+              <TouchableOpacity
                 style={{
                   flexDirection: "row",
-                  alignSelf: "center",
-                  marginBottom: 30,
-                  // justifyContent: "space-between",
+                  alignItems: "center",
                 }}
+                onPress={() =>
+                  props.updateWalkscorePreferences(!props.user.walkScore)
+                }
               >
-                <TouchableOpacity
-                  style={styles.editBtn}
-                  onPress={() => {
-                    props.addSafeSpot({
-                      name: safePlaceNameInput,
-                      address: safePlaceAddressInput,
-                    });
-                    setSafePlaceAddressInput("");
-                    setSafePlaceNameInput("");
-                    setEnterNewSafeSpot(!enterNewSafeSpot);
-                  }}
-                >
-                  <Text style={styles.textStyle}>Save new safe spot</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.cancelBtn}
-                  onPress={() => {
-                    setSafePlaceAddressInput("");
-                    setSafePlaceNameInput("");
-                    setEnterNewSafeSpot(!enterNewSafeSpot);
-                  }}
-                >
-                  <Text style={styles.textStyle}>Cancel</Text>
-                </TouchableOpacity>
-              </View>
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.user.walkScore
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Walkscore</Text>
             </View>
-          ) : null}
-        </View>
-        <View style={styles.safeSpotContainer}>
-          {enterNewSafeSpot ? null : (
-            <TouchableOpacity
-              style={styles.addSafeSpotBtn}
-              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}
-            >
-              <Text style={styles.btnText}>Add safe spot</Text>
-            </TouchableOpacity>
-          )}
-          {props.safeSpots.safeSpots.map((safeSpot) => {
-            return (
-              <SafeSpot
-                props={{
-                  name: safeSpot.name,
-                  address: safeSpot.address,
-                  deleteSafeSpot: props.deleteSafeSpot,
-                  editSafeSpot: props.editSafeSpot,
+            <View style={styles.check}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
-              />
+                onPress={() =>
+                  props.updateStreetlightPreferences(!props.user.lighting)
+                }
+              >
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.user.lighting
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Streetlights</Text>
+            </View>
+            <View style={styles.check}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                onPress={() =>
+                  props.updateConstructionPreferences(!props.user.construction)
+                }
+              >
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.user.construction
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Active Construction Sites</Text>
+            </View>
+            <View style={styles.check}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                onPress={() =>
+                  props.updateCrimeRatePreferences(!props.user.crimeRates)
+                }
+              >
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.user.crimeRates
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Crime Rates</Text>
+            </View>
+            <Text style={styles.header}>Safe Spots</Text>
+            {enterNewSafeSpot ? (
+              <View>
+                <TextInput
+                  style={{
+                    height: 40,
+                    width: 220,
+                    backgroundColor: "white",
+                    borderRadius: 22,
+                    padding: 8,
+                    marginBottom: 25,
+                    marginTop: 14,
+                    alignSelf: "center",
+                  }}
+                  placeholder={"Enter location name"}
+                  onChangeText={(text) => {
+                    setSafePlaceNameInput(text);
+                  }}
+                  value={safePlaceNameInput}
+                />
+                <TextInput
+                  style={{
+                    height: 40,
+                    width: 320,
+                    backgroundColor: "white",
+                    borderRadius: 20,
+                    padding: 15,
+                    marginBottom: 30,
+                    alignSelf: "center",
+                    padding: 8,
+                  }}
+                  placeholder={"Enter address"}
+                  onChangeText={(text) => {
+                    setSafePlaceAddressInput(text);
+                  }}
+                  value={safePlaceAddressInput}
+                />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignSelf: "center",
+                    marginBottom: 30,
+                    // justifyContent: "space-between",
+                  }}
+                >
+                  <TouchableOpacity
+                    style={styles.editBtn}
+                    onPress={() => {
+                      props.addSafeSpot({
+                        name: safePlaceNameInput,
+                        address: safePlaceAddressInput,
+                      });
+                      setSafePlaceAddressInput("");
+                      setSafePlaceNameInput("");
+                      setEnterNewSafeSpot(!enterNewSafeSpot);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>Save new safe spot</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.cancelBtn}
+                    onPress={() => {
+                      setSafePlaceAddressInput("");
+                      setSafePlaceNameInput("");
+                      setEnterNewSafeSpot(!enterNewSafeSpot);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ) : null}
+          </View>
+          <View style={styles.safeSpotContainer}>
+            {enterNewSafeSpot ? null : (
+              <TouchableOpacity
+                style={styles.addSafeSpotBtn}
+                onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}
+              >
+                <Text style={styles.btnText}>Add safe spot</Text>
+              </TouchableOpacity>
+            )}
+            {props.safeSpots.safeSpots.map((safeSpot) => {
+              return (
+                <SafeSpot
+                  props={{
+                    name: safeSpot.name,
+                    address: safeSpot.address,
+                    deleteSafeSpot: props.deleteSafeSpot,
+                    editSafeSpot: props.editSafeSpot,
+                  }}
+                />
+              );
+            })}
+          </View>
+          <Text style={styles.contactHeader}>Emergency Contacts</Text>
+          {console.log(props.emergencyContacts.emergencyContacts)}
+          {props.emergencyContacts.emergencyContacts.map((contact) => {
+            return (
+              <View style={styles.safeSpotContainer}>
+                <EmergencyContact
+                  props={{
+                    name: contact.name,
+                    number: contact.number,
+                    deleteEmergencyContact: props.deleteEmergencyContact,
+                    editEmergencyContact: props.editEmergencyContact,
+                  }}
+                />
+              </View>
             );
           })}
-        </View>
-        <Text style={styles.contactHeader}>Emergency Contacts</Text>
-        {console.log(props.emergencyContacts.emergencyContacts)}
-        {props.emergencyContacts.emergencyContacts.map((contact) => {
-          return (
-            <View style={styles.safeSpotContainer}>
-              <EmergencyContact
-                props={{
-                  name: contact.name,
-                  number: contact.number,
-                  deleteEmergencyContact: props.deleteEmergencyContact,
-                  editEmergencyContact: props.editEmergencyContact,
-                }}
-              />
-            </View>
-          );
-        })}
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 };
@@ -296,6 +326,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
     textAlign: "center",
     alignItems: "center",
+    zIndex: 0,
   },
   safeSpotContainer: {
     width: "85%",
