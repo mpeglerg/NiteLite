@@ -11,6 +11,7 @@ import RouteDirections from "../components/RouteDirections";
 import AudioButton from "../components/AudioButton";
 import Icon from "react-native-vector-icons/Ionicons";
 import { loadUserData } from "../../firebase/firebase.util";
+import MenuIcon from "react-native-vector-icons/MaterialIcons";
 
 const HomeScreen = (props) => {
   const sheetRef = useState(null);
@@ -112,8 +113,35 @@ const HomeScreen = (props) => {
         />
         <MapContainer />
         <View style={{ position: "absolute", left: 0, top: 0 }}>
-          {props.route.displayRoute ? <RouteDirections /> : null}
+          {props.route.displayRoute ? (
+            <RouteDirections />
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{
+                position: "absolute",
+                left: 0,
+                top: 10,
+                borderRadius: 5,
+                backgroundColor: colors.tertiaryBlue,
+                borderColor: colors.backgroundColor,
+                borderWidth: 3,
+                width: 47,
+                height: 47,
+                marginBottom: 100,
+                marginLeft: 10,
+                justifyContent: "center",
+                alignItems: "center",
+                alignSelf: "flex-end",
+              }}
+              // TODO:
+              // onPress={}
+            >
+              <MenuIcon size={35} color="white" name="menu" />
+            </TouchableOpacity>
+          )}
         </View>
+
         <View style={{ position: "absolute", right: 0, bottom: 100 }}>
           <AudioButton />
         </View>
