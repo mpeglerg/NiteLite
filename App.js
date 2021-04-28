@@ -30,9 +30,7 @@ const AppStack = createStackNavigator({
 });
 
 const AuthStack = createStackNavigator({
-  // "Log In": LogInScreen,
-  "Log In": SafetyQuizScreen,
-
+  "Log In": LogInScreen,
   "Sign Up": SignUpScreen,
   "Safety Preferences": SafetyQuizScreen,
   "Emergency Contacts": EmergencyContacts,
