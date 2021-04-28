@@ -46,7 +46,6 @@ const MapContainer = (props) => {
   let id = 0
 
   useEffect(() => {
-    getCurrentLocation();
     let mounted = true;
     getSafeSpotCoords();
     return () => (mounted = false);
@@ -130,17 +129,18 @@ const MapContainer = (props) => {
       <MapView
         style={StyleSheet.absoluteFill}
         ref={(c) => setMapUIView(c)} // eslint-disable-line react/jsx-no-bind
-        onMapReady={getCurrentLocation}
-        onPress={onMapPress}
-        followsUserLocation={true}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-        initialRegion={{
+        region={{
           latitude: props.directions.currentLocation.latitude,
           longitude: props.directions.currentLocation.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0922,
         }}
+        onMapReady={getCurrentLocation}
+        onPress={onMapPress}
+        // followsUserLocation={true}
+        showsUserLocation={true}
+        showsMyLocationButton={true}
+        moveOnMarkerPress={true}
       >
         <MapViewDirections
           origin={props.directions.currentLocation}
