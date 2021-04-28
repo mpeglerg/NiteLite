@@ -57,7 +57,7 @@ const AccountScreen = (props) => {
             justifyContent: "center",
             alignItems: "center",
           }}
-          // onPress={() => props.navigation.openDrawer()}
+          onPress={() => props.navigation.openDrawer()}
         >
           <MenuIcon size={35} color="white" name="menu" />
         </TouchableOpacity>
