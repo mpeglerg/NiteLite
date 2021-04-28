@@ -17,16 +17,15 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
-
 const AccountScreen = (props) => {
-  const [openBusinesses, setOpenBusinesses] = useState(false);
-  const [policeStations, setPoliceStations] = useState(false);
-  const [busySidewalks, setBusySidewalks] = useState(false);
+  const [crimeRates, setCrimeRates] = useState(false);
+  const [walkScore, setWalkScore] = useState(false);
+  const [lighting, setLighting] = useState(false);
+  const [construction, setConstruction] = useState(false);
   const [safePlaceInput, setSafePlaceInput] = useState("");
   const [enterNewSafeSpot, setEnterNewSafeSpot] = useState(false);
   const [safePlaceNameInput, setSafePlaceNameInput] = useState("");
   const [safePlaceAddressInput, setSafePlaceAddressInput] = useState("");
-
   let [fontsLoaded] = useFonts({
     CoveredByYourGrace_400Regular,
     Quicksand_500Medium,
@@ -252,7 +251,6 @@ const AccountScreen = (props) => {
     );
   }
 };
-
 const mapStateToProps = (state) => {
   return {
     safeSpots: state.safeSpots,
@@ -260,7 +258,6 @@ const mapStateToProps = (state) => {
     user: state.emergencyContacts.user,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteSafeSpot: (id) => {
@@ -292,9 +289,7 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(AccountScreen);
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

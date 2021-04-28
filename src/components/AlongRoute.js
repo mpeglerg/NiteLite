@@ -26,6 +26,12 @@ import {
 import { AppLoading } from "expo";
 
 const AlongRoute = (props) => {
+  //TODO: set states to user preferences
+  const space = "          ";
+  const [crimeRates, setCrimeRates] = useState(true);
+  const [walkScore, setWalkScore] = useState(true);
+  const [lighting, setLighting] = useState(true);
+  const [construction, setConstruction] = useState(true);
   const [error, setError] = useState(
     error !== null ? null : "Sorry, but something went wrong."
   );
@@ -93,31 +99,39 @@ const AlongRoute = (props) => {
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>{aggregateScore}</Text>
               </View>
+              {crimeRates?
               <CrimeRateIcon
                 size={22}
                 name="alert-octagram"
                 color="black"
                 style={styles.icon}
               />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              : null
+              }
+              {crimeRates? <View activeOpacity={0.7} style={styles.iconCircle} /> :null}
+              {crimeRates?
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>{crimeScore}</Text>
               </View>
+              : null}
+              {walkScore?
               <WalkScoreIcon
                 size={22}
                 name="walking"
                 color="black"
                 style={styles.icon}
-              />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              /> : null}
+              {walkScore? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
+              {walkScore? 
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>{walkscore}</Text>
               </View>
+              : null}
             </View>
             <View style={styles.infoTextRow1}>
               <Text style={styles.infoText}>Safety Score</Text>
-              <Text style={styles.infoText}>Area Crime Rate</Text>
-              <Text style={styles.infoText}>Avg Walkscore</Text>
+              {crimeRates? <Text style={styles.infoText}>Area Crime Rate</Text> : <Text style={styles.infoText}>{space}</Text>}
+              {walkScore? <Text style={styles.infoText}>Avg Walkscore</Text> : null}
             </View>
             <View style={{ flexDirection: "row" }}>
               <SafeSpotsIcon
@@ -132,31 +146,39 @@ const AlongRoute = (props) => {
                   {props.safeSpots.safeSpots.length}
                 </Text>
               </View>
+              {construction ?
               <ConstructionIcon
                 size={22}
                 name="ios-hammer"
                 color="black"
                 style={styles.icon}
               />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              : null}
+              {construction ? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
+              {construction ?
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>{constructionScore}</Text>
               </View>
+              : null}
+              {lighting ?
               <LightingIcon
                 size={22}
                 name="lightbulb"
                 color="black"
                 style={styles.icon}
               />
-              <View activeOpacity={0.7} style={styles.iconCircle} />
+              : null}
+              {lighting ? <View activeOpacity={0.7} style={styles.iconCircle} /> : null}
+              {lighting ?
               <View style={styles.infoButtons}>
                 <Text style={styles.valueText}>{streetlightScore}</Text>
               </View>
+              : null}
             </View>
             <View style={styles.infoTextRow2}>
               <Text style={styles.infoText}>Safe Spots</Text>
-              <Text style={styles.infoText}>Construction Score</Text>
-              <Text style={styles.infoText}>Lighting</Text>
+              {construction ?<Text style={styles.infoText}>Construction</Text> : <Text style={styles.infoText}>{space}</Text>}
+              {lighting ? <Text style={styles.infoText}>Lighting</Text> : null}
             </View>
           </View>
         </View>
@@ -215,22 +237,31 @@ const styles = StyleSheet.create({
     //OPTION 1
     // marginHorizontal: 13,
     //OPTION 2
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     paddingLeft: 30,
   },
   infoTextRow2: {
+    // display: "flex",
+    // flexDirection: "row",
+    // //OPTION 1
+    // // marginHorizontal: 13,
+    // //OPTION 2
+    // // justifyContent: "space-between",
+    // justifyContent: "flex-start",
+    // // alignContent: "center",
+    // // paddingLeft: 25,
+    // alignItems: "center",
+    // // alignSelf: "center",
+    // marginLeft: 30,
+
+
     display: "flex",
     flexDirection: "row",
     //OPTION 1
     // marginHorizontal: 13,
     //OPTION 2
-    // justifyContent: "space-between",
-    justifyContent: "space-around",
-    // alignContent: "center",
-    // paddingLeft: 25,
-    alignItems: "center",
-    // alignSelf: "center",
-    marginLeft: 30,
+    justifyContent: "space-between",
+    paddingLeft: 30,
   },
 });
 const mapStateToProps = (state) => {

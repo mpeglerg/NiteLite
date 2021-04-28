@@ -10,16 +10,13 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
   measurementId: process.env.MEASURE_ID,
 };
-
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
   firebase.app(); // if already initialized, use that one
 }
-
 // Get a reference to the database service
 export const database = firebase.database();
-
 export function registerNewUser(object) {
   console.log("OBJECT", object);
   let phoneNumber = object.phoneNumber;
@@ -63,7 +60,6 @@ function addNumber(phoneNumber, username) {
     username: username,
   });
 }
-
 function addEmail(email, username) {
   var emailMod = email.replace(/[.]/g, "");
   database.ref("users/emails/" + emailMod).set({
@@ -103,7 +99,6 @@ export async function verifyUsername(username) {
     return taken;
   });
 }
-
 // TODO: instead of verifying with information in firebase, can we set it up with Google Accounts?
 export async function verifyEmail(email) {
   var emailMod = email.replace(/[.]/g, "");
@@ -118,7 +113,6 @@ export async function verifyEmail(email) {
     return retVal;
   });
 }
-
 // TODO: if changing verification to Google Accounts, do we need the user phone number?
 export async function verifyPhone(phoneNumber) {
   var ref = await firebase.database().ref("users/numbers/" + phoneNumber);
@@ -154,14 +148,25 @@ export async function loadUserData(userName) {
   });
 }
 
-export function addRecentRoute(object) {
-  let destination = object.get("destination");
-  let username = object.get("name");
-  let previousDestinations = snapshot.child("recentRoutes").val();
-  let newRoutes = previousDestinations.push(destination);
-  database.ref("users/" + username).set({
-    recentRoutes: newRoutes,
-  });
+export async function addRecentRoute(username, destination) {
+  let ref = await firebase.database().ref("users/" + username);
+  let allDestinations = [destination];
+  await ref.once("value").then(function (snapshot) {
+     let previousDestinations = snapshot.child("recentRoutes").val();
+     console.log("previous destinations: ", previousDestinations);
+        if(previousDestinations == null){
+          allDestinations[0] = destination;
+        }
+        else {
+          previousDestinations.push(destination);
+          allDestinations = previousDestinations;
+        }
+        console.log("all destinations: ", allDestinations);
+
+        var updates = {};
+        updates['users/' + username + '/recentRoutes'] = allDestinations;
+        return firebase.database().ref().update(updates);
+    });
 }
 
 export async function loadRecentRoutes(userName) {
@@ -169,7 +174,10 @@ export async function loadRecentRoutes(userName) {
 
   return ref.once("value").then(function (snapshot) {
     let recents = snapshot.child("recentRoutes").val();
-    return recents.length > 5 ? recents.slice(4) : recents;
+    if (recents == null) {
+      return [];
+    }
+    return recents.length > 5 ? recents.slice(recents.length - 5, recents.length).reverse() : recents.reverse();
   });
 }
 

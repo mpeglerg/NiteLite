@@ -13,6 +13,7 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { addRecentRoute } from "../../firebase/firebase.util";
 
 const SearchPageModal = (props) => {
   const durationString = props.route.route.routes[0].legs[0].duration.text;
@@ -40,6 +41,31 @@ const SearchPageModal = (props) => {
                 To {props.route.route.routes[0].legs[0].end_address}
               </Text>
             </View>
+            {props.route.displayRoute ? null : (
+              <View style={styles.buttons}>
+                <Button
+                  style={styles.buttons}
+                  title="Start Route"
+                  onPress={() => {
+                    addRecentRoute(
+                      props.emergencyContacts.user.username,
+                      props.route.route.routes[0].legs[0].end_address
+                    );
+                    props.displayRoute(true);
+                  }}
+                ></Button>
+              </View>
+            )}
+            <View style={styles.buttons}>
+              <Button
+                title="Cancel"
+                onPress={() => {
+                  props.updateCurrentRoute([]);
+                  props.displayRoute(false);
+                }}
+              ></Button>
+            </View>
+            {/* )} */}
             <View
               style={{
                 flexDirection: "row",
@@ -61,7 +87,13 @@ const SearchPageModal = (props) => {
                 <Button
                   style={styles.buttons}
                   title="Start Route"
-                  onPress={() => props.displayRoute(true)}
+                  onPress={() => {
+                    addRecentRoute(
+                      props.emergencyContacts.user.username,
+                      props.route.route.routes[0].legs[0].end_address
+                    );
+                    props.displayRoute(true);
+                  }}
                 ></Button>
               </View>
             )}
