@@ -41,44 +41,20 @@ const SearchPageModal = (props) => {
                 To {props.route.route.routes[0].legs[0].end_address}
               </Text>
             </View>
-            {props.route.displayRoute ? null : (
-              <View style={styles.buttons}>
-                <Button
-                  style={styles.buttons}
-                  title="Start Route"
-                  onPress={() => {
-                    addRecentRoute(
-                      props.emergencyContacts.user.username,
-                      props.route.route.routes[0].legs[0].end_address
-                    );
-                    props.displayRoute(true);
-                  }}
-                ></Button>
-              </View>
-            )}
-            <View style={styles.buttons}>
-              <Button
-                title="Cancel"
-                onPress={() => {
-                  props.updateCurrentRoute([]);
-                  props.displayRoute(false);
-                }}
-              ></Button>
-            </View>
-            {/* )} */}
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-around",
                 paddingHorizontal: 20,
-              }}
-            >
+              }}>
               <Text
-                style={styles.textStyle}
-              >{`${durationString} (${distance})`}</Text>
+                style={
+                  styles.textStyle
+                }>{`${durationString} (${distance})`}</Text>
               <Text
-                style={styles.textStyle}
-              >{`ETA: ${splitEta[0]}:${splitEta[1]} ${splitEta[3]}`}</Text>
+                style={
+                  styles.textStyle
+                }>{`ETA: ${splitEta[0]}:${splitEta[1]} ${splitEta[3]}`}</Text>
             </View>
           </View>
           <View style={{ flexDirection: "row", marginTop: 20 }}>
@@ -93,8 +69,7 @@ const SearchPageModal = (props) => {
                       props.route.route.routes[0].legs[0].end_address
                     );
                     props.displayRoute(true);
-                  }}
-                ></Button>
+                  }}></Button>
               </View>
             )}
             <View style={styles.buttons}>
@@ -103,8 +78,7 @@ const SearchPageModal = (props) => {
                 onPress={() => {
                   props.updateCurrentRoute([]);
                   props.displayRoute(false);
-                }}
-              ></Button>
+                }}></Button>
             </View>
           </View>
           <AlongRoute />
