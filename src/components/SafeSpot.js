@@ -20,6 +20,7 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { deleteSafeSpot } from "../../firebase/firebase.util.js";
 
 const SafeSpot = ({ props }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -40,21 +41,30 @@ const SafeSpot = ({ props }) => {
           marginBottom: 15,
           backgroundColor: "white",
           borderRadius: 15,
-        }}
-      >
+        }}>
+        {console.log("PROPS", props)}
         <Text style={styles.infoTextName}>{props.name}</Text>
         <Text style={styles.infoTextAddress}>{props.address}</Text>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             style={styles.editBtn}
-            onPress={() => setModalVisible(!modalVisible)}
-          >
+            onPress={() => setModalVisible(!modalVisible)}>
             <Text>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.cancelBtn}
-            onPress={() => props.deleteSafeSpot(props.name)}
-          >
+            onPress={() => {
+              props.deleteSafeSpot(props.name);
+              console.log("PASSED TO DELETED SAFE SPOT", {
+                name: props.name,
+                address: props.address,
+                username: props.username,
+              });
+              deleteSafeSpot(props.user, {
+                name: props.name,
+                address: props.address,
+              });
+            }}>
             <Text>Delete</Text>
           </TouchableOpacity>
         </View>
@@ -65,8 +75,7 @@ const SafeSpot = ({ props }) => {
             visible={modalVisible}
             onRequestClose={() => {
               Alert.alert("Modal has been closed.");
-            }}
-          >
+            }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Current Name: {props.name}</Text>
@@ -117,16 +126,14 @@ const SafeSpot = ({ props }) => {
                       address: newPhoneNumber,
                       oldName: props.name,
                     });
-                  }}
-                >
+                  }}>
                   <Text style={styles.textStyle}>Save Changes</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   style={{ ...styles.openButton, backgroundColor: "red" }}
                   onPress={() => {
                     setModalVisible(!modalVisible);
-                  }}
-                >
+                  }}>
                   <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableHighlight>
               </View>

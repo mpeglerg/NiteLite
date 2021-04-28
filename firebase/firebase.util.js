@@ -152,21 +152,20 @@ export async function addRecentRoute(username, destination) {
   let ref = await firebase.database().ref("users/" + username);
   let allDestinations = [destination];
   await ref.once("value").then(function (snapshot) {
-     let previousDestinations = snapshot.child("recentRoutes").val();
-     console.log("previous destinations: ", previousDestinations);
-        if(previousDestinations == null){
-          allDestinations[0] = destination;
-        }
-        else {
-          previousDestinations.push(destination);
-          allDestinations = previousDestinations;
-        }
-        console.log("all destinations: ", allDestinations);
+    let previousDestinations = snapshot.child("recentRoutes").val();
+    console.log("previous destinations: ", previousDestinations);
+    if (previousDestinations == null) {
+      allDestinations[0] = destination;
+    } else {
+      previousDestinations.push(destination);
+      allDestinations = previousDestinations;
+    }
+    console.log("all destinations: ", allDestinations);
 
-        var updates = {};
-        updates['users/' + username + '/recentRoutes'] = allDestinations;
-        return firebase.database().ref().update(updates);
-    });
+    var updates = {};
+    updates["users/" + username + "/recentRoutes"] = allDestinations;
+    return firebase.database().ref().update(updates);
+  });
 }
 
 export async function loadRecentRoutes(userName) {
@@ -177,8 +176,41 @@ export async function loadRecentRoutes(userName) {
     if (recents == null) {
       return [];
     }
-    return recents.length > 5 ? recents.slice(recents.length - 5, recents.length).reverse() : recents.reverse();
+    return recents.length > 5
+      ? recents.slice(recents.length - 5, recents.length).reverse()
+      : recents.reverse();
   });
 }
 
+export async function addSafeSpot(username, safeSpot) {
+  let ref = await firebase.database().ref("users/" + username);
+  let allSafeSpots = [];
+  await ref.once("value").then(function (snapshot) {
+    let previousSafeSpots = snapshot.child("safeLocations").val();
+    if (previousSafeSpots == null) {
+      allSafeSpots[0] = safeSpot;
+    } else {
+      previousSafeSpots.push(safeSpot);
+      allSafeSpots = previousSafeSpots;
+    }
+    var updates = {};
+    updates["users/" + username + "/safeLocations"] = allSafeSpots;
+    return firebase.database().ref().update(updates);
+  });
+}
+
+export async function deleteSafeSpot(username, safeSpot) {
+  let ref = await firebase.database().ref("users/" + username);
+  await ref.once("value").then(function (snapshot) {
+    let previousSafeSpots = snapshot.child("safeLocations").val();
+    let newSafeSpots = previousSafeSpots.filter((spot) => {
+      return safeSpot.name !== spot.name;
+      //  && safeSpot.address !== spot.address;
+    });
+
+    var updates = {};
+    updates["users/" + username + "/safeLocations"] = newSafeSpots;
+    return firebase.database().ref().update(updates);
+  });
+}
 export default firebase;
