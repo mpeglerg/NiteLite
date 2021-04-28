@@ -22,24 +22,6 @@ export function registerNewUser(object) {
   let phoneNumber = object.phoneNumber;
   let email = object.email;
   let username = object.username;
-  // addNumber(phoneNumber, username);
-  // addEmail(email, username);
-  // let emergencyContact = [
-  //   object.emergencyNumber[0].name,
-  //   object.emergencyNumber[1].number,
-  // ];
-  console.log("DATABASE SET", {
-    name: username,
-    email: email,
-    password: object.password,
-    phoneNumber: phoneNumber,
-    crimeRates: object.crimeRates,
-    walkScore: object.walkScore,
-    lighting: object.lighting,
-    construction: object.construction,
-    safeLocations: object.safeSpots,
-    emergencyNumber: object.emergencyNumber,
-  });
 
   database.ref("users/" + username).set({
     name: username,
@@ -156,7 +138,7 @@ export async function addRecentRoute(username, destination) {
     console.log("previous destinations: ", previousDestinations);
     if (previousDestinations == null) {
       allDestinations[0] = destination;
-    } else {
+    } else if (!previousDestinations.includes(destination)) {
       previousDestinations.push(destination);
       allDestinations = previousDestinations;
     }
@@ -235,59 +217,12 @@ export async function editSafeSpot(username, originalSafeSpot, newSafeSpot) {
   });
 }
 
-// export async function addEmergencyContact(username, newContact) {
-//   let ref = await firebase.database().ref("users/" + username);
-//   let allContacts = [];
-//   await ref.once("value").then(function (snapshot) {
-//     let previousContacts = snapshot.child("emergencyNumber").val();
-//     if (previousContacts == null) {
-//       allContacts[0] = newContact;
-//     } else {
-//       previousContacts.push(newContact);
-//       allContacts = previousContacts;
-//     }
-//     var updates = {};
-//     updates["users/" + username + "/emergencyNumber"] = allContacts;
-//     return firebase.database().ref().update(updates);
-//   });
-// }
-
-// export async function deleteEmergencyContact(username) {
-//   // let ref = await firebase.database().ref("users/" + username);
-//   // await ref.once("value").then(function (snapshot) {
-//   // let previousSafeSpots = snapshot.child("safeLocations").val();
-//   // let newSafeSpots = previousSafeSpots.filter((spot) => {
-//   //   return safeSpot.name !== spot.name;
-//   //   //  && safeSpot.address !== spot.address;
-//   // });
-
-//   // var updates = {};
-//   updates["users/" + username + "/emergencyNumber"] = [];
-//   return firebase.database().ref().update(updates);
-//   // });
-// }
-
 export async function editEmergencyContact(username, oldContact, newContact) {
-  // let ref = await firebase.database().ref("users/" + username);
-  // await ref.once("value").then(function (snapshot) {
-  //   let previousSafeSpots = snapshot.child("safeLocations").val();
-  //   let newSafeSpots = previousSafeSpots.map((safeSpot) => {
-  //     return safeSpot.name === originalSafeSpot.name
-  //       ? {
-  //           name: newSafeSpot.name !== "" ? newSafeSpot.name : safeSpot.name,
-  //           address:
-  //             newSafeSpot.address !== ""
-  //               ? newSafeSpot.address
-  //               : safeSpot.address,
-  //         }
-  //       : safeSpot;
-  //   });
   let updates = {};
   updates["users/" + username + "/emergencyNumber"] = [
     newContact.name ? newContact.name : oldContact.name,
     newContact.number ? newContact.number : oldContact.number,
   ];
   return firebase.database().ref().update(updates);
-  // });
 }
 export default firebase;
