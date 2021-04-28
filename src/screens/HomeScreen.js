@@ -14,6 +14,8 @@ import { loadUserData } from "../../firebase/firebase.util";
 const HomeScreen = (props) => {
   const sheetRef = useState(null);
   const [userData, setUserData] = useState(null);
+  const [snapPoint, setSnapPoint] = useState(532);
+  
   useEffect(() => {
     async function loadData() {
       const result = await loadUserData(
@@ -54,7 +56,8 @@ const HomeScreen = (props) => {
         padding: 16,
         height: 500,
       }}>
-      {props.route.route.length === 0 ? <MapModal /> : <SearchPageModal />}
+    {props.route.displayRoute ? setSnapPoint(432) : setSnapPoint(532)}
+    {props.route.route.length === 0 ? <MapModal /> : <SearchPageModal />}
     </View>
   );
   return (
@@ -88,10 +91,9 @@ const HomeScreen = (props) => {
           <AudioButton />
         </View>
       </View>
-
       <BottomSheet
         ref={sheetRef}
-        snapPoints={[532, 300, 100]}
+        snapPoints={[snapPoint, 300, 100]}
         borderRadius={20}
         renderContent={renderContent}
       />
