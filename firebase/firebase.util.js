@@ -175,7 +175,6 @@ export async function loadRecentRoutes(userName) {
     if (recents == null) {
       return [];
     }
-    console.log("IN LOAD RECENTS: recents", recents);
     return recents.length > 5 ? recents.slice(recents.length - 5, recents.length).reverse() : recents.reverse();
   });
 }
