@@ -33,7 +33,7 @@ const SearchPageModal = (props) => {
     return <AppLoading />;
   } else {
     return props.route.route.routes.length !== 0 ? (
-      <ScrollView>
+      <ScrollView style={{ marginBottom: 150 }}>
         <View style={styles.centeredView}>
           <View>
             <View>
@@ -46,15 +46,14 @@ const SearchPageModal = (props) => {
                 flexDirection: "row",
                 justifyContent: "space-around",
                 paddingHorizontal: 20,
-              }}>
+              }}
+            >
               <Text
-                style={
-                  styles.textStyle
-                }>{`${durationString} (${distance})`}</Text>
+                style={styles.textStyle}
+              >{`${durationString} (${distance})`}</Text>
               <Text
-                style={
-                  styles.textStyle
-                }>{`ETA: ${splitEta[0]}:${splitEta[1]} ${splitEta[3]}`}</Text>
+                style={styles.textStyle}
+              >{`ETA: ${splitEta[0]}:${splitEta[1]} ${splitEta[3]}`}</Text>
             </View>
           </View>
           <View style={{ flexDirection: "row", marginTop: 20 }}>
@@ -69,7 +68,8 @@ const SearchPageModal = (props) => {
                       props.route.route.routes[0].legs[0].end_address
                     );
                     props.displayRoute(true);
-                  }}></Button>
+                  }}
+                ></Button>
               </View>
             )}
             <View style={styles.buttons}>
@@ -78,7 +78,8 @@ const SearchPageModal = (props) => {
                 onPress={() => {
                   props.updateCurrentRoute([]);
                   props.displayRoute(false);
-                }}></Button>
+                }}
+              ></Button>
             </View>
           </View>
           <AlongRoute />
