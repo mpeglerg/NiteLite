@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { colors } from "../styles/colors.js";
 import { AppLoading } from "expo";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import MenuIcon from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -39,6 +40,27 @@ const AccountScreen = (props) => {
   } else {
     return (
       <ScrollView contentContainerStyle={{ backgroundColor: "#010068" }}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={{
+            position: "relative",
+            left: 0,
+            top: 10,
+            borderRadius: 5,
+            backgroundColor: colors.tertiaryBlue,
+            borderColor: colors.backgroundColor,
+            borderWidth: 3,
+            width: 47,
+            height: 47,
+            marginBottom: 10,
+            marginLeft: 7,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={() => props.navigation.openDrawer()}
+        >
+          <MenuIcon size={35} color="white" name="menu" />
+        </TouchableOpacity>
         <View style={styles.container}>
           <Text
             style={{
