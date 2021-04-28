@@ -20,7 +20,7 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
-import { deleteSafeSpot } from "../../firebase/firebase.util.js";
+import { deleteSafeSpot, editSafeSpot } from "../../firebase/firebase.util.js";
 
 const SafeSpot = ({ props }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,7 +42,6 @@ const SafeSpot = ({ props }) => {
           backgroundColor: "white",
           borderRadius: 15,
         }}>
-        {console.log("PROPS", props)}
         <Text style={styles.infoTextName}>{props.name}</Text>
         <Text style={styles.infoTextAddress}>{props.address}</Text>
         <View style={{ flexDirection: "row" }}>
@@ -126,6 +125,11 @@ const SafeSpot = ({ props }) => {
                       address: newPhoneNumber,
                       oldName: props.name,
                     });
+                    editSafeSpot(
+                      props.user,
+                      { name: props.name, address: props.address },
+                      { name: newContactName, address: newPhoneNumber }
+                    );
                   }}>
                   <Text style={styles.textStyle}>Save Changes</Text>
                 </TouchableHighlight>

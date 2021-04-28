@@ -213,4 +213,26 @@ export async function deleteSafeSpot(username, safeSpot) {
     return firebase.database().ref().update(updates);
   });
 }
+
+export async function editSafeSpot(username, originalSafeSpot, newSafeSpot) {
+  let ref = await firebase.database().ref("users/" + username);
+  await ref.once("value").then(function (snapshot) {
+    let previousSafeSpots = snapshot.child("safeLocations").val();
+    let newSafeSpots = previousSafeSpots.map((safeSpot) => {
+      return safeSpot.name === originalSafeSpot.name
+        ? {
+            name: newSafeSpot.name !== "" ? newSafeSpot.name : safeSpot.name,
+            address:
+              newSafeSpot.address !== ""
+                ? newSafeSpot.address
+                : safeSpot.address,
+          }
+        : safeSpot;
+    });
+    console.log("newSafeSpots", newSafeSpots);
+    var updates = {};
+    updates["users/" + username + "/safeLocations"] = newSafeSpots;
+    return firebase.database().ref().update(updates);
+  });
+}
 export default firebase;
