@@ -82,7 +82,6 @@ const SearchPageModal = (props) => {
               >{`ETA: ${splitEta[0]}:${splitEta[1]} ${splitEta[3]}`}</Text>
             </View>
           </View>
-          <AlongRoute />
           <View style={{ flexDirection: "row", marginTop: 20 }}>
             {props.route.displayRoute ? null : (
               <View style={styles.buttons}>
@@ -109,6 +108,7 @@ const SearchPageModal = (props) => {
               ></Button>
             </View>
           </View>
+          <AlongRoute />
         </View>
       </ScrollView>
     ) : null;

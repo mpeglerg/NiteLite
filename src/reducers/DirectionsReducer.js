@@ -5,7 +5,7 @@ const initState = {
   },
   directions: {
       origin: "1 LMU Drive",
-      destination: "Apple Park Visitor Center",
+      destination: "",
   },
   displayRoute: false,
   route: []
