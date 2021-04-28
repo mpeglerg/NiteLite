@@ -1,55 +1,34 @@
 // Example mongo query for all crimes within a certain radius
-import { REACT_APP_MONGO_URI } from 'react-native-dotenv'
-
-const MongoClient = require('mongodb').MongoClient
-const uri = REACT_APP_MONGO_URI
-console.log(uri)
-const client = new MongoClient(uri, { useUnifiedTopology: true, useNewUrlParser: true })
-client.connect(async (err) => {
-    const collection = client.db("NiteLite").collection("streetlights")
-    // perform actions on the collection object
-    const radius = 5000
-    const lng = -118.4179
-    const lat = 33.9697
-    const query = {
-        location: {
-            $geoNear: {
-                near: [lng,lat],
-                distanceField: "distance",
-                uniqueDocs: true,
-                query : {"_id" : "id1"},
-                maxDistance : 2000
-            },
-        //   $near: {
-        //     $geometry: { type: "Point", coordinates: [lng,lat] },
-        //     $maxDistance: radius,
-        //   },
-        },
-      }
-    const options = {
-        // sort matched documents in descending order by date
-        sort: { location: 1, },
-    }
-
-    const query2 = {
-            "location.coordinates": { $gt: -118.424, $lt: -118.418422 },
-    }
-    const numStreetlights = await collection.aggregate(query, options)
-    // const cursor = await collection.aggregate([
-    //     {
-    //         $geoNear: {
-    //             near: [lng,lat],
-    //             distanceField: "distance",
-    //             uniqueDocs: true,
-    //             query : {"_id" : "id1"},
-    //             maxDistance : 2000
-    //         },
+// import { REACT_APP_MONGO_URI } from 'react-native-dotenv'
+const getStreetlightScore = (origin, destination) => {
+    // TODO: fix mongo client
+    // const MongoClient = require('mongodb').MongoClient
+    // const uri = "mongodb+srv://snagendran:EOcJhkCgpeJP3Z0h@cluster0.eo6ns.mongodb.net/NiteLite?retryWrites=true&w=majority"
+    // const client = new MongoClient(uri, { useUnifiedTopology: true, useNewUrlParser: true })
+    // console.log("ORIGIN: ", origin)
+    // console.log("DESTINATION: ", destination)
+    // client.connect(async (err) => {
+    //     const collection = client.db("NiteLite").collection("streetlights")
+    //     const radius = 5000
+    //     const origin = {lng: -118.42139306489231, lat: 33.973154090376546}
+    //     const destination = {lng: -118.4085, lat: 33.9416}
+    //     const query = {
+    //         $and: [
+    //             {"location.coordinates": { $gt: origin.lng, $lt: destination.lng }},
+    //             {"location.coordinates": { $gt: origin.lat, $lt: destination.lat }}
+    //         ]
     //     }
-    // ])
-    // console.log(numStreetlights)
-    await numStreetlights.forEach(console.dir)
-    // console.log(collection.find(query, options).count)
-    // console.log(await collection.find(query, options).count())
-
-    client.close()
-});
+    //     const options = {
+    //         sort: { location: 1, },
+    //         // limit: 10
+    //     }
+    //     const numStreetlights = await collection.countDocuments(query, options)
+    //     console.log(numStreetlights)
+    //     // const numStreetlights = await collection.find(query, options)
+    //     // await numStreetlights.forEach(console.log)
+    //     // return numStreetlights
+    //     client.close()
+    // });
+    return 9
+}
+export default getStreetlightScore;

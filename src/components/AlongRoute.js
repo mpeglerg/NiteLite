@@ -10,6 +10,10 @@ import LightingIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { colors } from "../styles/colors.js";
 // import AlongRouteIcon from "./AlongRouteIcon.js";
 import { getScore } from "../../data/walkScoreApi";
+import getStreetlightScore from '../mongo/streetlight-score'
+import getCrimeScore from "../mongo/crime-score.js";
+import getConstructionScore from "../mongo/construction-score.js";
+import getAggregateScore from "../mongo/aggregate-safety-score.js";
 import { withOrientation } from "react-navigation";
 import {
   useFonts,
@@ -25,21 +29,32 @@ const AlongRoute = (props) => {
     error !== null ? null : "Sorry, but something went wrong."
   );
   const [walkscore, setWalkscore] = useState(0);
+  const [streetlightScore, setStreetlightScore] = useState(0);
+  const [crimeScore, setCrimeScore] = useState(0);
+  const [constructionScore, setConstructionScore] = useState(0);
+  const [aggregateScore, setAggregateScore] = useState(0);
 
-  useEffect(() => {
+  useEffect (() => {    
+    const originCoord = {lng: props.directions.currentLocation.longitude, lat:props.directions.currentLocation.latitude}
+    const destinationCoord = props.route.route.routes[0].legs[0].end_location
+    setStreetlightScore(getStreetlightScore(originCoord, destinationCoord))
+    setCrimeScore(getCrimeScore(originCoord, destinationCoord))
+    setConstructionScore(getConstructionScore(originCoord, destinationCoord))
+    setAggregateScore(getAggregateScore(originCoord, destinationCoord))
     async function getWalkScore() {
       try {
         const originScore = await getScore({
-          lat: props.directions.currentLocation.latitude,
-          lon: props.directions.currentLocation.longitude,
+          lat: props.directions.currentLocation.latitude, lon: props.directions.currentLocation.longitude
         });
-        setWalkscore(originScore.walkscore);
+        setWalkscore(originScore.walkscore)
       } catch (error) {
         setError("Sorry, but something went wrong.");
       }
-    }
-    getWalkScore();
-  }, []);
+    };
+    getWalkScore()
+    console.log(`WalkScore: ${walkscore}, StreetlightScore: ${streetlightScore}, CrimeScore: ${crimeScore}, ConstructionScore: ${constructionScore}, AggregateScore: ${aggregateScore}`)
+  }, [])
+
   let [fontsLoaded] = useFonts({
     Quicksand_500Medium,
     Quicksand_700Bold,
@@ -69,7 +84,7 @@ const AlongRoute = (props) => {
               />
               <View activeOpacity={0.7} style={styles.iconCircle} />
               <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>Val</Text>
+                <Text style={styles.valueText}>{aggregateScore}</Text>
               </View>
               <CrimeRateIcon
                 size={22}
@@ -79,7 +94,7 @@ const AlongRoute = (props) => {
               />
               <View activeOpacity={0.7} style={styles.iconCircle} />
               <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>Val</Text>
+                <Text style={styles.valueText}>{crimeScore}</Text>
               </View>
               <WalkScoreIcon
                 size={22}
@@ -89,7 +104,7 @@ const AlongRoute = (props) => {
               />
               <View activeOpacity={0.7} style={styles.iconCircle} />
               <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>Val</Text>
+                <Text style={styles.valueText}>{walkscore}</Text>
               </View>
             </View>
             <View style={styles.infoTextRow1}>
@@ -118,7 +133,7 @@ const AlongRoute = (props) => {
               />
               <View activeOpacity={0.7} style={styles.iconCircle} />
               <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>Val</Text>
+                <Text style={styles.valueText}>{constructionScore}</Text>
               </View>
               <LightingIcon
                 size={22}
@@ -128,12 +143,12 @@ const AlongRoute = (props) => {
               />
               <View activeOpacity={0.7} style={styles.iconCircle} />
               <View style={styles.infoButtons}>
-                <Text style={styles.valueText}>{walkscore}</Text>
+                <Text style={styles.valueText}>{streetlightScore}</Text>
               </View>
             </View>
             <View style={styles.infoTextRow2}>
               <Text style={styles.infoText}>Safe Spots</Text>
-              <Text style={styles.infoText}>Open Biz</Text>
+              <Text style={styles.infoText}>Construction Score</Text>
               <Text style={styles.infoText}>Lighting</Text>
             </View>
           </View>
@@ -215,6 +230,7 @@ const mapStateToProps = (state) => {
   return {
     safeSpots: state.safeSpots,
     directions: state.directions,
+    route: state.directions,
     currentLocation: state.currentLocation,
   };
 };

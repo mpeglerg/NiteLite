@@ -3,10 +3,10 @@ import { View, StyleSheet, Text, Alert } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { connect } from "react-redux";
-import { getScore } from "../../data/walkScoreApi";
 import Geocoder from "react-native-geocoding";
 import { colors } from "../styles/colors.js";
 import safespotMarker from "../images/marker-04-big.png";
+import { getDirections } from "../../data/directionsApi";
 
 const GOOGLE_MAPS_APIKEY = process.env.REACT_APP_GOOGLE_MAPS_API;
 
@@ -41,6 +41,7 @@ const MapContainer = (props) => {
   const [mapUIView, setMapUIView] = useState(null);
   const [list, setList] = useState([]);
   const [safeSpotCoords, setSafeSpotCoords] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     getCurrentLocation();
@@ -80,9 +81,30 @@ const MapContainer = (props) => {
     });
   };
 
+  const performQuery = async (destination) => {
+    setError(null);
+    try {
+      const directions = await getDirections({
+        origin: `${props.directions.currentLocation.latitude},${props.directions.currentLocation.longitude}`,
+        destination: `${destination.latitude},${destination.longitude}`
+      });
+    props.updateCurrentRoute(directions)
+    // TODO: props not updating with new directions I think???
+    console.log("after end address: ", props.route.route.routes[0].legs[0].end_address)
+    console.log("after end location: ", props.route.route.routes[0].legs[0].end_location)
+  } catch (error) {
+      setError("Sorry, but something went wrong.")
+    }
+  };
+
   const directToSafeSpot = (marker) => {
+    props.displayRoute(false)
     // TODO: navigate to directions page with new route
-    props.updateDirections(marker);
+    console.log("before end address: ", props.route.route.routes[0].legs[0].end_address)
+    console.log("before end location: ", props.route.route.routes[0].legs[0].end_location)
+    props.updateDirections(marker)
+    // console.log("marker: ", marker)
+    performQuery(marker)
   };
 
   const initGeocoder = () => {
@@ -173,6 +195,7 @@ const MapContainer = (props) => {
 const mapStateToProps = (state) => {
   return {
     safeSpots: state.safeSpots,
+    route: state.directions,
     directions: state.directions,
     currentLocation: state.currentLocation,
   };
@@ -185,6 +208,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateDirections: (destination) => {
       dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
+    },
+    updateCurrentRoute: (route) => {
+      dispatch({ type: "UPDATE_CURRENT_ROUTE", payload: route });
+    },
+    displayRoute: (bool) => {
+      dispatch({ type: "DISPLAY_ROUTE", payload: bool });
     },
   };
 };

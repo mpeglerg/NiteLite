@@ -45,8 +45,7 @@ const AccountScreen = (props) => {
               fontSize: 40,
               color: "white",
               marginTop: 20,
-            }}
-          >
+            }}>
             Account Settings
           </Text>
           <Text style={styles.header}>Route Preferences</Text>
@@ -59,15 +58,18 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setOpenBusinesses(!openBusinesses)}
-            >
+              onPress={() =>
+                props.updateWalkscorePreferences(!props.user.walkScore)
+              }>
               <Icon
                 size={30}
                 color={"#FFFFFF"}
-                name={openBusinesses ? "check-box" : "check-box-outline-blank"}
+                name={
+                  props.user.walkScore ? "check-box" : "check-box-outline-blank"
+                }
               />
             </TouchableOpacity>
-            <Text style={styles.checkOptions}>Open Businesses</Text>
+            <Text style={styles.checkOptions}>Walkscore</Text>
           </View>
           <View style={styles.check}>
             <TouchableOpacity
@@ -75,15 +77,18 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setPoliceStations(!policeStations)}
-            >
+              onPress={() =>
+                props.updateStreetlightPreferences(!props.user.lighting)
+              }>
               <Icon
                 size={30}
                 color={"#FFFFFF"}
-                name={policeStations ? "check-box" : "check-box-outline-blank"}
+                name={
+                  props.user.lighting ? "check-box" : "check-box-outline-blank"
+                }
               />
             </TouchableOpacity>
-            <Text style={styles.checkOptions}>Police Stations</Text>
+            <Text style={styles.checkOptions}>Streetlights</Text>
           </View>
           <View style={styles.check}>
             <TouchableOpacity
@@ -91,15 +96,41 @@ const AccountScreen = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setBusySidewalks(!busySidewalks)}
-            >
+              onPress={() =>
+                props.updateConstructionPreferences(!props.user.construction)
+              }>
               <Icon
                 size={30}
                 color={"#FFFFFF"}
-                name={busySidewalks ? "check-box" : "check-box-outline-blank"}
+                name={
+                  props.user.construction
+                    ? "check-box"
+                    : "check-box-outline-blank"
+                }
               />
             </TouchableOpacity>
-            <Text style={styles.checkOptions}>Busy Sidewalks</Text>
+            <Text style={styles.checkOptions}>Active Construction Sites</Text>
+          </View>
+          <View style={styles.check}>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() =>
+                props.updateCrimeRatePreferences(!props.user.crimeRates)
+              }>
+              <Icon
+                size={30}
+                color={"#FFFFFF"}
+                name={
+                  props.user.crimeRates
+                    ? "check-box"
+                    : "check-box-outline-blank"
+                }
+              />
+            </TouchableOpacity>
+            <Text style={styles.checkOptions}>Crime Rates</Text>
           </View>
           <Text style={styles.header}>Safe Spots</Text>
           {enterNewSafeSpot ? (
@@ -144,8 +175,7 @@ const AccountScreen = (props) => {
                   alignSelf: "center",
                   marginBottom: 30,
                   // justifyContent: "space-between",
-                }}
-              >
+                }}>
                 <TouchableOpacity
                   style={styles.editBtn}
                   onPress={() => {
@@ -156,8 +186,7 @@ const AccountScreen = (props) => {
                     setSafePlaceAddressInput("");
                     setSafePlaceNameInput("");
                     setEnterNewSafeSpot(!enterNewSafeSpot);
-                  }}
-                >
+                  }}>
                   <Text style={styles.textStyle}>Save new safe spot</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -166,31 +195,10 @@ const AccountScreen = (props) => {
                     setSafePlaceAddressInput("");
                     setSafePlaceNameInput("");
                     setEnterNewSafeSpot(!enterNewSafeSpot);
-                  }}
-                >
+                  }}>
                   <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableOpacity>
               </View>
-              {/* <Button
-                title="Save new safe spot"
-                onPress={() => {
-                  props.addSafeSpot({
-                    name: safePlaceNameInput,
-                    address: safePlaceAddressInput,
-                  });
-                  setSafePlaceAddressInput("");
-                  setSafePlaceNameInput("");
-                  setEnterNewSafeSpot(!enterNewSafeSpot);
-                }}
-              ></Button>
-              <Button
-                title="Cancel"
-                onPress={() => {
-                  setSafePlaceAddressInput("");
-                  setSafePlaceNameInput("");
-                  setEnterNewSafeSpot(!enterNewSafeSpot);
-                }}
-              ></Button> */}
             </View>
           ) : null}
         </View>
@@ -198,8 +206,7 @@ const AccountScreen = (props) => {
           {enterNewSafeSpot ? null : (
             <TouchableOpacity
               style={styles.addSafeSpotBtn}
-              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}
-            >
+              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}>
               <Text style={styles.btnText}>Add safe spot</Text>
             </TouchableOpacity>
           )}
@@ -240,6 +247,7 @@ const mapStateToProps = (state) => {
   return {
     safeSpots: state.safeSpots,
     emergencyContacts: state.emergencyContacts,
+    user: state.emergencyContacts.user,
   };
 };
 
@@ -259,6 +267,18 @@ const mapDispatchToProps = (dispatch) => {
     },
     editEmergencyContact: (id) => {
       dispatch({ type: "EDIT_EMERGENCY_CONTACT", payload: id });
+    },
+    updateConstructionPreferences: (id) => {
+      dispatch({ type: "UPDATE_CONSTRUCTION_PREFERENCES", payload: id });
+    },
+    updateCrimeRatePreferences: (id) => {
+      dispatch({ type: "UPDATE_CRIME_RATE_PREFERENCES", payload: id });
+    },
+    updateWalkscorePreferences: (id) => {
+      dispatch({ type: "UPDATE_WALKSCORE_PREFERENCES", payload: id });
+    },
+    updateStreetlightPreferences: (id) => {
+      dispatch({ type: "UPDATE_STREETLIGHT_PREFERENCES", payload: id });
     },
   };
 };

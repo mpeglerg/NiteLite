@@ -18,11 +18,13 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import owl1 from "./../images/owl1.png";
 import owl2 from "./../images/owl2.png";
+import { connect } from "react-redux";
 
 // TODO: remove extraneous comments
-const EmergencyContacts = ({ navigation }) => {
-  let object = navigation.getParam("object", "missing");
+const EmergencyContacts = (props) => {
+  let object = props.navigation.getParam("object", "missing");
   const [name, setName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   let [fontsLoaded] = useFonts({
@@ -42,7 +44,12 @@ const EmergencyContacts = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.header}>
           Who would you like to call during an Emergency?
+          {console.log("props", props)}
         </Text>
+        {console.log("props.emergencyContacts", props.emergencyContacts)}
+        {console.log("props.safeSpots", props.safeSpots)}
+        {console.log("props.user", props.user)}
+
         <Text style={styles.subtitle}>
           Set up your primary contact now and add more later in your account
           settings
@@ -86,16 +93,35 @@ const EmergencyContacts = ({ navigation }) => {
           }}
           value={contactPhone}
         />
-        {/* <Button
-        title="Complete Profile"
-        
-      ></Button> */}
         <TouchableOpacity
           style={styles.signUpButton}
           onPress={() => {
-            objectifyAndNav(navigation, object, name, contactPhone);
-          }}
-        >
+            props.addEmergencyContact({ name: name, number: contactPhone });
+            console.log("NEW USER INFO", {
+              ...props.user,
+              emergencyNumber: props.emergencyContacts.emergencyContacts,
+              safeSpots: props.safeSpots.safeSpots,
+            });
+            registerNewUser({
+              ...props.user,
+              emergencyNumber: props.emergencyContacts.emergencyContacts,
+              safeSpots: props.safeSpots.safeSpots,
+              // emergencyNumber: [
+              //   props.emergencyContacts.emergencyContacts[0] &&
+              //   props.emergencyContacts.emergencyContacts[0].name
+              //     ? props.emergencyContacts.emergencyContacts[0].name
+              //     : "Emergency Services",
+              //   props.emergencyContacts.emergencyContacts[0].number
+              //     ? props.emergencyContacts.emergencyContacts[0].number
+              //     : "911",
+              // ],
+              // safeSpots: props.safeSpots.safeSpots[0].address
+              //   ? props.safeSpots.safeSpots[0].address
+              //   : "",
+              // name: props.user.username,
+            });
+            props.navigation.navigate("Home");
+          }}>
           <Text style={styles.signUpText}>Complete Profile!</Text>
         </TouchableOpacity>
         <View style={{ flex: 1, justifyContent: "flex-end", marginTop: 20 }}>
@@ -106,17 +132,23 @@ const EmergencyContacts = ({ navigation }) => {
   }
 };
 
-function objectifyAndNav(navigation, object, name, contactPhone) {
-  // add new items to our object
-  object.set("eName", name);
-  object.set("eNumber", contactPhone);
+const mapStateToProps = (state) => {
+  return {
+    emergencyContacts: state.emergencyContacts,
+    user: state.emergencyContacts.user,
+    safeSpots: state.safeSpots,
+  };
+};
 
-  // call firebase function to set all of these items in the object
-  registerNewUser(object);
-  // navigate to next page
-  navigation.navigate("Home", { text: object.get("name") });
-}
-export default EmergencyContacts;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addEmergencyContact: (name, number) => {
+      dispatch({ type: "ADD_EMERGENCY_CONTACT", id: { name, number } });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmergencyContacts);
 
 const styles = StyleSheet.create({
   container: {
