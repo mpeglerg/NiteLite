@@ -14,7 +14,6 @@ const initState = {
 };
 
 const emergencyContactsReducer = (state = initState, action) => {
-  // TODO: Add reducer for ADD_EMERGENCY_CONTACT
   if (action.type == "ADD_EMERGENCY_CONTACT") {
     let newContactName = action.id.name.name;
     let newContactNumber = action.id.name.number;

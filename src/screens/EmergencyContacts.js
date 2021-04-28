@@ -54,12 +54,10 @@ const EmergencyContacts = (props) => {
           style={{
             height: 40,
             width: "75%",
-            // backgroundColor: "white",
-            // borderRadius: 5,
             borderBottomColor: "white",
             borderBottomWidth: 2,
-            // padding: 15,
             color: "white",
+            fontFamily: "Quicksand_400Regular",
           }}
           placeholder={"Police, Campus Security, Roommate..."}
           placeholderTextColor="#A2A2AB"
@@ -74,12 +72,10 @@ const EmergencyContacts = (props) => {
           style={{
             height: 40,
             width: "75%",
-            // backgroundColor: "white",
-            // borderRadius: 5,
             borderBottomColor: "white",
             borderBottomWidth: 2,
-            // padding: 15,
             color: "white",
+            fontFamily: "Quicksand_400Regular",
           }}
           placeholder={"123-456-7890"}
           placeholderTextColor="#A2A2AB"
@@ -103,7 +99,8 @@ const EmergencyContacts = (props) => {
               safeSpots: props.safeSpots.safeSpots,
             });
             props.navigation.navigate("Home");
-          }}>
+          }}
+        >
           <Text style={styles.signUpText}>Complete Profile!</Text>
         </TouchableOpacity>
         <View style={{ flex: 1, justifyContent: "flex-end", marginTop: 20 }}>
@@ -159,9 +156,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 20,
     fontFamily: "Quicksand_400Regular",
-    // fontFamily: "Nunito_400Regular",
-    // fontFamily: "Quicksand_500Medium",
-    // lineHeight: 24,
     marginTop: 24,
     color: "#fff",
   },
@@ -188,5 +182,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 34,
     marginTop: -13,
+    lineHeight: 20,
   },
 });

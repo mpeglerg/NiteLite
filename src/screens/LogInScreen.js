@@ -11,7 +11,6 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
-// import { color } from "react-native-reanimated";
 import { colors } from "../styles/colors.js";
 import { AppLoading } from "expo";
 import {
@@ -39,60 +38,72 @@ const LogInScreen = (props) => {
   } else {
     return (
       <View style={styles.container}>
-        <Image source={logo} style={{ width: 270, height: 270 }}></Image>
-        <View style={styles.icon}>
-          <UserIcon
-            style={styles.logInIcons}
-            size={18}
-            name="user"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Username"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setReturningUserName(text);
-            }}
-            value={returningUserName}
-          />
-        </View>
-        <View style={styles.icon}>
-          <KeyIcon
-            style={styles.logInIcons}
-            size={18}
-            name="key"
-            color="white"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Password"
-            placeholderTextColor="#A2A2AB"
-            onChangeText={(text) => {
-              setReturningUserPassword(text);
-            }}
-            value={returningUserPassword}
-          />
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <Image
+            source={logo}
+            style={{ width: 270, height: 270, alignSelf: "center" }}
+          ></Image>
+          <View style={styles.icon}>
+            <UserIcon
+              style={styles.logInIcons}
+              size={18}
+              name="user"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Username"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setReturningUserName(text);
+              }}
+              value={returningUserName}
+            />
+          </View>
+          <View style={styles.icon}>
+            <KeyIcon
+              style={styles.logInIcons}
+              size={18}
+              name="key"
+              color="white"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Password"
+              placeholderTextColor="#A2A2AB"
+              onChangeText={(text) => {
+                setReturningUserPassword(text);
+              }}
+              value={returningUserPassword}
+            />
+          </View>
 
-        <TouchableOpacity
-          style={styles.logInButtonContainer}
-          onPress={() => {
-            verifyCredentials(
-              props.navigation,
-              props.updateUserName,
-              props.updatePassword,
-              returningUserName,
-              returningUserPassword
-            );
-          }}>
-          <Text style={styles.logInButtonText}>Log In</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.logInButtonContainer}
+            onPress={() => {
+              verifyCredentials(
+                props.navigation,
+                props.updateUserName,
+                props.updatePassword,
+                returningUserName,
+                returningUserPassword
+              );
+            }}
+          >
+            <Text style={styles.logInButtonText}>Log In</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => props.navigation.navigate("Sign Up")}>
-          <Text style={styles.signUpText1}>Don't Already Have an Account?</Text>
-          <Text style={styles.signUpText2}>Sign Up!</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("Sign Up")}
+          >
+            <Text style={styles.signUpText1}>
+              Don't Already Have an Account?
+            </Text>
+            <Text style={styles.signUpText2}>Sign Up!</Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
       </View>
     );
   }

@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AddContactIcon2 from "react-native-vector-icons/MaterialIcons";
+import AddContactIcon from "react-native-vector-icons/MaterialIcons";
+import AddSafeSpotIcon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../styles/colors.js";
 import { AppLoading } from "expo";
 import {
@@ -16,6 +17,7 @@ import { CoveredByYourGrace_400Regular } from "@expo-google-fonts/covered-by-you
 import {
   Quicksand_400Regular,
   Quicksand_600SemiBold,
+  Quicksand_500Medium,
 } from "@expo-google-fonts/quicksand";
 import SafeSpot from "../components/SafeSpot.js";
 
@@ -35,6 +37,7 @@ const SafetyQuizScreen = (props) => {
     Quicksand_400Regular,
     CoveredByYourGrace_400Regular,
     Quicksand_600SemiBold,
+    Quicksand_500Medium,
   });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -47,104 +50,121 @@ const SafetyQuizScreen = (props) => {
           <Text style={styles.taskText}>
             1. What makes you feel safe when walking?
           </Text>
-          <View style={styles.check}>
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onPress={() => {
-                props.updateConstructionPreferences(!construction);
-                setConstruction(!construction);
-              }}>
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.userData.construction
-                    ? "check-box"
-                    : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Construction</Text>
-          </View>
-          <View style={styles.check}>
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onPress={() => {
-                props.updateCrimeRatePreferences(!crimeRate);
-                setCrimeRate(!crimeRate);
-              }}>
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.userData.crimeRates
-                    ? "check-box"
-                    : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Crime Rate</Text>
-          </View>
-          <View style={styles.check}>
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onPress={() => {
-                props.updateWalkscorePreferences(!walkscore);
-                setWalkscore(!walkscore);
-              }}>
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.userData.walkScore
-                    ? "check-box"
-                    : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Walkscore</Text>
-          </View>
-          <View style={styles.check}>
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onPress={() => {
-                props.updateStreetlightPreferences(!streetlights);
-                setStreetlights(!streetlights);
-              }}>
-              <Icon
-                size={30}
-                color={"#FFFFFF"}
-                name={
-                  props.userData.lighting
-                    ? "check-box"
-                    : "check-box-outline-blank"
-                }
-              />
-            </TouchableOpacity>
-            <Text style={styles.checkOptions}>Streetlights</Text>
+          <View
+            style={{
+              alignSelf: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View style={styles.check}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  alignSelf: "center",
+                }}
+                onPress={() => {
+                  props.updateConstructionPreferences(!construction);
+                  setConstruction(!construction);
+                }}
+              >
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.userData.construction
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Construction</Text>
+            </View>
+            <View style={styles.check}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  alignSelf: "center",
+                }}
+                onPress={() => {
+                  props.updateCrimeRatePreferences(!crimeRate);
+                  setCrimeRate(!crimeRate);
+                }}
+              >
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.userData.crimeRates
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Crime Rate</Text>
+            </View>
+            <View style={styles.check}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  alignSelf: "center",
+                }}
+                onPress={() => {
+                  props.updateWalkscorePreferences(!walkscore);
+                  setWalkscore(!walkscore);
+                }}
+              >
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.userData.walkScore
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Walkscore</Text>
+            </View>
+            <View style={styles.check}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  alignSelf: "center",
+                }}
+                onPress={() => {
+                  props.updateStreetlightPreferences(!streetlights);
+                  setStreetlights(!streetlights);
+                }}
+              >
+                <Icon
+                  size={30}
+                  color={"#FFFFFF"}
+                  name={
+                    props.userData.lighting
+                      ? "check-box"
+                      : "check-box-outline-blank"
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.checkOptions}>Streetlights</Text>
+            </View>
           </View>
           <Text style={styles.taskText}> 2. Set Up Your "Safe Spots" </Text>
           {enterNewSafeSpot ? (
-            <View>
+            <View style={{ alignSelf: "center" }}>
               <TextInput
                 style={{
                   height: 40,
-                  width: "75%",
+                  width: 270,
                   borderBottomColor: "white",
                   borderBottomWidth: 2,
                   color: "white",
+                  marginBottom: 20,
+                  fontFamily: "Quicksand_400Regular",
                 }}
                 placeholder={"Enter safe spot name..."}
                 placeholderTextColor="#A2A2AB"
@@ -156,10 +176,11 @@ const SafetyQuizScreen = (props) => {
               <TextInput
                 style={{
                   height: 40,
-                  width: "75%",
+                  width: 270,
                   borderBottomColor: "white",
                   borderBottomWidth: 2,
                   color: "white",
+                  fontFamily: "Quicksand_400Regular",
                 }}
                 placeholder={"Enter safe spot address..."}
                 placeholderTextColor="#A2A2AB"
@@ -168,31 +189,47 @@ const SafetyQuizScreen = (props) => {
                 }}
                 value={safePlaceAddressInput}
               />
-              <Button
-                title="Save"
-                onPress={() => {
-                  setEnterNewSafeSpot(false);
-                  props.addSafeSpot({
-                    name: safePlaceNameInput,
-                    address: safePlaceAddressInput,
-                  });
-                  setSafePlaceAddressInput("");
-                  setSafePlaceNameInput("");
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-evenly",
+                  marginTop: 15,
                 }}
-              />
-              <Button
-                title="Cancel"
-                onPress={() => {
-                  setEnterNewSafeSpot(false);
-                  setSafePlaceAddressInput("");
-                  setSafePlaceNameInput("");
-                }}
-              />
+              >
+                <Button
+                  title="Save"
+                  color="#30C5F4"
+                  onPress={() => {
+                    setEnterNewSafeSpot(false);
+                    props.addSafeSpot({
+                      name: safePlaceNameInput,
+                      address: safePlaceAddressInput,
+                    });
+                    setSafePlaceAddressInput("");
+                    setSafePlaceNameInput("");
+                  }}
+                />
+                <Button
+                  title="Cancel"
+                  color="#F94545"
+                  onPress={() => {
+                    setEnterNewSafeSpot(false);
+                    setSafePlaceAddressInput("");
+                    setSafePlaceNameInput("");
+                  }}
+                />
+              </View>
             </View>
           ) : (
-            <Button
-              title="+"
-              onPress={() => setEnterNewSafeSpot(true)}></Button>
+            <TouchableOpacity onPress={() => setEnterNewSafeSpot(true)}>
+              <AddSafeSpotIcon
+                size={38}
+                name="add-location"
+                color="white"
+                style={{ alignSelf: "center" }}
+              />
+            </TouchableOpacity>
           )}
           {props.safeSpots.safeSpots.length === 0
             ? null
@@ -212,8 +249,14 @@ const SafetyQuizScreen = (props) => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate("Emergency Contacts");
-            }}>
-            <AddContactIcon2 size={38} name="person-add" color="white" />
+            }}
+          >
+            <AddContactIcon
+              size={38}
+              name="person-add"
+              color="white"
+              style={{ alignSelf: "center", marginBottom: 55 }}
+            />
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -285,8 +328,9 @@ const styles = StyleSheet.create({
   },
   checkOptions: {
     color: "#fff",
-    fontSize: 15,
-    fontFamily: "Quicksand_400Regular",
+    fontSize: 16,
+    fontFamily: "Quicksand_500Medium",
+    paddingLeft: 5,
   },
   taskText: {
     fontSize: 18,
@@ -296,8 +340,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginTop: 18,
     color: "#fff",
-    fontFamily: "Nunito_400Regular",
-    fontFamily: "Quicksand_400Regular",
     fontFamily: "Quicksand_600SemiBold",
   },
   inputStyle: {
