@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux";
+import { editEmergencyContact } from "../../firebase/firebase.util";
 
 const EmergencyContact = ({ props }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,8 +25,7 @@ const EmergencyContact = ({ props }) => {
         marginBottom: 15,
         backgroundColor: "white",
         borderRadius: 15,
-      }}
-    >
+      }}>
       <Text style={styles.infoTextName}>{props.name}</Text>
       <Text style={styles.infoTextNumber}>{props.number}</Text>
       <View style={{ flexDirection: "row" }}>
@@ -33,21 +33,8 @@ const EmergencyContact = ({ props }) => {
           style={styles.editBtn}
           onPress={() => {
             setModalVisible(!modalVisible);
-          }}
-        >
+          }}>
           <Text>Edit</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.cancelBtn}
-          onPress={() =>
-            props.deleteEmergencyContact({
-              name: props.name,
-              number: props.number,
-            })
-          }
-        >
-          <Text>Delete</Text>
         </TouchableOpacity>
       </View>
 
@@ -58,8 +45,7 @@ const EmergencyContact = ({ props }) => {
           visible={modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
-          }}
-        >
+          }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{props.name}</Text>
@@ -100,21 +86,30 @@ const EmergencyContact = ({ props }) => {
                 style={{ ...styles.openButton, backgroundColor: "#30C5F4" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
+                  editEmergencyContact(
+                    props.user,
+                    {
+                      name: props.name,
+                      number: props.number,
+                    },
+                    {
+                      name: newContactName,
+                      number: newPhoneNumber,
+                    }
+                  );
                   props.editEmergencyContact({
                     name: newContactName,
                     number: newPhoneNumber,
                     oldName: props.name,
                   });
-                }}
-              >
+                }}>
                 <Text style={styles.textStyle}>Save changes</Text>
               </TouchableHighlight>
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "red" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
-                }}
-              >
+                }}>
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
             </View>

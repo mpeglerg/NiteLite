@@ -17,6 +17,8 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { addSafeSpot } from "../../firebase/firebase.util.js";
+
 const AccountScreen = (props) => {
   const [crimeRates, setCrimeRates] = useState(false);
   const [walkScore, setWalkScore] = useState(false);
@@ -188,6 +190,10 @@ const AccountScreen = (props) => {
                       name: safePlaceNameInput,
                       address: safePlaceAddressInput,
                     });
+                    addSafeSpot(props.user.username, {
+                      name: safePlaceNameInput,
+                      address: safePlaceAddressInput,
+                    });
                     setSafePlaceAddressInput("");
                     setSafePlaceNameInput("");
                     setEnterNewSafeSpot(!enterNewSafeSpot);
@@ -226,6 +232,7 @@ const AccountScreen = (props) => {
                   address: safeSpot.address,
                   deleteSafeSpot: props.deleteSafeSpot,
                   editSafeSpot: props.editSafeSpot,
+                  user: props.user.username,
                 }}
               />
             );
@@ -242,6 +249,7 @@ const AccountScreen = (props) => {
                   number: contact.number,
                   deleteEmergencyContact: props.deleteEmergencyContact,
                   editEmergencyContact: props.editEmergencyContact,
+                  user: props.user.username,
                 }}
               />
             </View>
