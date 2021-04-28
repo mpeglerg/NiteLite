@@ -161,6 +161,9 @@ export async function loadRecentRoutes(userName) {
 
   return ref.once("value").then(function (snapshot) {
     let recents = snapshot.child("recentRoutes").val();
+    if (recents == null) {
+      return [];
+    }
     return recents.length > 5 ? recents.slice(4) : recents;
   });
 }
