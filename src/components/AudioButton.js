@@ -47,6 +47,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "flex-end",
     marginRight: 10,
-    // marginTop: 20,
   },
 });

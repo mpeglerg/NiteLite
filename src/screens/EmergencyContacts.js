@@ -66,7 +66,6 @@ const EmergencyContacts = (props) => {
           }}
           value={name}
         />
-        {/* TODO: Create style objects for text inputs instead of repeating them for each TextInput object */}
         <Text style={styles.taskText}>Phone number</Text>
         <TextInput
           style={{

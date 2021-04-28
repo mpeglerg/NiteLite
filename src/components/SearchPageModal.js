@@ -15,7 +15,6 @@ import {
 } from "@expo-google-fonts/quicksand";
 import { addRecentRoute } from "../../firebase/firebase.util";
 
-
 const SearchPageModal = (props) => {
   const durationString = props.route.route.routes[0].legs[0].duration.text;
   const durationNum = parseInt(durationString.match(/\d+/g)[0]);
