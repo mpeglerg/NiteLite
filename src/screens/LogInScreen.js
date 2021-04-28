@@ -11,7 +11,6 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { verifyLogin } from "../../firebase/firebase.util";
-// import { color } from "react-native-reanimated";
 import { colors } from "../styles/colors.js";
 import { AppLoading } from "expo";
 import {
