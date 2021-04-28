@@ -40,7 +40,6 @@ const SearchPageModal = (props) => {
                 To {props.route.route.routes[0].legs[0].end_address}
               </Text>
             </View>
-            {/* )} */}
             <View
               style={{
                 flexDirection: "row",

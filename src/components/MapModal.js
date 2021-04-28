@@ -98,14 +98,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     textAlign: "center",
-
-    // alignItems: "center",
   },
   modalView: {
     flex: 1,
     alignSelf: "center",
     margin: 20,
-    // backgroundColor: "blue",
     borderRadius: 20,
     width: "95%",
     elevation: 5,
@@ -140,7 +137,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
-    // fontWeight: "bold"
   },
   tabsText: {
     color: "white",

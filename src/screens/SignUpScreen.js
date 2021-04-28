@@ -57,7 +57,8 @@ const SignUpScreen = (props) => {
     return (
       <View style={styles.container}>
         <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}>
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
           <Text style={styles.header}>Welcome Owlette!</Text>
           <View style={styles.icon}>
             <UserIcon
@@ -143,7 +144,8 @@ const SignUpScreen = (props) => {
                   userPhoneNumber
                 );
               }
-            }}>
+            }}
+          >
             <View>
               <Text style={styles.ContinueText}>Continue</Text>
               {/* <ArrowIcon style={styles.SignUpIcons} size={18} name="arrow-right" color="white"/> */}
@@ -272,7 +274,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#fff",
     fontFamily: "Quicksand_700Bold",
-    // fontFamily: "Nunito_800ExtraBold",
   },
   header: {
     color: "#fff",
@@ -285,6 +286,7 @@ const styles = StyleSheet.create({
     textShadowColor: "#F2EA45",
     textShadowOffset: { width: 1.5, height: 1 },
     textShadowRadius: 12,
+    alignSelf: "center",
   },
 });
 

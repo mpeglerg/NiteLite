@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/Fontisto";
 import { getDirections } from "../../data/directionsApi";
 
-
 const ModalSearchBar = (props) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(null);
@@ -14,7 +13,7 @@ const ModalSearchBar = (props) => {
     try {
       const directions = await getDirections({
         origin: `${props.directions.currentLocation.latitude},${props.directions.currentLocation.longitude}`,
-        destination: event.nativeEvent.text
+        destination: event.nativeEvent.text,
       });
       props.updateCurrentRoute(directions);
     } catch (error) {
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    // alignSelf: "center",
     alignContent: "center",
     width: "100%",
     backgroundColor: "#fff",

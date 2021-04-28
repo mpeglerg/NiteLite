@@ -45,7 +45,8 @@ const AccountScreen = (props) => {
               fontSize: 40,
               color: "white",
               marginTop: 20,
-            }}>
+            }}
+          >
             Account Settings
           </Text>
           <Text style={styles.header}>Route Preferences</Text>
@@ -60,7 +61,8 @@ const AccountScreen = (props) => {
               }}
               onPress={() =>
                 props.updateWalkscorePreferences(!props.user.walkScore)
-              }>
+              }
+            >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -79,7 +81,8 @@ const AccountScreen = (props) => {
               }}
               onPress={() =>
                 props.updateStreetlightPreferences(!props.user.lighting)
-              }>
+              }
+            >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -98,7 +101,8 @@ const AccountScreen = (props) => {
               }}
               onPress={() =>
                 props.updateConstructionPreferences(!props.user.construction)
-              }>
+              }
+            >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -119,7 +123,8 @@ const AccountScreen = (props) => {
               }}
               onPress={() =>
                 props.updateCrimeRatePreferences(!props.user.crimeRates)
-              }>
+              }
+            >
               <Icon
                 size={30}
                 color={"#FFFFFF"}
@@ -175,7 +180,8 @@ const AccountScreen = (props) => {
                   alignSelf: "center",
                   marginBottom: 30,
                   // justifyContent: "space-between",
-                }}>
+                }}
+              >
                 <TouchableOpacity
                   style={styles.editBtn}
                   onPress={() => {
@@ -186,7 +192,8 @@ const AccountScreen = (props) => {
                     setSafePlaceAddressInput("");
                     setSafePlaceNameInput("");
                     setEnterNewSafeSpot(!enterNewSafeSpot);
-                  }}>
+                  }}
+                >
                   <Text style={styles.textStyle}>Save new safe spot</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -195,7 +202,8 @@ const AccountScreen = (props) => {
                     setSafePlaceAddressInput("");
                     setSafePlaceNameInput("");
                     setEnterNewSafeSpot(!enterNewSafeSpot);
-                  }}>
+                  }}
+                >
                   <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableOpacity>
               </View>
@@ -206,7 +214,8 @@ const AccountScreen = (props) => {
           {enterNewSafeSpot ? null : (
             <TouchableOpacity
               style={styles.addSafeSpotBtn}
-              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}>
+              onPress={() => setEnterNewSafeSpot(!enterNewSafeSpot)}
+            >
               <Text style={styles.btnText}>Add safe spot</Text>
             </TouchableOpacity>
           )}
@@ -290,19 +299,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    // backgroundColor: "#CBC3E3",
     textAlign: "center",
     alignItems: "center",
   },
   safeSpotContainer: {
-    // backgroundColor: "orange",
     width: "85%",
     alignSelf: "center",
     marginHorizontal: 20,
   },
   header: {
     fontSize: 25,
-    // padding: 10,
     textAlign: "center",
     marginTop: 20,
     marginHorizontal: 18,
@@ -316,7 +322,6 @@ const styles = StyleSheet.create({
   },
   contactHeader: {
     fontSize: 25,
-    // padding: 10,
     textAlign: "center",
     marginTop: 20,
     marginHorizontal: 18,
@@ -334,7 +339,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 20,
     fontFamily: "Quicksand_600SemiBold",
-    // lineHeight: 24,
     marginTop: 24,
     color: "#fff",
   },
@@ -344,7 +348,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     color: "#fff",
-    // margin: 8
   },
   checkOptions: {
     color: "#fff",
@@ -356,9 +359,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#30C5F4",
     color: "white",
     padding: 12,
-    // width: 90 ,
     alignItems: "center",
-    // marginLeft: 15,
     marginBottom: 18,
   },
   btnText: {
