@@ -240,6 +240,7 @@ const AccountScreen = (props) => {
                   number: contact.number,
                   deleteEmergencyContact: props.deleteEmergencyContact,
                   editEmergencyContact: props.editEmergencyContact,
+                  user: props.user.username,
                 }}
               />
             </View>

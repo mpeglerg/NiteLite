@@ -57,8 +57,7 @@ const HomeScreen = (props) => {
         backgroundColor: colors.backgroundColor,
         padding: 16,
         height: 500,
-      }}
-    >
+      }}>
       {props.route.displayRoute ? setSnapPoint(432) : setSnapPoint(532)}
       {props.route.route.length === 0 ? <MapModal /> : <SearchPageModal />}
     </View>
@@ -93,14 +92,12 @@ const HomeScreen = (props) => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}
-    >
+      }}>
       <View
         style={{
           height: "100%",
           width: "100%",
-        }}
-      >
+        }}>
         <MapView
           style={{ flex: 1 }}
           region={{
@@ -135,8 +132,7 @@ const HomeScreen = (props) => {
                 alignSelf: "flex-end",
               }}
               // TODO:
-              // onPress={}
-            >
+              onPress={() => props.navigation.openDrawer()}>
               <MenuIcon size={35} color="white" name="menu" />
             </TouchableOpacity>
           )}
@@ -163,8 +159,7 @@ const HomeScreen = (props) => {
             alignItems: "center",
             alignSelf: "flex-end",
           }}
-          onPress={triggerCall}
-        >
+          onPress={triggerCall}>
           <Icon
             size={38}
             color="white"

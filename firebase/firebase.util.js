@@ -229,10 +229,65 @@ export async function editSafeSpot(username, originalSafeSpot, newSafeSpot) {
           }
         : safeSpot;
     });
-    console.log("newSafeSpots", newSafeSpots);
     var updates = {};
     updates["users/" + username + "/safeLocations"] = newSafeSpots;
     return firebase.database().ref().update(updates);
   });
+}
+
+// export async function addEmergencyContact(username, newContact) {
+//   let ref = await firebase.database().ref("users/" + username);
+//   let allContacts = [];
+//   await ref.once("value").then(function (snapshot) {
+//     let previousContacts = snapshot.child("emergencyNumber").val();
+//     if (previousContacts == null) {
+//       allContacts[0] = newContact;
+//     } else {
+//       previousContacts.push(newContact);
+//       allContacts = previousContacts;
+//     }
+//     var updates = {};
+//     updates["users/" + username + "/emergencyNumber"] = allContacts;
+//     return firebase.database().ref().update(updates);
+//   });
+// }
+
+// export async function deleteEmergencyContact(username) {
+//   // let ref = await firebase.database().ref("users/" + username);
+//   // await ref.once("value").then(function (snapshot) {
+//   // let previousSafeSpots = snapshot.child("safeLocations").val();
+//   // let newSafeSpots = previousSafeSpots.filter((spot) => {
+//   //   return safeSpot.name !== spot.name;
+//   //   //  && safeSpot.address !== spot.address;
+//   // });
+
+//   // var updates = {};
+//   updates["users/" + username + "/emergencyNumber"] = [];
+//   return firebase.database().ref().update(updates);
+//   // });
+// }
+
+export async function editEmergencyContact(username, oldContact, newContact) {
+  // let ref = await firebase.database().ref("users/" + username);
+  // await ref.once("value").then(function (snapshot) {
+  //   let previousSafeSpots = snapshot.child("safeLocations").val();
+  //   let newSafeSpots = previousSafeSpots.map((safeSpot) => {
+  //     return safeSpot.name === originalSafeSpot.name
+  //       ? {
+  //           name: newSafeSpot.name !== "" ? newSafeSpot.name : safeSpot.name,
+  //           address:
+  //             newSafeSpot.address !== ""
+  //               ? newSafeSpot.address
+  //               : safeSpot.address,
+  //         }
+  //       : safeSpot;
+  //   });
+  let updates = {};
+  updates["users/" + username + "/emergencyNumber"] = [
+    newContact.name ? newContact.name : oldContact.name,
+    newContact.number ? newContact.number : oldContact.number,
+  ];
+  return firebase.database().ref().update(updates);
+  // });
 }
 export default firebase;
