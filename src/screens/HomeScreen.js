@@ -1,5 +1,5 @@
+import { View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
 import { connect } from "react-redux";
 import MapModal from "../components/MapModal";
 import MapView from "react-native-maps";
@@ -9,13 +9,14 @@ import { colors } from "../styles/colors.js";
 import SearchPageModal from "../components/SearchPageModal";
 import RouteDirections from "../components/RouteDirections";
 import AudioButton from "../components/AudioButton";
+import Icon from "react-native-vector-icons/Ionicons";
 import { loadUserData } from "../../firebase/firebase.util";
 
 const HomeScreen = (props) => {
   const sheetRef = useState(null);
   const [userData, setUserData] = useState(null);
   const [snapPoint, setSnapPoint] = useState(532);
-  
+
   useEffect(() => {
     async function loadData() {
       const result = await loadUserData(
@@ -55,11 +56,31 @@ const HomeScreen = (props) => {
         backgroundColor: colors.backgroundColor,
         padding: 16,
         height: 500,
-      }}>
-    {props.route.displayRoute ? setSnapPoint(432) : setSnapPoint(532)}
-    {props.route.route.length === 0 ? <MapModal /> : <SearchPageModal />}
+      }}
+    >
+      {props.route.displayRoute ? setSnapPoint(432) : setSnapPoint(532)}
+      {props.route.route.length === 0 ? <MapModal /> : <SearchPageModal />}
     </View>
   );
+
+  const [callNumber, setCallNumber] = useState("");
+
+  const triggerCall = () => {
+    const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(
+      /-/g,
+      ""
+    );
+
+    if (Platform.OS == "android") {
+      setCallNumber(`tel:${formattedNumber}`);
+    } else {
+      setCallNumber(`telprompt:${formattedNumber}`);
+    }
+    if (callNumber.length !== 0) {
+      Linking.openURL(callNumber);
+    }
+  };
+
   return (
     <View
       style={{
@@ -67,12 +88,14 @@ const HomeScreen = (props) => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-      }}>
+      }}
+    >
       <View
         style={{
           height: "100%",
           width: "100%",
-        }}>
+        }}
+      >
         <MapView
           style={{ flex: 1 }}
           region={{
@@ -84,12 +107,39 @@ const HomeScreen = (props) => {
           showsUserLocation={true}
         />
         <MapContainer />
-        <View style={{ flex: 10 }}>
+        <View style={{ position: "absolute", left: 0, top: 0 }}>
           {props.route.displayRoute ? <RouteDirections /> : null}
         </View>
-        <View style={{ flex: 20 }}>
+        <View style={{ position: "absolute", right: 0, bottom: 100 }}>
           <AudioButton />
         </View>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={{
+            position: "absolute",
+            right: 0,
+            bottom: 80,
+            borderRadius: 100,
+            backgroundColor: colors.tertiaryBlue,
+            borderColor: colors.backgroundColor,
+            borderWidth: 3,
+            width: 60,
+            height: 60,
+            marginBottom: 100,
+            marginRight: 10,
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "flex-end",
+          }}
+          onPress={triggerCall}
+        >
+          <Icon
+            size={38}
+            color="white"
+            name="ios-call"
+            style={{ alignSelf: "center" }}
+          />
+        </TouchableOpacity>
       </View>
       <BottomSheet
         ref={sheetRef}
