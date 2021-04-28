@@ -18,10 +18,12 @@ with open(STREETLIGHT_SOURCE, 'r+') as f:
     reader = csv.reader(f)
     for index, row in enumerate(reader):
         if index != 0:
-            id, point = row[1], row[3]
+            id, point = row[2], row[1]
+            # print(point)
 
             try:
                 lon, lat = re.findall(r'-?\d+(?:\.\d+)?', point)
+                # print("here?")
             except ValueError:
                 pass
 
