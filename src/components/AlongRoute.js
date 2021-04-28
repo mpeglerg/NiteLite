@@ -7,10 +7,11 @@ import SafetyScoreIcon from "react-native-vector-icons/FontAwesome";
 import WalkScoreIcon from "react-native-vector-icons/FontAwesome5";
 import OpenBizIcon from "react-native-vector-icons/Entypo";
 import LightingIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import ConstructionIcon from "react-native-vector-icons/Ionicons";
 import { colors } from "../styles/colors.js";
 // import AlongRouteIcon from "./AlongRouteIcon.js";
 import { getScore } from "../../data/walkScoreApi";
-import getStreetlightScore from '../mongo/streetlight-score'
+import getStreetlightScore from "../mongo/streetlight-score";
 import getCrimeScore from "../mongo/crime-score.js";
 import getConstructionScore from "../mongo/construction-score.js";
 import getAggregateScore from "../mongo/aggregate-safety-score.js";
@@ -34,26 +35,32 @@ const AlongRoute = (props) => {
   const [constructionScore, setConstructionScore] = useState(0);
   const [aggregateScore, setAggregateScore] = useState(0);
 
-  useEffect (() => {    
-    const originCoord = {lng: props.directions.currentLocation.longitude, lat:props.directions.currentLocation.latitude}
-    const destinationCoord = props.route.route.routes[0].legs[0].end_location
-    setStreetlightScore(getStreetlightScore(originCoord, destinationCoord))
-    setCrimeScore(getCrimeScore(originCoord, destinationCoord))
-    setConstructionScore(getConstructionScore(originCoord, destinationCoord))
-    setAggregateScore(getAggregateScore(originCoord, destinationCoord))
+  useEffect(() => {
+    const originCoord = {
+      lng: props.directions.currentLocation.longitude,
+      lat: props.directions.currentLocation.latitude,
+    };
+    const destinationCoord = props.route.route.routes[0].legs[0].end_location;
+    setStreetlightScore(getStreetlightScore(originCoord, destinationCoord));
+    setCrimeScore(getCrimeScore(originCoord, destinationCoord));
+    setConstructionScore(getConstructionScore(originCoord, destinationCoord));
+    setAggregateScore(getAggregateScore(originCoord, destinationCoord));
     async function getWalkScore() {
       try {
         const originScore = await getScore({
-          lat: props.directions.currentLocation.latitude, lon: props.directions.currentLocation.longitude
+          lat: props.directions.currentLocation.latitude,
+          lon: props.directions.currentLocation.longitude,
         });
-        setWalkscore(originScore.walkscore)
+        setWalkscore(originScore.walkscore);
       } catch (error) {
         setError("Sorry, but something went wrong.");
       }
-    };
-    getWalkScore()
-    console.log(`WalkScore: ${walkscore}, StreetlightScore: ${streetlightScore}, CrimeScore: ${crimeScore}, ConstructionScore: ${constructionScore}, AggregateScore: ${aggregateScore}`)
-  }, [])
+    }
+    getWalkScore();
+    console.log(
+      `WalkScore: ${walkscore}, StreetlightScore: ${streetlightScore}, CrimeScore: ${crimeScore}, ConstructionScore: ${constructionScore}, AggregateScore: ${aggregateScore}`
+    );
+  }, []);
 
   let [fontsLoaded] = useFonts({
     Quicksand_500Medium,
@@ -125,9 +132,9 @@ const AlongRoute = (props) => {
                   {props.safeSpots.safeSpots.length}
                 </Text>
               </View>
-              <OpenBizIcon
+              <ConstructionIcon
                 size={22}
-                name="shop"
+                name="ios-hammer"
                 color="black"
                 style={styles.icon}
               />

@@ -94,7 +94,7 @@ const HomeScreen = (props) => {
         }}
       >
         <MapView
-          style={{ flex: 2 }}
+          style={{ flex: 1 }}
           region={{
             latitude: 42.882004,
             longitude: 74.582748,
@@ -104,29 +104,39 @@ const HomeScreen = (props) => {
           showsUserLocation={true}
         />
         <MapContainer />
-        {/* <View style={{ flex: 10 }}>
+        <View style={{ position: "absolute", left: 0, top: 0 }}>
           {props.route.displayRoute ? <RouteDirections /> : null}
-        </View> */}
-        <View style={{ flex: 0.75 }}>
+        </View>
+        <View style={{ position: "absolute", right: 0, bottom: 100 }}>
           <AudioButton />
         </View>
         <TouchableOpacity
           activeOpacity={0.7}
           style={{
-            flex: 2,
-            backgroundColor: "white",
-            borderColor: colors.tertiaryBlue,
+            position: "absolute",
+            right: 0,
+            bottom: 80,
+            borderRadius: 100,
+            backgroundColor: colors.tertiaryBlue,
+            borderColor: colors.backgroundColor,
             borderWidth: 3,
-            borderRadius: 50,
-            height: 60,
             width: 60,
-            margin: 10,
+            height: 60,
+            marginBottom: 100,
+            marginRight: 10,
             justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "flex-end",
           }}
           // style={styles.buttons}
           onPress={triggerCall}
         >
-          <Icon size={38} name="ios-call" style={{ alignSelf: "center" }} />
+          <Icon
+            size={38}
+            color="white"
+            name="ios-call"
+            style={{ alignSelf: "center" }}
+          />
         </TouchableOpacity>
       </View>
 

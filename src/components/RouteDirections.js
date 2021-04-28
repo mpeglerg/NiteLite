@@ -1,58 +1,58 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
-import Swiper from 'react-native-swiper'
+import { colors } from "../styles/colors.js";
+import Swiper from "react-native-swiper";
 
 const RouteDirections = (props) => {
-
   return (
     <View style={styles.container}>
-      <Swiper key={props.route.route.routes[0].legs[0].steps.length} style={styles.wrapper} showsButtons={true} height={200}>
+      <Swiper
+        key={props.route.route.routes[0].legs[0].steps.length}
+        style={styles.wrapper}
+        showsButtons={true}
+        height={150}
+      >
         {props.route.route.routes[0].legs[0].steps.map((step) => {
-          return(
+          return (
             <View style={styles.slide1}>
               <Text style={styles.text}>
                 {step.distance.text ? step.distance.text : null}
               </Text>
               <Text style={styles.text}>
-                {step.html_instructions ? step.html_instructions.replace( /(<([^>]+)>)/ig, '') : null}
+                {step.html_instructions
+                  ? step.html_instructions.replace(/(<([^>]+)>)/gi, "")
+                  : null}
               </Text>
             </View>
-          )})}
+          );
+        })}
       </Swiper>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: .25
+    flex: 1,
+    marginTop: -13,
   },
   wrapper: {},
   slide1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB'
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5'
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9'
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.tertiaryBlue,
   },
   text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold'
-  }
-})
+    color: "#fff",
+    fontSize: 22,
+    fontWeight: "bold",
+    alignSelf: "center",
+    textAlign: "center",
+    flexWrap: "wrap",
+  },
+});
 
 const mapStateToProps = (state) => {
   return {
