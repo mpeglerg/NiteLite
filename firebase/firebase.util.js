@@ -146,14 +146,28 @@ export async function loadUserData(userName) {
   });
 }
 
-export function addRecentRoute(object) {
-  let destination = object.get("destination");
-  let username = object.get("name");
-  let previousDestinations = snapshot.child("recentRoutes").val();
-  let newRoutes = previousDestinations.push(destination);
-  database.ref("users/" + username).set({
-    recentRoutes: newRoutes,
-  });
+export async function addRecentRoute(username, destination) {
+  var newPostKey = (await firebase.database().ref().child(username).push()).key;
+  var updates = {};
+  updates['users/' + username + '/recentRoutes' + newPostKey] = destination;
+  return firebase.database().ref().update(updates);
+
+
+//   console.log("IN ADD RECENT ROUTE");
+//   let ref = await firebase.database().ref("users/" + username);
+//   console.log("IN ADD RECENT ROUTE pt2");
+
+//   return ref.once("value").then(function (snapshot) {
+//     let previousDestinations = snapshot.child("recentRoutes").val();
+//     console.log("previous destinations, ", previousDestinations);
+//     //TODO: check previous dest not the same as new pushed dest
+//     // let newRoutes = previousDestinations.push(destination);
+//     previousDestinations.push(destination);
+//     console.log("new routes! ", previousDestinations);
+//     database.ref("users/" + username).set({
+//       recentRoutes: previousDestinations,
+//     });
+// });
 }
 
 export async function loadRecentRoutes(userName) {
