@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -14,9 +14,44 @@ import { colors } from "../styles/colors.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import { connect } from "react-redux";
 import RouteList from "./RouteList";
+import { loadRecentRoutes } from "../../firebase/firebase.util";
+import { getDirections } from "../../data/directionsApi";
 
 const MapModal = (props) => {
   const [callNumber, setCallNumber] = useState("");
+  const [recents, setRecents] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function loadRecents() {
+      let results = await loadRecentRoutes(
+        props.emergencyContacts.user.username
+          ? props.emergencyContacts.user.username
+          : "Demo401!"
+      );
+      setRecents(results);
+      return;
+    }
+    loadRecents();
+  }, []);
+
+  const performQuery = async (destination) => {
+    setError(null);
+    console.log("PERFORM QUERY CALLED", {
+      origin: `${props.directions.currentLocation.latitude},${props.directions.currentLocation.longitude}`,
+      destination: destination,
+    });
+    try {
+      const directions = await getDirections({
+        origin: `${props.directions.currentLocation.latitude},${props.directions.currentLocation.longitude}`,
+        destination: destination,
+      });
+      console.log("DIRECTIONS", directions);
+      props.updateCurrentRoute(directions);
+    } catch (error) {
+      setError("Sorry, but something went wrong.");
+    }
+  };
 
   const triggerCall = () => {
     const formattedNumber = props.emergencyContacts.emergencyContacts[0].number.replace(
@@ -34,48 +69,51 @@ const MapModal = (props) => {
     }
   };
 
-  const onShare = async () => {
-    try {
-      const result = await Share.share({
-        message: "View my NiteLite walking route:",
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
   return (
     <View style={styles.centeredView}>
       <ScrollView style={styles.modalView}>
         <ModalSearchBar />
-        <View style={styles.tabs}>
-          <Text style={styles.tabsText}>Recents</Text>
-        </View>
+        {recents.length !== 0 ? (
+          <View style={styles.tabs}>
+            <Text style={styles.tabsText}>Recents</Text>
+          </View>
+        ) : (
+          <View style={styles.tabs}>
+            <Text style={styles.tabsText}>Type in your first destination!</Text>
+          </View>
+        )}
         <View>
-          <TouchableOpacity style={styles.recentContainer}>
-            <Text>Recent #1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.recentContainer}>
-            <Text>Recent #2</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.recentContainer}>
-            <Text>Recent #3</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.recentContainer}>
-            <Text>Recent #4</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.recentContainer}>
-            <Text>Recent #5</Text>
-          </TouchableOpacity>
+          {recents[0] != null ? (
+            <TouchableOpacity
+              style={styles.recentContainer}
+              onPress={() => {
+                console.log("ON PRESSED CALLED");
+                performQuery(recents[0]);
+              }}
+            >
+              <Text>{recents[0]}</Text>
+            </TouchableOpacity>
+          ) : null}
+          {recents[1] != null ? (
+            <TouchableOpacity style={styles.recentContainer}>
+              <Text>{recents[1]}</Text>
+            </TouchableOpacity>
+          ) : null}
+          {recents[2] != null ? (
+            <TouchableOpacity style={styles.recentContainer}>
+              <Text>{recents[2]}</Text>
+            </TouchableOpacity>
+          ) : null}
+          {recents[3] != null ? (
+            <TouchableOpacity style={styles.recentContainer}>
+              <Text>{recents[3]}</Text>
+            </TouchableOpacity>
+          ) : null}
+          {recents[4] != null ? (
+            <TouchableOpacity style={styles.recentContainer}>
+              <Text>{recents[4]}</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
         {/* TODO: make seperate emergency call component */}
         {/* <View style={styles.textStyle}>
@@ -162,7 +200,24 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     emergencyContacts: state.emergencyContacts,
+    route: state.directions,
+    directions: state.directions,
+    currentLocation: state.currentLocation,
   };
 };
 
-export default connect(mapStateToProps, null)(MapModal);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCurrentRoute: (route) => {
+      dispatch({ type: "UPDATE_CURRENT_ROUTE", payload: route });
+    },
+    displayRoute: (bool) => {
+      dispatch({ type: "DISPLAY_ROUTE", payload: bool });
+    },
+    // updateDirections: (destination) => {
+    //   dispatch({ type: "UPDATE_DIRECTIONS", payload: destination });
+    // },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapModal);
