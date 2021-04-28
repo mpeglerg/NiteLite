@@ -22,6 +22,26 @@ const HomeScreen = (props) => {
           : "Demo401!"
       );
       setUserData(result);
+      props.updateConstructionPreferences(result.construction);
+      props.updateCrimeRatePreferences(result.crimeRates);
+      props.updateStreetlightPreferences(result.lighting);
+      props.updateWalkscorePreferences(result.walkScore);
+      // check if state.emergency contacts and result.emergency contacts are different, if so need to load into state
+      if (
+        props.emergencyContacts.emergencyContacts.length !==
+        result.emergencyNumber.length
+      ) {
+        result.emergencyNumber.map((contact) => {
+          props.addEmergencyContact(contact);
+        });
+      }
+
+      if (props.safeSpots.length !== result.safeSpots.length) {
+        result.safeSpots.map((safeSpot) => {
+          props.addSafeSpot(safeSpot);
+        });
+      }
+
       return;
     }
     loadData();
@@ -83,6 +103,36 @@ const mapStateToProps = (state) => {
   return {
     route: state.directions,
     emergencyContacts: state.emergencyContacts,
+    safeSpots: state.safeSpots.safeSpots,
   };
 };
-export default connect(mapStateToProps, null)(HomeScreen);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateEmail: (id) => {
+      dispatch({ type: "UPDATE_EMAIL", payload: id });
+    },
+    updatePhoneNumber: (id) => {
+      dispatch({ type: "UPDATE_PHONE_NUMBER", payload: id });
+    },
+    addEmergencyContact: (name, number) => {
+      dispatch({ type: "ADD_EMERGENCY_CONTACT", id: { name, number } });
+    },
+    addSafeSpot: (newSafeSpot) => {
+      dispatch({ type: "ADD_SAFE_SPOT", payload: newSafeSpot });
+    },
+    updateConstructionPreferences: (id) => {
+      dispatch({ type: "UPDATE_CONSTRUCTION_PREFERENCES", payload: id });
+    },
+    updateCrimeRatePreferences: (id) => {
+      dispatch({ type: "UPDATE_CRIME_RATE_PREFERENCES", payload: id });
+    },
+    updateWalkscorePreferences: (id) => {
+      dispatch({ type: "UPDATE_WALKSCORE_PREFERENCES", payload: id });
+    },
+    updateStreetlightPreferences: (id) => {
+      dispatch({ type: "UPDATE_STREETLIGHT_PREFERENCES", payload: id });
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -24,10 +24,13 @@ export function registerNewUser(object) {
   console.log("OBJECT", object);
   let phoneNumber = object.phoneNumber;
   let email = object.email;
-  let username = object.name;
-  addNumber(phoneNumber, username);
-  addEmail(email, username);
-  let emergencyContact = [object.emergencyNumber[0], object.emergencyNumber[1]];
+  let username = object.username;
+  // addNumber(phoneNumber, username);
+  // addEmail(email, username);
+  // let emergencyContact = [
+  //   object.emergencyNumber[0].name,
+  //   object.emergencyNumber[1].number,
+  // ];
   console.log("DATABASE SET", {
     name: username,
     email: email,
@@ -37,9 +40,8 @@ export function registerNewUser(object) {
     walkScore: object.walkScore,
     lighting: object.lighting,
     construction: object.construction,
-    safeLocations: "",
-    // safeLocations: object.safeLocations,
-    emergencyNumber: emergencyContact,
+    safeLocations: object.safeSpots,
+    emergencyNumber: object.emergencyNumber,
   });
 
   database.ref("users/" + username).set({
@@ -51,8 +53,8 @@ export function registerNewUser(object) {
     walkScore: object.walkScore,
     lighting: object.lighting,
     construction: object.construction,
-    safeLocations: object.safeLocations,
-    emergencyNumber: emergencyContact,
+    safeLocations: object.safeSpots,
+    emergencyNumber: object.emergencyNumber,
   });
 }
 
