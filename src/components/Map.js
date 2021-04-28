@@ -142,13 +142,15 @@ const MapContainer = (props) => {
         showsMyLocationButton={true}
         moveOnMarkerPress={true}
       >
-        {props.route.displayRoute ? <MapViewDirections
+        {props.route.route.routes ? 
+        <MapViewDirections
           origin={props.directions.currentLocation}
           destination={props.directions.directions.destination}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={3}
           strokeColor="hotpink"
-        /> : null}
+        /> 
+        : null}
         <Marker coordinate={props.directions.currentLocation}>
           <Callout style={styles.walkScoreView}>
             <View>
